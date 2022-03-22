@@ -1,32 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/21 17:19:49 by arudy             #+#    #+#             */
-/*   Updated: 2022/03/22 11:41:03 by arudy            ###   ########.fr       */
+/*   Created: 2022/03/22 10:13:12 by arudy             #+#    #+#             */
+/*   Updated: 2022/03/22 10:13:37 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
-int	main(int ac, char **av, char **envp)
+size_t	ft_strlen(const char *str)
 {
-	char	*line;
-	char	**full_path;
+	int	i;
 
-	(void)av;
-	if (ac != 1)
-		return (0);
-	full_path = get_full_path(envp);
-	// while (1)
-	// {
-		line = readline("Minishell : ");
-		printf("%s\n", line);
-		free(line);
-	// }
-	free_strs(full_path);
-	return (0);
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
 }

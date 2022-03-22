@@ -1,32 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/21 17:19:49 by arudy             #+#    #+#             */
-/*   Updated: 2022/03/22 11:41:03 by arudy            ###   ########.fr       */
+/*   Created: 2022/03/22 10:13:12 by arudy             #+#    #+#             */
+/*   Updated: 2022/03/22 10:14:46 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
-int	main(int ac, char **av, char **envp)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	char	*line;
-	char	**full_path;
+	size_t	i;
 
-	(void)av;
-	if (ac != 1)
-		return (0);
-	full_path = get_full_path(envp);
-	// while (1)
-	// {
-		line = readline("Minishell : ");
-		printf("%s\n", line);
-		free(line);
-	// }
-	free_strs(full_path);
+	i = 0;
+	while (i < n)
+	{
+		if (s1[i] != s2[i] || s1[i] == '\0' || s2[i] == '\0')
+			return (((unsigned char *)s1)[i] - ((unsigned char *)s2)[i]);
+		i++;
+	}
 	return (0);
 }
