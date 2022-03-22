@@ -1,33 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/21 17:19:49 by arudy             #+#    #+#             */
-/*   Updated: 2022/03/22 19:30:54 by arudy            ###   ########.fr       */
+/*   Created: 2022/03/22 18:28:26 by arudy             #+#    #+#             */
+/*   Updated: 2022/03/22 19:35:08 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#ifndef LEXER_H
+# define LEXER_H
 
-int	main(int ac, char **av, char **envp)
+typedef enum e_token_type
 {
-	char	*line;
-	char	**env_path;
-	t_token	*token;
+	WORD,
+	DOUBLE_QUOTE,
+	SIMPLE_QUOTE,
+	PIPE,
+	REDIR_IN,
+	REDIR_OUT,
+	DOUBLE_GREATER,
+	HERE_DOC,
+	DOLLAR,
+	ESPACE
+}	t_token_type;
 
-	(void)av;
-	if (ac != 1)
-		return (0);
-	env_path = get_full_path(envp);
-	// while (1)
-	// {
-		line = readline("Minishell : ");
-		lexer(&token, line);
-		free(line);
-	// }
-	free_strs(env_path);
-	return (0);
-}
+typedef struct s_token
+{
+	char			*content;
+	t_token_type	type;
+	struct s_token	*next;
+	struct s_token	*prev;
+}	t_token;
+
+void	lexer(t_token **token, char *line);
+
+#endif

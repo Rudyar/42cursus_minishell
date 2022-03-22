@@ -3,16 +3,18 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+         #
+#    By: arudy <arudy@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/21 17:19:21 by arudy             #+#    #+#              #
-#    Updated: 2022/03/22 13:16:02 by lleveque         ###   ########.fr        #
+#    Updated: 2022/03/22 19:32:16 by arudy            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS = ${SRCS_PARSING} ${SRCS_LIBFT} ${SRCS_BUILTINS} srcs/main.c
+SRCS = ${SRCS_PARSING} ${SRCS_LEXER} ${SRCS_LIBFT} ${SRCS_BUILTINS} srcs/main.c
 
 SRCS_PARSING = $(addprefix srcs/parsing/, get_full_path.c)
+
+SRCS_LEXER = $(addprefix srcs/lexer/, lexer.c)
 
 SRCS_LIBFT = $(addprefix srcs/libft/, ft_putstr_fd.c ft_strlen.c \
 				ft_strncmp.c ft_substr.c ft_split.c free_strs.c)
