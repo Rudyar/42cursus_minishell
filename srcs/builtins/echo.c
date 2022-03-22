@@ -6,13 +6,13 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 12:37:27 by lleveque          #+#    #+#             */
-/*   Updated: 2022/03/22 13:39:43 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/03/22 18:57:40 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-int check_opt(char **args)
+int	check_opt(char **args)
 {
 	int	i;
 
