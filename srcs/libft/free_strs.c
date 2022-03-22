@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   free_strs.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 10:24:06 by arudy             #+#    #+#             */
-/*   Updated: 2022/03/22 10:24:27 by arudy            ###   ########.fr       */
+/*   Updated: 2022/03/22 12:46:09 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "../../include/minishell.h"
 
 void	free_strs(char **strs)
 {

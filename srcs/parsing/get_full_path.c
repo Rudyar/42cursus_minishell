@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_full_path.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 10:08:45 by arudy             #+#    #+#             */
-/*   Updated: 2022/03/22 11:34:04 by arudy            ###   ########.fr       */
+/*   Updated: 2022/03/22 12:45:23 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "../../include/minishell.h"
 
 static void	get_full_path_error(char *msg)
 {

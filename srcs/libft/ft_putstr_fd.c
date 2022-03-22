@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 10:16:53 by arudy             #+#    #+#             */
-/*   Updated: 2022/03/22 10:17:13 by arudy            ###   ########.fr       */
+/*   Updated: 2022/03/22 12:46:07 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "../../include/minishell.h"
 
 void	ft_putstr_fd(char *s, int fd)
 {

@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/22 10:13:12 by arudy             #+#    #+#             */
-/*   Updated: 2022/03/22 12:46:01 by lleveque         ###   ########.fr       */
+/*   Created: 2022/03/21 17:22:46 by arudy             #+#    #+#             */
+/*   Updated: 2022/03/22 12:44:41 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#ifndef PARSING_H
+# define PARSING_H
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+struct s_parsing
 {
-	size_t	i;
+	char	**strs;
+} t_parsing;
 
-	i = 0;
-	while (i < n)
-	{
-		if (s1[i] != s2[i] || s1[i] == '\0' || s2[i] == '\0')
-			return (((unsigned char *)s1)[i] - ((unsigned char *)s2)[i]);
-		i++;
-	}
-	return (0);
-}
+char	**get_full_path(char **envp);
+
+#endif

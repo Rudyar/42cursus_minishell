@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:19:49 by arudy             #+#    #+#             */
-/*   Updated: 2022/03/22 11:43:34 by arudy            ###   ########.fr       */
+/*   Updated: 2022/03/22 12:45:12 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../include/minishell.h"
 
 int	main(int ac, char **av, char **envp)
 {
