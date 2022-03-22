@@ -6,11 +6,11 @@
 #    By: arudy <arudy@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/21 17:19:21 by arudy             #+#    #+#              #
-#    Updated: 2022/03/21 17:25:59 by arudy            ###   ########.fr        #
+#    Updated: 2022/03/22 09:55:38 by arudy            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS = ${SRCS_PARSING}
+SRCS = ${SRCS_PARSING} srcs/main.c
 
 SRCS_PARSING = $(addprefix srcs/parsing/,)
 
@@ -27,7 +27,7 @@ RM = rm -f
 all: ${NAME}
 
 ${NAME}:	${OBJS}
-		${CC} ${CFLAGS} ${OBJS} -o ${NAME}
+		${CC} ${CFLAGS} ${OBJS} -lreadline -o ${NAME}
 
 .c.o:
 	${CC} ${CFLAGS} -c $< -o ${<:.c=.o}

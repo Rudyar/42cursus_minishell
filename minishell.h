@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:22:46 by arudy             #+#    #+#             */
-/*   Updated: 2022/03/21 17:41:12 by arudy            ###   ########.fr       */
+/*   Updated: 2022/03/22 09:51:25 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,13 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
+#include <readline/readline.h>
+#include <readline/history.h>
 
 struct s_parsing
 {
 	char	**strs;
+	char	**full_path;
 
 } t_parsing;
 
