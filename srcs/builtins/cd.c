@@ -6,7 +6,7 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 13:42:57 by lleveque          #+#    #+#             */
-/*   Updated: 2022/03/22 18:59:03 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/03/23 18:44:22 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,54 +22,68 @@ int	go_home(char *path)
 
 int	check_path(char *path)
 {
-	void	*dir;
+	void		*dir;
+	struct stat	st;
 
 	dir = opendir(path);
-	if (!dir)
+	if (dir)
 	{
-		ft_putstr_fd("minishell: cd: ", 2);
-		ft_putstr_fd(path, 2);
-		ft_putstr_fd(": No such file or directory\n", 2);
-		return (1);
+		closedir(dir);
+		return (0);
 	}
 	closedir(dir);
-	return (0);
+	ft_putstr_fd("minishell: cd: ", 2);
+	ft_putstr_fd(path, 2);
+	if (stat(path, &st) == -1)
+		ft_putstr_fd(": No such file or directory\n", 2);
+	else if (S_ISDIR(st.st_mode))
+		ft_putstr_fd(": Permission denied\n", 2);
+	else
+		ft_putstr_fd(": Not a directory\n", 2);
+	return (1);
 }
 
-int	set_home(char **envp)
+int	set_home(void)
 {
 	char	*path;
 
-	path = get_env("HOME=", envp);
+	path = getenv("HOME=");
+	if (!path)
+	{
+		ft_putstr_fd("minishell: cd: HOME not set\n", 2);
+		return (0);
+	}
 	chdir(path);
 	free(path);
 	return (0);
 }
 
-int	set_oldpwd(char **envp)
+int	set_oldpwd(void)
 {
 	char	*path;
 
-	path = get_env("OLDPWD=", envp);
+	path = getenv("OLDPWD=");
+	if (!path)
+	{
+		ft_putstr_fd("minishell: cd: OLDPWD not set\n", 2);
+		return (0);
+	}
 	chdir(path);
 	free(path);
 	return (0);
 }
 
-int	cd(char **args, char **envp)
+int	cd(char **args)
 {
-	char	*path;
-
-	(void)args;
 	if (args[0] && args[1] && args[2])
 	{
 		ft_putstr_fd("minishell: cd: too many arguments\n", 2);
 		return (0);
 	}
 	if (!args[1] || go_home(args[1]))
-		return (set_home(envp));
+		return (set_home());
 	if (args[1][0] == '-' && args[1][1] == '\0')
-		return (set_oldpwd(envp));
+		return (set_oldpwd());
 	if (check_path(args[1]))
 		return (0);
 	chdir(args[1]);

@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:19:49 by arudy             #+#    #+#             */
-/*   Updated: 2022/03/23 18:55:12 by arudy            ###   ########.fr       */
+/*   Updated: 2022/03/23 19:11:17 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	main(int ac, char **av, char **envp)
 	// char	**env_path;
 	t_token	*token;
 
+	(void)ac;
+	(void)envp;
 	(void)av;
 	(void)envp;
 	if (ac != 1)

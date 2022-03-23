@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:22:46 by arudy             #+#    #+#             */
-/*   Updated: 2022/03/23 18:26:16 by arudy            ###   ########.fr       */
+/*   Updated: 2022/03/23 19:10:52 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <sys/types.h>
+# include <sys/stat.h>
 # include <dirent.h>
 
 # include "libft.h"
@@ -26,7 +27,6 @@
 # include "builtins.h"
 # include "exec.h"
 # include "lexer.h"
-# include "utils.h"
 
 typedef struct s_history
 {

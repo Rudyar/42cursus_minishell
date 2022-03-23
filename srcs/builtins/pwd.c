@@ -1,40 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_utils.c                                        :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/22 16:29:09 by lleveque          #+#    #+#             */
-/*   Updated: 2022/03/22 18:30:36 by lleveque         ###   ########.fr       */
+/*   Created: 2022/03/23 15:36:21 by lleveque          #+#    #+#             */
+/*   Updated: 2022/03/23 18:27:01 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-char	*get_env(char *var, char **envp)
+int	pwd(void)
 {
-	int		i;
-	char	*value;
+	char	*path;
 
-	i = 0;
-	value = NULL;
-	while (envp[i])
-	{
-		if (!ft_strncmp(var, envp[i], ft_strlen(var) - 1))
-		{
-			value = ft_substr(envp[i], ft_strlen(var), ft_strlen(envp[i]));
-			if (!value)
-			{
-				ft_putstr_fd("Substr problem\n", 2);
-				return (NULL);
-				// EXIT FREE
-			}
-			break ;
-		}
-		i++;
-	}
-	if (!value)
-		return (NULL);
-	return (value);
+	path = getcwd(NULL, 0);
+	ft_putstr_fd(path, 1);
+	ft_putstr_fd("\n", 1);
+	free(path);
+	return (0);
 }
