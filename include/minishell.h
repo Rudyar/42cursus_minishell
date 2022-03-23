@@ -6,7 +6,7 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:22:46 by arudy             #+#    #+#             */
-/*   Updated: 2022/03/23 16:08:17 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/03/23 18:43:20 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@
 # include "builtins.h"
 # include "exec.h"
 # include "lexer.h"
-# include "utils.h"
 
 typedef struct s_history
 {

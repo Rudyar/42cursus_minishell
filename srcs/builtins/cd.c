@@ -6,7 +6,7 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 13:42:57 by lleveque          #+#    #+#             */
-/*   Updated: 2022/03/23 17:56:56 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/03/23 18:44:22 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,11 @@ int	check_path(char *path)
 	return (1);
 }
 
-int	set_home(char **envp)
+int	set_home(void)
 {
 	char	*path;
 
-	path = get_env("HOME=", envp);
+	path = getenv("HOME=");
 	if (!path)
 	{
 		ft_putstr_fd("minishell: cd: HOME not set\n", 2);
@@ -58,11 +58,11 @@ int	set_home(char **envp)
 	return (0);
 }
 
-int	set_oldpwd(char **envp)
+int	set_oldpwd(void)
 {
 	char	*path;
 
-	path = get_env("OLDPWD=", envp);
+	path = getenv("OLDPWD=");
 	if (!path)
 	{
 		ft_putstr_fd("minishell: cd: OLDPWD not set\n", 2);
@@ -73,7 +73,7 @@ int	set_oldpwd(char **envp)
 	return (0);
 }
 
-int	cd(char **args, char **envp)
+int	cd(char **args)
 {
 	if (args[0] && args[1] && args[2])
 	{
@@ -81,9 +81,9 @@ int	cd(char **args, char **envp)
 		return (0);
 	}
 	if (!args[1] || go_home(args[1]))
-		return (set_home(envp));
+		return (set_home());
 	if (args[1][0] == '-' && args[1][1] == '\0')
-		return (set_oldpwd(envp));
+		return (set_oldpwd());
 	if (check_path(args[1]))
 		return (0);
 	chdir(args[1]);
