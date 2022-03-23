@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 18:28:26 by arudy             #+#    #+#             */
-/*   Updated: 2022/03/23 11:29:41 by arudy            ###   ########.fr       */
+/*   Updated: 2022/03/23 18:45:00 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,16 @@
 typedef enum e_token_type
 {
 	WORD,
+	LETTER,
 	DQUOTE = '"',
 	QUOTE = '\'',
-	PIPE,
-	REDIR_IN,
-	REDIR_OUT,
+	PIPE = '|',
+	REDIR_IN = '<',
+	REDIR_OUT = '>',
 	DGREATER,
 	HERE_DOC,
-	DOLLAR,
-	ESPACE
+	DOLLAR = '$',
+	WHITE_SPACE
 }	t_token_type;
 
 typedef struct s_token
@@ -37,5 +38,6 @@ typedef struct s_token
 
 void	lexer(t_token **token, char *line);
 int		check_quotes(char *str);
+t_token	*char_to_token(char *s);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: arudy <arudy@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/21 17:19:21 by arudy             #+#    #+#              #
-#    Updated: 2022/03/23 11:03:10 by arudy            ###   ########.fr        #
+#    Updated: 2022/03/23 18:51:02 by arudy            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,10 +14,13 @@ SRCS = ${SRCS_PARSING} ${SRCS_LEXER} ${SRCS_LIBFT} ${SRCS_BUILTINS} srcs/main.c
 
 SRCS_PARSING = $(addprefix srcs/parsing/, get_full_path.c)
 
-SRCS_LEXER = $(addprefix srcs/lexer/, lexer.c check_quotes.c)
+SRCS_LEXER = $(addprefix srcs/lexer/, lexer.c check_quotes.c \
+				char_to_token.c)
 
 SRCS_LIBFT = $(addprefix srcs/libft/, ft_putstr_fd.c ft_strlen.c \
-				ft_strncmp.c ft_substr.c ft_split.c free_strs.c)
+				ft_strncmp.c ft_substr.c ft_split.c free_strs.c \
+				ft_is_whitespace.c ft_lst_addback.c ft_lst_last.c \
+				ft_free_lst.c)
 
 SRCS_BUILTINS = $(addprefix srcs/builtins/, echo.c)
 
