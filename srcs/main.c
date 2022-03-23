@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:19:49 by arudy             #+#    #+#             */
-/*   Updated: 2022/03/22 19:39:16 by arudy            ###   ########.fr       */
+/*   Updated: 2022/03/23 11:26:32 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,11 @@ int	main(int ac, char **av, char **envp)
 	while (1)
 	{
 		line = readline("Minishell : ");
-		lexer(&token, line);
-		free(line);
+		if (line)
+		{
+			lexer(&token, line);
+			free(line);
+		}
 	}
 	free_strs(env_path);
 	return (0);
