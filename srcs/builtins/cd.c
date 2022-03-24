@@ -6,7 +6,7 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 13:42:57 by lleveque          #+#    #+#             */
-/*   Updated: 2022/03/23 18:44:22 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/03/24 19:24:31 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	set_oldpwd(void)
 	return (0);
 }
 
-int	cd(char **args)
+int	cd_cmd(char **args)
 {
 	if (args[0] && args[1] && args[2])
 	{

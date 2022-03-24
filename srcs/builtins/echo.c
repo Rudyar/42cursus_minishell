@@ -6,7 +6,7 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 12:37:27 by lleveque          #+#    #+#             */
-/*   Updated: 2022/03/24 12:38:07 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/03/24 19:24:27 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	check_opt(char **args)
 	return (0);
 }
 
-int	echo(char **args)
+int	echo_cmd(char **args)
 {
 	int	i;
 
@@ -53,10 +53,10 @@ int	echo(char **args)
 	return (0);
 }
 
-int main(int ac, char **av, char **envp)
-{
-	(void)ac;
-	(void)envp;
-	echo(av);
-	return (0);
-}
+// int main(int ac, char **av, char **envp)
+// {
+// 	(void)ac;
+// 	(void)envp;
+// 	echo(av);
+// 	return (0);
+// }

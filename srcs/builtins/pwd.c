@@ -6,13 +6,13 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 15:36:21 by lleveque          #+#    #+#             */
-/*   Updated: 2022/03/23 18:27:01 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/03/24 19:24:22 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-int	pwd(void)
+int	pwd_cmd(void)
 {
 	char	*path;
 
