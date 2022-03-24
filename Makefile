@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: arudy <arudy@student.42.fr>                +#+  +:+       +#+         #
+#    By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/21 17:19:21 by arudy             #+#    #+#              #
-#    Updated: 2022/03/23 11:03:10 by arudy            ###   ########.fr        #
+#    Updated: 2022/03/24 14:26:24 by lleveque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,8 @@ SRCS_PARSING = $(addprefix srcs/parsing/, get_full_path.c)
 SRCS_LEXER = $(addprefix srcs/lexer/, lexer.c check_quotes.c)
 
 SRCS_LIBFT = $(addprefix srcs/libft/, ft_putstr_fd.c ft_strlen.c \
-				ft_strncmp.c ft_substr.c ft_split.c free_strs.c)
+				ft_strncmp.c ft_substr.c ft_split.c free_strs.c ft_strsjoin.c \
+				ft_strdup.c)
 
 SRCS_BUILTINS = $(addprefix srcs/builtins/, echo.c)
 
