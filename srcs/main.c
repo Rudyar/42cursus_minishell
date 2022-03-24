@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:19:49 by arudy             #+#    #+#             */
-/*   Updated: 2022/03/23 19:11:17 by arudy            ###   ########.fr       */
+/*   Updated: 2022/03/24 19:35:42 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 int	main(int ac, char **av, char **envp)
 {
-	char	*line;
+	// char	*line;
 	// char	**env_path;
-	t_token	*token;
+	t_env	*env;
+	// t_token	*token;
 
 	(void)ac;
 	(void)envp;
@@ -24,17 +25,19 @@ int	main(int ac, char **av, char **envp)
 	(void)envp;
 	if (ac != 1)
 		return (0);
+	env = init_env(envp);
 	// env_path = get_full_path(envp);
-	while (1)
-	{
-		line = readline("Minishell : ");
-		if (line)
-		{
-			lexer(&token, line);
-			free(line);
-		}
-	}
+	// while (1)
+	// {
+	// 	line = readline("Minishell : ");
+	// 	if (line)
+	// 	{
+	// 		lexer(&token, line);
+	// 		free(line);
+	// 	}
+	// }
 	// free_strs(env_path);
+	ft_free(env);
 	return (0);
 }
 

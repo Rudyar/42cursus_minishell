@@ -6,13 +6,13 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 10:36:35 by arudy             #+#    #+#             */
-/*   Updated: 2022/03/22 12:46:04 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/03/24 19:13:40 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-static void	ft_free(char **strs)
+static void	ft_free_split(char **strs)
 {
 	int	i;
 
@@ -95,7 +95,7 @@ char	**ft_split(char const *s, char c)
 		strs[j] = malloc(sizeof(char) * (malloc_size(s, i, c) + 1));
 		if (!strs[j])
 		{
-			ft_free(strs);
+			ft_free_split(strs);
 			return (NULL);
 		}
 		i = mine_substr(s, i, strs[j], c);
