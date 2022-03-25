@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 18:28:26 by arudy             #+#    #+#             */
-/*   Updated: 2022/03/25 09:44:01 by arudy            ###   ########.fr       */
+/*   Updated: 2022/03/25 17:01:29 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 
 typedef enum e_token_type
 {
-	WORD,
-	LETTER,
+	WORD = 1,
+	LETTER = 2,
 	DQUOTE = '"',
 	QUOTE = '\'',
 	PIPE = '|',
 	REDIR_IN = '<',
 	REDIR_OUT = '>',
-	DGREATER,
-	HERE_DOC,
+	DGREATER = 8,
+	HERE_DOC = 9,
 	DOLLAR = '$',
-	WHITE_SPACE
+	WHITE_SPACE = 10
 }	t_token_type;
 
 typedef struct s_token
@@ -36,11 +36,14 @@ typedef struct s_token
 	struct s_token	*prev;
 }	t_token;
 
-void	lexer(t_token **token, char *line);
-int		check_quotes(char *str);
+t_token	*lexer(char *line);
 t_token	*char_to_token(char *s);
-void	free_token_lst(t_token **lst);
 t_token	*token_lst_last(t_token *lst);
+t_token	*manage_quotes(t_token **lst, t_token *prev);
+t_token	*copy_tokens(t_token **lst, t_token_type type, t_token *prev, int n);
+int		check_quotes(char *str);
+void	free_token_lst(t_token **lst);
 void	token_lst_addback(t_token **head, t_token *new);
+void	print_token_lst(t_token **lst);
 
 #endif

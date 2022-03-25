@@ -6,11 +6,19 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 18:36:57 by arudy             #+#    #+#             */
-/*   Updated: 2022/03/25 09:50:40 by arudy            ###   ########.fr       */
+/*   Updated: 2022/03/25 17:51:47 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+static t_token	*char_to_token_error(t_token **lst)
+{
+	if (*lst != NULL)
+		free_token_lst(lst);
+	printf("Can't create new token when reading line\n");
+	return (NULL);
+}
 
 static t_token	*create_token(char c, t_token_type token_type, t_token *prev)
 {
@@ -69,12 +77,17 @@ t_token	*char_to_token(char *s)
 		prev = new;
 		new = token_type(s[i], prev);
 		if (!new)
-		{
-			printf("Pas new\n\n");
-			return (NULL);
-		}
+			return (char_to_token_error(&head));
 		token_lst_addback(&head, new);
 		i++;
 	}
+	print_token_lst(&head);
+	printf("%s\n\n", head->prev->content);
+	while (head->prev != NULL)
+	{
+		printf("---%s---\n", head->content);
+		head = head->prev;
+	}
+
 	return (head);
 }
