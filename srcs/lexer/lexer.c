@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 19:25:20 by arudy             #+#    #+#             */
-/*   Updated: 2022/03/25 17:48:02 by arudy            ###   ########.fr       */
+/*   Updated: 2022/03/25 19:18:18 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,10 @@ static t_token	*concat_tokens(t_token **lst)
 	t_token	*head;
 	t_token	*new;
 	t_token	*prev;
-	t_token	*tmp;
 
 	head = NULL;
 	new = NULL;
 	prev = NULL;
-	tmp = *lst;
 	while (*lst)
 	{
 		if ((*lst)->type == QUOTE || (*lst)->type == DQUOTE)
@@ -58,13 +56,6 @@ static t_token	*concat_tokens(t_token **lst)
 		}
 		*lst = (*lst)->next;
 	}
-	// printf("---> %s\n\n", (*lst)->content);
-	// while ((*lst)->prev != NULL)
-	// {
-	// 	(*lst) = (*lst)->prev;
-	// }
-	// print_token_lst(&tmp);
-	// printf("----------------\n\n");
 	return (head);
 }
 
@@ -72,30 +63,25 @@ t_token	*lexer(char *s)
 {
 	t_token	*token;
 	t_token	*tokens_lst;
+	t_token	*tmp;
 
 	if (check_quotes(s))
 		return (NULL);
 	tokens_lst = NULL;
 	token = char_to_token(s);
+	tmp = token;
 	if (!token)
 	{
 		printf("Can't create token from line\n");
 		return (NULL);
 	}
-	// print_token_lst(&token);
-	// printf("----------------\n\n");
 	tokens_lst = concat_tokens(&token);
 	if (!tokens_lst)
 	{
 		printf("Can't create tokens from token\n");
+		free_token_lst(&tmp);
 		return (NULL);
 	}
-	// while (token->prev != NULL)
-	// {
-	// 	token = token->prev;
-	// }
-	// print_token_lst(&token);
-	// printf("----------------\n\n");
-	free_token_lst(&token);
+	free_token_lst(&tmp);
 	return (tokens_lst);
 }

@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 18:28:26 by arudy             #+#    #+#             */
-/*   Updated: 2022/03/25 17:01:29 by arudy            ###   ########.fr       */
+/*   Updated: 2022/03/25 18:59:58 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ typedef enum e_token_type
 	DGREATER = 8,
 	HERE_DOC = 9,
 	DOLLAR = '$',
-	WHITE_SPACE = 10
+	WHITE_SPACE = 10,
+	WORD_IN_DQUOTE = 11
 }	t_token_type;
 
 typedef struct s_token

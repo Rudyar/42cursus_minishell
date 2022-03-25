@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 18:36:57 by arudy             #+#    #+#             */
-/*   Updated: 2022/03/25 17:51:47 by arudy            ###   ########.fr       */
+/*   Updated: 2022/03/25 18:50:02 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ t_token	*char_to_token(char *s)
 	i = 0;
 	while (s[i] && ft_is_whitespace(s[i]))
 		i++;
-	new = token_type(s[i], NULL);
+	prev = NULL;
+	new = token_type(s[i], prev);
 	head = new;
 	i++;
 	while (s[i])
@@ -81,13 +82,5 @@ t_token	*char_to_token(char *s)
 		token_lst_addback(&head, new);
 		i++;
 	}
-	print_token_lst(&head);
-	printf("%s\n\n", head->prev->content);
-	while (head->prev != NULL)
-	{
-		printf("---%s---\n", head->content);
-		head = head->prev;
-	}
-
 	return (head);
 }

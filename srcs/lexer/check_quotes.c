@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 10:35:41 by arudy             #+#    #+#             */
-/*   Updated: 2022/03/25 17:03:28 by arudy            ###   ########.fr       */
+/*   Updated: 2022/03/25 19:02:15 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,8 @@ t_token	*manage_quotes(t_token **lst, t_token *prev)
 	{
 		if ((*lst)->next != NULL)
 			*lst = (*lst)->next;
-		new = copy_tokens(lst, WORD, prev, find_next_quote(*lst, DQUOTE));
+		new = copy_tokens(lst, WORD_IN_DQUOTE, prev,
+				find_next_quote(*lst, DQUOTE));
 		if ((*lst)->next != NULL)
 			*lst = (*lst)->next;
 	}
