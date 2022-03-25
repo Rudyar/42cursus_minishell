@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:22:46 by arudy             #+#    #+#             */
-/*   Updated: 2022/03/24 17:10:30 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/03/25 09:44:08 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,5 @@ char	**ft_strsjoin(char **tab, char *s2);
 char	*ft_strdup(char *s);
 char	*ft_strchr(char *s, int c);
 int		ft_is_whitespace(int c);
-void	ft_lst_addback(t_token **head, t_token *new);
-t_token	*ft_lst_last(t_token *lst);
-void	ft_free_lst(t_token **lst);
 
 #endif

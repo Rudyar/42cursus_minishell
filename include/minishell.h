@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:22:46 by arudy             #+#    #+#             */
-/*   Updated: 2022/03/24 19:36:16 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/03/25 09:54:35 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ typedef struct s_env
 
 typedef struct s_garbage
 {
-	void *ptr;
-	struct s_garbage *next;
+	void				*ptr;
+	struct s_garbage	*next;
 }	t_garbage;
 
 typedef struct s_data
@@ -58,17 +58,3 @@ t_env	*init_env(char **envp);
 void	ft_free(t_env *env);
 
 #endif
-
-
-
-
-
-
-
-
-
-
-
-
-
-

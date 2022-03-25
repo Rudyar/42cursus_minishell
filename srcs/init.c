@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 18:22:42 by lleveque          #+#    #+#             */
-/*   Updated: 2022/03/24 18:27:53 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/03/25 09:53:21 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-t_env *ft_env_lstnew(char *content)
+t_env	*ft_env_lstnew(char *content)
 {
 	t_env	*new;
 
@@ -24,7 +24,7 @@ t_env *ft_env_lstnew(char *content)
 	return (new);
 }
 
-t_env *init_env(char **envp)
+t_env	*init_env(char **envp)
 {
 	int		i;
 	t_env	*env;

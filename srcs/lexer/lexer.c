@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 19:25:20 by arudy             #+#    #+#             */
-/*   Updated: 2022/03/23 19:05:00 by arudy            ###   ########.fr       */
+/*   Updated: 2022/03/25 09:42:55 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	lexer(t_token **tokens_lst, char *s)
 		return ;
 	}
 	print_lst(&token);
-	ft_free_lst(&token);
+	free_token_lst(&token);
 	(void)tokens_lst;
 }
 // Ret lst avec tous les tokens concat par type, donc changer le proto de la ft.

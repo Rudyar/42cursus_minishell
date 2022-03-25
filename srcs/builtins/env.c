@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 16:26:20 by lleveque          #+#    #+#             */
-/*   Updated: 2022/03/24 19:41:03 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/03/25 09:54:05 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-extern char **__environ;
+extern char	**__environ;
 
 int	env_cmd(t_env *env)
 {

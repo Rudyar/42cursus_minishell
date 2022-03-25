@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 18:57:22 by lleveque          #+#    #+#             */
-/*   Updated: 2022/03/24 19:09:48 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/03/25 09:30:33 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	free_env(t_env *lst)
 {
-	t_env *tmp;
+	t_env	*tmp;
 
 	while (lst)
 	{

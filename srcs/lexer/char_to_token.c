@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 18:36:57 by arudy             #+#    #+#             */
-/*   Updated: 2022/03/23 18:46:38 by arudy            ###   ########.fr       */
+/*   Updated: 2022/03/25 09:50:40 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ t_token	*char_to_token(char *s)
 			printf("Pas new\n\n");
 			return (NULL);
 		}
-		ft_lst_addback(&head, new);
+		token_lst_addback(&head, new);
 		i++;
 	}
 	return (head);
