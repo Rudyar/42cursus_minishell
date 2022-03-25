@@ -3,24 +3,60 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 16:26:20 by lleveque          #+#    #+#             */
-/*   Updated: 2022/03/25 09:54:05 by arudy            ###   ########.fr       */
+/*   Updated: 2022/03/25 16:21:24 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-extern char	**__environ;
-
-int	env_cmd(t_env *env)
+int	check_env_args(char **args)
 {
+	int		i;
+	size_t	j;
+
+	i = 1;
+	j = 0;
+	if (!args)
+		return (1);
+	while (args[i])
+	{
+		while (args[i][j])
+		{
+			printf("%c\n", args[i][j]);
+			if (args[i][j] == '=')
+				break ;
+			j++;
+		}
+		if (j == ft_strlen(args[i]) - 1)
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+int	env_cmd(char **args, t_env *env)
+{
+	int	i;
+
+	i = 1;
+	if (check_env_args(args))
+		return (0);
 	while (env)
 	{
 		ft_putstr_fd(env->var, 1);
 		ft_putstr_fd("\n", 1);
 		env = env->next;
+	}
+	if (!args)
+		return (0);
+	while (args[i])
+	{
+		ft_putstr_fd(args[i], 1);
+		ft_putstr_fd("\n", 1);
+		i++;
 	}
 	return (0);
 }
@@ -34,6 +70,6 @@ int	env_cmd(t_env *env)
 // 	// var=__environ;
 // 	// for(int i = 0; var[i] != NULL; i++)
 // 	// 	printf("%s\n", var[i]);
-// 	env(envp);
+// 	env_cmd(av, envp);
 // 	return (0);
 // }
