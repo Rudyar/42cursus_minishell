@@ -6,11 +6,24 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 18:49:07 by arudy             #+#    #+#             */
-/*   Updated: 2022/03/25 18:48:54 by arudy            ###   ########.fr       */
+/*   Updated: 2022/03/26 11:31:56 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+int	count_letters(t_token *lst)
+{
+	int	i;
+
+	i = 0;
+	while (lst != NULL && lst->type == LETTER)
+	{
+		i++;
+		lst = lst->next;
+	}
+	return (i);
+}
 
 t_token	*token_lst_last(t_token *lst)
 {

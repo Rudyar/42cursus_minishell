@@ -6,11 +6,19 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 19:25:20 by arudy             #+#    #+#             */
-/*   Updated: 2022/03/25 19:18:18 by arudy            ###   ########.fr       */
+/*   Updated: 2022/03/26 16:47:52 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+// t_token	*manage_letters(t_token **lst, t_token *prev)
+// {
+// 	t_token	*new;
+
+// 	new = NULL;
+
+// }
 
 t_token	*copy_tokens(t_token **lst, t_token_type type, t_token *prev, int n)
 {
@@ -24,11 +32,12 @@ t_token	*copy_tokens(t_token **lst, t_token_type type, t_token *prev, int n)
 	new->content = malloc(sizeof(char) * (n + 1));
 	if (!new->content)
 		return (NULL);
-	while (lst && i < n)
+	while (*lst && i < n)
 	{
 		new->content[i] = (*lst)->content[0];
 		i++;
-		*lst = (*lst)->next;
+		if ((*lst)->next != NULL)
+			*lst = (*lst)->next;
 	}
 	new->content[i] = '\0';
 	new->type = type;
@@ -51,6 +60,12 @@ static t_token	*concat_tokens(t_token **lst)
 		if ((*lst)->type == QUOTE || (*lst)->type == DQUOTE)
 		{
 			new = manage_quotes(lst, prev);
+			token_lst_addback(&head, new);
+			prev = new;
+		}
+		if ((*lst)->type == LETTER)
+		{
+			new = copy_tokens(lst, WORD, prev, count_letters(*lst));
 			token_lst_addback(&head, new);
 			prev = new;
 		}
@@ -82,6 +97,7 @@ t_token	*lexer(char *s)
 		free_token_lst(&tmp);
 		return (NULL);
 	}
+	print_token_lst(&tokens_lst);
 	free_token_lst(&tmp);
 	return (tokens_lst);
 }
