@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 10:35:41 by arudy             #+#    #+#             */
-/*   Updated: 2022/03/25 19:02:15 by arudy            ###   ########.fr       */
+/*   Updated: 2022/03/26 18:01:22 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static int	find_next_quote(t_token *lst, t_token_type type)
 	return (i);
 }
 
-t_token	*manage_quotes(t_token **lst, t_token *prev)
+void	manage_quotes(t_token **lst, t_token **prev, t_token **head)
 {
 	t_token	*new;
 
@@ -72,7 +72,7 @@ t_token	*manage_quotes(t_token **lst, t_token *prev)
 	{
 		if ((*lst)->next != NULL)
 			*lst = (*lst)->next;
-		new = copy_tokens(lst, WORD_IN_DQUOTE, prev,
+		new = copy_tokens(lst, WORD_IN_DQUOTE, *prev,
 				find_next_quote(*lst, DQUOTE));
 		if ((*lst)->next != NULL)
 			*lst = (*lst)->next;
@@ -81,9 +81,10 @@ t_token	*manage_quotes(t_token **lst, t_token *prev)
 	{
 		if ((*lst)->next != NULL)
 			*lst = (*lst)->next;
-		new = copy_tokens(lst, WORD, prev, find_next_quote(*lst, QUOTE));
+		new = copy_tokens(lst, WORD, *prev, find_next_quote(*lst, QUOTE));
 		if ((*lst)->next != NULL)
 			*lst = (*lst)->next;
 	}
-	return (new);
+	token_lst_addback(head, new);
+	*prev = new;
 }

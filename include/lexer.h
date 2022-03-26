@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 18:28:26 by arudy             #+#    #+#             */
-/*   Updated: 2022/03/26 11:00:30 by arudy            ###   ########.fr       */
+/*   Updated: 2022/03/26 18:12:55 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,9 @@ typedef struct s_token
 t_token	*lexer(char *line);
 t_token	*char_to_token(char *s);
 t_token	*token_lst_last(t_token *lst);
-t_token	*manage_quotes(t_token **lst, t_token *prev);
 t_token	*copy_tokens(t_token **lst, t_token_type type, t_token *prev, int n);
+void	manage_redir(t_token **lst, t_token **prev, t_token **head);
+void	manage_quotes(t_token **lst, t_token **prev, t_token **head);
 int		check_quotes(char *str);
 int		count_letters(t_token *lst);
 void	free_token_lst(t_token **lst);
