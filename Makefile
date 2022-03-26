@@ -6,7 +6,7 @@
 #    By: arudy <arudy@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/21 17:19:21 by arudy             #+#    #+#              #
-#    Updated: 2022/03/26 18:11:24 by arudy            ###   ########.fr        #
+#    Updated: 2022/03/26 18:54:13 by arudy            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ SRCS_MAIN = $(addprefix srcs/, main.c free.c init.c)
 
 SRCS_PARSING = $(addprefix srcs/parsing/, get_full_path.c)
 
-SRCS_LEXER = $(addprefix srcs/lexer/, lexer.c check_quotes.c \
+SRCS_LEXER = $(addprefix srcs/lexer/, lexer.c first_check.c \
 				lexer_utils.c char_to_token.c token_manager.c)
 
 SRCS_LIBFT = $(addprefix srcs/libft/, ft_putstr_fd.c ft_strlen.c \

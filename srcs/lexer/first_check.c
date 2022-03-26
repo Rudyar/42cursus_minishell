@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_quotes.c                                     :+:      :+:    :+:   */
+/*   first_check.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 10:35:41 by arudy             #+#    #+#             */
-/*   Updated: 2022/03/26 18:01:22 by arudy            ###   ########.fr       */
+/*   Updated: 2022/03/26 19:09:00 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,43 +48,36 @@ near unexpected token \'\n", 2), 1);
 	return (0);
 }
 
-static int	find_next_quote(t_token *lst, t_token_type type)
+static int	count_char_occurences(char *s, t_token_type c)
 {
 	int	i;
+	int	n;
 
 	i = 0;
-	while (lst != NULL)
+	n = 0;
+	while (s[i])
 	{
-		if (lst->type == type)
-			return (i);
+		if (s[i] == (int)c)
+		{
+			while (s[i] == (int)c)
+			{
+				n++;
+				i++;
+			}
+			return (n);
+		}
 		i++;
-		lst = lst->next;
 	}
-	return (i);
+	return (n);
 }
 
-void	manage_quotes(t_token **lst, t_token **prev, t_token **head)
+int	first_check(char *s)
 {
-	t_token	*new;
+	if (check_quotes(s))
+		return (1);
+	if (count_char_occurences(s, REDIR_IN) > 2)
+		return (ft_putstr_fd("minishell: syntax error \
+near unexpected token `newline'\n", 2), 1);
 
-	new = NULL;
-	if ((*lst)->type == DQUOTE)
-	{
-		if ((*lst)->next != NULL)
-			*lst = (*lst)->next;
-		new = copy_tokens(lst, WORD_IN_DQUOTE, *prev,
-				find_next_quote(*lst, DQUOTE));
-		if ((*lst)->next != NULL)
-			*lst = (*lst)->next;
-	}
-	else
-	{
-		if ((*lst)->next != NULL)
-			*lst = (*lst)->next;
-		new = copy_tokens(lst, WORD, *prev, find_next_quote(*lst, QUOTE));
-		if ((*lst)->next != NULL)
-			*lst = (*lst)->next;
-	}
-	token_lst_addback(head, new);
-	*prev = new;
+	return (0);
 }

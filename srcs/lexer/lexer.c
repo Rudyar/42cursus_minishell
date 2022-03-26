@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 19:25:20 by arudy             #+#    #+#             */
-/*   Updated: 2022/03/26 18:10:59 by arudy            ###   ########.fr       */
+/*   Updated: 2022/03/26 18:55:10 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ t_token	*lexer(char *s)
 	t_token	*tokens_lst;
 	t_token	*tmp;
 
-	if (check_quotes(s))
+	if (first_check(s))
 		return (NULL);
 	tokens_lst = NULL;
 	token = char_to_token(s);
