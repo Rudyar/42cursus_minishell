@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 10:35:41 by arudy             #+#    #+#             */
-/*   Updated: 2022/03/26 19:09:00 by arudy            ###   ########.fr       */
+/*   Updated: 2022/03/27 18:31:26 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,61 +23,110 @@ static int	next_quote(char *str, char c, int	*i)
 	return (1);
 }
 
-int	check_quotes(char *str)
+static int	check_quotes(char *str, int *i)
 {
-	int	i;
-
-	i = -1;
-	while (str[++i])
+	while (str[*i])
 	{
-		if (str[i] == DQUOTE)
+		if (str[*i] == DQUOTE)
 		{
-			i++;
-			if (next_quote(str, DQUOTE, &i))
+			(*i)++;
+			if (next_quote(str, DQUOTE, i))
 				return (ft_putstr_fd("minishell: syntax error \
 near unexpected token \"\n", 2), 1);
+			else
+				return (0);
 		}
-		if (str[i] == QUOTE)
+		if (str[*i] == QUOTE)
 		{
-			i++;
-			if (next_quote(str, QUOTE, &i))
+			(*i)++;
+			if (next_quote(str, QUOTE, i))
 				return (ft_putstr_fd("minishell: syntax error \
 near unexpected token \'\n", 2), 1);
+			else
+				return (0);
 		}
+		(*i)++;
 	}
 	return (0);
 }
 
-static int	count_char_occurences(char *s, t_token_type c)
+static int	check_redir(char *s, int *i)
 {
-	int	i;
 	int	n;
 
-	i = 0;
 	n = 0;
-	while (s[i])
+	if (s[*i] == REDIR_IN)
 	{
-		if (s[i] == (int)c)
+		while (s[*i] == REDIR_IN)
 		{
-			while (s[i] == (int)c)
-			{
-				n++;
-				i++;
-			}
-			return (n);
+			(*i)++;
+			n++;
 		}
-		i++;
 	}
-	return (n);
+	else
+	{
+		while (s[*i] == REDIR_OUT)
+		{
+			(*i)++;
+			n++;
+		}
+	}
+	while (ft_is_whitespace(s[*i]))
+		(*i)++;
+	if (n > 2 || s[*i] == '\0')
+		return (ft_putstr_fd("minishell: syntax error \
+near unexpected token `newline'\n", 2), 1);
+	return (0);
+}
+
+static int	check_pipe(char *s, int *i)
+{
+	int	n;
+	int	j;
+
+	n = 0;
+	j = 0;
+	while (ft_is_whitespace(s[j]))
+		j++;
+	if (j == (*i))
+		return (ft_putstr_fd("minishell: syntax error \
+near unexpected token `|'\n", 2), 1);
+	while (s[*i] == PIPE)
+	{
+		(*i)++;
+		n++;
+	}
+	while (ft_is_whitespace(s[*i]))
+		(*i)++;
+	if (n > 1 || s[*i] == '\0')
+		return (ft_putstr_fd("minishell: syntax error \
+near unexpected token `|'\n", 2), 1);
+	return (0);
 }
 
 int	first_check(char *s)
 {
-	if (check_quotes(s))
-		return (1);
-	if (count_char_occurences(s, REDIR_IN) > 2)
-		return (ft_putstr_fd("minishell: syntax error \
-near unexpected token `newline'\n", 2), 1);
+	int	i;
 
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] == QUOTE || s[i] == DQUOTE)
+		{
+			if (check_quotes(s, &i))
+				return (1);
+		}
+		if (s[i] == REDIR_IN || s[i] == REDIR_OUT)
+		{
+			if (check_redir(s, &i))
+				return (1);
+		}
+		if (s[i] == PIPE)
+		{
+			if (check_pipe(s, &i))
+				return (1);
+		}
+		i++;
+	}
 	return (0);
 }
