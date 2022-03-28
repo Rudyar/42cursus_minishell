@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 19:25:20 by arudy             #+#    #+#             */
-/*   Updated: 2022/03/26 18:55:10 by arudy            ###   ########.fr       */
+/*   Updated: 2022/03/28 17:53:45 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,11 @@ static t_token	*concat_tokens(t_token **lst)
 		if ((*lst)->type == QUOTE || (*lst)->type == DQUOTE)
 			manage_quotes(lst, &prev, &head);
 		if ((*lst)->type == LETTER)
-		{
-			new = copy_tokens(lst, WORD, prev, count_letters(*lst));
-			token_lst_addback(&head, new);
-			prev = new;
-		}
+			manage_letters(lst, &prev, &head);
 		if ((*lst)->type == REDIR_IN || (*lst)->type == REDIR_OUT)
 			manage_redir(lst, &prev, &head);
+		if ((*lst)->type == PIPE || (*lst)->type == DOLLAR)
+			manage_else(lst, &prev, &head);
 		*lst = (*lst)->next;
 	}
 	return (head);

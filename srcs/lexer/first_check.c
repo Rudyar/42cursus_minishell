@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 10:35:41 by arudy             #+#    #+#             */
-/*   Updated: 2022/03/27 18:54:17 by arudy            ###   ########.fr       */
+/*   Updated: 2022/03/28 19:16:50 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,32 +50,29 @@ near unexpected token \'\n", 2), 1);
 	return (0);
 }
 
-static int	check_redir(char *s, int *i, int *n)
+static int	check_redir(char *s, int *i)
 {
 	int	j;
+	int	n;
 
-	if (s[*i] == REDIR_IN)
+	n = 0;
+	while (s[*i] == REDIR_IN)
 	{
-		while (s[*i] == REDIR_IN)
-		{
-			(*i)++;
-			(*n)++;
-		}
+		(*i)++;
+		n++;
 	}
-	else
+	while (s[*i] == REDIR_OUT)
 	{
-		while (s[*i] == REDIR_OUT)
-		{
-			(*i)++;
-			(*n)++;
-		}
+		(*i)++;
+		n++;
 	}
 	j = (*i);
 	while (ft_is_whitespace(s[j]))
 		j++;
-	if ((*n) > 2 || s[j] == '\0')
+	if (n > 2 || s[j] == '\0')
 		return (ft_putstr_fd("minishell: syntax error \
 near unexpected token `newline'\n", 2), 1);
+	(*i)--;
 	return (0);
 }
 
@@ -108,12 +105,10 @@ near unexpected token `|'\n", 2), 1);
 int	first_check(char *s)
 {
 	int	i;
-	int	n;
 
 	i = 0;
 	while (s[i])
 	{
-		n = 0;
 		if (s[i] == QUOTE || s[i] == DQUOTE)
 		{
 			if (check_quotes(s, &i))
@@ -121,13 +116,14 @@ int	first_check(char *s)
 		}
 		if (s[i] == REDIR_IN || s[i] == REDIR_OUT)
 		{
-			if (check_redir(s, &i, &n))
+			if (check_redir(s, &i))
 				return (1);
 		}
 		if (s[i] == PIPE)
 		{
 			if (check_pipe(s, &i))
 				return (1);
+			i--;
 		}
 		i++;
 	}

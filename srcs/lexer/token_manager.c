@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 18:10:51 by arudy             #+#    #+#             */
-/*   Updated: 2022/03/26 18:53:12 by arudy            ###   ########.fr       */
+/*   Updated: 2022/03/28 18:58:25 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,19 +38,27 @@ void	manage_quotes(t_token **lst, t_token **prev, t_token **head)
 			*lst = (*lst)->next;
 		new = copy_tokens(lst, WORD_IN_DQUOTE, *prev,
 				find_next_quote(*lst, DQUOTE));
-		if ((*lst)->next != NULL)
-			*lst = (*lst)->next;
 	}
 	else
 	{
 		if ((*lst)->next != NULL)
 			*lst = (*lst)->next;
 		new = copy_tokens(lst, WORD, *prev, find_next_quote(*lst, QUOTE));
-		if ((*lst)->next != NULL)
-			*lst = (*lst)->next;
 	}
 	token_lst_addback(head, new);
 	*prev = new;
+}
+
+void	manage_letters(t_token **lst, t_token **prev, t_token **head)
+{
+	t_token	*new;
+
+	new = NULL;
+	new = copy_tokens(lst, WORD, *prev, count_letters(*lst));
+	token_lst_addback(head, new);
+	*prev = new;
+	if ((*lst)->next != NULL)
+		*lst = (*lst)->prev;
 }
 
 void	manage_redir(t_token **lst, t_token **prev, t_token **head)
@@ -74,4 +82,31 @@ void	manage_redir(t_token **lst, t_token **prev, t_token **head)
 	}
 	token_lst_addback(head, new);
 	*prev = new;
+	*lst = (*lst)->prev;
+}
+
+void	manage_else(t_token **lst, t_token **prev, t_token **head)
+{
+	int		i;
+	t_token	*new;
+	t_token	*tmp;
+
+	i = 0 ;
+	new = NULL;
+	tmp = *lst;
+	if (tmp->type == DOLLAR)
+	{
+		while (tmp != NULL && (tmp->type == DOLLAR || tmp->type == LETTER))
+		{
+			i++;
+			tmp = tmp->next;
+		}
+		new = copy_tokens(lst, (*lst)->type, *prev, i);
+	}
+	else
+		new = copy_tokens(lst, (*lst)->type, *prev, 1);
+	token_lst_addback(head, new);
+	*prev = new;
+	if ((*lst)->next != NULL)
+		*lst = (*lst)->prev;
 }
