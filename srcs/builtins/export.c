@@ -6,13 +6,33 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 13:42:32 by lleveque          #+#    #+#             */
-/*   Updated: 2022/03/24 19:50:43 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/03/28 19:14:31 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-int	export_cmd(char **args, char ***envp)
+// int	is_unvalid(char c)
+// {
+// 	if (c == '=')
+// }
+
+// int	check_export_arg(char *arg)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	if (arg)
+// 	{
+// 		if (arg[0] == '=')
+// 		while (arg[i])
+// 		{
+
+// 		}
+// 	}
+// }
+
+int	export_cmd(char **args, t_env *envp)
 {
 	int	i;
 
@@ -20,31 +40,10 @@ int	export_cmd(char **args, char ***envp)
 
 	// while (args[i])
 	// {
-		*envp = ft_strsjoin(*envp, args[i]);
+	// 	*envp = ft_strsjoin(*envp, args[i]);
 	// 	i++;
 	// }
 	(void)envp;
 	(void)args;
 	return (0);
 }
-
-// int main(int ac, char **av, char **envp)
-// {
-// 	(void)ac;
-// 	export(av, &envp);
-// 	int i = 0;
-// 	while (envp[i])
-// 	{
-// 		printf("%s\n", envp[i]);
-// 		i++;
-// 	}
-// 	i = 0;
-// 	while (envp[i])
-// 	{
-// 		free(envp[i]);
-// 		i++;
-// 	}
-// 	printf("%d\n", i);
-// 	free(envp);
-// 	return (0);
-// }

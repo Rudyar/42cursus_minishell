@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:22:46 by arudy             #+#    #+#             */
-/*   Updated: 2022/03/25 09:54:35 by arudy            ###   ########.fr       */
+/*   Updated: 2022/03/28 18:42:37 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,18 @@
 # include <sys/stat.h>
 # include <dirent.h>
 
+# include "libft.h"
+# include "parsing.h"
+# include "builtins.h"
+# include "exec.h"
+# include "lexer.h"
+
 typedef struct s_history
 {
 	struct s_history	*prev;
 	char				*cmd;
 	struct s_history	*next;
 }	t_history;
-
-typedef struct s_env
-{
-	char			*var;
-	struct s_env	*next;
-}	t_env;
 
 typedef struct s_garbage
 {
@@ -47,12 +47,6 @@ typedef struct s_data
 	t_env		env;
 	char		*current_path;
 }	t_data;
-
-# include "libft.h"
-# include "parsing.h"
-# include "builtins.h"
-# include "exec.h"
-# include "lexer.h"
 
 t_env	*init_env(char **envp);
 void	ft_free(t_env *env);
