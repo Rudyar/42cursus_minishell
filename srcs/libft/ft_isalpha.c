@@ -1,27 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.h                                          :+:      :+:    :+:   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/21 17:22:46 by arudy             #+#    #+#             */
-/*   Updated: 2022/03/29 17:33:28 by lleveque         ###   ########.fr       */
+/*   Created: 2021/11/22 13:23:01 by lleveque          #+#    #+#             */
+/*   Updated: 2021/11/24 11:40:45 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSING_H
-# define PARSING_H
-
-typedef struct s_env
+int	ft_isalpha(int c)
 {
-	struct s_env	*prev;
-	char			*var;
-	struct s_env	*next;
-}	t_env;
-
-char	**get_full_path(char **envp);
-int		parsing(char *line, t_token **tokens_lst);
-int		first_check(char *s);
-
-#endif
+	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
+		return (1);
+	return (0);
+}

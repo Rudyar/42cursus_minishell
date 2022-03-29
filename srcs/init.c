@@ -3,26 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 18:22:42 by lleveque          #+#    #+#             */
-/*   Updated: 2022/03/25 09:53:21 by arudy            ###   ########.fr       */
+/*   Updated: 2022/03/29 17:44:35 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-t_env	*ft_env_lstnew(char *content)
-{
-	t_env	*new;
-
-	new = malloc(sizeof(*new));
-	if (!new)
-		return (NULL);
-	new->var = content;
-	new->next = NULL;
-	return (new);
-}
 
 t_env	*init_env(char **envp)
 {
@@ -31,16 +19,17 @@ t_env	*init_env(char **envp)
 	t_env	*tmp;
 
 	i = 1;
+	env = NULL;
 	if (envp[0])
-		env = ft_env_lstnew(envp[0]);
+		env = ft_env_lstnew(envp[0], env);
 	if (envp[i])
 	{
-		env->next = ft_env_lstnew(envp[i]);
+		env->next = ft_env_lstnew(envp[i], env);
 		i++;
 		tmp = env->next;
 		while (envp[i])
 		{
-			tmp->next = ft_env_lstnew(envp[i]);
+			tmp->next = ft_env_lstnew(envp[i], tmp);
 			tmp = tmp->next;
 			i++;
 			if (!envp[i])

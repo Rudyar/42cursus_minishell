@@ -1,27 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.h                                          :+:      :+:    :+:   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/21 17:22:46 by arudy             #+#    #+#             */
-/*   Updated: 2022/03/29 17:33:28 by lleveque         ###   ########.fr       */
+/*   Created: 2021/11/22 14:17:40 by lleveque          #+#    #+#             */
+/*   Updated: 2021/11/23 11:15:48 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSING_H
-# define PARSING_H
-
-typedef struct s_env
+int	ft_isdigit(int c)
 {
-	struct s_env	*prev;
-	char			*var;
-	struct s_env	*next;
-}	t_env;
-
-char	**get_full_path(char **envp);
-int		parsing(char *line, t_token **tokens_lst);
-int		first_check(char *s);
-
-#endif
+	if (c >= '0' && c <= '9')
+		return (1);
+	return (0);
+}

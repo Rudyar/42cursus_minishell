@@ -1,27 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.h                                          :+:      :+:    :+:   */
+/*   ft_env_lst.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/21 17:22:46 by arudy             #+#    #+#             */
-/*   Updated: 2022/03/29 17:33:28 by lleveque         ###   ########.fr       */
+/*   Created: 2022/03/29 16:05:20 by lleveque          #+#    #+#             */
+/*   Updated: 2022/03/29 17:34:57 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSING_H
-# define PARSING_H
+#include "../../include/minishell.h"
 
-typedef struct s_env
+t_env	*ft_env_lstnew(char *content, t_env *prev)
 {
-	struct s_env	*prev;
-	char			*var;
-	struct s_env	*next;
-}	t_env;
+	t_env	*new;
 
-char	**get_full_path(char **envp);
-int		parsing(char *line, t_token **tokens_lst);
-int		first_check(char *s);
+	new = malloc(sizeof(*new));
+	if (!new)
+		return (NULL);
+	new->prev = prev;
+	new->var = content;
+	new->next = NULL;
+	return (new);
+}
 
-#endif
+void	ft_env_addback(t_env *env, t_env *new)
+{
+	while (env->next)
+		env = env->next;
+	env->next = new;
+}
