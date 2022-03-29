@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 19:25:20 by arudy             #+#    #+#             */
-/*   Updated: 2022/03/28 17:53:45 by arudy            ###   ########.fr       */
+/*   Updated: 2022/03/29 11:19:12 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,30 +62,52 @@ static t_token	*concat_tokens(t_token **lst)
 	return (head);
 }
 
-t_token	*lexer(char *s)
+int	lexer(char *s, t_token **tokens_lst)
 {
 	t_token	*token;
-	t_token	*tokens_lst;
 	t_token	*tmp;
 
-	if (first_check(s))
-		return (NULL);
-	tokens_lst = NULL;
 	token = char_to_token(s);
 	tmp = token;
 	if (!token)
 	{
-		printf("Can't create token from line\n");
-		return (NULL);
+		ft_putstr_fd("Can't create token from line\n", 2);
+		return (1);
 	}
-	tokens_lst = concat_tokens(&token);
+	*tokens_lst = concat_tokens(&token);
 	if (!tokens_lst)
 	{
-		printf("Can't create tokens from token\n");
+		ft_putstr_fd("Can't create tokens from token\n", 2);
 		free_token_lst(&tmp);
-		return (NULL);
+		return (1);
 	}
-	print_token_lst(&tokens_lst);
 	free_token_lst(&tmp);
-	return (tokens_lst);
+	return (0);
 }
+
+// t_token	*lexer(char *s, t_token **tokens_lst)
+// {
+// 	t_token	*token;
+// 	// t_token	*tokens_lst;
+// 	t_token	*tmp;
+
+// 	if (first_check(s))
+// 		return (NULL);
+// 	// tokens_lst = NULL;
+// 	token = char_to_token(s);
+// 	tmp = token;
+// 	if (!token)
+// 	{
+// 		ft_putstr_fd("Can't create token from line\n", 2);
+// 		return (NULL);
+// 	}
+// 	tokens_lst = concat_tokens(&token);
+// 	if (!tokens_lst)
+// 	{
+// 		ft_putstr_fd("Can't create tokens from token\n", 2);
+// 		free_token_lst(&tmp);
+// 		return (NULL);
+// 	}
+// 	free_token_lst(&tmp);
+// 	return (tokens_lst);
+// }
