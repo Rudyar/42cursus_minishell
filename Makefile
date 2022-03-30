@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+         #
+#    By: arudy <arudy@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/21 17:19:21 by arudy             #+#    #+#              #
-#    Updated: 2022/03/29 18:29:34 by lleveque         ###   ########.fr        #
+#    Updated: 2022/03/30 18:05:04 by arudy            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ SRCS = ${SRCS_MAIN} ${SRCS_PARSING} ${SRCS_LEXER} ${SRCS_LIBFT} ${SRCS_BUILTINS}
 SRCS_MAIN = $(addprefix srcs/, main.c free.c init.c)
 
 SRCS_PARSING = $(addprefix srcs/parsing/, first_check.c \
-				parsing.c)
+				parsing.c parsing_utils.c)
 
 SRCS_LEXER = $(addprefix srcs/lexer/, lexer.c lexer_utils.c \
 				char_to_token.c token_manager.c)

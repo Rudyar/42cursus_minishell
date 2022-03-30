@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:19:49 by arudy             #+#    #+#             */
-/*   Updated: 2022/03/30 16:30:13 by arudy            ###   ########.fr       */
+/*   Updated: 2022/03/30 18:32:36 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,25 @@
 // 	return (0);
 // }
 
+void	print_lst(t_cmd **lst)
+{
+	int	i;
+
+	while (*lst)
+	{
+		i = 0;
+		printf("---------\n");
+		while ((*lst)->cmd[i] != NULL)
+		{
+			printf("%s\n", (*lst)->cmd[i]);
+			i++;
+		}
+		printf("---------\n");
+		lst = &(*lst)->next;
+	}
+}
+
+
 int	main(int ac, char **av, char **envp)
 {
 	char	*line;
@@ -37,12 +56,12 @@ int	main(int ac, char **av, char **envp)
 	while (1)
 	{
 		line = readline("Minishell : ");
-		if (line)
+		if (*line)
 		{
 			if (parsing(line, data) == 0)
 			{
 				// exec
-				// print_token_lst(&data->tokens);
+				print_lst(&data->cmd_lst);
 				free_token_lst(&data->tokens);
 			}
 			free(line);
