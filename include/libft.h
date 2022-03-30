@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:22:46 by arudy             #+#    #+#             */
-/*   Updated: 2022/03/30 13:44:23 by arudy            ###   ########.fr       */
+/*   Updated: 2022/03/30 16:57:21 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	ft_putstr_fd(char *s, int fd);
 void	free_strs(char **strs);
 size_t	ft_strlen(const char *str);
 char	**ft_split(char const *s, char c);
+char	**ft_nsplit(char const *s, char c, size_t n);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strdup(char *s);
 char	*ft_strchr(char *s, int c);
