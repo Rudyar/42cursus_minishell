@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:22:46 by arudy             #+#    #+#             */
-/*   Updated: 2022/03/28 18:42:37 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/03/30 12:01:08 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,25 +28,43 @@
 # include "exec.h"
 # include "lexer.h"
 
-typedef struct s_history
+typedef struct s_history	t_history;
+typedef struct s_cmd		t_cmd;
+typedef struct s_data		t_data;
+
+// typedef struct s_garbage
+// {
+// 	void				*ptr;
+// 	struct s_garbage	*next;
+// }	t_garbage;
+
+struct	s_history
 {
 	struct s_history	*prev;
 	char				*cmd;
 	struct s_history	*next;
-}	t_history;
+};
 
-typedef struct s_garbage
+struct	s_cmd
 {
-	void				*ptr;
-	struct s_garbage	*next;
-}	t_garbage;
+	char			**cmd;
+	char			*bin_path;
+	int				in;
+	int				out;
+	pid_t			fork;
+	int				pipe[2];
+	struct s_cmd	*next;
+	struct s_cmd	*prev;
+};
 
-typedef struct s_data
+struct	s_data
 {
-	t_history	history;
-	t_env		env;
+	t_history	*history;
+	t_env		*env;
+	t_cmd		*cmd_lst;
+	int			nb_cmd;
 	char		*current_path;
-}	t_data;
+};
 
 t_env	*init_env(char **envp);
 void	ft_free(t_env *env);

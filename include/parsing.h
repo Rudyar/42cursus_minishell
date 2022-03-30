@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:22:46 by arudy             #+#    #+#             */
-/*   Updated: 2022/03/29 17:33:28 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/03/30 12:01:50 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSING_H
 # define PARSING_H
+
+# include "minishell.h"
 
 typedef struct s_env
 {
@@ -21,7 +23,7 @@ typedef struct s_env
 }	t_env;
 
 char	**get_full_path(char **envp);
-int		parsing(char *line, t_token **tokens_lst);
+int		parsing(char *line, t_token **tokens_lst, t_data *data);
 int		first_check(char *s);
 
 #endif
