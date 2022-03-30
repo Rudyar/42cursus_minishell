@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 18:57:22 by lleveque          #+#    #+#             */
-/*   Updated: 2022/03/25 09:30:33 by arudy            ###   ########.fr       */
+/*   Updated: 2022/03/30 16:30:31 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ void	free_env(t_env *lst)
 	}
 }
 
-void	ft_free(t_env *env)
+void	ft_free(t_data *data)
 {
-	free_env(env);
+	free_env(data->env);
+	free(data);
 }

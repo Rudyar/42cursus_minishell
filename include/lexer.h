@@ -6,36 +6,12 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 18:28:26 by arudy             #+#    #+#             */
-/*   Updated: 2022/03/30 11:27:17 by arudy            ###   ########.fr       */
+/*   Updated: 2022/03/30 14:21:52 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEXER_H
 # define LEXER_H
-
-typedef enum e_token_type
-{
-	WORD = 1,
-	LETTER = 2,
-	DQUOTE = '"',
-	QUOTE = '\'',
-	PIPE = '|',
-	REDIR_IN = '<',
-	REDIR_OUT = '>',
-	DGREATER = 8,
-	HERE_DOC = 9,
-	DOLLAR = '$',
-	WHITE_SPACE = 10,
-	WORD_IN_DQUOTE = 11
-}	t_token_type;
-
-typedef struct s_token
-{
-	char			*content;
-	t_token_type	type;
-	struct s_token	*next;
-	struct s_token	*prev;
-}	t_token;
 
 int		lexer(char *s, t_token **tokens_lst);
 t_token	*char_to_token(char *s);
