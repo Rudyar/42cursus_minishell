@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:22:46 by arudy             #+#    #+#             */
-/*   Updated: 2022/03/30 16:17:05 by arudy            ###   ########.fr       */
+/*   Updated: 2022/03/31 11:09:40 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@
 
 t_data	*init_data(char **envp);
 void	ft_free(t_data *data);
+void	free_lst(t_data *data);
 
 #endif

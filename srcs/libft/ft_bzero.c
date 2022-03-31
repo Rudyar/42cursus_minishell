@@ -1,22 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.h                                          :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/21 17:22:46 by arudy             #+#    #+#             */
-/*   Updated: 2022/03/31 11:04:33 by arudy            ###   ########.fr       */
+/*   Created: 2022/03/31 14:20:10 by arudy             #+#    #+#             */
+/*   Updated: 2022/03/31 14:20:22 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSING_H
-# define PARSING_H
+#include "../../include/minishell.h"
 
-int		parsing(char *line, t_data *data);
-int		first_check(char *s);
-int		check_line(char *s);
-int		count_nb_cmd(t_token **lst);
-int		find_cmd_length(t_token *lst);
+void	ft_bzero(void *s, size_t n)
+{
+	size_t	i;
 
-#endif
+	i = 0;
+	while (i < n)
+	{
+		((char *)s)[i] = '\0';
+		i++;
+	}
+}

@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.h                                          :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/21 17:22:46 by arudy             #+#    #+#             */
-/*   Updated: 2022/03/31 11:04:33 by arudy            ###   ########.fr       */
+/*   Created: 2022/03/31 14:19:08 by arudy             #+#    #+#             */
+/*   Updated: 2022/03/31 14:19:23 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSING_H
-# define PARSING_H
+#include "../../include/minishell.h"
 
-int		parsing(char *line, t_data *data);
-int		first_check(char *s);
-int		check_line(char *s);
-int		count_nb_cmd(t_token **lst);
-int		find_cmd_length(t_token *lst);
+void	*ft_calloc(size_t nmemb, size_t size)
+{
+	void	*dst;
 
-#endif
+	dst = malloc(nmemb * size);
+	if (!dst)
+		return (NULL);
+	ft_bzero(dst, nmemb * size);
+	return (dst);
+}

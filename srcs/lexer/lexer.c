@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 19:25:20 by arudy             #+#    #+#             */
-/*   Updated: 2022/03/29 11:19:12 by arudy            ###   ########.fr       */
+/*   Updated: 2022/03/31 11:53:08 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,9 @@ t_token	*copy_tokens(t_token **lst, t_token_type type, t_token *prev, int n)
 static t_token	*concat_tokens(t_token **lst)
 {
 	t_token	*head;
-	t_token	*new;
 	t_token	*prev;
 
 	head = NULL;
-	new = NULL;
 	prev = NULL;
 	while (*lst)
 	{
@@ -84,30 +82,3 @@ int	lexer(char *s, t_token **tokens_lst)
 	free_token_lst(&tmp);
 	return (0);
 }
-
-// t_token	*lexer(char *s, t_token **tokens_lst)
-// {
-// 	t_token	*token;
-// 	// t_token	*tokens_lst;
-// 	t_token	*tmp;
-
-// 	if (first_check(s))
-// 		return (NULL);
-// 	// tokens_lst = NULL;
-// 	token = char_to_token(s);
-// 	tmp = token;
-// 	if (!token)
-// 	{
-// 		ft_putstr_fd("Can't create token from line\n", 2);
-// 		return (NULL);
-// 	}
-// 	tokens_lst = concat_tokens(&token);
-// 	if (!tokens_lst)
-// 	{
-// 		ft_putstr_fd("Can't create tokens from token\n", 2);
-// 		free_token_lst(&tmp);
-// 		return (NULL);
-// 	}
-// 	free_token_lst(&tmp);
-// 	return (tokens_lst);
-// }

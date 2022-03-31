@@ -1,57 +1,54 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/24 18:57:22 by lleveque          #+#    #+#             */
-/*   Updated: 2022/03/31 18:48:31 by arudy            ###   ########.fr       */
+/*   Created: 2022/03/30 17:41:53 by arudy             #+#    #+#             */
+/*   Updated: 2022/03/31 12:16:50 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
-void	free_env(t_env *lst)
+int	find_cmd_length(t_token *lst)
 {
-	t_env	*tmp;
+	int	i;
 
-	while (lst)
+	i = 0;
+	while (lst && lst->type != PIPE)
 	{
-		tmp = lst;
+		i++;
 		lst = lst->next;
-		free(tmp);
 	}
+	return (i);
 }
 
-void	ft_free(t_data *data)
+int	count_nb_cmd(t_token **lst)
 {
-	free_env(data->env);
-	free(data);
-}
+	int	i;
 
-void	free_cmd_lst(t_cmd **lst)
-{
-	t_cmd	*tmp;
-	int		i;
-
+	i = 1;
 	while (*lst)
 	{
-		i = 0;
-		tmp = *lst;
-		while (tmp->cmd[i] != NULL)
-		{
-			free(tmp->cmd[i]);
+		if ((*lst)->type == PIPE)
 			i++;
-		}
-		free(tmp->cmd);
-		*lst = (*lst)->next;
-		free(tmp);
+		lst = &(*lst)->next;
 	}
+	return (i);
 }
 
-void	free_lst(t_data *data)
+int	check_line(char *s)
 {
-	free_token_lst(&data->tokens);
-	free_cmd_lst(&data->cmd_lst);
+	int	i;
+	int	j;
+
+	i = ft_strlen(s);
+	j = 0;
+	while (s[j] == ' ')
+		j++;
+	if (j == i)
+		return (1);
+	return (0);
 }
