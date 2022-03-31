@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:19:49 by arudy             #+#    #+#             */
-/*   Updated: 2022/03/30 18:32:36 by arudy            ###   ########.fr       */
+/*   Updated: 2022/03/31 18:55:47 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	print_lst(t_cmd **lst)
 {
 	int	i;
 
-	while (*lst)
+	while ((*lst))
 	{
 		i = 0;
 		printf("---------\n");
@@ -40,10 +40,11 @@ void	print_lst(t_cmd **lst)
 			i++;
 		}
 		printf("---------\n");
+		if ((*lst)->next == NULL)
+			break ;
 		lst = &(*lst)->next;
 	}
 }
-
 
 int	main(int ac, char **av, char **envp)
 {
@@ -62,7 +63,7 @@ int	main(int ac, char **av, char **envp)
 			{
 				// exec
 				print_lst(&data->cmd_lst);
-				free_token_lst(&data->tokens);
+				free_lst(data);
 			}
 			free(line);
 		}
