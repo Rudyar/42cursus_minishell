@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 16:26:20 by lleveque          #+#    #+#             */
-/*   Updated: 2022/03/31 19:10:08 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/03/31 19:27:51 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,16 @@
 
 int	env_cmd(t_env *env)
 {
-	int	i;
-
 	while (env)
 	{
-		i = 0;
-		while (env->var[i])
+		if (env->var[0])
 		{
-			ft_putstr_fd(env->var[i], 1);
-			++i;
+			ft_putstr_fd(env->var[0], 1);
+			ft_putstr_fd("=", 1);
+			if (env->var[1])
+				ft_putstr_fd(env->var[1], 1);
+			ft_putstr_fd("\n", 1);
 		}
-		ft_putstr_fd("\n", 1);
 		env = env->next;
 	}
 	return (0);
