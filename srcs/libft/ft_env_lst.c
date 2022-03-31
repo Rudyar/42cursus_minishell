@@ -6,7 +6,7 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:05:20 by lleveque          #+#    #+#             */
-/*   Updated: 2022/03/29 17:34:57 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/03/30 16:54:09 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_env	*ft_env_lstnew(char *content, t_env *prev)
 	if (!new)
 		return (NULL);
 	new->prev = prev;
-	new->var = content;
+	new->var = ft_nsplit(content, '=', 1);
 	new->next = NULL;
 	return (new);
 }
