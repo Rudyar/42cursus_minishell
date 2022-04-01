@@ -6,7 +6,7 @@
 #    By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/21 17:19:21 by arudy             #+#    #+#              #
-#    Updated: 2022/03/31 19:46:46 by lleveque         ###   ########.fr        #
+#    Updated: 2022/04/01 19:27:57 by lleveque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,5 +53,8 @@ fclean: clean
 	${RM} ${NAME}
 
 re: fclean all
+
+rc: fclean all
+	${RM} ${OBJS}
 
 .PHONY: all clean fclean re
