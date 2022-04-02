@@ -1,54 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_utils.c                                    :+:      :+:    :+:   */
+/*   cmd_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/30 17:41:53 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/02 12:30:07 by arudy            ###   ########.fr       */
+/*   Created: 2022/04/02 12:05:27 by arudy             #+#    #+#             */
+/*   Updated: 2022/04/02 12:25:42 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-int	find_cmd_length(t_token *lst)
+t_cmd	*cmd_lst_last(t_cmd *lst)
 {
-	int	i;
-
-	i = 0;
-	while (lst && lst->type != PIPE)
-	{
-		i++;
+	while (lst->next != NULL)
 		lst = lst->next;
-	}
-	return (i);
+	return (lst);
 }
 
-int	count_nb_cmd(t_token **lst)
+void	cmd_lst_addback(t_cmd **head, t_cmd *new)
 {
-	int	i;
+	t_cmd	*tmp;
 
-	i = 1;
-	while (*lst)
+	if (new)
 	{
-		if ((*lst)->type == PIPE)
-			i++;
-		lst = &(*lst)->next;
+		if (*head)
+		{
+			tmp = cmd_lst_last(*head);
+			tmp->next = new;
+		}
+		else
+			*head = new;
 	}
-	return (i);
-}
-
-int	check_line(char *s)
-{
-	int	i;
-	int	j;
-
-	i = ft_strlen(s);
-	j = 0;
-	while (s[j] == ' ')
-		j++;
-	if (j == i)
-		return (1);
-	return (0);
 }
