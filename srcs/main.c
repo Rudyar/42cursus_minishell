@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:19:49 by arudy             #+#    #+#             */
-/*   Updated: 2022/03/31 19:22:46 by arudy            ###   ########.fr       */
+/*   Updated: 2022/03/31 19:58:04 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,31 +20,31 @@ int	main(int ac, char **av, char **envp)
 	(void)ac;
 	data = init_data(envp);
 	// export_cmd(av, env);
-	// unset_cmd(av, env);
+	unset_cmd(av, data->env);
 	env_cmd(data->env);
 	ft_free(data);
 	return (0);
 }
 
-void	print_lst(t_cmd **lst)
-{
-	int	i;
+// void	print_lst(t_cmd **lst)
+// {
+// 	int	i;
 
-	while ((*lst))
-	{
-		i = 0;
-		printf("---------\n");
-		while ((*lst)->cmd[i] != NULL)
-		{
-			printf("%s\n", (*lst)->cmd[i]);
-			i++;
-		}
-		printf("---------\n");
-		if ((*lst)->next == NULL)
-			break ;
-		lst = &(*lst)->next;
-	}
-}
+// 	while ((*lst))
+// 	{
+// 		i = 0;
+// 		printf("---------\n");
+// 		while ((*lst)->cmd[i] != NULL)
+// 		{
+// 			printf("%s\n", (*lst)->cmd[i]);
+// 			i++;
+// 		}
+// 		printf("---------\n");
+// 		if ((*lst)->next == NULL)
+// 			break ;
+// 		lst = &(*lst)->next;
+// 	}
+// }
 
 // int	main(int ac, char **av, char **envp)
 // {

@@ -1,30 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/24 16:26:20 by lleveque          #+#    #+#             */
-/*   Updated: 2022/03/31 19:53:10 by arudy            ###   ########.fr       */
+/*   Created: 2022/03/31 19:44:02 by lleveque          #+#    #+#             */
+/*   Updated: 2022/03/31 19:45:15 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-int	env_cmd(t_env *env)
+int	ft_strcmp(char *s1, char *s2)
 {
-	while (env)
-	{
-		if (env->var[0])
-		{
-			ft_putstr_fd(env->var[0], 1);
-			ft_putstr_fd("=", 1);
-			if (env->var[1])
-				ft_putstr_fd(env->var[1], 1);
-			ft_putstr_fd("\n", 1);
-		}
-		env = env->next;
-	}
-	return (0);
+	int	i;
+
+	i = 0;
+	while (s1[i] && s2[i] && s1[i] == s2[i])
+		i++;
+	return (s1[i] - s2[i]);
 }
