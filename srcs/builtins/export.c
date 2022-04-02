@@ -6,7 +6,7 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 13:42:32 by lleveque          #+#    #+#             */
-/*   Updated: 2022/03/29 19:37:00 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/02 19:45:19 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,7 @@ int	export_cmd(char **args, t_env *env)
 		if (args[i] && !check_export_arg(args[i])/* && doesnt_exist()*/)
 			ft_env_addback(env, ft_env_lstnew(args[i], env));
 		else
-		{
-			ft_putstr_fd("minishell: export: `", 1);
-			ft_putstr_fd(args[i], 1);
-			ft_putstr_fd("': not a valid identifier\n", 1);
-		}
+			error("export", args[i], "not a valid identifier");
 		i++;
 	}
 	return (0);
