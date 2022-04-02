@@ -6,7 +6,7 @@
 #    By: arudy <arudy@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/21 17:19:21 by arudy             #+#    #+#              #
-#    Updated: 2022/04/02 12:06:10 by arudy            ###   ########.fr        #
+#    Updated: 2022/04/02 18:26:10 by arudy            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,8 @@ SRCS = ${SRCS_MAIN} ${SRCS_PARSING} ${SRCS_LEXER} ${SRCS_LIBFT} ${SRCS_BUILTINS}
 SRCS_MAIN = $(addprefix srcs/, main.c free.c init.c)
 
 SRCS_PARSING = $(addprefix srcs/parsing/, first_check.c \
-				parsing.c parsing_utils.c cmd_utils.c)
+				parsing.c parsing_utils.c cmd_utils.c \
+				scan_dollar.c)
 
 SRCS_LEXER = $(addprefix srcs/lexer/, lexer.c lexer_utils.c \
 				char_to_token.c token_manager.c)
@@ -23,7 +24,8 @@ SRCS_LEXER = $(addprefix srcs/lexer/, lexer.c lexer_utils.c \
 SRCS_LIBFT = $(addprefix srcs/libft/, ft_putstr_fd.c ft_strlen.c \
 				ft_strncmp.c ft_substr.c ft_split.c free_strs.c ft_env_lst.c \
 				ft_strdup.c ft_is_whitespace.c ft_strchr.c ft_isalpha.c \
-				ft_isdigit.c ft_calloc.c ft_bzero.c ft_nsplit.c ft_strcmp.c)
+				ft_isdigit.c ft_calloc.c ft_bzero.c ft_nsplit.c ft_strcmp.c \
+				ft_strjoin.c ft_strjoin_char.c)
 
 SRCS_BUILTINS = $(addprefix srcs/builtins/, echo.c cd.c env.c export.c pwd.c \
 					unset.c)
@@ -55,6 +57,6 @@ fclean: clean
 re: fclean all
 
 rc: fclean all
-	${RM} ${OBJS}
+	${RM} ${OBJS} && clear
 
 .PHONY: all clean fclean re

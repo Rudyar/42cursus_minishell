@@ -1,33 +1,50 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_env_lst.c                                       :+:      :+:    :+:   */
+/*   ft_strjoin_char.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/29 16:05:20 by lleveque          #+#    #+#             */
-/*   Updated: 2022/04/02 18:10:37 by arudy            ###   ########.fr       */
+/*   Created: 2022/04/02 15:23:42 by arudy             #+#    #+#             */
+/*   Updated: 2022/04/02 16:06:10 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-t_env	*ft_env_lstnew(char *content, t_env *prev)
+static char	*first_char(char c)
 {
-	t_env	*new;
+	char	*s;
 
-	new = malloc(sizeof(*new));
-	if (!new)
+	s = malloc(sizeof(char) * 2);
+	if (!s)
 		return (NULL);
-	new->prev = prev;
-	new->var = ft_nsplit(content, '=', 2);
-	new->next = NULL;
-	return (new);
+	s[0] = c;
+	s[1] = '\0';
+	return (s);
 }
 
-void	ft_env_addback(t_env *env, t_env *new)
+char	*ft_strjoin_char(char *s, char c)
 {
-	while (env->next)
-		env = env->next;
-	env->next = new;
+	int		i;
+	char	*dst;
+
+	i = 0;
+	if (!c)
+		return (NULL);
+	if (!s)
+		return (first_char(c));
+	dst = malloc(sizeof(char) * (ft_strlen(s) + 2));
+	if (!dst)
+		return (NULL);
+	while (s[i])
+	{
+		dst[i] = s[i];
+		i++;
+	}
+	dst[i] = c;
+	i++;
+	dst[i] = '\0';
+	free(s);
+	return (dst);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:22:46 by arudy             #+#    #+#             */
-/*   Updated: 2022/03/31 19:50:00 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/02 18:24:12 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,13 @@
 # include "lexer.h"
 # include "parsing.h"
 
+size_t	ft_strlen(const char *str);
 void	ft_putstr_fd(char *s, int fd);
 void	free_strs(char **strs);
-size_t	ft_strlen(const char *str);
 char	**ft_split(char const *s, char c);
-char	**ft_nsplit(char const *s, char c, size_t n);
+char	**ft_nsplit(char *s, char c, size_t n);
+char	*ft_strjoin(char *s1, char *s2);
+char	*ft_strjoin_char(char *s, char c);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strdup(char *s);
 char	*ft_strchr(char *s, int c);

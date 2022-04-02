@@ -6,28 +6,32 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:02:20 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/02 12:29:59 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/02 18:39:51 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
+// t_cmd	*cpy_cmd()
+
 t_cmd	*parse_cmd(t_token **tokens, int size, t_cmd *new, t_cmd *prev)
 {
-	int		i;
+	int	i;
 
 	i = 0;
-	(void)prev;
 	new->cmd = malloc(sizeof(char *) * (size + 1));
 	if (!new->cmd)
 		return (NULL);
 	while (*tokens && i < size)
 	{
-		new->cmd[i] = ft_strdup((*tokens)->content);
-		*tokens = (*tokens)->next;
+	// 	if ((*tokens)->type == WORD)
+	// 		new->cmd[i] = ft_strdup((*tokens)->content);
+	// 	if ((*tokens)->type == WORD_IN_DQUOTE)
+	// 		new->cmd[i] = scan_dollar((*tokens)->content);
+	// 	*tokens = (*tokens)->next;
 		i++;
 	}
-	new->cmd[i] = 0;
+	new->cmd[i] = NULL;
 	new->next = NULL;
 	new->prev = prev;
 	return (new);
