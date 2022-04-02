@@ -6,7 +6,7 @@
 #    By: arudy <arudy@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/21 17:19:21 by arudy             #+#    #+#              #
-#    Updated: 2022/03/31 19:53:37 by arudy            ###   ########.fr        #
+#    Updated: 2022/04/02 11:58:49 by arudy            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,5 +53,8 @@ fclean: clean
 	${RM} ${NAME}
 
 re: fclean all
+
+rc: fclean all
+	${RM} ${OBJS}
 
 .PHONY: all clean fclean re
