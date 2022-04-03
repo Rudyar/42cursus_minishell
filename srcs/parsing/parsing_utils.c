@@ -6,13 +6,13 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 17:41:53 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/02 18:35:53 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/03 11:01:48 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-char *ft_getenv(t_env *env, char *s)
+char	*ft_getenv(t_env *env, char *s)
 {
 	while (env)
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:22:46 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/02 19:27:47 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/03 10:54:59 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,10 @@
 
 # include "struct.h"
 # include "libft.h"
+# include "utils.h"
+# include "lexer.h"
 # include "parsing.h"
 # include "builtins.h"
 # include "exec.h"
-# include "lexer.h"
-
-t_data	*init_data(char **envp);
-void	ft_free(t_data *data);
-void	free_lst(t_data *data);
-void	*error(char *cmd, char *arg, char *msg);
 
 #endif

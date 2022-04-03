@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 19:23:24 by lleveque          #+#    #+#             */
-/*   Updated: 2022/04/02 19:28:07 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/03 11:03:37 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void *error(char *cmd, char *arg, char *msg)
+void	*error(char *cmd, char *arg, char *msg)
 {
 	ft_putstr_fd("minishell: ", 1);
 	if (cmd)
@@ -28,4 +28,5 @@ void *error(char *cmd, char *arg, char *msg)
 	if (msg)
 		ft_putstr_fd(msg, 1);
 	ft_putstr_fd("\n", 1);
+	return (NULL);
 }

@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_strs.c                                        :+:      :+:    :+:   */
+/*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/22 10:24:06 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/03 10:58:01 by arudy            ###   ########.fr       */
+/*   Created: 2022/04/03 10:52:06 by arudy             #+#    #+#             */
+/*   Updated: 2022/04/03 10:53:17 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#ifndef UTILS_H
+# define UTILS_H
 
-void	free_strs(char **strs)
-{
-	int	i;
+t_data	*init_data(char **envp);
+void	ft_free(t_data *data);
+void	free_lst(t_data *data);
+void	*error(char *cmd, char *arg, char *msg);
 
-	i = 0;
-	while (strs[i])
-	{
-		free(strs[i]);
-		i++;
-	}
-	free(strs);
-}
+#endif

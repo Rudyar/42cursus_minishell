@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:02:20 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/02 18:39:51 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/03 10:29:28 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ t_cmd	*parse_cmd(t_token **tokens, int size, t_cmd *new, t_cmd *prev)
 		return (NULL);
 	while (*tokens && i < size)
 	{
-	// 	if ((*tokens)->type == WORD)
-	// 		new->cmd[i] = ft_strdup((*tokens)->content);
-	// 	if ((*tokens)->type == WORD_IN_DQUOTE)
-	// 		new->cmd[i] = scan_dollar((*tokens)->content);
-	// 	*tokens = (*tokens)->next;
+		if ((*tokens)->type == WORD)
+			new->cmd[i] = ft_strdup((*tokens)->content);
+		if ((*tokens)->type == WORD_IN_DQUOTE || (*tokens)->type == DOLLAR)
+			new->cmd[i] = scan_dollar((*tokens)->content);
+		*tokens = (*tokens)->next;
 		i++;
 	}
 	new->cmd[i] = NULL;

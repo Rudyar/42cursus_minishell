@@ -6,11 +6,11 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 18:22:42 by lleveque          #+#    #+#             */
-/*   Updated: 2022/04/02 18:25:39 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/03 10:58:10 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
 t_env	*init_env(char **envp)
 {
