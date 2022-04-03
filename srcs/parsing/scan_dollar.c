@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 16:36:45 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/03 18:24:37 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/03 18:37:20 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ static char	*get_env_var(t_data *data, char *s, int *i)
 	dst = NULL;
 	while (s[*i] && s[*i] != ' ' && s[*i] != '$')
 	{
-		tmp = ft_strjoin_char(tmp, s[*i]);
+		if (s[*i] != '{' && s[*i] != '}')
+			tmp = ft_strjoin_char(tmp, s[*i]);
 		(*i)++;
 	}
 	env = ft_getenv(data->env, tmp);
