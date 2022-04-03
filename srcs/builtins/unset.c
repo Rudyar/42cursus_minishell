@@ -6,7 +6,7 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:37:01 by lleveque          #+#    #+#             */
-/*   Updated: 2022/03/31 19:48:31 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/02 19:31:09 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,7 @@ int	unset_cmd(char **args, t_env *env)
 	{
 		while (args[i] && check_unset_arg(args[i]))
 		{
-			ft_putstr_fd("minishell: unset : `", 1);
-			ft_putstr_fd(args[i], 1);
-			ft_putstr_fd("': not a valid identifier\n", 1);
+			error("unset", args[i], "not a valid identifier");
 			i++;
 		}
 		if (!args[i])

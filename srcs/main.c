@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:19:49 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/02 18:45:10 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/02 19:16:01 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	main(int ac, char **av, char **envp)
 	data = init_data(envp);
 	// export_cmd(av, env);
 	// unset_cmd(av, data->env);
-	// printf("%s\n", ft_getenv(data->env, av[1]));
+	printf("%s\n", ft_getenv(data->env, av[1]));
 	env_cmd(data->env);
 	ft_free(data);
 	return (0);
