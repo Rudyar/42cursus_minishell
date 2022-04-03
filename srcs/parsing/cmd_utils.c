@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 12:05:27 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/02 16:37:05 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/03 12:09:06 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,14 @@ t_cmd	*cmd_lst_last(t_cmd *lst)
 	return (lst);
 }
 
-void	cmd_lst_addback(t_cmd **head, t_cmd *new)
+void	cmd_lst_addback(t_cmd **head, t_cmd *new, t_cmd *prev)
 {
 	t_cmd	*tmp;
 
 	if (new)
 	{
+		new->next = NULL;
+		new->prev = prev;
 		if (*head)
 		{
 			tmp = cmd_lst_last(*head);

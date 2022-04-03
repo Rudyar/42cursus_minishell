@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 16:36:45 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/03 11:49:58 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/03 12:11:20 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static char	*join_tmp(char *s1, char *s2)
 	return (dst);
 }
 
-static char	*get_env_var(char *s, int *i)
+static char	*get_env_var(t_data *data, char *s, int *i)
 {
 	char	*dst;
 	char	*tmp;
@@ -49,7 +49,7 @@ static char	*get_env_var(char *s, int *i)
 		tmp = ft_strjoin_char(tmp, s[*i]);
 		(*i)++;
 	}
-	env = getenv(tmp);
+	env = ft_getenv(data->env, tmp);
 	if (!env)
 		dst = NULL;
 	else
@@ -60,7 +60,7 @@ static char	*get_env_var(char *s, int *i)
 	return (dst);
 }
 
-char	*scan_dollar(char *s)
+char	*scan_dollar(t_data *data, char *s)
 {
 	int		i;
 	char	*dst;
@@ -77,7 +77,7 @@ char	*scan_dollar(char *s)
 					|| !s[i + 1]))
 				tmp = (exit_dollar_status());
 			else
-				tmp = (get_env_var(s, &i));
+				tmp = (get_env_var(data, s, &i));
 			dst = join_tmp(dst, tmp);
 			continue ;
 		}

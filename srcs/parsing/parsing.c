@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:02:20 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/03 10:29:28 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/03 12:09:30 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 // t_cmd	*cpy_cmd()
 
-t_cmd	*parse_cmd(t_token **tokens, int size, t_cmd *new, t_cmd *prev)
+t_cmd	*parse_cmd(t_data *data, t_token **tokens, int size, t_cmd *new)
 {
 	int	i;
 
@@ -27,17 +27,15 @@ t_cmd	*parse_cmd(t_token **tokens, int size, t_cmd *new, t_cmd *prev)
 		if ((*tokens)->type == WORD)
 			new->cmd[i] = ft_strdup((*tokens)->content);
 		if ((*tokens)->type == WORD_IN_DQUOTE || (*tokens)->type == DOLLAR)
-			new->cmd[i] = scan_dollar((*tokens)->content);
+			new->cmd[i] = scan_dollar(data, (*tokens)->content);
 		*tokens = (*tokens)->next;
 		i++;
 	}
 	new->cmd[i] = NULL;
-	new->next = NULL;
-	new->prev = prev;
 	return (new);
 }
 
-t_cmd	*create_cmd_lst(t_token **tokens)
+t_cmd	*create_cmd_lst(t_data *data, t_token **tokens)
 {
 	int		size;
 	t_token	*head_tokens;
@@ -54,13 +52,13 @@ t_cmd	*create_cmd_lst(t_token **tokens)
 		new = malloc(sizeof(t_cmd));
 		if (!new)
 			return (NULL);
-		new = parse_cmd(tokens, size, new, prev);
+		new = parse_cmd(data, tokens, size, new);
 		if (!new)
 			return (NULL);
 		if (*tokens)
 			*tokens = (*tokens)->next;
+		cmd_lst_addback(&head, new, prev);
 		prev = new;
-		cmd_lst_addback(&head, new);
 	}
 	*tokens = head_tokens;
 	return (head);
@@ -73,7 +71,7 @@ int	parsing(char *line, t_data *data)
 	if (lexer(line, &data->tokens))
 		return (1);
 	data->nb_cmd = count_nb_cmd(&data->tokens);
-	data->cmd_lst = create_cmd_lst(&data->tokens);
+	data->cmd_lst = create_cmd_lst(data, &data->tokens);
 	if (!data->cmd_lst)
 	{
 		ft_putstr_fd("Can't create cmd lst\n", 2);
