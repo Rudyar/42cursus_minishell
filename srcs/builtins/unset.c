@@ -6,11 +6,25 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:37:01 by lleveque          #+#    #+#             */
-/*   Updated: 2022/04/02 19:31:09 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/03 18:23:15 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+void	free_env_lst(t_env *env)
+{
+	int		i;
+
+	i = 0;
+	while (env->var[i])
+	{
+		free(env->var[i]);
+		i++;
+	}
+	free(env->var);
+	free(env);
+}
 
 int	check_unset_arg(char *arg)
 {
@@ -31,10 +45,33 @@ int	check_unset_arg(char *arg)
 	return (0);
 }
 
-int	unset_cmd(char **args, t_env *env)
+t_env	*unset_env_var(t_env *env, char *arg)
+{
+	t_env	*tmp;
+
+	while (env->next)
+	{
+		if (env->var[0] && !ft_strcmp(env->var[0], arg))
+		{
+			tmp = env;
+			if (env->prev)
+				env->prev->next = env->next;
+			if (env->next)
+				env->next->prev = env->prev;
+			env = env->next;
+			break ;
+		}
+		else
+			env = env->next;
+	}
+	while (env->prev)
+		env = env->prev;
+	return (env);
+}
+
+int	unset_cmd(char **args, t_env **env)
 {
 	int		i;
-	t_env	*tmp;
 
 	i = 1;
 	while (args[i])
@@ -46,21 +83,7 @@ int	unset_cmd(char **args, t_env *env)
 		}
 		if (!args[i])
 			break ;
-		while (env->next)
-		{
-			if (env->var[0] && !ft_strcmp(env->var[0], args[i]))
-			{
-				tmp = env;
-				env->prev->next = env->next;
-				env->next->prev = env->prev;
-				env = env->next;
-				free(tmp);
-			}
-			else
-				env = env->next;
-		}
-		while (env->prev)
-			env = env->prev;
+		*env = unset_env_var(*env, args[i]);
 		i++;
 	}
 	return (0);

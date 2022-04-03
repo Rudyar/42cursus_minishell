@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 18:22:42 by lleveque          #+#    #+#             */
-/*   Updated: 2022/04/03 10:58:10 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/03 17:42:26 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,8 @@ t_env	*init_env(char **envp)
 	t_env	*tmp;
 
 	i = 1;
-	env = NULL;
 	if (envp[0])
-		env = ft_env_lstnew(envp[0], env);
+		env = ft_env_lstnew(envp[0], NULL);
 	if (envp[i])
 	{
 		env->next = ft_env_lstnew(envp[i], env);
