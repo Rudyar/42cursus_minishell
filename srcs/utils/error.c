@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 19:23:24 by lleveque          #+#    #+#             */
-/*   Updated: 2022/04/03 11:03:37 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/03 17:04:07 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@ void	*error(char *cmd, char *arg, char *msg)
 	}
 	if (arg)
 	{
+		ft_putstr_fd("`", 1);
 		ft_putstr_fd(arg, 1);
-		ft_putstr_fd(": ", 1);
+		ft_putstr_fd("': ", 1);
 	}
 	if (msg)
 		ft_putstr_fd(msg, 1);
