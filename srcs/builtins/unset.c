@@ -6,7 +6,7 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:37:01 by lleveque          #+#    #+#             */
-/*   Updated: 2022/04/03 18:23:15 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/04 17:13:58 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ t_env	*unset_env_var(t_env *env, char *arg)
 			if (env->next)
 				env->next->prev = env->prev;
 			env = env->next;
+			free_env_lst(tmp);
 			break ;
 		}
 		else
