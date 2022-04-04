@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 10:35:41 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/04 10:47:18 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/04 18:29:33 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,32 @@ int	first_check(char *s)
 			i--;
 		}
 		i++;
+	}
+	return (0);
+}
+
+int	check_tokens(t_token *lst)
+{
+	while (lst->next)
+	{
+		if (lst->type == HERE_DOC || lst->type == DGREATER \
+			|| lst->type == REDIR_IN || lst->type == REDIR_OUT)
+		{
+			if (lst->next)
+			{
+				lst = lst->next;
+				if (lst->type == HERE_DOC || lst->type == DGREATER \
+					|| lst->type == REDIR_IN || lst->type == REDIR_OUT)
+				{
+					ft_putstr_fd("minishell: syntax error near \
+unexpected token `", 2);
+					ft_putstr_fd(lst->content, 2);
+					ft_putstr_fd("'\n", 2);
+					return (1);
+				}
+			}
+		}
+		lst = lst->next;
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:02:20 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/04 11:57:28 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/04 18:27:20 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ int	parsing(char *line, t_data *data)
 	if (first_check(line) || check_line(line))
 		return (1);
 	if (lexer(line, &data->tokens))
+		return (1);
+	if (check_tokens(data->tokens))
 		return (1);
 	data->nb_cmd = count_nb_cmd(&data->tokens);
 	data->cmd_lst = create_cmd_lst(data, &data->tokens);

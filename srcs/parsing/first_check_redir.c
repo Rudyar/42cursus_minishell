@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 10:46:15 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/04 12:03:25 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/04 17:20:54 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,21 @@ static int	redir_error_msg(int n, char c)
 	if (n == 1)
 	{
 		if (c == '<')
-		ft_putstr_fd("minishell: syntax error near \
-// unexpeted token `<'\n", 2);
+			ft_putstr_fd("minishell: syntax error near \
+unexpetecd token `newline'\n", 2);
 		else
-		ft_putstr_fd("minishell: syntax error near \
-// unexpeted token `>'\n", 2);
+			ft_putstr_fd("minishell: syntax error near \
+unexpected token `>'\n", 2);
 	}
 	if (n == 2)
 	{
 		ft_putstr_fd("minishell: syntax error \
-// near unexpected token `newline'\n", 2);
+near unexpected token `newline'\n", 2);
 	}
 	return (1);
 }
 
-static int	valid_redir(char *s, int *i, char c_type, char c_op)
+static int	valid_redir(char *s, int *i, char c_type)
 {
 	int	n;
 	int	j;
@@ -48,7 +48,7 @@ static int	valid_redir(char *s, int *i, char c_type, char c_op)
 	while (ft_is_whitespace(s[j]))
 		j++;
 	if (s[j] == '\0')
-		return (redir_error_msg(2, NULL));
+		return (redir_error_msg(2, 0));
 	(*i)--;
 	return (0);
 }
@@ -56,35 +56,8 @@ static int	valid_redir(char *s, int *i, char c_type, char c_op)
 int	check_redir(char *s, int *i)
 {
 	if (s[*i] == REDIR_IN)
-		return (valid_redir(s, i, '<', '>'));
+		return (valid_redir(s, i, '<'));
 	if (s[*i] == REDIR_OUT)
-		return (valid_redir(s, i, '>', '<'));
+		return (valid_redir(s, i, '>'));
 	return (0);
 }
-
-
-// int	check_redir(char *s, int *i)
-// {
-// 	int	j;
-// 	int	n;
-
-// 	n = 0;
-// 	while (s[*i] == REDIR_IN)
-// 	{
-// 		(*i)++;
-// 		n++;
-// 	}
-// 	while (s[*i] == REDIR_OUT)
-// 	{
-// 		(*i)++;
-// 		n++;
-// 	}
-// 	j = (*i);
-// 	while (ft_is_whitespace(s[j]))
-// 		j++;
-// 	if (n > 2 || s[j] == '\0')
-// 		return (ft_putstr_fd("minishell: syntax error \
-// near unexpected token `newline'\n", 2), 1);
-// 	(*i)--;
-// 	return (0);
-// }
