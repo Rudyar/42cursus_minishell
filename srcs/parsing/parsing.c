@@ -6,13 +6,11 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:02:20 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/03 12:09:30 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/04 11:57:28 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
-// t_cmd	*cpy_cmd()
 
 t_cmd	*parse_cmd(t_data *data, t_token **tokens, int size, t_cmd *new)
 {
@@ -28,6 +26,8 @@ t_cmd	*parse_cmd(t_data *data, t_token **tokens, int size, t_cmd *new)
 			new->cmd[i] = ft_strdup((*tokens)->content);
 		if ((*tokens)->type == WORD_IN_DQUOTE || (*tokens)->type == DOLLAR)
 			new->cmd[i] = scan_dollar(data, (*tokens)->content);
+		else
+			new->cmd[i] = ft_strdup((*tokens)->content);
 		*tokens = (*tokens)->next;
 		i++;
 	}
