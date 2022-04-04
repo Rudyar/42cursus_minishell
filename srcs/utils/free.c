@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 18:57:22 by lleveque          #+#    #+#             */
-/*   Updated: 2022/04/03 10:58:06 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/04 17:09:02 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	free_env(t_env *lst)
 	{
 		i = 0;
 		tmp = lst;
+		printf("lst.var[0] = %s\n", lst->var[0]);
 		while (lst->var[i])
 		{
 			free(lst->var[i]);
