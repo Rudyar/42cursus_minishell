@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 10:35:41 by arudy             #+#    #+#             */
-/*   Updated: 2022/03/28 19:16:50 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/04 18:29:33 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,32 +47,6 @@ near unexpected token \'\n", 2), 1);
 		}
 		(*i)++;
 	}
-	return (0);
-}
-
-static int	check_redir(char *s, int *i)
-{
-	int	j;
-	int	n;
-
-	n = 0;
-	while (s[*i] == REDIR_IN)
-	{
-		(*i)++;
-		n++;
-	}
-	while (s[*i] == REDIR_OUT)
-	{
-		(*i)++;
-		n++;
-	}
-	j = (*i);
-	while (ft_is_whitespace(s[j]))
-		j++;
-	if (n > 2 || s[j] == '\0')
-		return (ft_putstr_fd("minishell: syntax error \
-near unexpected token `newline'\n", 2), 1);
-	(*i)--;
 	return (0);
 }
 
@@ -126,6 +100,32 @@ int	first_check(char *s)
 			i--;
 		}
 		i++;
+	}
+	return (0);
+}
+
+int	check_tokens(t_token *lst)
+{
+	while (lst->next)
+	{
+		if (lst->type == HERE_DOC || lst->type == DGREATER \
+			|| lst->type == REDIR_IN || lst->type == REDIR_OUT)
+		{
+			if (lst->next)
+			{
+				lst = lst->next;
+				if (lst->type == HERE_DOC || lst->type == DGREATER \
+					|| lst->type == REDIR_IN || lst->type == REDIR_OUT)
+				{
+					ft_putstr_fd("minishell: syntax error near \
+unexpected token `", 2);
+					ft_putstr_fd(lst->content, 2);
+					ft_putstr_fd("'\n", 2);
+					return (1);
+				}
+			}
+		}
+		lst = lst->next;
 	}
 	return (0);
 }
