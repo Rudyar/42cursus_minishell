@@ -6,7 +6,7 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 16:52:38 by lleveque          #+#    #+#             */
-/*   Updated: 2022/04/04 19:46:20 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/05 20:04:36 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,18 +93,10 @@ char	**ft_nsplit(char *s, char c, size_t n)
 	int		i;
 
 	i = 0;
-	while (s[i] != '=')
-		i++;
-	if (s[i + i] == '\0')
-		strs = malloc(sizeof(char *) * (2));
-	else
-		strs = malloc(sizeof(char *) * (n + 1));
+	strs = malloc(sizeof(char *) * (n + 1));
 	if (!strs || !s)
 		return (NULL);
 	strs = split_copy(s, strs, c, n);
-	if (s[i] == '\0')
-		strs[1] = NULL;
-	else
-		strs[n] = NULL;
+	strs[n] = 0;
 	return (strs);
 }

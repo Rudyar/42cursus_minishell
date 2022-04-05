@@ -6,7 +6,7 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:19:49 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/04 19:21:58 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/05 19:00:20 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	main(int ac, char **av, char **envp)
 	data = init_data(envp);
 	export_cmd(av, data->env);
 	// unset_cmd(av, &data->env);
+	// echo_cmd(av);
 	env_cmd(data->env);
 	ft_free(data);
 	return (0);
