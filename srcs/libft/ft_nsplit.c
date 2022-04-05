@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_nsplit.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 16:52:38 by lleveque          #+#    #+#             */
-/*   Updated: 2022/04/02 18:42:00 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/04 19:46:20 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,12 +89,22 @@ char	**split_copy(char *s, char **strs, char c, int n)
 
 char	**ft_nsplit(char *s, char c, size_t n)
 {
-	char		**strs;
+	char	**strs;
+	int		i;
 
-	strs = malloc(sizeof(char *) * (n + 1));
+	i = 0;
+	while (s[i] != '=')
+		i++;
+	if (s[i + i] == '\0')
+		strs = malloc(sizeof(char *) * (2));
+	else
+		strs = malloc(sizeof(char *) * (n + 1));
 	if (!strs || !s)
 		return (NULL);
 	strs = split_copy(s, strs, c, n);
-	strs[n] = NULL;
+	if (s[i] == '\0')
+		strs[1] = NULL;
+	else
+		strs[n] = NULL;
 	return (strs);
 }
