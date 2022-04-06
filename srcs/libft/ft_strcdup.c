@@ -1,49 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin_char.c                                  :+:      :+:    :+:   */
+/*   ft_strcdup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/02 15:23:42 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/06 19:35:47 by lleveque         ###   ########.fr       */
+/*   Created: 2022/04/06 15:28:09 by lleveque          #+#    #+#             */
+/*   Updated: 2022/04/06 15:31:10 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-static char	*first_char(char c)
+char	*ft_strcdup(char *s, char c)
 {
-	char	*s;
-
-	s = malloc(sizeof(char) * 2);
-	if (!s)
-		return (NULL);
-	s[0] = c;
-	s[1] = '\0';
-	return (s);
-}
-
-char	*ft_strjoin_char(char *s, char c)
-{
-	int		i;
-	char	*dst;
+	size_t	i;
+	size_t	size;
+	char	*dest;
 
 	i = 0;
-	if (!c)
+	size = 0;
+	while (s && s[size] && s[size] != c)
+		size++;
+	dest = malloc(sizeof(char) * (size + 1));
+	if (!dest)
 		return (NULL);
-	if (!s)
-		return (first_char(c));
-	dst = malloc(sizeof(char) * (ft_strlen(s) + 2));
-	if (!dst)
-		return (NULL);
-	while (s[i])
+	while (s && s[i] && s[i] != c)
 	{
-		dst[i] = s[i];
+		dest[i] = s[i];
 		i++;
 	}
-	dst[i] = c;
-	i++;
-	dst[i] = '\0';
-	return (dst);
+	dest[i] = '\0';
+	return (dest);
 }

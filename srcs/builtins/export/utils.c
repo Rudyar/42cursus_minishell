@@ -1,49 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin_char.c                                  :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/02 15:23:42 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/06 19:35:47 by lleveque         ###   ########.fr       */
+/*   Created: 2022/04/06 19:03:17 by lleveque          #+#    #+#             */
+/*   Updated: 2022/04/06 19:13:18 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../../include/minishell.h"
 
-static char	*first_char(char c)
-{
-	char	*s;
-
-	s = malloc(sizeof(char) * 2);
-	if (!s)
-		return (NULL);
-	s[0] = c;
-	s[1] = '\0';
-	return (s);
-}
-
-char	*ft_strjoin_char(char *s, char c)
+char	*name_without_plus(char *s)
 {
 	int		i;
-	char	*dst;
+	char	*dest;
 
 	i = 0;
-	if (!c)
-		return (NULL);
 	if (!s)
-		return (first_char(c));
-	dst = malloc(sizeof(char) * (ft_strlen(s) + 2));
-	if (!dst)
 		return (NULL);
-	while (s[i])
+	dest = malloc(sizeof(char) * ft_strlen(s));
+	if (!dest)
+		return (NULL);
+	while (s[i] && s[i] != '+')
 	{
-		dst[i] = s[i];
+		dest[i] = s[i];
 		i++;
 	}
-	dst[i] = c;
-	i++;
-	dst[i] = '\0';
-	return (dst);
+	dest[i] = '\0';
+	free(s);
+	return (dest);
 }
