@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 18:57:22 by lleveque          #+#    #+#             */
-/*   Updated: 2022/04/04 17:33:00 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/06 12:10:46 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	free_cmd_lst(t_cmd **lst)
 		while (tmp->cmd[i] != NULL)
 		{
 			free(tmp->cmd[i]);
+			free(tmp->bin_path);
 			i++;
 		}
 		free(tmp->cmd);

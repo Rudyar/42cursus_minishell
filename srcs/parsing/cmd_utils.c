@@ -6,11 +6,23 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 12:05:27 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/03 12:09:06 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/05 16:34:59 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+void	fill_cmd_data(t_cmd *cmd, int i)
+{
+	cmd->cmd[i] = NULL;
+	cmd->bin_path = NULL;
+	cmd->is_builtin = 0;
+	cmd->in = 0;
+	cmd->out = 0;
+	cmd->fork = 0;
+	cmd->pipe[0] = 0;
+	cmd->pipe[1] = 0;
+}
 
 t_cmd	*cmd_lst_last(t_cmd *lst)
 {

@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:02:20 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/04 18:27:20 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/06 12:09:18 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,14 @@ t_cmd	*parse_cmd(t_data *data, t_token **tokens, int size, t_cmd *new)
 			new->cmd[i] = ft_strdup((*tokens)->content);
 		if ((*tokens)->type == WORD_IN_DQUOTE || (*tokens)->type == DOLLAR)
 			new->cmd[i] = scan_dollar(data, (*tokens)->content);
-		else
-			new->cmd[i] = ft_strdup((*tokens)->content);
+		// if ((*tokens)->type == PIPE || (*tokens)->type == HERE_DOC ||
+		// (*tokens)->type == DGREATER || (*tokens)->type == REDIR_IN ||
+		// (*tokens)->type == REDIR_OUT)
+			// new->cmd[i] = ft_strdup((*tokens)->content);
 		*tokens = (*tokens)->next;
 		i++;
 	}
-	new->cmd[i] = NULL;
+	fill_cmd_data(new, i);
 	return (new);
 }
 
@@ -79,5 +81,6 @@ int	parsing(char *line, t_data *data)
 		ft_putstr_fd("Can't create cmd lst\n", 2);
 		return (1);
 	}
+	create_bin_path(data, data->cmd_lst);
 	return (0);
 }
