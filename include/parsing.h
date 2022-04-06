@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:22:46 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/06 11:27:12 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/06 15:16:22 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ int		parsing(char *line, t_data *data);
 int		first_check(char *s);
 int		check_redir(char *s, int *i);
 int		check_line(char *s);
-int		count_nb_cmd(t_token **lst);
-int		check_tokens(t_token *lst);
+int		check_tokens(t_data *data);
 int		find_cmd_length(t_token *lst);
+void	check_builtins(t_cmd *lst);
 void	create_bin_path(t_data *data, t_cmd *lst);
 void	cmd_lst_addback(t_cmd **head, t_cmd *new, t_cmd *prev);
 char	*scan_dollar(t_data *data, char *s);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 17:41:53 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/05 13:28:22 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/06 14:27:42 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,20 +32,6 @@ int	find_cmd_length(t_token *lst)
 	{
 		i++;
 		lst = lst->next;
-	}
-	return (i);
-}
-
-int	count_nb_cmd(t_token **lst)
-{
-	int	i;
-
-	i = 1;
-	while (*lst)
-	{
-		if ((*lst)->type == PIPE)
-			i++;
-		lst = &(*lst)->next;
 	}
 	return (i);
 }

@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:19:49 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/06 12:17:08 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/06 15:18:52 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,28 +26,32 @@
 // 	return (0);
 // }
 
-// void	print_lst(t_cmd **lst)
-// {
-// 	int	i;
 
-// 	while ((*lst))
-// 	{
-// 		i = 0;
-// 		printf("---------\n");
-// 		while ((*lst)->cmd[i] != NULL)
-// 		{
-// 			printf("%s\n", (*lst)->cmd[i]);
-// 			i++;
-// 		}
-// 		printf("---------\n");
-// 		if ((*lst)->next == NULL)
-// 			break ;
-// 		lst = &(*lst)->next;
-// 	}
-// }
+void	print_lst(t_cmd *lst)
+{
+	int	i;
+
+	while (lst)
+	{
+		i = 0;
+		printf("---------\n");
+		while (lst->cmd[i] != NULL)
+		{
+			printf("%s\n", lst->cmd[i]);
+			if (lst->is_builtin)
+				printf("builtins !\n");
+			i++;
+		}
+		printf("---------\n");
+		if (lst->next == NULL)
+			break ;
+		lst = lst->next;
+	}
+}
 
 int	main(int ac, char **av, char **envp)
 {
+	char	*line;
 	t_data	*data;
 
 	(void)av;
@@ -61,8 +65,8 @@ int	main(int ac, char **av, char **envp)
 			if (parsing(line, data) == 0)
 			{
 				// exec
-				// print_token_lst(&data->tokens);
-				// print_lst(&data->cmd_lst);
+				print_token_lst(&data->tokens);
+				print_lst(data->cmd_lst);
 				free_lst(data);
 			}
 			free(line);
@@ -71,50 +75,3 @@ int	main(int ac, char **av, char **envp)
 	ft_free(data);
 	return (0);
 }
-
-// void	print_lst(t_cmd **lst)
-// {
-// 	int	i;
-
-// 	while ((*lst))
-// 	{
-// 		i = 0;
-// 		printf("---------\n");
-// 		while ((*lst)->cmd[i] != NULL)
-// 		{
-// 			printf("%s\n", (*lst)->cmd[i]);
-// 			i++;
-// 		}
-// 		printf("---------\n");
-// 		if ((*lst)->next == NULL)
-// 			break ;
-// 		lst = &(*lst)->next;
-// 	}
-// }
-
-// int	main(int ac, char **av, char **envp)
-// {
-// 	char	*line;
-// 	t_data	*data;
-
-// 	(void)av;
-// 	(void)ac;
-// 	data = init_data(envp);
-// 	while (1)
-// 	{
-// 		line = readline("Minishell : ");
-// 		if (*line)
-// 		{
-// 			if (parsing(line, data) == 0)
-// 			{
-// 				// exec
-// 				print_token_lst(&data->tokens);
-// 				print_lst(&data->cmd_lst);
-// 				free_lst(data);
-// 			}
-// 			free(line);
-// 		}
-// 	}
-// 	ft_free(data);
-// 	return (0);
-// }

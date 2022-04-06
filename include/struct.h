@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 14:17:58 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/04 18:08:41 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/06 15:09:57 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,11 +79,5 @@ struct	s_token
 	struct s_token	*next;
 	struct s_token	*prev;
 };
-
-// typedef struct s_garbage
-// {
-// 	void				*ptr;
-// 	struct s_garbage	*next;
-// }	t_garbage;
 
 #endif

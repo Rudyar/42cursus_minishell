@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:02:20 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/06 12:09:18 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/06 15:13:19 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,15 +72,16 @@ int	parsing(char *line, t_data *data)
 		return (1);
 	if (lexer(line, &data->tokens))
 		return (1);
-	if (check_tokens(data->tokens))
+	if (check_tokens(data))
 		return (1);
-	data->nb_cmd = count_nb_cmd(&data->tokens);
 	data->cmd_lst = create_cmd_lst(data, &data->tokens);
 	if (!data->cmd_lst)
 	{
 		ft_putstr_fd("Can't create cmd lst\n", 2);
 		return (1);
 	}
+	check_builtins(data->cmd_lst);
+	// Apres je vire les **lst !!!!
 	create_bin_path(data, data->cmd_lst);
 	return (0);
 }

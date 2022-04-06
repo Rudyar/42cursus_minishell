@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 16:23:25 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/06 12:13:37 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/06 15:08:55 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ void	create_bin_path(t_data *data, t_cmd *lst)
 			lst->bin_path = ft_strdup(lst->cmd[0]);
 		else
 			find_bin_path(data, lst);
-		printf("bin path : %s\n", lst->bin_path);
 		lst = lst->next;
 	}
 }
