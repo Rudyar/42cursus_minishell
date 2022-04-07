@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 18:36:57 by arudy             #+#    #+#             */
-/*   Updated: 2022/03/25 18:50:02 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/06 17:12:37 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ static t_token	*token_type(char c, t_token *prev)
 		return (create_token(c, DQUOTE, prev));
 	else if (c == QUOTE)
 		return (create_token(c, QUOTE, prev));
+	// 	return (create_token(c, LETTER, prev));
 	else if (c == REDIR_IN)
 		return (create_token(c, REDIR_IN, prev));
 	else if (c == REDIR_OUT)

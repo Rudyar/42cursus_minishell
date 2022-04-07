@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 18:57:22 by lleveque          #+#    #+#             */
-/*   Updated: 2022/04/06 12:10:46 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/06 15:54:29 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ void	free_cmd_lst(t_cmd **lst)
 		while (tmp->cmd[i] != NULL)
 		{
 			free(tmp->cmd[i]);
-			free(tmp->bin_path);
 			i++;
 		}
+		free(tmp->bin_path);
 		free(tmp->cmd);
 		*lst = (*lst)->next;
 		free(tmp);

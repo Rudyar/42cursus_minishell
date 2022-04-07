@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 14:21:43 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/06 15:15:38 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/06 15:38:44 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	valid_redir(t_token *lst)
 {
-	while (lst->next)
+	while (lst)
 	{
 		if (lst->type == HERE_DOC || lst->type == DGREATER \
 			|| lst->type == REDIR_IN || lst->type == REDIR_OUT)

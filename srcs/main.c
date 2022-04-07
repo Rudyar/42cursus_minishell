@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:19:49 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/06 15:18:52 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/07 10:22:47 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@ void	print_lst(t_cmd *lst)
 		while (lst->cmd[i] != NULL)
 		{
 			printf("%s\n", lst->cmd[i]);
-			if (lst->is_builtin)
-				printf("builtins !\n");
 			i++;
 		}
 		printf("---------\n");
@@ -64,9 +62,11 @@ int	main(int ac, char **av, char **envp)
 		{
 			if (parsing(line, data) == 0)
 			{
+				// execve(data->cmd_lst->bin_path, data->cmd_lst->cmd, envp);
+				// printf("coucouc\n");
 				// exec
 				print_token_lst(&data->tokens);
-				print_lst(data->cmd_lst);
+				// print_lst(data->cmd_lst);
 				free_lst(data);
 			}
 			free(line);
