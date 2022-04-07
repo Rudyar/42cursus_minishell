@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:02:20 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/07 10:19:28 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/07 17:13:55 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_cmd	*parse_cmd(t_data *data, t_token **tokens, int size, t_cmd *new)
 			new->cmd[i] = scan_dollar(data, (*tokens)->content);
 		if ((*tokens)->type == PIPE || (*tokens)->type == HERE_DOC
 			|| (*tokens)->type == DGREATER || (*tokens)->type == REDIR_IN
-			|| (*tokens)->type == REDIR_OUT)
+			|| (*tokens)->type == REDIR_OUT || (*tokens)->type == WHITE_SPACE)
 			new->cmd[i] = ft_strdup((*tokens)->content);
 		*tokens = (*tokens)->next;
 		i++;
@@ -68,9 +68,10 @@ t_cmd	*create_cmd_lst(t_data *data, t_token **tokens)
 
 int	parsing(char *line, t_data *data)
 {
-	if (first_check(line) || check_line(line))
+	if (first_check(line))
 		return (1);
-	if (lexer(line, &data->tokens))
+	line = check_line(line);
+	if (!line || lexer(line, &data->tokens))
 		return (1);
 	if (check_tokens(data))
 		return (1);
@@ -80,7 +81,8 @@ int	parsing(char *line, t_data *data)
 		ft_putstr_fd("Can't create cmd lst\n", 2);
 		return (1);
 	}
-	check_builtins(data->cmd_lst);
-	create_bin_path(data, data->cmd_lst);
+	// check_builtins(data->cmd_lst);
+	// create_bin_path(data, data->cmd_lst);
+	free(line);
 	return (0);
 }

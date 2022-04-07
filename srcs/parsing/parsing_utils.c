@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 17:41:53 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/06 14:27:42 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/07 16:34:08 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,47 @@ int	find_cmd_length(t_token *lst)
 	return (i);
 }
 
-int	check_line(char *s)
+static char	*trim_line(char *s)
 {
-	int	i;
-	int	j;
+	int				i;
+	int				j;
+	int				k;
+	unsigned int	size;
+	char			*ret;
+
+	if (!s)
+		return (NULL);
+	i = 0;
+	j = ft_strlen(s) - 1;
+	k = 0;
+	while (ft_is_whitespace(s[i]))
+		i++;
+	while (ft_is_whitespace(s[j]) && j > i)
+		j--;
+	size = j - i;
+	ret = malloc(sizeof(char) * (size + 2));
+	if (!ret)
+		return (NULL);
+	while (i <= j)
+		ret[k++] = s[i++];
+	ret[k] = '\0';
+	return (ret);
+}
+
+char	*check_line(char *s)
+{
+	int		i;
+	int		j;
+	char	*dst;
 
 	i = ft_strlen(s);
 	j = 0;
-	while (s[j] == ' ')
+	dst = NULL;
+	while (ft_is_whitespace(s[j]))
 		j++;
 	if (j == i)
-		return (1);
-	return (0);
+		return (NULL);
+	dst = trim_line(s);
+	free(s);
+	return (dst);
 }

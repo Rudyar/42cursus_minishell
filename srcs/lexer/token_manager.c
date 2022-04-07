@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 18:10:51 by arudy             #+#    #+#             */
-/*   Updated: 2022/03/28 18:58:25 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/07 17:05:59 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ void	manage_quotes(t_token **lst, t_token **prev, t_token **head)
 			*lst = (*lst)->next;
 		new = copy_tokens(lst, WORD, *prev, find_next_quote(*lst, QUOTE));
 	}
+	if (!new)
+		return ;
 	token_lst_addback(head, new);
 	*prev = new;
 }
@@ -55,6 +57,8 @@ void	manage_letters(t_token **lst, t_token **prev, t_token **head)
 
 	new = NULL;
 	new = copy_tokens(lst, WORD, *prev, count_letters(*lst));
+	if (!new)
+		return ;
 	token_lst_addback(head, new);
 	*prev = new;
 	if ((*lst)->next != NULL)
@@ -80,6 +84,8 @@ void	manage_redir(t_token **lst, t_token **prev, t_token **head)
 		else
 			new = copy_tokens(lst, REDIR_OUT, *prev, 1);
 	}
+	if (!new)
+		return ;
 	token_lst_addback(head, new);
 	*prev = new;
 	*lst = (*lst)->prev;
@@ -105,6 +111,8 @@ void	manage_else(t_token **lst, t_token **prev, t_token **head)
 	}
 	else
 		new = copy_tokens(lst, (*lst)->type, *prev, 1);
+	if (!new)
+		return ;
 	token_lst_addback(head, new);
 	*prev = new;
 	if ((*lst)->next != NULL)

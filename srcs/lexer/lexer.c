@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 19:25:20 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/07 10:31:36 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/07 17:10:16 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,20 @@ t_token	*copy_tokens(t_token **lst, t_token_type type, t_token *prev, int n)
 	return (new);
 }
 
+void	manage_whitespaces(t_token **lst, t_token **prev, t_token **head)
+{
+	t_token	*new;
+
+	new = copy_tokens(lst, WHITE_SPACE, *prev, 1);
+	if (!new)
+		return ;
+	token_lst_addback(head, new);
+	*prev = new;
+	while (*lst && (*lst)->type == WHITE_SPACE)
+		*lst = (*lst)->next;
+	*lst = (*lst)->prev;
+}
+
 static t_token	*concat_tokens(t_token **lst)
 {
 	t_token	*head;
@@ -55,7 +69,10 @@ static t_token	*concat_tokens(t_token **lst)
 			manage_redir(lst, &prev, &head);
 		if ((*lst)->type == PIPE || (*lst)->type == DOLLAR)
 			manage_else(lst, &prev, &head);
-		*lst = (*lst)->next;
+		if ((*lst)->type == WHITE_SPACE)
+			manage_whitespaces(lst, &prev, &head);
+		if (*lst)
+			*lst = (*lst)->next;
 	}
 	return (head);
 }
