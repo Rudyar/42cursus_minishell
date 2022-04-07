@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 19:25:20 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/07 17:10:16 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/07 19:57:57 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,17 +79,33 @@ static t_token	*concat_tokens(t_token **lst)
 
 int	lexer(char *s, t_token **tokens_lst)
 {
-	t_token	*token;
+	t_token	*char_token;
+	// t_token	*concat_tokens_lst;
 	t_token	*tmp;
 
-	token = char_to_token(s);
-	tmp = token;
-	if (!token)
+	char_token = char_to_token(s);
+	tmp = char_token;
+	if (!char_token)
 	{
 		ft_putstr_fd("Can't create token from line\n", 2);
 		return (1);
 	}
-	*tokens_lst = concat_tokens(&token);
+	// concat_tokens_lst = concat_tokens(&char_token);
+	// print_token_lst(&concat_tokens_lst);
+	// if (!concat_tokens_lst)
+	// {
+	// 	ft_putstr_fd("Can't create tokens from token\n", 2);
+	// 	free_token_lst(&tmp);
+	// 	return (1);
+	// }
+	// *tokens_lst = scan_tokens(concat_tokens_lst);
+	// if (!tokens_lst)
+	// {
+	// 	ft_putstr_fd("Can't create tokens from token\n", 2);
+	// 	free_token_lst(&tmp);
+	// 	return (1);
+	// }
+	*tokens_lst = concat_tokens(&char_token);
 	if (!tokens_lst)
 	{
 		ft_putstr_fd("Can't create tokens from token\n", 2);
