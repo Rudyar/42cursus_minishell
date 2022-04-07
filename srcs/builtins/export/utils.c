@@ -6,7 +6,7 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 19:03:17 by lleveque          #+#    #+#             */
-/*   Updated: 2022/04/06 19:13:18 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/07 19:58:36 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,3 +32,16 @@ char	*name_without_plus(char *s)
 	free(s);
 	return (dest);
 }
+
+// void	print_export(t_env *env)
+// {
+// 	char	**tmp;
+// 	int		diff;
+
+// 	diff = ft_strcmp(env->var[0], env->next->var[0]);
+// 	env = env->next;
+// 	while (env->next)
+// 	{
+// 		if (ft_strcmp(env->var, env->next->var) <)
+// 	}
+// }

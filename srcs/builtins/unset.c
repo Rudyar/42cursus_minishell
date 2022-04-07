@@ -6,7 +6,7 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:37:01 by lleveque          #+#    #+#             */
-/*   Updated: 2022/04/04 17:13:58 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/07 19:58:24 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,28 +49,41 @@ t_env	*unset_env_var(t_env *env, char *arg)
 {
 	t_env	*tmp;
 
-	while (env->next)
+	while (env)
 	{
 		if (env->var[0] && !ft_strcmp(env->var[0], arg))
 		{
 			tmp = env;
-			if (env->prev)
+			if (!env->prev && !env->next)
+				return (NULL);
+			if (!env->prev)
+				env->next->prev = NULL;
+			else if (!env->next)
+			{
+				env->prev->next = NULL;
+				env = env->prev;
+			}
+			if (env->prev && env->next)
+			{
 				env->prev->next = env->next;
-			if (env->next)
 				env->next->prev = env->prev;
-			env = env->next;
+			}
+			if (env->next)
+				env = env->next;
 			free_env_lst(tmp);
 			break ;
 		}
-		else
+		else if (env->next)
 			env = env->next;
+		else
+			break ;
 	}
 	while (env->prev)
 		env = env->prev;
 	return (env);
 }
 
-int	unset_cmd(char **args, t_env **env)
+int	unset_cmd(char **args, t_data *data)
 {
 	int		i;
 
@@ -84,8 +97,11 @@ int	unset_cmd(char **args, t_env **env)
 		}
 		if (!args[i])
 			break ;
-		*env = unset_env_var(*env, args[i]);
+		if (data->env)
+			data->env = unset_env_var(data->env, args[i]);
 		i++;
 	}
+	free_strs(data->env_char);
+	data->env_char = dup_env(data->env);
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 14:17:58 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/04 18:08:41 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/07 17:21:57 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ struct	s_data
 {
 	t_history	*history;
 	t_env		*env;
+	char		**env_char;
 	t_cmd		*cmd_lst;
 	t_token		*tokens;
 	int			nb_cmd;

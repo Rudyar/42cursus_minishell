@@ -6,7 +6,7 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 16:22:34 by lleveque          #+#    #+#             */
-/*   Updated: 2022/04/06 19:21:42 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/07 14:01:17 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,8 @@ int	check_name(char **var, char *arg)
 
 int	check_exist(char *arg, t_env *env)
 {
-	int	check;
+	int		check;
+	char	**var;
 
 	while (env)
 	{
@@ -87,10 +88,14 @@ int	check_exist(char *arg, t_env *env)
 			check = check_name(env->var, arg);
 			if (check)
 			{
+				var = ft_nsplit(arg, '=', 2);
+				// if (!var)
 				if (check == 1)
-					return (update_env_var(arg, env), 1);
+					update_env_var(env, var);
 				else
-					return (update_add_env_var(arg, env), 1);
+					update_add_env_var(env, var);
+				free(var);
+				return (1);
 			}
 		}
 		env = env->next;

@@ -6,14 +6,19 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 16:26:20 by lleveque          #+#    #+#             */
-/*   Updated: 2022/04/05 20:22:54 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/07 19:58:49 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-int	env_cmd(t_env *env)
+int	env_cmd(t_data	*data)
 {
+	t_env	*env;
+
+	if (!data->env)
+		return (0);
+	env = data->env;
 	while (env)
 	{
 		if (env->var[0])

@@ -1,22 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/03 10:52:06 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/07 16:50:09 by lleveque         ###   ########.fr       */
+/*   Created: 2022/04/07 15:54:28 by lleveque          #+#    #+#             */
+/*   Updated: 2022/04/07 18:40:20 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#include "../../include/minishell.h"
 
-t_data	*init_data(char **envp);
-void	ft_free(t_data *data);
-void	free_lst(t_data *data);
-void	*error(char *cmd, char *arg, char *msg);
-char	**dup_env(t_env *env);
+char **dup_env(t_env *env)
+{
+	int		i;
+	char	**dest;
+	char	*tmp;
 
-#endif
+	i = 0;
+	dest = malloc(sizeof(char *) * (ft_lstsize(env) + 1));
+	if (!dest)
+		return (NULL);
+	while (env)
+	{
+		tmp = ft_strjoin_char(env->var[0], '=');
+		if (env->var[1])
+			tmp = ft_strjoin(tmp, env->var[1]);
+		dest[i] = tmp;
+		i++;
+		env = env->next;
+	}
+	dest[i] = NULL;
+	return (dest);
+}

@@ -6,7 +6,7 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 18:22:42 by lleveque          #+#    #+#             */
-/*   Updated: 2022/04/03 17:42:26 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/07 18:42:17 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ t_env	*init_env(char **envp)
 	t_env	*tmp;
 
 	i = 1;
+	if (!envp[0])
+		return (NULL);
 	if (envp[0])
 		env = ft_env_lstnew(envp[0], NULL);
 	if (envp[i])
@@ -51,6 +53,8 @@ t_data	*init_data(char **envp)
 		exit (EXIT_FAILURE);
 	}
 	data->env = init_env(envp);
+	if (data->env)
+		data->env_char = dup_env(data->env);
 	data->cmd_lst = NULL;
 	data->current_path = NULL;
 	data->history = NULL;

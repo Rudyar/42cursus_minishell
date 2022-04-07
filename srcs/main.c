@@ -6,7 +6,7 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:19:49 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/06 19:01:45 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/07 19:55:33 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,15 @@ int	main(int ac, char **av, char **envp)
 	(void)av;
 	(void)ac;
 	data = init_data(envp);
-	export_cmd(av, data->env);
-	// unset_cmd(av, &data->env);
-	env_cmd(data->env);
+	// for (int i = 0; data->env_char[i]; i++)
+		// printf("--- %s\n", data->env_char[i]);
+	// pwd_cmd();
+	env_cmd(data);
+	// export_cmd(av, data);
+	unset_cmd(av, data);
+	env_cmd(data);
+	// for (int i = 0; data->env_char[i]; i++)
+		// printf("--- %s\n", data->env_char[i]);
 	ft_free(data);
 	return (0);
 }

@@ -1,22 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/03 10:52:06 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/07 16:50:09 by lleveque         ###   ########.fr       */
+/*   Created: 2021/11/30 22:37:13 by lleveque          #+#    #+#             */
+/*   Updated: 2022/04/07 15:59:32 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#include "../../include/minishell.h"
 
-t_data	*init_data(char **envp);
-void	ft_free(t_data *data);
-void	free_lst(t_data *data);
-void	*error(char *cmd, char *arg, char *msg);
-char	**dup_env(t_env *env);
+int	ft_lstsize(t_env *lst)
+{
+	int		i;
 
-#endif
+	i = 0;
+	while (lst)
+	{
+		lst = lst->next;
+		i++;
+	}
+	return (i);
+}

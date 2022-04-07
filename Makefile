@@ -6,7 +6,7 @@
 #    By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/21 17:19:21 by arudy             #+#    #+#              #
-#    Updated: 2022/04/06 19:06:18 by lleveque         ###   ########.fr        #
+#    Updated: 2022/04/07 16:51:19 by lleveque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ SRCS = ${SRCS_MAIN} ${SRCS_UTILS} ${SRCS_PARSING} ${SRCS_LEXER} ${SRCS_LIBFT} ${
 
 SRCS_MAIN = $(addprefix srcs/, main.c)
 
-SRCS_UTILS = $(addprefix srcs/utils/, free.c init.c error.c \
+SRCS_UTILS = $(addprefix srcs/utils/, free.c init.c error.c env.c\
 				free_strs.c)
 
 SRCS_PARSING = $(addprefix srcs/parsing/, first_check.c \
@@ -28,7 +28,7 @@ SRCS_LIBFT = $(addprefix srcs/libft/, ft_putstr_fd.c ft_strlen.c \
 				ft_strncmp.c ft_substr.c ft_split.c ft_env_lst.c \
 				ft_strdup.c ft_is_whitespace.c ft_strchr.c ft_isalpha.c \
 				ft_isdigit.c ft_calloc.c ft_bzero.c ft_nsplit.c ft_strcmp.c \
-				ft_strjoin.c ft_strjoin_char.c ft_strcdup.c)
+				ft_strjoin.c ft_strjoin_char.c ft_strcdup.c ft_lstsize.c)
 
 SRCS_BUILTINS = $(addprefix srcs/builtins/, echo.c cd.c env.c export/export.c \
 				export/check.c export/utils.c pwd.c unset.c)
