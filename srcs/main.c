@@ -6,26 +6,31 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:19:49 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/07 19:58:34 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/07 20:02:09 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-// int	main(int ac, char **av, char **envp)
-// {
-// 	t_data	*data;
+int	main(int ac, char **av, char **envp)
+{
+	t_data	*data;
 
-// 	(void)av;
-// 	(void)ac;
-// 	data = init_data(envp);
-// 	// export_cmd(av, env);
-// 	unset_cmd(av, &data->env);
-// 	env_cmd(data->env);
-// 	ft_free(data);
-// 	return (0);
-// }
-
+	(void)av;
+	(void)ac;
+	data = init_data(envp);
+	// for (int i = 0; data->env_char[i]; i++)
+		// printf("--- %s\n", data->env_char[i]);
+	// pwd_cmd();
+	env_cmd(data);
+	// export_cmd(av, data);
+	unset_cmd(av, data);
+	env_cmd(data);
+	// for (int i = 0; data->env_char[i]; i++)
+		// printf("--- %s\n", data->env_char[i]);
+	ft_free(data);
+	return (0);
+}
 
 // void	print_lst(t_cmd *lst)
 // {

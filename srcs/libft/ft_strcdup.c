@@ -1,22 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   ft_strcdup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/03 10:52:06 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/07 16:50:09 by lleveque         ###   ########.fr       */
+/*   Created: 2022/04/06 15:28:09 by lleveque          #+#    #+#             */
+/*   Updated: 2022/04/06 15:31:10 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#include "../../include/minishell.h"
 
-t_data	*init_data(char **envp);
-void	ft_free(t_data *data);
-void	free_lst(t_data *data);
-void	*error(char *cmd, char *arg, char *msg);
-char	**dup_env(t_env *env);
+char	*ft_strcdup(char *s, char c)
+{
+	size_t	i;
+	size_t	size;
+	char	*dest;
 
-#endif
+	i = 0;
+	size = 0;
+	while (s && s[size] && s[size] != c)
+		size++;
+	dest = malloc(sizeof(char) * (size + 1));
+	if (!dest)
+		return (NULL);
+	while (s && s[i] && s[i] != c)
+	{
+		dest[i] = s[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
+}

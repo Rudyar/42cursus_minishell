@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 18:57:22 by lleveque          #+#    #+#             */
-/*   Updated: 2022/04/07 17:10:47 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/07 20:02:13 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	free_env(t_env *lst)
 	t_env	*tmp;
 	int		i;
 
+	if (!lst)
+		return ;
 	while (lst)
 	{
 		i = 0;
@@ -35,6 +37,7 @@ void	free_env(t_env *lst)
 void	ft_free(t_data *data)
 {
 	free_env(data->env);
+	free_strs(data->env_char);
 	free(data);
 }
 

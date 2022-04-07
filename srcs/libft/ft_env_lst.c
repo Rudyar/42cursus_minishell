@@ -6,7 +6,7 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:05:20 by lleveque          #+#    #+#             */
-/*   Updated: 2022/04/05 20:35:08 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/06 19:39:58 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ char	**var_without_value(char *content)
 {
 	char	**var;
 
-	var = malloc(sizeof(char *) * 3);
-	var[0] = ft_strdup(content);
+	var = malloc(sizeof(char *) * 2);
+	var[0] = ft_strcdup(content, '=');
 	var[1] = NULL;
 	return (var);
 }
@@ -34,7 +34,7 @@ t_env	*ft_env_lstnew(char *content, t_env *prev)
 	new->prev = prev;
 	while (content[i] && content[i] != '=')
 		i++;
-	if (content[i + 1] && content[i + 1] == '\0')
+	if (!content[i + 1])
 		new->var = var_without_value(content);
 	else
 		new->var = ft_nsplit(content, '=', 2);
@@ -46,5 +46,6 @@ void	ft_env_addback(t_env *env, t_env *new)
 {
 	while (env->next)
 		env = env->next;
+	new->prev = env;
 	env->next = new;
 }
