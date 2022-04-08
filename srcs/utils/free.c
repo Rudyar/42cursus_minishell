@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 18:57:22 by lleveque          #+#    #+#             */
-/*   Updated: 2022/04/07 20:02:13 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/08 11:07:20 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,5 @@ void	free_cmd_lst(t_cmd **lst)
 void	free_lst(t_data *data)
 {
 	free_token_lst(&data->tokens);
-	free_cmd_lst(&data->cmd_lst);
+	// free_cmd_lst(&data->cmd_lst);
 }

@@ -1,29 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_tokens.c                                     :+:      :+:    :+:   */
+/*   scan_tokens_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 14:21:43 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/06 15:38:44 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/08 11:33:40 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-static int	valid_redir(t_token *lst)
+static int	is_redir_sign(t_token_type token)
+{
+	if (token == HERE_DOC)
+		return (1);
+	if (token == DGREATER)
+		return (1);
+	if (token == REDIR_IN)
+		return (1);
+	if (token == REDIR_OUT)
+		return (1);
+	return (0);
+}
+
+int	scan_redir(t_token *lst)
 {
 	while (lst)
 	{
-		if (lst->type == HERE_DOC || lst->type == DGREATER \
-			|| lst->type == REDIR_IN || lst->type == REDIR_OUT)
+		if (is_redir_sign(lst->type))
 		{
 			if (lst->next)
 			{
-				lst = lst->next;
-				if (lst->type == HERE_DOC || lst->type == DGREATER \
-					|| lst->type == REDIR_IN || lst->type == REDIR_OUT)
+				while (lst && lst->type == WHITE_SPACE)
+					lst = lst->next;
+				if (lst && is_redir_sign(lst->type))
 				{
 					ft_putstr_fd("minishell: syntax error near \
 unexpected token `", 2);
@@ -33,32 +45,33 @@ unexpected token `", 2);
 				}
 			}
 		}
-		lst = lst->next;
+		if (lst)
+			lst = lst->next;
 	}
 	return (0);
 }
 
-static int	count_nb_cmd(t_token *lst)
-{
-	int	i;
+// static int	count_nb_cmd(t_token *lst)
+// {
+// 	int	i;
 
-	i = 1;
-	while (lst)
-	{
-		if (lst->type == PIPE)
-			i++;
-		lst = lst->next;
-	}
-	return (i);
-}
+// 	i = 1;
+// 	while (lst)
+// 	{
+// 		if (lst->type == PIPE)
+// 			i++;
+// 		lst = lst->next;
+// 	}
+// 	return (i);
+// }
 
-int	check_tokens(t_data *data)
-{
-	if (valid_redir(data->tokens))
-		return (1);
-	data->nb_cmd = count_nb_cmd(data->tokens);
-	return (0);
-}
+// int	check_tokens(t_data *data)
+// {
+// 	if (valid_redir(data->tokens))
+// 		return (1);
+// 	data->nb_cmd = count_nb_cmd(data->tokens);
+// 	return (0);
+// }
 
 void	check_builtins(t_cmd *lst)
 {

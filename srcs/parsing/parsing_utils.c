@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 17:41:53 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/07 16:34:08 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/08 12:56:18 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 char	*ft_getenv(t_env *env, char *s)
 {
+	if (!s)
+		return (NULL);
 	while (env)
 	{
 		if (env->var && !ft_strcmp(env->var[0], s))
