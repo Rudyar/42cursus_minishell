@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 14:21:43 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/08 11:33:40 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/08 14:47:13 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,22 +31,19 @@ int	scan_redir(t_token *lst)
 	{
 		if (is_redir_sign(lst->type))
 		{
-			if (lst->next)
+			lst = lst->next;
+			while (lst && lst->type == WHITE_SPACE)
+				lst = lst->next;
+			if (lst && is_redir_sign(lst->type))
 			{
-				while (lst && lst->type == WHITE_SPACE)
-					lst = lst->next;
-				if (lst && is_redir_sign(lst->type))
-				{
-					ft_putstr_fd("minishell: syntax error near \
+				ft_putstr_fd("minishell: syntax error near \
 unexpected token `", 2);
-					ft_putstr_fd(lst->content, 2);
-					ft_putstr_fd("'\n", 2);
-					return (1);
-				}
+				ft_putstr_fd(lst->content, 2);
+				ft_putstr_fd("'\n", 2);
+				return (1);
 			}
 		}
-		if (lst)
-			lst = lst->next;
+		lst = lst->next;
 	}
 	return (0);
 }

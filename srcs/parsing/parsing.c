@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:02:20 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/08 13:06:51 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/08 14:41:31 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,11 @@ int	parsing(char *line, t_data *data)
 	data->tokens = scan_tokens(data, tokens_lst);
 	if (!data->tokens)
 	{
+		free_token_lst(&tokens_lst);
 		free(line);
 		return (1);
 	}
-	print_token_lst(&tokens_lst);
+	// print_token_lst(&tokens_lst);
 	// (void)data;
 	// if (check_tokens(data))
 	// 	return (1);
