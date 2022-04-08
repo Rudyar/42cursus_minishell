@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 14:21:43 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/08 14:47:13 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/08 14:56:06 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,28 +47,6 @@ unexpected token `", 2);
 	}
 	return (0);
 }
-
-// static int	count_nb_cmd(t_token *lst)
-// {
-// 	int	i;
-
-// 	i = 1;
-// 	while (lst)
-// 	{
-// 		if (lst->type == PIPE)
-// 			i++;
-// 		lst = lst->next;
-// 	}
-// 	return (i);
-// }
-
-// int	check_tokens(t_data *data)
-// {
-// 	if (valid_redir(data->tokens))
-// 		return (1);
-// 	data->nb_cmd = count_nb_cmd(data->tokens);
-// 	return (0);
-// }
 
 void	check_builtins(t_cmd *lst)
 {

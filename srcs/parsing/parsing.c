@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:02:20 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/08 14:41:31 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/08 14:56:33 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,13 @@ int	parsing(char *line, t_data *data)
 		return (1);
 	}
 	line = check_line(line);
-	if (!line || lexer(line, &tokens_lst))
+	if (!line)
 		return (1);
+	if (lexer(line, &tokens_lst))
+	{
+		free(line);
+		return (1);
+	}
 	data->tokens = scan_tokens(data, tokens_lst);
 	if (!data->tokens)
 	{
@@ -86,10 +91,12 @@ int	parsing(char *line, t_data *data)
 		free(line);
 		return (1);
 	}
-	// print_token_lst(&tokens_lst);
+	free_token_lst(&tokens_lst);
+	free(line);
+	return (0);
+}
+
 	// (void)data;
-	// if (check_tokens(data))
-	// 	return (1);
 	// data->cmd_lst = create_cmd_lst(data, &data->tokens);
 	// if (!data->cmd_lst)
 	// {
@@ -98,7 +105,3 @@ int	parsing(char *line, t_data *data)
 	// }
 	// check_builtins(data->cmd_lst);
 	// create_bin_path(data, data->cmd_lst);
-	free_token_lst(&tokens_lst);
-	free(line);
-	return (0);
-}
