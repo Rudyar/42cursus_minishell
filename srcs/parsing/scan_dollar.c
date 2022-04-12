@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 16:36:45 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/08 14:31:42 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/12 18:13:10 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,14 +89,16 @@ char	*find_dollar_value(t_data *data, char *s)
 		if (s[i])
 			dst = ft_strjoin_char(dst, s[i++]);
 	}
+	if (i == 0)
+		return (s);
 	return (dst);
 }
-
+// si $1PATH s'arreter au 1 car une var ne commence que par lettres ou _
 int	scan_dollar(t_data *data, t_token *lst)
 {
 	while (lst)
 	{
-		if (lst->type == WORD_IN_DQUOTE || lst->type == DOLLAR)
+		if (lst->type == IN_DQUOTE || lst->type == DOLLAR)
 			lst->content = find_dollar_value(data, lst->content);
 		lst = lst->next;
 	}

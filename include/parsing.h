@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:22:46 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/08 11:56:07 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/12 18:04:11 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,5 @@ int		scan_dollar(t_data *data, t_token *lst);
 char	*ft_getenv(t_env *env, char *s);
 t_cmd	*cmd_lst_last(t_cmd *lst);
 t_token	*scan_tokens(t_data *data, t_token *lst);
-
 
 #endif

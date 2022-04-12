@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:02:20 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/08 14:56:33 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/12 17:56:47 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 // 	{
 // 		if ((*tokens)->type == WORD)
 // 			new->cmd[i] = ft_strdup((*tokens)->content);
-// 		if ((*tokens)->type == WORD_IN_DQUOTE || (*tokens)->type == DOLLAR)
+// 		if ((*tokens)->type == IN_DQUOTE || (*tokens)->type == DOLLAR)
 // 			new->cmd[i] = scan_dollar(data, (*tokens)->content);
 // 		if ((*tokens)->type == PIPE || (*tokens)->type == HERE_DOC
 // 			|| (*tokens)->type == DGREATER || (*tokens)->type == REDIR_IN
