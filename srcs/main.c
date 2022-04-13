@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:19:49 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/07 20:02:09 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/13 16:12:22 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,12 @@ int	main(int ac, char **av, char **envp)
 	// for (int i = 0; data->env_char[i]; i++)
 		// printf("--- %s\n", data->env_char[i]);
 	// pwd_cmd();
-	env_cmd(data);
-	// export_cmd(av, data);
-	unset_cmd(av, data);
+	// env_cmd(data);
+	printf("===================================================================================\n");
+	export_cmd(av, data);
+	// unset_cmd(av, data);
+	// echo_cmd(av);
+	printf("===================================================================================\n");
 	env_cmd(data);
 	// for (int i = 0; data->env_char[i]; i++)
 		// printf("--- %s\n", data->env_char[i]);

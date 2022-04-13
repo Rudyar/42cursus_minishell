@@ -6,7 +6,7 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 16:22:34 by lleveque          #+#    #+#             */
-/*   Updated: 2022/04/07 14:01:17 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/13 17:41:26 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,7 @@ int	check_export_arg(char *arg)
 	int	i;
 
 	i = 0;
-	if (!check_value(arg))
-		return (1);
-	if (!ft_isalpha(arg[1]) && arg[1] != '_')
+	if (!ft_isalpha(arg[0]) && arg[0] != '_')
 		return (1);
 	while (arg[i] && arg[i] != '=')
 	{
