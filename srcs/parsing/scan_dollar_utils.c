@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scan_tokens.c                                      :+:      :+:    :+:   */
+/*   scan_dollar_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/07 19:47:16 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/13 16:49:13 by arudy            ###   ########.fr       */
+/*   Created: 2022/04/13 16:12:52 by arudy             #+#    #+#             */
+/*   Updated: 2022/04/13 16:20:58 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-t_token	*scan_tokens(t_data *data, t_token *lst)
+char	*join_tmp(char *s1, char *s2)
 {
-	t_token	*head;
-	t_token	*prev;
+	char	*dst;
 
-	head = NULL;
-	prev = NULL;
-	if (scan_redir(lst))
+	if (!s1 && !s2)
 		return (NULL);
-	if (scan_dollar(data, lst))
+	if (!s1)
+		return (s2);
+	if (!s2)
+		return (s1);
+	dst = ft_strjoin(s1, s2);
+	if (!dst)
 		return (NULL);
-	print_token_lst(&lst);
-	return (NULL);
+	free(s2);
+	return (dst);
 }

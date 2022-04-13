@@ -6,13 +6,13 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 16:36:45 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/12 18:13:10 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/13 18:37:56 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-char	*exit_dollar_status(char *s)
+static char	*exit_dollar_status(char *s)
 {
 	char	*dst;
 
@@ -22,20 +22,26 @@ char	*exit_dollar_status(char *s)
 	return (dst);
 }
 
-static char	*join_tmp(char *s1, char *s2)
+static char	*copy_dollar(char *s, int *i)
 {
+	int		j;
+	int		len;
 	char	*dst;
 
-	if (!s1 && !s2)
-		return (NULL);
-	if (!s1)
-		return (s2);
-	if (!s2)
-		return (s1);
-	dst = ft_strjoin(s1, s2);
+	j = 0;
+	len = 0;
+	while (s[*i] && s[*i] == '$')
+	{
+		len++;
+		(*i)++;
+	}
+	dst = malloc(sizeof(char) * (len + 2));
 	if (!dst)
 		return (NULL);
-	free(s2);
+	dst[0] = '$';
+	while (j++ < len)
+		dst[j] = '$';
+	dst[j] = '\0';
 	return (dst);
 }
 
@@ -46,22 +52,27 @@ static char	*get_env_var(t_data *data, char *s, int *i)
 	char	*env;
 
 	tmp = NULL;
-	env = NULL;
 	dst = NULL;
-	while (s[*i] && s[*i] != ' ' && s[*i] != '$')
+	if (s[*i] && !ft_isalpha(s[*i]) && s[*i] != '{' && s[*i] != '}' && s[*i] != '_')
+	{
+		(*i)++;
+		return (NULL);
+	}
+	while (s[*i] && (ft_isalpha(s[*i]) || ft_isdigit(s[*i]) || s[*i] == '{' || s[*i] == '}' || s[*i] == '_'))
 	{
 		if (s[*i] != '{' && s[*i] != '}')
 			tmp = ft_strjoin_char(tmp, s[*i]);
+		if (s[*i] == '}')
+		{
+			(*i)++;
+			break ;
+		}
 		(*i)++;
 	}
 	env = ft_getenv(data->env, tmp);
-	if (!env)
-		dst = NULL;
-	else
+	if (env)
 		dst = ft_strdup(env);
 	free(tmp);
-	if (s[*i] && s[*i] != '$' && s[*i] != ' ')
-		(*i)++;
 	return (dst);
 }
 
@@ -81,8 +92,10 @@ char	*find_dollar_value(t_data *data, char *s)
 			if (s[i] && s[i] == '?' && ((s[i + 1] && s[i + 1] == ' ')
 					|| !s[i + 1]))
 				tmp = (exit_dollar_status(s));
+			else if (!s[i] || (s[i] && (s[i] == '$' || s[i] == ' ')))
+				tmp = copy_dollar(s, &i);
 			else
-				tmp = (get_env_var(data, s, &i));
+				tmp = get_env_var(data, s, &i);
 			dst = join_tmp(dst, tmp);
 			continue ;
 		}
@@ -93,7 +106,7 @@ char	*find_dollar_value(t_data *data, char *s)
 		return (s);
 	return (dst);
 }
-// si $1PATH s'arreter au 1 car une var ne commence que par lettres ou _
+
 int	scan_dollar(t_data *data, t_token *lst)
 {
 	while (lst)

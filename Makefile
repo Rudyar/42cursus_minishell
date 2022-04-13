@@ -6,7 +6,7 @@
 #    By: arudy <arudy@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/21 17:19:21 by arudy             #+#    #+#              #
-#    Updated: 2022/04/08 11:22:28 by arudy            ###   ########.fr        #
+#    Updated: 2022/04/13 16:13:43 by arudy            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,8 +19,8 @@ SRCS_UTILS = $(addprefix srcs/utils/, free.c init.c error.c env.c\
 
 SRCS_PARSING = $(addprefix srcs/parsing/, first_check.c \
 				first_check_redir.c parsing.c parsing_utils.c \
-				cmd_utils.c scan_dollar.c find_bin_path.c \
-				scan_tokens_utils.c scan_tokens.c)
+				cmd_utils.c scan_dollar.c scan_dollar_utils.c \
+				find_bin_path.c scan_tokens_utils.c scan_tokens.c)
 
 SRCS_LEXER = $(addprefix srcs/lexer/, lexer.c lexer_utils.c \
 				char_to_token.c token_manager.c)
