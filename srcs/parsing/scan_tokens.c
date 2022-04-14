@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 19:47:16 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/14 12:28:05 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/14 14:10:50 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ unexpected token `", 2);
 	return (0);
 }
 
-// t_token	*scan_tokens(t_data *data, t_token *lst)
 int	scan_tokens(t_data *data, t_token *lst)
 {
 	if (scan_redir(lst))
