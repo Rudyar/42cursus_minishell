@@ -6,7 +6,7 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 18:22:42 by lleveque          #+#    #+#             */
-/*   Updated: 2022/04/07 18:42:17 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/14 10:29:41 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ t_env	*init_env(char **envp)
 	i = 1;
 	if (!envp[0])
 		return (NULL);
-	if (envp[0])
-		env = ft_env_lstnew(envp[0], NULL);
+	env = ft_env_lstnew(envp[0], NULL);
 	if (envp[i])
 	{
 		env->next = ft_env_lstnew(envp[i], env);

@@ -6,13 +6,13 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 15:54:28 by lleveque          #+#    #+#             */
-/*   Updated: 2022/04/07 18:40:20 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/14 10:30:02 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-char **dup_env(t_env *env)
+char	**dup_env(t_env *env)
 {
 	int		i;
 	char	**dest;
