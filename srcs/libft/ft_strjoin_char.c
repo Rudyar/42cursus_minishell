@@ -6,7 +6,7 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 15:23:42 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/07 16:53:03 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/14 13:02:12 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,6 @@ char	*ft_strjoin_char(char *s, char c)
 	dst[i] = c;
 	i++;
 	dst[i] = '\0';
+	free(s);
 	return (dst);
 }
