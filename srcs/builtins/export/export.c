@@ -6,7 +6,7 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 13:42:32 by lleveque          #+#    #+#             */
-/*   Updated: 2022/04/14 10:32:42 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/14 13:02:39 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,18 +72,14 @@ void	add_env_var(char *arg, t_env **env, int n)
 {
 	char	**tmp;
 	char	*var;
-	char	*tmp2;
 
 	tmp = NULL;
-	tmp2 = NULL;
 	if (arg[ft_strlen(arg) - 1] != '=')
 	{
 		tmp = ft_nsplit(arg, '=', 2);
 		var = name_without_plus(tmp[0]);
-		tmp2 = var;
-		var = ft_strjoin_char(tmp2, '=');
+		var = ft_strjoin_char(var, '=');
 		free(tmp[0]);
-		free(tmp2);
 	}
 	else
 		var = name_without_plus(arg);

@@ -6,7 +6,7 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 15:54:28 by lleveque          #+#    #+#             */
-/*   Updated: 2022/04/14 10:30:02 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/14 13:01:51 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ char	**dup_env(t_env *env)
 	int		i;
 	char	**dest;
 	char	*tmp;
+	char	*tmp2;
 
 	i = 0;
 	dest = malloc(sizeof(char *) * (ft_lstsize(env) + 1));
@@ -24,7 +25,8 @@ char	**dup_env(t_env *env)
 		return (NULL);
 	while (env)
 	{
-		tmp = ft_strjoin_char(env->var[0], '=');
+		tmp2 = ft_strdup(env->var[0]);
+		tmp = ft_strjoin_char(tmp2, '=');
 		if (env->var[1])
 			tmp = ft_strjoin(tmp, env->var[1]);
 		dest[i] = tmp;
