@@ -6,47 +6,11 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 14:21:43 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/08 14:56:06 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/14 11:30:57 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
-static int	is_redir_sign(t_token_type token)
-{
-	if (token == HERE_DOC)
-		return (1);
-	if (token == DGREATER)
-		return (1);
-	if (token == REDIR_IN)
-		return (1);
-	if (token == REDIR_OUT)
-		return (1);
-	return (0);
-}
-
-int	scan_redir(t_token *lst)
-{
-	while (lst)
-	{
-		if (is_redir_sign(lst->type))
-		{
-			lst = lst->next;
-			while (lst && lst->type == WHITE_SPACE)
-				lst = lst->next;
-			if (lst && is_redir_sign(lst->type))
-			{
-				ft_putstr_fd("minishell: syntax error near \
-unexpected token `", 2);
-				ft_putstr_fd(lst->content, 2);
-				ft_putstr_fd("'\n", 2);
-				return (1);
-			}
-		}
-		lst = lst->next;
-	}
-	return (0);
-}
 
 void	check_builtins(t_cmd *lst)
 {

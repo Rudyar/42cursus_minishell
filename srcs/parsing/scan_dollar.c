@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 16:36:45 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/14 10:27:06 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/14 12:22:15 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ static char	*copy_dollar(char *s, int *i)
 	while (j++ < len)
 		dst[j] = '$';
 	dst[j] = '\0';
+	free(s);
 	return (dst);
 }
 
@@ -68,6 +69,7 @@ static char	*get_env_var(t_data *data, char *s, int *i)
 		(*i)++;
 	}
 	env = ft_getenv(data->env, tmp);
+	printf("tmp : %s\n", tmp);
 	if (env)
 		dst = ft_strdup(env);
 	free(tmp);
@@ -82,7 +84,7 @@ static char	*find_dollar_value(t_data *data, char *s, int i)
 	dst = NULL;
 	while (s[i])
 	{
-		if (s[i] == '$')
+		if (s[i] && s[i] == '$')
 		{
 			i++;
 			if (s[i] && s[i] == '?' && ((s[i + 1] && s[i + 1] == ' ')

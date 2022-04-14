@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 18:28:26 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/08 11:19:12 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/14 13:00:36 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,6 @@ void	manage_else(t_token **lst, t_token **prev, t_token **head);
 int		count_letters(t_token *lst);
 void	free_token_lst(t_token **lst);
 void	token_lst_addback(t_token **head, t_token *new);
-void	print_token_lst(t_token **lst);
+void	print_token_lst(t_token *lst);
 
 #endif

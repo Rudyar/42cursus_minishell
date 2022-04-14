@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin_char.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 15:23:42 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/07 16:53:03 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/14 12:38:18 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ char	*ft_strjoin_char(char *s, char c)
 		i++;
 	}
 	dst[i] = c;
-	i++;
-	dst[i] = '\0';
+	dst[i + 1] = '\0';
 	return (dst);
 }
