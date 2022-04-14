@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 17:41:53 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/08 12:56:18 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/14 17:45:21 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,14 @@ int	find_cmd_length(t_token *lst)
 	i = 0;
 	while (lst && lst->type != PIPE)
 	{
-		i++;
-		lst = lst->next;
+		if (lst && is_word(lst->type))
+		{
+			while (lst && is_word(lst->type))
+				lst = lst->next;
+			i++;
+		}
+		if (lst)
+			lst = lst->next;
 	}
 	return (i);
 }

@@ -6,11 +6,19 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 12:05:27 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/05 16:34:59 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/14 17:44:18 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+int	is_word(t_token_type type)
+{
+	if (type == WORD || type == DOLLAR
+		|| type == IN_DQUOTE || type == IN_QUOTE)
+		return (1);
+	return (0);
+}
 
 void	fill_cmd_data(t_cmd *cmd, int i)
 {
