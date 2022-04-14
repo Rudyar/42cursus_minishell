@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 16:36:45 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/13 18:37:56 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/14 10:27:06 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,10 @@ static char	*get_env_var(t_data *data, char *s, int *i)
 
 	tmp = NULL;
 	dst = NULL;
-	if (s[*i] && !ft_isalpha(s[*i]) && s[*i] != '{' && s[*i] != '}' && s[*i] != '_')
-	{
-		(*i)++;
-		return (NULL);
-	}
-	while (s[*i] && (ft_isalpha(s[*i]) || ft_isdigit(s[*i]) || s[*i] == '{' || s[*i] == '}' || s[*i] == '_'))
+	if (s[*i] && !ft_isalpha(s[*i]) && s[*i] != '{'
+		&& s[*i] != '}' && s[*i] != '_')
+		return (get_env_var_return(i));
+	while (check_next_char_dollar(s, i))
 	{
 		if (s[*i] != '{' && s[*i] != '}')
 			tmp = ft_strjoin_char(tmp, s[*i]);
@@ -76,13 +74,11 @@ static char	*get_env_var(t_data *data, char *s, int *i)
 	return (dst);
 }
 
-char	*find_dollar_value(t_data *data, char *s)
+static char	*find_dollar_value(t_data *data, char *s, int i)
 {
-	int		i;
 	char	*dst;
 	char	*tmp;
 
-	i = 0;
 	dst = NULL;
 	while (s[i])
 	{
@@ -109,10 +105,13 @@ char	*find_dollar_value(t_data *data, char *s)
 
 int	scan_dollar(t_data *data, t_token *lst)
 {
+	int	i;
+
 	while (lst)
 	{
+		i = 0;
 		if (lst->type == IN_DQUOTE || lst->type == DOLLAR)
-			lst->content = find_dollar_value(data, lst->content);
+			lst->content = find_dollar_value(data, lst->content, i);
 		lst = lst->next;
 	}
 	(void)data;

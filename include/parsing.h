@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:22:46 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/13 16:21:12 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/14 10:29:50 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,11 @@ void	create_bin_path(t_data *data, t_cmd *lst);
 void	cmd_lst_addback(t_cmd **head, t_cmd *new, t_cmd *prev);
 void	fill_cmd_data(t_cmd *cmd, int i);
 char	*check_line(char *s);
-// char	*scan_dollar(t_data *data, char *s);
 int		scan_dollar(t_data *data, t_token *lst);
 char	*ft_getenv(t_env *env, char *s);
 char	*join_tmp(char *s1, char *s2);
+int		check_next_char_dollar(char *s, int *i);
+char	*get_env_var_return(int *i);
 t_cmd	*cmd_lst_last(t_cmd *lst);
 t_token	*scan_tokens(t_data *data, t_token *lst);
 
