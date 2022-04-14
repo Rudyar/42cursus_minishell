@@ -6,7 +6,7 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:37:01 by lleveque          #+#    #+#             */
-/*   Updated: 2022/04/07 19:58:24 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/12 16:12:24 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	check_unset_arg(char *arg)
 	i = 0;
 	if (arg)
 	{
-		if (!ft_isalpha(arg[0]))
+		if (!ft_isalpha(arg[0]) && arg[0] != '_')
 			return (1);
 		while (arg[i])
 		{

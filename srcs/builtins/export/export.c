@@ -6,7 +6,7 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 13:42:32 by lleveque          #+#    #+#             */
-/*   Updated: 2022/04/07 19:40:38 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/14 10:32:42 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	update_add_env_var(t_env *env, char **var)
 	}
 	else
 	{
-		if (var[1])
+		if (var && var[1])
 		{
 			free(env->var[0]);
 			free(env->var);
@@ -37,8 +37,7 @@ void	update_add_env_var(t_env *env, char **var)
 			env->var[1] = var[1];
 			env->var[2] = NULL;
 		}
-		else
-			free(var[0]);
+		free(var[0]);
 	}
 }
 
@@ -75,22 +74,30 @@ void	add_env_var(char *arg, t_env **env, int n)
 	char	*var;
 	char	*tmp2;
 
-	tmp = ft_nsplit(arg, '=', 2);
-	var = name_without_plus(tmp[0]);
-	tmp2 = var;
-	var = ft_strjoin_char(tmp2, '=');
-	if (tmp[1])
+	tmp = NULL;
+	tmp2 = NULL;
+	if (arg[ft_strlen(arg) - 1] != '=')
+	{
+		tmp = ft_nsplit(arg, '=', 2);
+		var = name_without_plus(tmp[0]);
+		tmp2 = var;
+		var = ft_strjoin_char(tmp2, '=');
+		free(tmp[0]);
+		free(tmp2);
+	}
+	else
+		var = name_without_plus(arg);
+	if (tmp != NULL && tmp[1])
 	{
 		var = ft_strjoin(var, tmp[1]);
 		free(tmp[1]);
+		free(tmp);
 	}
-	free(tmp);
 	if (n == 1)
 		*env = ft_env_lstnew(var, NULL);
 	if (n == 2)
 		ft_env_addback(*env, ft_env_lstnew(var, NULL));
 	free(var);
-	free(tmp2);
 }
 
 int	export_cmd(char **args, t_data *data)
@@ -107,6 +114,8 @@ int	export_cmd(char **args, t_data *data)
 	{
 		if (args[i] && !check_export_arg(args[i]))
 		{
+			if (!check_value(args[i]))
+				continue ;
 			if (!data->env)
 			{
 				if (!check_add_value(args[i]))

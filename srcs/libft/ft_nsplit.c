@@ -6,7 +6,7 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 16:52:38 by lleveque          #+#    #+#             */
-/*   Updated: 2022/04/06 15:33:29 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/13 17:14:25 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ char	**split_copy(char *s, char **strs, char c, int n)
 
 	i = 0;
 	j = 0;
-	while (s[i] && j < n)
+	while (j < n)
 	{
 		if (j == n - 1)
 			strs[j] = malloc(sizeof(char) * (malloc_size(s, i, 0) + 1));

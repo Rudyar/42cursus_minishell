@@ -6,7 +6,7 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:05:20 by lleveque          #+#    #+#             */
-/*   Updated: 2022/04/06 19:39:58 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/13 17:02:22 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ t_env	*ft_env_lstnew(char *content, t_env *prev)
 	new->prev = prev;
 	while (content[i] && content[i] != '=')
 		i++;
-	if (!content[i + 1])
+	printf("Content = %s\n", content);
+	if (!content[i] || !content[i + 1])
 		new->var = var_without_value(content);
 	else
 		new->var = ft_nsplit(content, '=', 2);
