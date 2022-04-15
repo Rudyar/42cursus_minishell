@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:02:20 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/15 15:38:54 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/15 16:25:02 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,7 @@ t_cmd	*parse_cmd(t_data *data, t_token **tokens, int size, t_cmd *new)
 		}
 		i++;
 	}
-	fill_cmd_data(new, i);
-	return (new);
+	return (fill_cmd_data(new, i));
 }
 
 t_cmd	*create_cmd_lst(t_data *data, t_token **tokens)

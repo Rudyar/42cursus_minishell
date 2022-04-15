@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 12:05:27 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/15 15:24:11 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/15 16:16:36 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	is_word(t_token_type type)
 	return (0);
 }
 
-void	fill_cmd_data(t_cmd *cmd, int i)
+t_cmd	*fill_cmd_data(t_cmd *cmd, int i)
 {
 	cmd->cmd[i] = NULL;
 	cmd->bin_path = NULL;
@@ -30,6 +30,7 @@ void	fill_cmd_data(t_cmd *cmd, int i)
 	cmd->fork = 0;
 	cmd->pipe[0] = 0;
 	cmd->pipe[1] = 0;
+	return (cmd);
 }
 
 t_cmd	*cmd_lst_last(t_cmd *lst)

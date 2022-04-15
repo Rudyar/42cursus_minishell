@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:19:49 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/15 15:19:13 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/15 16:05:55 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ void	print_lst(t_cmd *lst)
 		printf("---------\n");
 		while (lst->cmd[i] != NULL)
 		{
+			if (lst->is_builtin && i == 0)
+				printf("Builtin : ");
 			printf("%s\n", lst->cmd[i]);
 			i++;
 		}
