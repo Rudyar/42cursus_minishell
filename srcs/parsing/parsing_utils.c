@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 17:41:53 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/15 15:25:54 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/15 16:33:23 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	find_cmd_length(t_token *lst)
 	return (i);
 }
 
-static char	*trim_line(char *s)
+static char	*trim_line(char *s, t_data *data)
 {
 	int				i;
 	int				j;
@@ -68,16 +68,14 @@ static char	*trim_line(char *s)
 	while (ft_is_whitespace(s[j]) && j > i)
 		j--;
 	size = j - i;
-	ret = malloc(sizeof(char) * (size + 2));
-	if (!ret)
-		return (NULL);
+	ret = ft_malloc(sizeof(char) * (size + 2), data);
 	while (i <= j)
 		ret[k++] = s[i++];
 	ret[k] = '\0';
 	return (ret);
 }
 
-char	*check_line(char *s)
+char	*check_line(char *s, t_data *data)
 {
 	int		i;
 	int		j;
@@ -90,7 +88,7 @@ char	*check_line(char *s)
 		j++;
 	if (j == i)
 		return (NULL);
-	dst = trim_line(s);
-	free(s);
+	dst = trim_line(s, data);
+	ft_free(s, data);
 	return (dst);
 }

@@ -6,7 +6,7 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 10:15:19 by arudy             #+#    #+#             */
-/*   Updated: 2022/03/22 12:45:59 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/15 11:25:42 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static size_t	malloc_size(char const *s, unsigned int start, size_t len)
 	return (size);
 }
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr(char const *s, unsigned int start, size_t len, t_data *data)
 {
 	size_t	i;
 	size_t	size;
@@ -37,9 +37,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		return (NULL);
 	i = 0;
 	size = malloc_size(s, start, len);
-	dst = malloc(sizeof(char) * (size + 1));
-	if (!dst)
-		return (NULL);
+	dst = ft_malloc(sizeof(char) * (size + 1), data);
 	while (i < size && s[start])
 		dst[i++] = s[start++];
 	dst[i] = '\0';

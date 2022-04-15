@@ -6,13 +6,13 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 19:03:17 by lleveque          #+#    #+#             */
-/*   Updated: 2022/04/13 16:34:31 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/15 11:23:53 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
 
-char	*name_without_plus(char *s)
+char	*name_without_plus(char *s, t_data *data)
 {
 	int		i;
 	char	*dest;
@@ -20,9 +20,7 @@ char	*name_without_plus(char *s)
 	i = 0;
 	if (!s)
 		return (NULL);
-	dest = malloc(sizeof(char) * ft_strlen(s));
-	if (!dest)
-		return (NULL);
+	dest = ft_malloc(sizeof(char) * ft_strlen(s), data);
 	while (s[i] && s[i] != '+')
 	{
 		dest[i] = s[i];

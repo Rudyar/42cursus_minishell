@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 14:17:58 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/12 17:56:27 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/15 14:35:51 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ typedef struct s_cmd		t_cmd;
 typedef struct s_data		t_data;
 typedef struct s_env		t_env;
 typedef struct s_token		t_token;
+typedef struct s_garbage	t_garbage;
 
 typedef enum e_token_type
 {
@@ -43,14 +44,22 @@ struct	s_history
 	struct s_history	*next;
 };
 
+struct	s_garbage
+{
+	struct s_garbage	*prev;
+	void				*ptr;
+	struct s_garbage	*next;
+};
+
+
 struct	s_cmd
 {
-	char			**cmd;
-	char			*bin_path;
 	int				is_builtin;
 	int				in;
 	int				out;
 	int				pipe[2];
+	char			*bin_path;
+	char			**cmd;
 	pid_t			fork;
 	struct s_cmd	*next;
 	struct s_cmd	*prev;
@@ -58,13 +67,14 @@ struct	s_cmd
 
 struct	s_data
 {
-	t_history	*history;
-	t_env		*env;
-	char		**env_char;
-	t_cmd		*cmd_lst;
-	t_token		*tokens;
 	int			nb_cmd;
 	char		*current_path;
+	char		**env_char;
+	t_env		*env;
+	t_cmd		*cmd_lst;
+	t_token		*tokens;
+	t_history	*history;
+	t_garbage	*garbage;
 };
 
 struct	s_env
@@ -76,10 +86,10 @@ struct	s_env
 
 struct	s_token
 {
+	struct s_token	*prev;
 	char			*content;
 	t_token_type	type;
 	struct s_token	*next;
-	struct s_token	*prev;
 };
 
 #endif

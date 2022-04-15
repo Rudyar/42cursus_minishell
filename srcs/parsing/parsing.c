@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:02:20 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/15 16:25:02 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/15 16:35:12 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,22 +78,28 @@ t_cmd	*create_cmd_lst(t_data *data, t_token **tokens)
 	return (head);
 }
 
+int	parsing_return(char *line, t_data *data)
+{
+	ft_free(line, data);
+	return (1);
+}
+
 int	parsing(char *line, t_data *data)
 {
 	if (first_check(line))
-		return (parsing_return(line));
-	line = check_line(line);
+		return (parsing_return(line, data));
+	line = check_line(line, data);
 	if (!line)
 		return (1);
-	if (lexer(line, &data->tokens))
-		return (parsing_return(line));
-	if (scan_tokens(data, data->tokens))
-		return (parsing_return(line));
-	data->cmd_lst = create_cmd_lst(data, &data->tokens);
-	if (!data->cmd_lst)
-		return (parsing_return(line));
-	// check_builtins(data->cmd_lst);
-	// create_bin_path(data, data->cmd_lst);
-	free(line);
+	if (lexer(line, &tokens_lst, data))
+		return (parsing_return(line, data));
+	data->tokens = scan_tokens(data, tokens_lst);
+	if (!data->tokens)
+	{
+		free_token_lst(&tokens_lst, data);
+		return (parsing_return(line, data));
+	}
+	free_token_lst(&tokens_lst, data);
+	ft_free(line, data);
 	return (0);
 }

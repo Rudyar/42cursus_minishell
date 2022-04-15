@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 16:36:45 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/14 14:38:42 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/15 16:35:19 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static char	*exit_dollar_status(char *s)
 	return (dst);
 }
 
-static char	*copy_dollar(char *s, int *i)
+static char	*copy_dollar(char *s, int *i, t_data *data)
 {
 	int		j;
 	int		len;
@@ -35,9 +35,7 @@ static char	*copy_dollar(char *s, int *i)
 		len++;
 		(*i)++;
 	}
-	dst = malloc(sizeof(char) * (len + 2));
-	if (!dst)
-		return (NULL);
+	dst = ft_malloc(sizeof(char) * (len + 2), data);
 	dst[0] = '$';
 	while (j++ < len)
 		dst[j] = '$';
@@ -60,7 +58,7 @@ static char	*get_env_var(t_data *data, char *s, int *i)
 	while (check_next_char_dollar(s, i))
 	{
 		if (s[*i] != '{' && s[*i] != '}')
-			tmp = ft_strjoin_char(tmp, s[*i]);
+			tmp = ft_strjoin_char(tmp, s[*i], data);
 		if (s[*i] == '}')
 		{
 			(*i)++;
@@ -70,8 +68,8 @@ static char	*get_env_var(t_data *data, char *s, int *i)
 	}
 	env = ft_getenv(data->env, tmp);
 	if (env)
-		dst = ft_strdup(env);
-	free(tmp);
+		dst = ft_strdup(env, data);
+	ft_free(tmp, data);
 	return (dst);
 }
 
@@ -90,14 +88,14 @@ static char	*find_dollar_value(t_data *data, char *s, int i)
 					|| !s[i + 1]))
 				tmp = (exit_dollar_status(s));
 			else if (!s[i] || (s[i] && (s[i] == '$' || s[i] == ' ')))
-				tmp = copy_dollar(s, &i);
+				tmp = copy_dollar(s, &i, data);
 			else
 				tmp = get_env_var(data, s, &i);
-			dst = join_tmp(dst, tmp);
+			dst = join_tmp(dst, tmp, data);
 			continue ;
 		}
 		if (s[i])
-			dst = ft_strjoin_char(dst, s[i++]);
+			dst = ft_strjoin_char(dst, s[i++], data);
 	}
 	if (i == 0)
 		return (s);

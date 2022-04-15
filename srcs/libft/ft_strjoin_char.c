@@ -6,25 +6,23 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 15:23:42 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/14 14:21:12 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/15 16:33:18 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-static char	*first_char(char c)
+static char	*first_char(char c, t_data *data)
 {
 	char	*s;
 
-	s = malloc(sizeof(char) * 2);
-	if (!s)
-		return (NULL);
+	s = ft_malloc(sizeof(char) * 2, data);
 	s[0] = c;
 	s[1] = '\0';
 	return (s);
 }
 
-char	*ft_strjoin_char(char *s, char c)
+char	*ft_strjoin_char(char *s, char c, t_data *data)
 {
 	int		i;
 	char	*dst;
@@ -33,10 +31,8 @@ char	*ft_strjoin_char(char *s, char c)
 	if (!c)
 		return (NULL);
 	if (!s)
-		return (first_char(c));
-	dst = malloc(sizeof(char) * (ft_strlen(s) + 2));
-	if (!dst)
-		return (NULL);
+		return (first_char(c, data));
+	dst = ft_malloc(sizeof(char) * (ft_strlen(s) + 2), data);
 	while (s[i])
 	{
 		dst[i] = s[i];
@@ -45,6 +41,6 @@ char	*ft_strjoin_char(char *s, char c)
 	dst[i] = c;
 	i++;
 	dst[i] = '\0';
-	free(s);
+	ft_free(s, data);
 	return (dst);
 }

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   find_bin_path.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 16:23:25 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/06 16:41:11 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/15 09:59:34 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-static char	**add_cmd_error(int n, char **path)
+static char	**add_cmd_error(int n, char **path, t_data *data)
 {
 	if (n == 1)
 	{
@@ -21,7 +21,7 @@ static char	**add_cmd_error(int n, char **path)
 	}
 	if (n == 2)
 		ft_putstr_fd("Join problem in add_cmd\n", 2);
-	free_strs(path);
+	free_strs(path, data);
 	return (NULL);
 }
 
@@ -31,17 +31,17 @@ static char	**add_cmd(t_data *data, char *cmd)
 	char	**path;
 
 	i = 0;
-	path = ft_split(ft_getenv(data->env, "PATH"), ':');
+	path = ft_split(ft_getenv(data->env, "PATH"), ':', data);
 	if (!path)
-		return (add_cmd_error(1, path));
+		return (add_cmd_error(1, path, data));
 	while (path[i])
 	{
-		path[i] = ft_strjoin(path[i], "/");
+		path[i] = ft_strjoin(path[i], "/", data);
 		if (!path[i])
-			return (add_cmd_error(2, path));
-		path[i] = ft_strjoin(path[i], cmd);
+			return (add_cmd_error(2, path, data));
+		path[i] = ft_strjoin(path[i], cmd, data);
 		if (!path[i])
-			return (add_cmd_error(2, path));
+			return (add_cmd_error(2, path, data));
 		i++;
 	}
 	return (path);
@@ -60,15 +60,15 @@ static int	find_bin_path(t_data *data, t_cmd *lst)
 	{
 		if (access(path[i], F_OK) == 0)
 		{
-			lst->bin_path = ft_strdup(path[i]);
-			free_strs(path);
+			lst->bin_path = ft_strdup(path[i], data);
+			free_strs(path, data);
 			return (0);
 		}
 		i++;
 	}
 	ft_putstr_fd(lst->cmd[0], 2);
 	ft_putstr_fd(": command not found\n", 2);
-	free_strs(path);
+	free_strs(path, data);
 	return (1);
 }
 
@@ -77,7 +77,7 @@ void	create_bin_path(t_data *data, t_cmd *lst)
 	while (lst)
 	{
 		if (access(lst->cmd[0], F_OK) == 0)
-			lst->bin_path = ft_strdup(lst->cmd[0]);
+			lst->bin_path = ft_strdup(lst->cmd[0], data);
 		else
 			find_bin_path(data, lst);
 		lst = lst->next;
