@@ -6,7 +6,7 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 14:17:58 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/15 14:35:51 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/15 22:54:21 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ struct	s_garbage
 	void				*ptr;
 	struct s_garbage	*next;
 };
-
 
 struct	s_cmd
 {

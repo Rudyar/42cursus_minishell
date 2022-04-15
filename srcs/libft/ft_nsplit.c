@@ -6,13 +6,13 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 16:52:38 by lleveque          #+#    #+#             */
-/*   Updated: 2022/04/15 11:54:22 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/15 22:32:43 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-static size_t	malloc_size(char const *s, size_t i, char c)
+static size_t	mall_size(char const *s, size_t i, char c)
 {
 	size_t	size;
 
@@ -60,9 +60,9 @@ char	**ft_nsplit(char *s, char c, int n, t_data *data)
 	while (j < n)
 	{
 		if (j == n - 1)
-			strs[j] = ft_malloc(sizeof(char) * (malloc_size(s, i, 0) + 1), data);
+			strs[j] = ft_malloc(sizeof(char) * (mall_size(s, i, 0) + 1), data);
 		else
-			strs[j] = ft_malloc(sizeof(char) * (malloc_size(s, i, c) + 1), data);
+			strs[j] = ft_malloc(sizeof(char) * (mall_size(s, i, c) + 1), data);
 		if (j == n - 1)
 			i = mine_substr(s, i, strs[j], 0);
 		else

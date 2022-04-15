@@ -6,7 +6,7 @@
 #    By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/21 17:19:21 by arudy             #+#    #+#              #
-#    Updated: 2022/04/15 16:22:14 by lleveque         ###   ########.fr        #
+#    Updated: 2022/04/15 22:50:45 by lleveque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,8 +14,8 @@ SRCS = ${SRCS_MAIN} ${SRCS_UTILS} ${SRCS_PARSING} ${SRCS_LEXER} ${SRCS_LIBFT} ${
 
 SRCS_MAIN = $(addprefix srcs/, main.c)
 
-SRCS_UTILS = $(addprefix srcs/utils/, ft_free.c init.c error.c env.c\
-				free_strs.c ft_malloc.c)
+SRCS_UTILS = $(addprefix srcs/utils/, free/ft_free.c init.c error.c env.c\
+				free_strs.c ft_malloc.c free/utils.c)
 
 SRCS_PARSING = $(addprefix srcs/parsing/, first_check.c \
 				first_check_redir.c parsing.c parsing_utils.c \
@@ -41,7 +41,7 @@ NAME = minishell
 
 CC = clang
 
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -fsanitize=address
 
 RM = rm -f
 

@@ -6,7 +6,7 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 18:22:42 by lleveque          #+#    #+#             */
-/*   Updated: 2022/04/15 15:53:34 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/16 00:30:16 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,26 +44,23 @@ t_env	*init_env(char **envp, t_data *data)
 t_data	*init_data(char **envp)
 {
 	t_data	*data;
-	(void)envp;
+
 	data = malloc(sizeof(t_data));
 	if (!data)
 	{
 		ft_putstr_fd("minishell: can't malloc data\n", 2);
 		exit(EXIT_FAILURE);
 	}
-	data->garbage = malloc(24);
+	data->garbage = malloc(sizeof(t_garbage));
 	if (!data->garbage)
 	{
 		ft_putstr_fd("minishell: can't malloc data\n", 2);
 		free(data);
 		exit(EXIT_FAILURE);
 	}
-	data->garbage->prev = NULL;
 	data->garbage->ptr = NULL;
-	data->garbage->next = NULL;
 	data->env = init_env(envp, data);
-	if (data->env)
-		data->env_char = dup_env(data->env, data);
+	data->env_char = dup_env(data->env, data);
 	data->cmd_lst = NULL;
 	data->current_path = NULL;
 	data->history = NULL;

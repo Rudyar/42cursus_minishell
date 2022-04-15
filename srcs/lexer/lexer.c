@@ -6,7 +6,7 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 19:25:20 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/15 11:24:37 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/15 23:01:39 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ t_token	*copy_tokens(t_token **lst, t_token_type type, int n, t_data *data)
 	return (new);
 }
 
-void	manage_whitespaces(t_token **lst, t_token **prev, t_token **head, t_data *data)
+void	manage_whitespaces(t_token **lst, t_token **prev, t_token **head, \
+t_data *data)
 {
 	t_token	*new;
 
