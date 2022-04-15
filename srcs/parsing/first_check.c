@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 10:35:41 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/06 15:09:29 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/15 14:01:46 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ near unexpected token `|'\n", 2), 1);
 	j = (*i);
 	while (ft_is_whitespace(s[j]))
 		j++;
-	if (n > 1 || s[j] == '\0')
+	if (n > 1 || s[j] == '\0' || s[j] == '|')
 		return (ft_putstr_fd("minishell: syntax error \
 near unexpected token `|'\n", 2), 1);
 	return (0);

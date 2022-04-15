@@ -6,39 +6,42 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:02:20 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/15 12:27:32 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/15 15:38:54 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+void	concat_words(t_data *data, t_token **tokens, char **new)
+{
+	(void)data;
+	*new = ft_strdup((*tokens)->content);
+	if (*tokens)
+		*tokens = (*tokens)->next;
+	while (*tokens && is_word((*tokens)->type))
+	{
+		*new = ft_strjoin(*new, (*tokens)->content);
+		if (*tokens)
+			*tokens = (*tokens)->next;
+	}
+}
 
 t_cmd	*parse_cmd(t_data *data, t_token **tokens, int size, t_cmd *new)
 {
 	int	i;
 
 	i = 0;
-	(void)data;
 	new->cmd = malloc(sizeof(char *) * (size + 1));
 	if (!new->cmd)
 		return (NULL);
 	while (*tokens && i < size)
 	{
 		if (*tokens && is_word((*tokens)->type))
-		{
-			new->cmd[i] = ft_strdup((*tokens)->content);
-			if (*tokens)
-				*tokens = (*tokens)->next;
-			while (*tokens && is_word((*tokens)->type))
-			{
-				new->cmd[i] = ft_strjoin(new->cmd[i], (*tokens)->content);
-				if (*tokens)
-				*tokens = (*tokens)->next;
-			}
-		}
+			concat_words(data, tokens, &new->cmd[i]);
 		while (*tokens && !is_word((*tokens)->type))
 		{
 			if ((*tokens)->type != WHITE_SPACE)
-				is_redir(tokens);
+				redir(tokens);
 			*tokens = (*tokens)->next;
 		}
 		i++;
@@ -61,7 +64,6 @@ t_cmd	*create_cmd_lst(t_data *data, t_token **tokens)
 	while (*tokens)
 	{
 		size = find_cmd_length(*tokens);
-		printf("SIZE : %d\n", size);
 		new = malloc(sizeof(t_cmd));
 		if (!new)
 			return (NULL);
@@ -70,19 +72,11 @@ t_cmd	*create_cmd_lst(t_data *data, t_token **tokens)
 			return (NULL);
 		cmd_lst_addback(&head, new, prev);
 		prev = new;
-		if (*tokens && (*tokens)->type == PIPE)
-			is_pipe(tokens);
-		if (*tokens)
+		while (*tokens && (*tokens)->type == WHITE_SPACE)
 			*tokens = (*tokens)->next;
 	}
 	*tokens = head_tokens;
 	return (head);
-}
-
-int	parsing_return(char *line)
-{
-	free(line);
-	return (1);
 }
 
 int	parsing(char *line, t_data *data)

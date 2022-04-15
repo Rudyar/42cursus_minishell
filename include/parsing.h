@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:22:46 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/15 12:20:51 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/15 15:26:15 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,18 @@ int		check_tokens(t_data *data);
 int		find_cmd_length(t_token *lst);
 int		is_word(t_token_type type);
 int		scan_dollar(t_data *data, t_token *lst);
+int		scan_tokens(t_data *data, t_token *lst);
+int		parsing_return(char *line);
 void	check_builtins(t_cmd *lst);
 void	create_bin_path(t_data *data, t_cmd *lst);
 void	cmd_lst_addback(t_cmd **head, t_cmd *new, t_cmd *prev);
 void	fill_cmd_data(t_cmd *cmd, int i);
-void	is_pipe(t_token **tokens);
-void	is_redir(t_token **tokens);
+void	redir(t_token **tokens);
 char	*check_line(char *s);
 char	*ft_getenv(t_env *env, char *s);
 char	*join_tmp(char *s1, char *s2);
 int		check_next_char_dollar(char *s, int *i);
 char	*get_env_var_return(int *i);
 t_cmd	*cmd_lst_last(t_cmd *lst);
-int		scan_tokens(t_data *data, t_token *lst);
 
 #endif

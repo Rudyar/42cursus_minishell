@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:19:49 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/15 10:24:02 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/15 15:19:13 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@
 // 		// printf("--- %s\n", data->env_char[i]);
 // 	// pwd_cmd();
 // 	// env_cmd(data);
-// 	printf("===================================================================================\n");
+// 	printf("==============================================================\n");
 // 	export_cmd(av, data);
 // 	// unset_cmd(av, data);
 // 	// echo_cmd(av);
-// 	printf("===================================================================================\n");
+// 	printf("==============================================================\n");
 // 	env_cmd(data);
 // 	// for (int i = 0; data->env_char[i]; i++)
 // 		// printf("--- %s\n", data->env_char[i]);
@@ -55,6 +55,33 @@ void	print_lst(t_cmd *lst)
 	}
 }
 
+// int	main(int ac, char **av, char **envp)
+// {
+// 	char	*line;
+// 	t_data	*data;
+
+// 	(void)av;
+// 	(void)ac;
+// 	data = init_data(envp);
+// 	while (1)
+// 	{
+// 		line = readline("Minishell : ");
+// 		if (*line)
+// 		{
+// 			if (parsing(line, data) == 0)
+// 			{
+// 				// execve(data->cmd_lst->bin_path, data->cmd_lst->cmd, envp);
+// 				// print_token_lst(data->tokens);
+// 				printf("\n\n\n\n");
+// 				print_lst(data->cmd_lst);
+// 				printf("\n\n\n\n");
+// 				free_lst(data);
+// 			}
+// 		}
+// 	}
+// 	ft_free(data);
+// 	return (0);
+// }
 
 int	main(int ac, char **av, char **envp)
 {
@@ -64,45 +91,15 @@ int	main(int ac, char **av, char **envp)
 	(void)av;
 	(void)ac;
 	data = init_data(envp);
-	while (1)
+	line = readline("Minishell : ");
+	if (*line)
 	{
-		line = readline("Minishell : ");
-		if (*line)
+		if (parsing(line, data) == 0)
 		{
-			if (parsing(line, data) == 0)
-			{
-				// execve(data->cmd_lst->bin_path, data->cmd_lst->cmd, envp);
-				// print_token_lst(data->tokens);
-				printf("\n\n\n\n");
-				print_lst(data->cmd_lst);
-				printf("\n\n\n\n");
-				free_lst(data);
-			}
+			print_lst(data->cmd_lst);
+			free_lst(data);
 		}
 	}
 	ft_free(data);
 	return (0);
 }
-
-// int	main(int ac, char **av, char **envp)
-// {
-// 	char	*line;
-// 	t_data	*data;
-
-// 	(void)av;
-// 	(void)ac;
-// 	data = init_data(envp);
-// 	line = readline("Minishell : ");
-// 	if (*line)
-// 	{
-// 		if (parsing(line, data) == 0)
-// 		{
-// 			// execve(data->cmd_lst->bin_path, data->cmd_lst->cmd, envp);
-// 			// print_token_lst(data->tokens);
-// 			print_lst(data->cmd_lst);
-// 			free_lst(data);
-// 		}
-// 	}
-// 	ft_free(data);
-// 	return (0);
-// }

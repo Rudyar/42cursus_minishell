@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 12:05:27 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/15 12:20:19 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/15 15:24:11 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,12 @@ t_cmd	*cmd_lst_last(t_cmd *lst)
 	return (lst);
 }
 
-void	is_pipe(t_token **tokens)
+void	redir(t_token **tokens)
 {
-	printf("Ceci est un pipe %s\n", (*tokens)->content);
-	*tokens = (*tokens)->next;
-}
-
-void	is_redir(t_token **tokens)
-{
-	printf("Ceci est une redir %s\n", (*tokens)->content);
+	if ((*tokens)->type == PIPE)
+		printf("Ceci est un pipe %s\n", (*tokens)->content);
+	else
+		printf("Ceci est une redir %s\n", (*tokens)->content);
 }
 
 void	cmd_lst_addback(t_cmd **head, t_cmd *new, t_cmd *prev)

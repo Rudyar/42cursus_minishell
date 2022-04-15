@@ -6,11 +6,17 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 17:41:53 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/15 10:34:14 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/15 15:25:54 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+int	parsing_return(char *line)
+{
+	free(line);
+	return (1);
+}
 
 char	*ft_getenv(t_env *env, char *s)
 {
@@ -38,7 +44,7 @@ int	find_cmd_length(t_token *lst)
 				lst = lst->next;
 			i++;
 		}
-		if (lst)
+		if (lst && lst->type != PIPE)
 			lst = lst->next;
 	}
 	return (i);
