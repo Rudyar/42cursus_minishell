@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_malloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 15:09:12 by lleveque          #+#    #+#             */
-/*   Updated: 2022/04/15 16:28:56 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/15 16:45:06 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	*ft_malloc(size_t size, t_data *data)
 	if (!ptr)
 	{
 		ft_free_garbage(data->garbage);
-		printf("error");
+		printf("malloc error\n");
 		exit(1);
 	}
 	if (data->garbage->ptr)

@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:22:46 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/15 16:32:41 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/15 16:50:38 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int		find_cmd_length(t_token *lst);
 int		is_word(t_token_type type);
 int		scan_dollar(t_data *data, t_token *lst);
 int		scan_tokens(t_data *data, t_token *lst);
-int		parsing_return(char *line);
+int		parsing_return(char *line, t_data *data);
 void	check_builtins(t_cmd *lst);
 void	create_bin_path(t_data *data, t_cmd *lst);
 void	cmd_lst_addback(t_cmd **head, t_cmd *new, t_cmd *prev);

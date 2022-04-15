@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:19:49 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/15 16:31:36 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/15 16:36:42 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,26 +16,26 @@
 // {
 // 	t_data	*data;
 
-	(void)av;
-	(void)ac;
-	(void)envp;
-	data = init_data(envp);
-	// pwd_cmd();
-	printf("===================================================================================\n");
-	// export_cmd(av, data);
-	unset_cmd(av, data);
-	// echo_cmd(av);
-	printf("===================================================================================\n");
-	env_cmd(data);
-	// for (int i = 0; data->env_char[i]; i++)
-		// printf("--- %s\n", data->env_char[i]);
-	free_all(data);
-	return (0);
-}
+// 	(void)av;
+// 	(void)ac;
+// 	(void)envp;
+// 	data = init_data(envp);
+// 	// pwd_cmd();
+// 	printf("===================================================================================\n");
+// 	// export_cmd(av, data);
+// 	unset_cmd(av, data);
+// 	// echo_cmd(av);
+// 	printf("===================================================================================\n");
+// 	env_cmd(data);
+// 	// for (int i = 0; data->env_char[i]; i++)
+// 		// printf("--- %s\n", data->env_char[i]);
+// 	free_all(data);
+// 	return (0);
+// }
 
-// void	print_lst(t_cmd *lst)
-// {
-// 	int	i;
+void	print_lst(t_cmd *lst)
+{
+	int	i;
 
 	while (lst)
 	{
@@ -100,6 +100,6 @@ int	main(int ac, char **av, char **envp)
 			free_lst(data);
 		}
 	}
-	ft_free(data);
+	free_all(data);
 	return (0);
 }

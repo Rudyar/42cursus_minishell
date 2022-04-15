@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:02:20 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/15 16:35:12 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/15 16:50:21 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 void	concat_words(t_data *data, t_token **tokens, char **new)
 {
 	(void)data;
-	*new = ft_strdup((*tokens)->content);
+	*new = ft_strdup((*tokens)->content, data);
 	if (*tokens)
 		*tokens = (*tokens)->next;
 	while (*tokens && is_word((*tokens)->type))
 	{
-		*new = ft_strjoin(*new, (*tokens)->content);
+		*new = ft_strjoin(*new, (*tokens)->content, data);
 		if (*tokens)
 			*tokens = (*tokens)->next;
 	}
@@ -31,9 +31,7 @@ t_cmd	*parse_cmd(t_data *data, t_token **tokens, int size, t_cmd *new)
 	int	i;
 
 	i = 0;
-	new->cmd = malloc(sizeof(char *) * (size + 1));
-	if (!new->cmd)
-		return (NULL);
+	new->cmd = ft_malloc(sizeof(char *) * (size + 1), data);
 	while (*tokens && i < size)
 	{
 		if (*tokens && is_word((*tokens)->type))
@@ -63,9 +61,7 @@ t_cmd	*create_cmd_lst(t_data *data, t_token **tokens)
 	while (*tokens)
 	{
 		size = find_cmd_length(*tokens);
-		new = malloc(sizeof(t_cmd));
-		if (!new)
-			return (NULL);
+		new = ft_malloc(sizeof(t_cmd), data);
 		new = parse_cmd(data, tokens, size, new);
 		if (!new)
 			return (NULL);
@@ -78,12 +74,6 @@ t_cmd	*create_cmd_lst(t_data *data, t_token **tokens)
 	return (head);
 }
 
-int	parsing_return(char *line, t_data *data)
-{
-	ft_free(line, data);
-	return (1);
-}
-
 int	parsing(char *line, t_data *data)
 {
 	if (first_check(line))
@@ -91,15 +81,12 @@ int	parsing(char *line, t_data *data)
 	line = check_line(line, data);
 	if (!line)
 		return (1);
-	if (lexer(line, &tokens_lst, data))
+	if (lexer(line, &data->tokens, data))
 		return (parsing_return(line, data));
-	data->tokens = scan_tokens(data, tokens_lst);
-	if (!data->tokens)
-	{
-		free_token_lst(&tokens_lst, data);
+	if (scan_tokens(data, data->tokens))
 		return (parsing_return(line, data));
-	}
-	free_token_lst(&tokens_lst, data);
-	ft_free(line, data);
+	data->cmd_lst = create_cmd_lst(data, &data->tokens);
+	if (!data->cmd_lst)
+		return (parsing_return(line, data));
 	return (0);
 }

@@ -6,15 +6,15 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 17:41:53 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/15 16:33:23 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/15 16:55:07 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-int	parsing_return(char *line)
+int	parsing_return(char *line, t_data *data)
 {
-	free(line);
+	ft_free(line, data);
 	return (1);
 }
 
@@ -89,6 +89,6 @@ char	*check_line(char *s, t_data *data)
 	if (j == i)
 		return (NULL);
 	dst = trim_line(s, data);
-	ft_free(s, data);
+	// ft_free(s, data);
 	return (dst);
 }
