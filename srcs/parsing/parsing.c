@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:02:20 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/14 10:17:32 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/15 11:26:31 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,7 @@
 // 	int	i;
 
 // 	i = 0;
-// 	new->cmd = malloc(sizeof(char *) * (size + 1));
-// 	if (!new->cmd)
-// 		return (NULL);
+// 	new->cmd = ft_malloc(sizeof(char *) * (size + 1));
 // 	while (*tokens && i < size)
 // 	{
 // 		if ((*tokens)->type == WORD)
@@ -51,9 +49,7 @@
 // 	while (*tokens)
 // 	{
 // 		size = find_cmd_length(*tokens);
-// 		new = malloc(sizeof(t_cmd));
-// 		if (!new)
-// 			return (NULL);
+// 		new = ft_malloc(sizeof(t_cmd));
 // 		new = parse_cmd(data, tokens, size, new);
 // 		if (!new)
 // 			return (NULL);
@@ -66,9 +62,9 @@
 // 	return (head);
 // }
 
-int	parsing_return(char *line)
+int	parsing_return(char *line, t_data *data)
 {
-	free(line);
+	ft_free(line, data);
 	return (1);
 }
 
@@ -78,20 +74,20 @@ int	parsing(char *line, t_data *data)
 
 	tokens_lst = NULL;
 	if (first_check(line))
-		return (parsing_return(line));
-	line = check_line(line);
+		return (parsing_return(line, data));
+	line = check_line(line, data);
 	if (!line)
 		return (1);
-	if (lexer(line, &tokens_lst))
-		return (parsing_return(line));
+	if (lexer(line, &tokens_lst, data))
+		return (parsing_return(line, data));
 	data->tokens = scan_tokens(data, tokens_lst);
 	if (!data->tokens)
 	{
-		free_token_lst(&tokens_lst);
-		return (parsing_return(line));
+		free_token_lst(&tokens_lst, data);
+		return (parsing_return(line, data));
 	}
-	free_token_lst(&tokens_lst);
-	free(line);
+	free_token_lst(&tokens_lst, data);
+	ft_free(line, data);
 	return (0);
 }
 

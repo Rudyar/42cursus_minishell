@@ -6,24 +6,24 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:37:01 by lleveque          #+#    #+#             */
-/*   Updated: 2022/04/12 16:12:24 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/15 11:24:18 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	free_env_lst(t_env *env)
+void	free_env_lst(t_env *env, t_data *data)
 {
 	int		i;
 
 	i = 0;
 	while (env->var[i])
 	{
-		free(env->var[i]);
+		ft_free(env->var[i], data);
 		i++;
 	}
-	free(env->var);
-	free(env);
+	ft_free(env->var, data);
+	ft_free(env, data);
 }
 
 int	check_unset_arg(char *arg)
@@ -45,7 +45,7 @@ int	check_unset_arg(char *arg)
 	return (0);
 }
 
-t_env	*unset_env_var(t_env *env, char *arg)
+t_env	*unset_env_var(t_env *env, char *arg, t_data *data)
 {
 	t_env	*tmp;
 
@@ -70,7 +70,7 @@ t_env	*unset_env_var(t_env *env, char *arg)
 			}
 			if (env->next)
 				env = env->next;
-			free_env_lst(tmp);
+			free_env_lst(tmp, data);
 			break ;
 		}
 		else if (env->next)
@@ -98,10 +98,10 @@ int	unset_cmd(char **args, t_data *data)
 		if (!args[i])
 			break ;
 		if (data->env)
-			data->env = unset_env_var(data->env, args[i]);
+			data->env = unset_env_var(data->env, args[i], data);
 		i++;
 	}
-	free_strs(data->env_char);
-	data->env_char = dup_env(data->env);
+	free_strs(data->env_char, data);
+	data->env_char = dup_env(data->env, data);
 	return (0);
 }

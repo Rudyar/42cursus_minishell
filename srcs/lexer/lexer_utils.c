@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 18:49:07 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/07 15:27:25 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/15 11:24:32 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,16 @@ void	token_lst_addback(t_token **head, t_token *new)
 	}
 }
 
-void	free_token_lst(t_token **lst)
+void	free_token_lst(t_token **lst, t_data *data)
 {
 	t_token	*tmp;
 
 	while (*lst)
 	{
 		tmp = *lst;
-		free(tmp->content);
+		ft_free(tmp->content, data);
 		*lst = (*lst)->next;
-		free(tmp);
+		ft_free(tmp, data);
 	}
 }
 

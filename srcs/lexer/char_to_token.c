@@ -3,33 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   char_to_token.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 18:36:57 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/07 14:56:16 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/15 11:24:26 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-static t_token	*char_to_token_error(t_token **lst)
+static t_token	*char_to_token_error(t_token **lst, t_data *data)
 {
 	if (*lst != NULL)
-		free_token_lst(lst);
+		free_token_lst(lst, data);
 	printf("Can't create new token when reading line\n");
 	return (NULL);
 }
 
-static t_token	*create_token(char c, t_token_type token_type, t_token *prev)
+static t_token	*create_token(char c, t_token_type token_type, t_token *prev, \
+t_data *data)
 {
 	t_token	*new;
 
-	new = malloc(sizeof(t_token));
-	if (!new)
-		return (NULL);
-	new->content = malloc(sizeof(char) * 2);
-	if (!new->content)
-		return (NULL);
+	new = ft_malloc(sizeof(t_token), data);
+	new->content = ft_malloc(sizeof(char) * 2, data);
 	new->content[0] = c;
 	new->content[1] = '\0';
 	new->type = token_type;
@@ -38,28 +35,28 @@ static t_token	*create_token(char c, t_token_type token_type, t_token *prev)
 	return (new);
 }
 
-static t_token	*token_type(char c, t_token *prev)
+static t_token	*token_type(char c, t_token *prev, t_data *data)
 {
 	if (c == DQUOTE)
-		return (create_token(c, DQUOTE, prev));
+		return (create_token(c, DQUOTE, prev, data));
 	else if (c == QUOTE)
-		return (create_token(c, QUOTE, prev));
+		return (create_token(c, QUOTE, prev, data));
 	else if (c == REDIR_IN)
-		return (create_token(c, REDIR_IN, prev));
+		return (create_token(c, REDIR_IN, prev, data));
 	else if (c == REDIR_OUT)
-		return (create_token(c, REDIR_OUT, prev));
+		return (create_token(c, REDIR_OUT, prev, data));
 	else if (c == PIPE)
-		return (create_token(c, PIPE, prev));
+		return (create_token(c, PIPE, prev, data));
 	else if (c == DOLLAR)
-		return (create_token(c, DOLLAR, prev));
+		return (create_token(c, DOLLAR, prev, data));
 	else if (ft_is_whitespace(c))
-		return (create_token(c, WHITE_SPACE, prev));
+		return (create_token(c, WHITE_SPACE, prev, data));
 	else
-		return (create_token(c, LETTER, prev));
+		return (create_token(c, LETTER, prev, data));
 	return (NULL);
 }
 
-t_token	*char_to_token(char *s)
+t_token	*char_to_token(char *s, t_data *data)
 {
 	t_token	*head;
 	t_token	*new;
@@ -70,15 +67,15 @@ t_token	*char_to_token(char *s)
 	while (s[i] && ft_is_whitespace(s[i]))
 		i++;
 	prev = NULL;
-	new = token_type(s[i], prev);
+	new = token_type(s[i], prev, data);
 	head = new;
 	i++;
 	while (s[i])
 	{
 		prev = new;
-		new = token_type(s[i], prev);
+		new = token_type(s[i], prev, data);
 		if (!new)
-			return (char_to_token_error(&head));
+			return (char_to_token_error(&head, data));
 		token_lst_addback(&head, new);
 		i++;
 	}

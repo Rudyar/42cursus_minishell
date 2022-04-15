@@ -6,24 +6,11 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 10:36:35 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/06 15:33:39 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/15 11:25:05 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
-static void	ft_free_split(char **strs)
-{
-	int	i;
-
-	i = 0;
-	while (strs[i])
-	{
-		free(strs[i]);
-		i++;
-	}
-	free(strs);
-}
 
 static size_t	count_word(char const *s, char c)
 {
@@ -77,7 +64,7 @@ static size_t	mine_substr(char const *s, size_t i, char *strs, char c)
 	return (i);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char c, t_data *data)
 {
 	char		**strs;
 	size_t		i;
@@ -87,17 +74,10 @@ char	**ft_split(char const *s, char c)
 	j = 0;
 	if (!s)
 		return (NULL);
-	strs = malloc(sizeof(char *) * (count_word(s, c) + 1));
-	if (!strs)
-		return (NULL);
+	strs = ft_malloc(sizeof(char *) * (count_word(s, c) + 1), data);
 	while (s[i] && j < count_word(s, c))
 	{
-		strs[j] = malloc(sizeof(char) * (malloc_size(s, i, c) + 1));
-		if (!strs[j])
-		{
-			ft_free_split(strs);
-			return (NULL);
-		}
+		strs[j] = ft_malloc(sizeof(char) * (malloc_size(s, i, c) + 1), data);
 		i = mine_substr(s, i, strs[j], c);
 		j++;
 	}

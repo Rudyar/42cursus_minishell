@@ -6,13 +6,13 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 15:28:09 by lleveque          #+#    #+#             */
-/*   Updated: 2022/04/06 15:31:10 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/15 11:25:12 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-char	*ft_strcdup(char *s, char c)
+char	*ft_strcdup(char *s, char c, t_data *data)
 {
 	size_t	i;
 	size_t	size;
@@ -22,9 +22,7 @@ char	*ft_strcdup(char *s, char c)
 	size = 0;
 	while (s && s[size] && s[size] != c)
 		size++;
-	dest = malloc(sizeof(char) * (size + 1));
-	if (!dest)
-		return (NULL);
+	dest = ft_malloc(sizeof(char) * (size + 1), data);
 	while (s && s[i] && s[i] != c)
 	{
 		dest[i] = s[i];

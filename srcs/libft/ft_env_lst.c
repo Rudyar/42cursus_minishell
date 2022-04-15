@@ -6,39 +6,36 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:05:20 by lleveque          #+#    #+#             */
-/*   Updated: 2022/04/13 17:02:22 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/15 15:05:39 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-char	**var_without_value(char *content)
+char	**var_without_value(char *content, t_data *data)
 {
 	char	**var;
 
-	var = malloc(sizeof(char *) * 2);
-	var[0] = ft_strcdup(content, '=');
+	var = ft_malloc(sizeof(char *) * 2, data);
+	var[0] = ft_strcdup(content, '=', data);
 	var[1] = NULL;
 	return (var);
 }
 
-t_env	*ft_env_lstnew(char *content, t_env *prev)
+t_env	*ft_env_lstnew(char *content, t_env *prev, t_data *data)
 {
 	int		i;
 	t_env	*new;
 
 	i = 0;
-	new = malloc(sizeof(*new));
-	if (!new)
-		return (NULL);
+	new = ft_malloc(sizeof(*new), data);
 	new->prev = prev;
 	while (content[i] && content[i] != '=')
 		i++;
-	printf("Content = %s\n", content);
 	if (!content[i] || !content[i + 1])
-		new->var = var_without_value(content);
+		new->var = var_without_value(content, data);
 	else
-		new->var = ft_nsplit(content, '=', 2);
+		new->var = ft_nsplit(content, '=', 2, data);
 	new->next = NULL;
 	return (new);
 }
