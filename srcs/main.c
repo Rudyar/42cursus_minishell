@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:19:49 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/14 17:36:30 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/15 10:24:02 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,9 @@ int	main(int ac, char **av, char **envp)
 			{
 				// execve(data->cmd_lst->bin_path, data->cmd_lst->cmd, envp);
 				// print_token_lst(data->tokens);
+				printf("\n\n\n\n");
 				print_lst(data->cmd_lst);
+				printf("\n\n\n\n");
 				free_lst(data);
 			}
 		}

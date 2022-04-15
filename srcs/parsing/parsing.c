@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:02:20 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/14 18:10:49 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/15 12:27:32 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,31 +17,33 @@ t_cmd	*parse_cmd(t_data *data, t_token **tokens, int size, t_cmd *new)
 	int	i;
 
 	i = 0;
+	(void)data;
 	new->cmd = malloc(sizeof(char *) * (size + 1));
 	if (!new->cmd)
 		return (NULL);
-	while (*tokens && (*tokens)->type != PIPE)
+	while (*tokens && i < size)
 	{
 		if (*tokens && is_word((*tokens)->type))
 		{
 			new->cmd[i] = ft_strdup((*tokens)->content);
-			*tokens = (*tokens)->next;
+			if (*tokens)
+				*tokens = (*tokens)->next;
 			while (*tokens && is_word((*tokens)->type))
 			{
 				new->cmd[i] = ft_strjoin(new->cmd[i], (*tokens)->content);
+				if (*tokens)
 				*tokens = (*tokens)->next;
 			}
 		}
-		while (*tokens && ((*tokens)->type == HERE_DOC
-			|| (*tokens)->type == DGREATER || (*tokens)->type == REDIR_IN
-			|| (*tokens)->type == REDIR_OUT || (*tokens)->type == WHITE_SPACE))
+		while (*tokens && !is_word((*tokens)->type))
+		{
+			if ((*tokens)->type != WHITE_SPACE)
+				is_redir(tokens);
 			*tokens = (*tokens)->next;
+		}
 		i++;
 	}
 	fill_cmd_data(new, i);
-	(void)data;
-	if (*tokens)
-		printf("yoyoyo : %s\n", (*tokens)->content);
 	return (new);
 }
 
@@ -59,6 +61,7 @@ t_cmd	*create_cmd_lst(t_data *data, t_token **tokens)
 	while (*tokens)
 	{
 		size = find_cmd_length(*tokens);
+		printf("SIZE : %d\n", size);
 		new = malloc(sizeof(t_cmd));
 		if (!new)
 			return (NULL);
@@ -67,6 +70,8 @@ t_cmd	*create_cmd_lst(t_data *data, t_token **tokens)
 			return (NULL);
 		cmd_lst_addback(&head, new, prev);
 		prev = new;
+		if (*tokens && (*tokens)->type == PIPE)
+			is_pipe(tokens);
 		if (*tokens)
 			*tokens = (*tokens)->next;
 	}
