@@ -6,11 +6,13 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:19:49 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/15 23:37:37 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/18 17:02:28 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+int	g_exit_status;
 
 int	main(int ac, char **av, char **envp)
 {
@@ -22,11 +24,12 @@ int	main(int ac, char **av, char **envp)
 	data = init_data(envp);
 	// pwd_cmd();
 	printf("===================================================================================\n");
-	export_cmd(av, data);
+	// export_cmd(av, data);
+	exit_cmd(av);
 	// unset_cmd(av, data);
 	// echo_cmd(av);
 	printf("===================================================================================\n");
-	env_cmd(data);
+	// env_cmd(data);
 	// for (int i = 0; data->env_char[i]; i++)
 		// printf("--- %s\n", data->env_char[i]);
 	free_all(data);
