@@ -6,24 +6,11 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 19:47:16 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/18 15:02:38 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/18 17:16:37 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
-static int	is_redir_sign(t_token_type token)
-{
-	if (token == HERE_DOC)
-		return (1);
-	if (token == DGREATER)
-		return (1);
-	if (token == REDIR_IN)
-		return (1);
-	if (token == REDIR_OUT)
-		return (1);
-	return (0);
-}
 
 static int	scan_redir(t_token *lst)
 {

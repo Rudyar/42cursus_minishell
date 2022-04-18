@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_manager.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 18:10:51 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/15 23:02:44 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/18 17:39:57 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,6 @@ t_data *data)
 			*lst = (*lst)->next;
 		new = copy_tokens(lst, IN_QUOTE, find_next_quote(*lst, QUOTE), data);
 	}
-	if (!new)
-		return ;
 	new->prev = *prev;
 	token_lst_addback(head, new);
 	*prev = new;
@@ -60,8 +58,6 @@ t_data *data)
 
 	new = NULL;
 	new = copy_tokens(lst, WORD, count_letters(*lst), data);
-	if (!new)
-		return ;
 	new->prev = *prev;
 	token_lst_addback(head, new);
 	*prev = new;
@@ -89,8 +85,6 @@ t_data *data)
 		else
 			new = copy_tokens(lst, REDIR_OUT, 1, data);
 	}
-	if (!new)
-		return ;
 	new->prev = *prev;
 	token_lst_addback(head, new);
 	*prev = new;
@@ -118,8 +112,6 @@ t_data *data)
 	}
 	else
 		new = copy_tokens(lst, (*lst)->type, 1, data);
-	if (!new)
-		return ;
 	new->prev = *prev;
 	token_lst_addback(head, new);
 	*prev = new;

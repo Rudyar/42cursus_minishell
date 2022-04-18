@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 14:49:49 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/18 16:14:17 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/18 17:26:14 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,16 @@ static t_token	*create_data_token(t_token **lst, t_token *new, t_data *data)
 {
 	new->content = ft_strdup((*lst)->content, data);
 	new->type = (*lst)->type;
+	new->next = NULL;
 	*lst = (*lst)->next;
+	if (!is_word(new->type))
+		return (new);
 	while (*lst && is_word((*lst)->type))
 	{
 		new->content = ft_strjoin(new->content, (*lst)->content, data);
 		*lst = (*lst)->next;
 		new->type = WORD;
 	}
-	new->next = NULL;
 	return (new);
 }
 

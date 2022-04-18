@@ -6,14 +6,14 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 18:28:26 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/18 14:14:52 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/18 17:41:47 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEXER_H
 # define LEXER_H
 
-int		lexer(char *s, t_token **tokens_lst, t_data *data);
+void	lexer(char *s, t_token **tokens_lst, t_data *data);
 t_token	*char_to_token(char *s, t_data *data);
 t_token	*token_lst_last(t_token *lst);
 t_token	*copy_tokens(t_token **lst, t_token_type type, int n, t_data *data);

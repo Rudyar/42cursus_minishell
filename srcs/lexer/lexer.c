@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 19:25:20 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/18 15:24:34 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/18 17:41:35 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,25 +72,13 @@ static t_token	*concat_tokens(t_token **lst, t_data *data)
 	return (head);
 }
 
-int	lexer(char *s, t_token **tokens_lst, t_data *data)
+void	lexer(char *s, t_token **tokens_lst, t_data *data)
 {
 	t_token	*char_token;
 	t_token	*tmp;
 
 	char_token = char_to_token(s, data);
-	if (!char_token)
-	{
-		ft_putstr_fd("Can't create token from line\n", 2);
-		return (1);
-	}
 	tmp = char_token;
 	*tokens_lst = concat_tokens(&char_token, data);
-	if (!tokens_lst)
-	{
-		ft_putstr_fd("Can't create tokens from token\n", 2);
-		free_token_lst(&tmp, data);
-		return (1);
-	}
 	free_token_lst(&tmp, data);
-	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 16:36:45 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/15 16:35:19 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/18 17:29:11 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static char	*copy_dollar(char *s, int *i, t_data *data)
 	while (j++ < len)
 		dst[j] = '$';
 	dst[j] = '\0';
-	free(s);
+	ft_free(s, data);
 	return (dst);
 }
 
@@ -99,7 +99,7 @@ static char	*find_dollar_value(t_data *data, char *s, int i)
 	}
 	if (i == 0)
 		return (s);
-	return (free(s), dst);
+	return (ft_free(s, data), dst);
 }
 
 int	scan_dollar(t_data *data, t_token *lst)
@@ -113,6 +113,5 @@ int	scan_dollar(t_data *data, t_token *lst)
 			lst->content = find_dollar_value(data, lst->content, i);
 		lst = lst->next;
 	}
-	(void)data;
 	return (0);
 }

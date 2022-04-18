@@ -6,18 +6,11 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 17:41:53 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/18 16:20:58 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/18 17:54:00 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
-int	parsing_return(char *line, t_data *data)
-{
-	(void)data;
-	free(line);
-	return (1);
-}
 
 char	*ft_getenv(t_env *env, char *s)
 {
@@ -32,24 +25,24 @@ char	*ft_getenv(t_env *env, char *s)
 	return (NULL);
 }
 
-int	find_cmd_length(t_token *lst)
-{
-	int	i;
+// int	find_cmd_length(t_token *lst)
+// {
+// 	int	i;
 
-	i = 0;
-	while (lst && lst->type != PIPE)
-	{
-		if (lst && is_word(lst->type))
-		{
-			while (lst && is_word(lst->type))
-				lst = lst->next;
-			i++;
-		}
-		if (lst && lst->type != PIPE)
-			lst = lst->next;
-	}
-	return (i);
-}
+// 	i = 0;
+// 	while (lst && lst->type != PIPE)
+// 	{
+// 		if (lst && is_word(lst->type))
+// 		{
+// 			while (lst && is_word(lst->type))
+// 				lst = lst->next;
+// 			i++;
+// 		}
+// 		if (lst && lst->type != PIPE)
+// 			lst = lst->next;
+// 	}
+// 	return (i);
+// }
 
 static char	*trim_line(char *s, t_data *data)
 {
@@ -88,7 +81,11 @@ char	*check_line(char *s, t_data *data)
 	while (ft_is_whitespace(s[j]))
 		j++;
 	if (j == i)
+	{
+		free(s);
 		return (NULL);
+	}
 	dst = trim_line(s, data);
+	free(s);
 	return (dst);
 }
