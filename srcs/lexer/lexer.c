@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 19:25:20 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/18 14:15:31 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/18 15:24:34 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ t_data *data)
 	t_token	*new;
 
 	new = copy_tokens(lst, WHITE_SPACE, 1, data);
-	if (!new)
-		return ;
 	new->prev = *prev;
 	token_lst_addback(head, new);
 	*prev = new;

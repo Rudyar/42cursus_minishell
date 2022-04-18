@@ -3,22 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   char_to_token.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 18:36:57 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/15 11:24:26 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/18 15:59:01 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
-static t_token	*char_to_token_error(t_token **lst, t_data *data)
-{
-	if (*lst != NULL)
-		free_token_lst(lst, data);
-	printf("Can't create new token when reading line\n");
-	return (NULL);
-}
 
 static t_token	*create_token(char c, t_token_type token_type, t_token *prev, \
 t_data *data)
@@ -74,8 +66,6 @@ t_token	*char_to_token(char *s, t_data *data)
 	{
 		prev = new;
 		new = token_type(s[i], prev, data);
-		if (!new)
-			return (char_to_token_error(&head, data));
 		token_lst_addback(&head, new);
 		i++;
 	}

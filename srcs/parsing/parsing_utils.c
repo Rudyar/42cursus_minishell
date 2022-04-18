@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 17:41:53 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/18 14:36:27 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/18 16:20:58 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int	parsing_return(char *line, t_data *data)
 {
-	ft_free(line, data);
+	(void)data;
+	free(line);
 	return (1);
 }
 

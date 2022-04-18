@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:19:49 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/18 14:15:28 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/18 16:14:14 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,34 +55,6 @@ void	print_lst(t_cmd *lst)
 	}
 }
 
-// int	main(int ac, char **av, char **envp)
-// {
-// 	char	*line;
-// 	t_data	*data;
-
-// 	(void)av;
-// 	(void)ac;
-// 	data = init_data(envp);
-// 	while (1)
-// 	{
-// 		line = readline("Minishell : ");
-// 		if (*line)
-// 		{
-// 			if (parsing(line, data) == 0)
-// 			{
-// 				// execve(data->cmd_lst->bin_path, data->cmd_lst->cmd, envp);
-// 				// print_token_lst(data->tokens);
-// 				printf("\n\n\n\n");
-// 				print_lst(data->cmd_lst);
-// 				printf("\n\n\n\n");
-// 				free_lst(data);
-// 			}
-// 		}
-// 	}
-// 	ft_free(data);
-// 	return (0);
-// }
-
 int	main(int ac, char **av, char **envp)
 {
 	char	*line;
@@ -91,15 +63,39 @@ int	main(int ac, char **av, char **envp)
 	(void)av;
 	(void)ac;
 	data = init_data(envp);
-	line = readline("Minishell : ");
-	if (*line)
+	while (1)
 	{
-		if (parsing(line, data) == 0)
+		line = readline("Minishell : ");
+		if (*line)
 		{
-			print_lst(data->cmd_lst);
-			free_lst(data);
+			if (parsing(line, data) == 0)
+			{
+				print_token_lst(data->tokens);
+				free_lst(data);
+			}
 		}
 	}
 	free_all(data);
 	return (0);
 }
+
+// int	main(int ac, char **av, char **envp)
+// {
+// 	char	*line;
+// 	t_data	*data;
+
+// 	(void)av;
+// 	(void)ac;
+// 	data = init_data(envp);
+// 	line = readline("Minishell : ");
+// 	if (*line)
+// 	{
+// 		if (parsing(line, data) == 0)
+// 		{
+// 			// print_lst(data->cmd_lst);
+// 			free_lst(data);
+// 		}
+// 	}
+// 	free_all(data);
+// 	return (0);
+// }

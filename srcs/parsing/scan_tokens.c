@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 19:47:16 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/14 14:10:50 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/18 15:02:38 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,6 @@ int	scan_tokens(t_data *data, t_token *lst)
 		return (1);
 	if (scan_dollar(data, lst))
 		return (1);
+	data->tokens = del_whitespaces(&lst, data);
 	return (0);
 }

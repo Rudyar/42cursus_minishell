@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:02:20 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/18 14:35:35 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/18 16:21:41 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,6 @@ t_cmd	*create_cmd_lst(t_data *data, t_token **tokens)
 		size = find_cmd_length(*tokens);
 		new = ft_malloc(sizeof(t_cmd), data);
 		new = parse_cmd(data, tokens, size, new);
-		if (!new)
-			return (NULL);
 		cmd_lst_addback(&head, new, prev);
 		prev = new;
 		while (*tokens && (*tokens)->type == WHITE_SPACE)
@@ -76,17 +74,18 @@ t_cmd	*create_cmd_lst(t_data *data, t_token **tokens)
 
 int	parsing(char *line, t_data *data)
 {
+	t_token	*tokens_lst;
+
+	tokens_lst = NULL;
 	if (first_check(line))
 		return (parsing_return(line, data));
 	line = check_line(line, data);
 	if (!line)
 		return (1);
-	if (lexer(line, &data->tokens, data))
+	if (lexer(line, &tokens_lst, data))
 		return (parsing_return(line, data));
-	if (scan_tokens(data, data->tokens))
+	if (scan_tokens(data, tokens_lst))
 		return (parsing_return(line, data));
-	data->cmd_lst = create_cmd_lst(data, &data->tokens);
-	if (!data->cmd_lst)
-		return (parsing_return(line, data));
+	ft_free(tokens_lst, data);
 	return (0);
 }
