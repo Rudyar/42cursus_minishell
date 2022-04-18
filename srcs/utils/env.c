@@ -6,7 +6,7 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 15:54:28 by lleveque          #+#    #+#             */
-/*   Updated: 2022/04/15 11:26:51 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/16 00:30:07 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ char	**dup_env(t_env *env, t_data *data)
 	char	*tmp2;
 
 	i = 0;
+	if (!env)
+		return (NULL);
 	dest = ft_malloc(sizeof(char *) * (ft_lstsize(env) + 1), data);
 	while (env)
 	{

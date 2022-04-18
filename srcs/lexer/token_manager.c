@@ -6,7 +6,7 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 18:10:51 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/14 17:15:44 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/15 23:02:44 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ static int	find_next_quote(t_token *lst, t_token_type type)
 	return (i);
 }
 
-void	manage_quotes(t_token **lst, t_token **prev, t_token **head, t_data *data)
+void	manage_quotes(t_token **lst, t_token **prev, t_token **head, \
+t_data *data)
 {
 	t_token	*new;
 
@@ -52,7 +53,8 @@ void	manage_quotes(t_token **lst, t_token **prev, t_token **head, t_data *data)
 	*prev = new;
 }
 
-void	manage_letters(t_token **lst, t_token **prev, t_token **head, t_data *data)
+void	manage_letters(t_token **lst, t_token **prev, t_token **head, \
+t_data *data)
 {
 	t_token	*new;
 
@@ -67,7 +69,8 @@ void	manage_letters(t_token **lst, t_token **prev, t_token **head, t_data *data)
 		*lst = (*lst)->prev;
 }
 
-void	manage_redir(t_token **lst, t_token **prev, t_token **head, t_data *data)
+void	manage_redir(t_token **lst, t_token **prev, t_token **head, \
+t_data *data)
 {
 	t_token	*new;
 
@@ -94,7 +97,8 @@ void	manage_redir(t_token **lst, t_token **prev, t_token **head, t_data *data)
 	*lst = (*lst)->prev;
 }
 
-void	manage_else(t_token **lst, t_token **prev, t_token **head, t_data *data)
+void	manage_else(t_token **lst, t_token **prev, t_token **head, \
+t_data *data)
 {
 	int		i;
 	t_token	*new;

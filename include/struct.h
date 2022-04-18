@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 14:17:58 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/15 14:35:51 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/18 14:25:44 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,9 @@ typedef enum e_token_type
 	DOLLAR = '$',
 	WHITE_SPACE = 10,
 	IN_DQUOTE = 11,
-	IN_QUOTE = 12
+	IN_QUOTE = 12,
+	CMD = 13,
+	ARG = 14
 }	t_token_type;
 
 struct	s_history
@@ -50,7 +52,6 @@ struct	s_garbage
 	void				*ptr;
 	struct s_garbage	*next;
 };
-
 
 struct	s_cmd
 {

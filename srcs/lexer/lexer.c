@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 19:25:20 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/15 16:33:11 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/18 14:15:31 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ t_token	*copy_tokens(t_token **lst, t_token_type type, int n, t_data *data)
 	return (new);
 }
 
-void	manage_whitespaces(t_token **lst, t_token **prev, t_token **head, t_data *data)
+void	manage_whitespaces(t_token **lst, t_token **prev, t_token **head, \
+t_data *data)
 {
 	t_token	*new;
 

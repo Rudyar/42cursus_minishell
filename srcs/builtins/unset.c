@@ -6,7 +6,7 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:37:01 by lleveque          #+#    #+#             */
-/*   Updated: 2022/04/15 11:24:18 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/15 23:19:53 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,32 +45,38 @@ int	check_unset_arg(char *arg)
 	return (0);
 }
 
-t_env	*unset_env_var(t_env *env, char *arg, t_data *data)
+t_env	*get_free(t_env *env, t_data *data)
 {
 	t_env	*tmp;
 
+	tmp = env;
+	if (!env->prev)
+		env->next->prev = NULL;
+	else if (!env->next)
+	{
+		env->prev->next = NULL;
+		env = env->prev;
+	}
+	if (env->prev && env->next)
+	{
+		env->prev->next = env->next;
+		env->next->prev = env->prev;
+	}
+	if (env->next)
+		env = env->next;
+	free_env_lst(tmp, data);
+	return (env);
+}
+
+t_env	*unset_env_var(t_env *env, char *arg, t_data *data)
+{
 	while (env)
 	{
 		if (env->var[0] && !ft_strcmp(env->var[0], arg))
 		{
-			tmp = env;
 			if (!env->prev && !env->next)
 				return (NULL);
-			if (!env->prev)
-				env->next->prev = NULL;
-			else if (!env->next)
-			{
-				env->prev->next = NULL;
-				env = env->prev;
-			}
-			if (env->prev && env->next)
-			{
-				env->prev->next = env->next;
-				env->next->prev = env->prev;
-			}
-			if (env->next)
-				env = env->next;
-			free_env_lst(tmp, data);
+			env = get_free(env, data);
 			break ;
 		}
 		else if (env->next)

@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 15:09:12 by lleveque          #+#    #+#             */
-/*   Updated: 2022/04/15 16:45:06 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/18 14:15:34 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,10 @@ void	*ft_malloc(size_t size, t_data *data)
 	if (data->garbage->ptr)
 		ft_garb_addback(data, ft_garb_lstnew(ptr, data));
 	else
+	{
+		data->garbage->prev = NULL;
 		data->garbage->ptr = ptr;
+		data->garbage->next = NULL;
+	}
 	return (ptr);
 }
