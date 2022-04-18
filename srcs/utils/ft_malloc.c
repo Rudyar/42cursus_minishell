@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_malloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 15:09:12 by lleveque          #+#    #+#             */
-/*   Updated: 2022/04/18 14:15:34 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/18 17:55:16 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ t_garbage	*ft_garb_lstnew(void *ptr, t_data *data)
 	new = malloc(sizeof(*new));
 	if (!new)
 	{
-		ft_free_garbage(data->garbage);
-		printf("error");
+		free_all(data);
+		printf("minishell: malloc error: terminal killed\n");
 		exit(1);
 	}
 	new->prev = NULL;
@@ -46,8 +46,8 @@ void	*ft_malloc(size_t size, t_data *data)
 	ptr = malloc(size);
 	if (!ptr)
 	{
-		ft_free_garbage(data->garbage);
-		printf("malloc error\n");
+		free_all(data);
+		printf("minishell: malloc error: terminal killed\n");
 		exit(1);
 	}
 	if (data->garbage->ptr)

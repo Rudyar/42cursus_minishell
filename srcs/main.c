@@ -6,11 +6,13 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:19:49 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/18 17:07:14 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/18 18:08:06 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+int	g_exit_status;
 
 // int	main(int ac, char **av, char **envp)
 // {
@@ -22,38 +24,39 @@
 // 	data = init_data(envp);
 // 	// pwd_cmd();
 // 	printf("===================================================================================\n");
-// 	export_cmd(av, data);
+// 	// export_cmd(av, data);
+// 	exit_cmd(av);
 // 	// unset_cmd(av, data);
 // 	// echo_cmd(av);
 // 	printf("===================================================================================\n");
-// 	env_cmd(data);
+// 	// env_cmd(data);
 // 	// for (int i = 0; data->env_char[i]; i++)
 // 		// printf("--- %s\n", data->env_char[i]);
 // 	free_all(data);
 // 	return (0);
 // }
 
-void	print_lst(t_cmd *lst)
-{
-	int	i;
+// void	print_lst(t_cmd *lst)
+// {
+// 	int	i;
 
-	while (lst)
-	{
-		i = 0;
-		printf("---------\n");
-		while (lst->cmd[i] != NULL)
-		{
-			if (lst->is_builtin && i == 0)
-				printf("Builtin : ");
-			printf("%s\n", lst->cmd[i]);
-			i++;
-		}
-		printf("---------\n");
-		if (lst->next == NULL)
-			break ;
-		lst = lst->next;
-	}
-}
+// 	while (lst)
+// 	{
+// 		i = 0;
+// 		printf("---------\n");
+// 		while (lst->cmd[i] != NULL)
+// 		{
+// 			if (lst->is_builtin && i == 0)
+// 				printf("Builtin : ");
+// 			printf("%s\n", lst->cmd[i]);
+// 			i++;
+// 		}
+// 		printf("---------\n");
+// 		if (lst->next == NULL)
+// 			break ;
+// 		lst = lst->next;
+// 	}
+// }
 
 // int	main(int ac, char **av, char **envp)
 // {
