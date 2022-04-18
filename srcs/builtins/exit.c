@@ -6,13 +6,13 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 14:44:05 by lleveque          #+#    #+#             */
-/*   Updated: 2022/04/18 17:49:00 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/18 17:57:17 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-extern int g_exit_status;
+extern int	g_exit_status;
 
 int	get_len(char *arg)
 {
@@ -113,4 +113,3 @@ int	exit_cmd(char **args)
 	else
 		exit(ft_atoll(args[1]));
 }
-

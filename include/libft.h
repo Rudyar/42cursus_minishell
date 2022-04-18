@@ -6,7 +6,7 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:22:46 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/18 16:24:35 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/18 17:56:24 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ char		*ft_strjoin(char *s1, char *s2, t_data *data);
 char		**ft_split(char const *s, char c, t_data *data);
 char		*ft_strjoin_char(char *s, char c, t_data *data);
 char		**ft_nsplit(char *s, char c, int n, t_data *data);
-char		*ft_substr(char const *s, unsigned int start, size_t len, t_data *data);
+char		*ft_substr(char const *s, unsigned int start, size_t len, \
+t_data *data);
 t_env		*ft_env_lstnew(char *content, t_env *prev, t_data *data);
 size_t		ft_strlen(const char *str);
 long long	ft_atoll(char *n);
