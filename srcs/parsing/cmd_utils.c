@@ -6,13 +6,21 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 12:05:27 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/05 16:34:59 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/15 16:16:36 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	fill_cmd_data(t_cmd *cmd, int i)
+int	is_word(t_token_type type)
+{
+	if (type == WORD || type == DOLLAR
+		|| type == IN_DQUOTE || type == IN_QUOTE)
+		return (1);
+	return (0);
+}
+
+t_cmd	*fill_cmd_data(t_cmd *cmd, int i)
 {
 	cmd->cmd[i] = NULL;
 	cmd->bin_path = NULL;
@@ -22,6 +30,7 @@ void	fill_cmd_data(t_cmd *cmd, int i)
 	cmd->fork = 0;
 	cmd->pipe[0] = 0;
 	cmd->pipe[1] = 0;
+	return (cmd);
 }
 
 t_cmd	*cmd_lst_last(t_cmd *lst)
@@ -29,6 +38,14 @@ t_cmd	*cmd_lst_last(t_cmd *lst)
 	while (lst->next != NULL)
 		lst = lst->next;
 	return (lst);
+}
+
+void	redir(t_token **tokens)
+{
+	if ((*tokens)->type == PIPE)
+		printf("Ceci est un pipe %s\n", (*tokens)->content);
+	else
+		printf("Ceci est une redir %s\n", (*tokens)->content);
 }
 
 void	cmd_lst_addback(t_cmd **head, t_cmd *new, t_cmd *prev)

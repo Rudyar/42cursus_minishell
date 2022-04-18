@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scan_dollar.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 16:36:45 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/15 11:26:41 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/15 16:35:19 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ static char	*copy_dollar(char *s, int *i, t_data *data)
 	while (j++ < len)
 		dst[j] = '$';
 	dst[j] = '\0';
+	free(s);
 	return (dst);
 }
 
@@ -80,7 +81,7 @@ static char	*find_dollar_value(t_data *data, char *s, int i)
 	dst = NULL;
 	while (s[i])
 	{
-		if (s[i] == '$')
+		if (s[i] && s[i] == '$')
 		{
 			i++;
 			if (s[i] && s[i] == '?' && ((s[i + 1] && s[i + 1] == ' ')
@@ -98,7 +99,7 @@ static char	*find_dollar_value(t_data *data, char *s, int i)
 	}
 	if (i == 0)
 		return (s);
-	return (dst);
+	return (free(s), dst);
 }
 
 int	scan_dollar(t_data *data, t_token *lst)

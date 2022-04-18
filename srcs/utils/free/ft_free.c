@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 18:57:22 by lleveque          #+#    #+#             */
-/*   Updated: 2022/04/16 00:34:49 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/18 14:15:49 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void	ft_free(void *ptr, t_data *data)
 
 void	free_lst(t_data *data)
 {
-	(void)data;
 	free_token_lst(&data->tokens, data);
 	free_cmd_lst(&data->cmd_lst, data);
 }

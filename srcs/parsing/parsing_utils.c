@@ -3,14 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 17:41:53 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/15 11:25:54 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/18 14:36:27 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+int	parsing_return(char *line, t_data *data)
+{
+	ft_free(line, data);
+	return (1);
+}
 
 char	*ft_getenv(t_env *env, char *s)
 {
@@ -32,8 +38,14 @@ int	find_cmd_length(t_token *lst)
 	i = 0;
 	while (lst && lst->type != PIPE)
 	{
-		i++;
-		lst = lst->next;
+		if (lst && is_word(lst->type))
+		{
+			while (lst && is_word(lst->type))
+				lst = lst->next;
+			i++;
+		}
+		if (lst && lst->type != PIPE)
+			lst = lst->next;
 	}
 	return (i);
 }
@@ -77,6 +89,5 @@ char	*check_line(char *s, t_data *data)
 	if (j == i)
 		return (NULL);
 	dst = trim_line(s, data);
-	ft_free(s, data);
 	return (dst);
 }
