@@ -6,7 +6,7 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:19:49 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/19 17:11:50 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/19 17:13:57 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int	g_exit_status;
 // int	main(int ac, char **av, char **envp)
 // {
 // 	t_data	*data;
-
 // 	(void)av;
 // 	(void)ac;
 // 	(void)envp;
