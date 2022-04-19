@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:19:49 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/19 14:25:17 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/19 14:48:21 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int	g_exit_status;
 // int	main(int ac, char **av, char **envp)
 // {
 // 	t_data	*data;
-
 // 	(void)av;
 // 	(void)ac;
 // 	(void)envp;
@@ -25,11 +24,11 @@ int	g_exit_status;
 // 	// pwd_cmd();
 // 	printf("===================================================================================\n");
 // 	// export_cmd(av, data);
-// 	exit_cmd(av);
+// 	cd_cmd(av, data);
 // 	// unset_cmd(av, data);
 // 	// echo_cmd(av);
 // 	printf("===================================================================================\n");
-// 	// env_cmd(data);
+// 	env_cmd(data);
 // 	// for (int i = 0; data->env_char[i]; i++)
 // 		// printf("--- %s\n", data->env_char[i]);
 // 	free_all(data);
@@ -58,30 +57,30 @@ int	g_exit_status;
 // 	}
 // }
 
-int	main(int ac, char **av, char **envp)
-{
-	char	*line;
-	t_data	*data;
+// int	main(int ac, char **av, char **envp)
+// {
+// 	char	*line;
+// 	t_data	*data;
 
-	(void)av;
-	(void)ac;
-	data = init_data(envp);
-	while (1)
-	{
-		line = readline("Minishell : ");
-		if (*line)
-		{
-			add_history(line);
-			if (parsing(line, data) == 0)
-			{
-				print_token_lst(data->tokens);
-				free_lst(data);
-			}
-		}
-	}
-	free_all(data);
-	return (0);
-}
+// 	(void)av;
+// 	(void)ac;
+// 	data = init_data(envp);
+// 	while (1)
+// 	{
+// 		line = readline("Minishell : ");
+// 		if (*line)
+// 		{
+// 			add_history(line);
+// 			if (parsing(line, data) == 0)
+// 			{
+// 				print_token_lst(data->tokens);
+// 				free_lst(data);
+// 			}
+// 		}
+// 	}
+// 	free_all(data);
+// 	return (0);
+// }
 
 // int	main(int ac, char **av, char **envp)
 // {

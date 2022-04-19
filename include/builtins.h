@@ -6,7 +6,7 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:22:46 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/18 16:41:04 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/19 13:40:32 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@
 # include "struct.h"
 
 int		pwd_cmd(void);
-int		cd_cmd(char **args);
 int		echo_cmd(char **args);
 int		exit_cmd(char **args);
 int		env_cmd(t_data *data);
 int		check_value(char *arg);
 int		check_add_value(char *arg);
 int		check_export_arg(char *arg);
+int		cd_cmd(char **args, t_data *data);
 int		unset_cmd(char **args, t_data *data);
 int		export_cmd(char **args, t_data *data);
 int		check_exist(char *arg, t_env *env, t_data *data);
