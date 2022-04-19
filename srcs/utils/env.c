@@ -6,11 +6,28 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 15:54:28 by lleveque          #+#    #+#             */
-/*   Updated: 2022/04/16 00:30:07 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/19 16:47:04 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+void	set_env(t_env *env, t_data *data, char *var, char *value)
+{
+	while (env)
+	{
+		if (env->var && !ft_strcmp(env->var[0], var))
+		{
+			if (env->var[1])
+				ft_free(env->var[1], data);
+			if (value)
+				env->var[1] = value;
+			else
+				env->var[1] = NULL;
+		}
+		env = env->next;
+	}
+}
 
 char	**dup_env(t_env *env, t_data *data)
 {

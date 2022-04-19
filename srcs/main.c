@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:19:49 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/19 17:21:52 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/19 17:39:09 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,12 +93,13 @@ int	main(int ac, char **av, char **envp)
 // 	line = readline("Minishell : ");
 // 	if (*line)
 // 	{
-		// add_history(line);
-// 		if (parsing(line, data) == 0)
-// 		{
-// 			print_token_lst(data->tokens);
-// 			free_lst(data);
-// 		}
+// 		// add_history(line);
+// 		cd_cmd()
+// 		// if (parsing(line, data) == 0)
+// 		// {
+// 			// print_token_lst(data->tokens);
+// 			// free_lst(data);
+// 		// }
 // 	}
 // 	free_all(data);
 // 	return (0);
