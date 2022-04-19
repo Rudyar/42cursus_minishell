@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 22:47:18 by lleveque          #+#    #+#             */
-/*   Updated: 2022/04/18 17:07:53 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/19 11:08:01 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ void	free_cmd_lst(t_cmd **lst, t_data *data)
 			ft_free(tmp->cmd[i], data);
 			i++;
 		}
-		// ft_free(tmp->bin_path, data);
 		ft_free(tmp->cmd, data);
 		*lst = (*lst)->next;
 		ft_free(tmp, data);
 	}
 }
+		// ft_free(tmp->bin_path, data);
 
 void	ft_free_garbage(t_garbage *garbage)
 {
