@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 13:42:57 by lleveque          #+#    #+#             */
-/*   Updated: 2022/04/13 09:29:36 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/19 13:48:27 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,11 @@ int	check_path(char *path)
 	return (1);
 }
 
-int	set_home(void)
+int	set_home(t_data *data)
 {
 	char	*path;
 
-	path = getenv("HOME=");
+	path = ft_getenv(data->env, "HOME=");
 	if (!path)
 	{
 		ft_putstr_fd("minishell: cd: HOME not set\n", 2);
@@ -58,11 +58,11 @@ int	set_home(void)
 	return (0);
 }
 
-int	set_oldpwd(void)
+int	set_oldpwd(t_data *data)
 {
 	char	*path;
 
-	path = getenv("OLDPWD=");
+	path = ft_getenv(data->env, "OLDPWD=");
 	if (!path)
 	{
 		ft_putstr_fd("minishell: cd: OLDPWD not set\n", 2);
@@ -73,17 +73,18 @@ int	set_oldpwd(void)
 	return (0);
 }
 
-int	cd_cmd(char **args)
+int	cd_cmd(char **args, t_data *data)
 {
 	if (args[0] && args[1] && args[2])
 	{
 		ft_putstr_fd("minishell: cd: too many arguments\n", 2);
 		return (0);
 	}
-	if (!args[1] || go_home(args[1]))
-		return (set_home());
+	if (!args[1] || (args(args[1][0] == '~' && args[1][1] == '\0')
+		|| (args[1][0] == '-' && args[1][1] == '-' && args[1][2] == '\0')))
+		return (set_home(data));
 	if (args[1][0] == '-' && args[1][1] == '\0')
-		return (set_oldpwd());
+		return (set_oldpwd(data));
 	if (check_path(args[1]))
 		return (0);
 	chdir(args[1]);

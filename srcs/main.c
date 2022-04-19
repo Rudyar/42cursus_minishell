@@ -6,7 +6,7 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:19:49 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/18 17:55:05 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/19 13:49:07 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ int	main(int ac, char **av, char **envp)
 	// pwd_cmd();
 	printf("===================================================================================\n");
 	// export_cmd(av, data);
-	exit_cmd(av);
+	cd_cmd(av, data);
 	// unset_cmd(av, data);
 	// echo_cmd(av);
 	printf("===================================================================================\n");
-	// env_cmd(data);
+	env_cmd(data);
 	// for (int i = 0; data->env_char[i]; i++)
 		// printf("--- %s\n", data->env_char[i]);
 	free_all(data);
@@ -107,23 +107,23 @@ void	print_lst(t_cmd *lst)
 // 	return (0);
 // }
 
-int	main(int ac, char **av, char **envp)
-{
-	char	*line;
-	t_data	*data;
+// int	main(int ac, char **av, char **envp)
+// {
+// 	char	*line;
+// 	t_data	*data;
 
-	(void)av;
-	(void)ac;
-	data = init_data(envp);
-	line = readline("Minishell : ");
-	if (*line)
-	{
-		if (parsing(line, data) == 0)
-		{
-			print_lst(data->cmd_lst);
-			free_lst(data);
-		}
-	}
-	free_all(data);
-	return (0);
-}
+// 	(void)av;
+// 	(void)ac;
+// 	data = init_data(envp);
+// 	line = readline("Minishell : ");
+// 	if (*line)
+// 	{
+// 		if (parsing(line, data) == 0)
+// 		{
+// 			print_lst(data->cmd_lst);
+// 			free_lst(data);
+// 		}
+// 	}
+// 	free_all(data);
+// 	return (0);
+// }
