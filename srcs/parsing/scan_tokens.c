@@ -6,26 +6,13 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 19:47:16 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/14 14:10:50 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/19 11:06:38 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-static int	is_redir_sign(t_token_type token)
-{
-	if (token == HERE_DOC)
-		return (1);
-	if (token == DGREATER)
-		return (1);
-	if (token == REDIR_IN)
-		return (1);
-	if (token == REDIR_OUT)
-		return (1);
-	return (0);
-}
-
-static int	scan_redir(t_token *lst)
+int	scan_redir(t_token *lst)
 {
 	while (lst)
 	{
@@ -48,11 +35,37 @@ unexpected token `", 2);
 	return (0);
 }
 
+void	add_type(t_token *lst)
+{
+	while (lst)
+	{
+		if (lst && is_word(lst->type))
+		{
+			lst->type = CMD;
+			lst = lst->next;
+			while (lst && is_word(lst->type))
+			{
+				lst->type = ARG;
+				lst = lst->next;
+			}
+		}
+		if (lst && is_redir_sign(lst->type))
+		{
+			lst->next->type = lst->type;
+			lst = lst->next;
+		}
+		if (lst)
+			lst = lst->next;
+	}
+}
+
 int	scan_tokens(t_data *data, t_token *lst)
 {
 	if (scan_redir(lst))
 		return (1);
 	if (scan_dollar(data, lst))
 		return (1);
+	data->tokens = del_whitespaces(&lst, data);
+	add_type(data->tokens);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:19:49 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/19 13:49:07 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/19 13:50:11 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,38 +46,39 @@ int	main(int ac, char **av, char **envp)
 // 	data = init_data(envp);
 // 	// pwd_cmd();
 // 	printf("===================================================================================\n");
-// 	export_cmd(av, data);
+// 	// export_cmd(av, data);
+// 	exit_cmd(av);
 // 	// unset_cmd(av, data);
 // 	// echo_cmd(av);
 // 	printf("===================================================================================\n");
-// 	env_cmd(data);
+// 	// env_cmd(data);
 // 	// for (int i = 0; data->env_char[i]; i++)
 // 		// printf("--- %s\n", data->env_char[i]);
 // 	free_all(data);
 // 	return (0);
 // }
 
-void	print_lst(t_cmd *lst)
-{
-	int	i;
+// void	print_lst(t_cmd *lst)
+// {
+// 	int	i;
 
-	while (lst)
-	{
-		i = 0;
-		printf("---------\n");
-		while (lst->cmd[i] != NULL)
-		{
-			if (lst->is_builtin && i == 0)
-				printf("Builtin : ");
-			printf("%s\n", lst->cmd[i]);
-			i++;
-		}
-		printf("---------\n");
-		if (lst->next == NULL)
-			break ;
-		lst = lst->next;
-	}
-}
+// 	while (lst)
+// 	{
+// 		i = 0;
+// 		printf("---------\n");
+// 		while (lst->cmd[i] != NULL)
+// 		{
+// 			if (lst->is_builtin && i == 0)
+// 				printf("Builtin : ");
+// 			printf("%s\n", lst->cmd[i]);
+// 			i++;
+// 		}
+// 		printf("---------\n");
+// 		if (lst->next == NULL)
+// 			break ;
+// 		lst = lst->next;
+// 	}
+// }
 
 // int	main(int ac, char **av, char **envp)
 // {
@@ -92,18 +93,15 @@ void	print_lst(t_cmd *lst)
 // 		line = readline("Minishell : ");
 // 		if (*line)
 // 		{
+// 			add_history(line);
 // 			if (parsing(line, data) == 0)
 // 			{
-// 				// execve(data->cmd_lst->bin_path, data->cmd_lst->cmd, envp);
-// 				// print_token_lst(data->tokens);
-// 				printf("\n\n\n\n");
-// 				print_lst(data->cmd_lst);
-// 				printf("\n\n\n\n");
+// 				print_token_lst(data->tokens);
 // 				free_lst(data);
 // 			}
 // 		}
 // 	}
-// 	ft_free(data);
+// 	free_all(data);
 // 	return (0);
 // }
 
@@ -118,9 +116,10 @@ void	print_lst(t_cmd *lst)
 // 	line = readline("Minishell : ");
 // 	if (*line)
 // 	{
+		// add_history(line);
 // 		if (parsing(line, data) == 0)
 // 		{
-// 			print_lst(data->cmd_lst);
+// 			print_token_lst(data->tokens);
 // 			free_lst(data);
 // 		}
 // 	}

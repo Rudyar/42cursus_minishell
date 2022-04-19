@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 18:28:26 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/18 17:54:49 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/18 18:04:16 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 # define LEXER_H
 
 int		count_letters(t_token *lst);
-int		lexer(char *s, t_token **tokens_lst, t_data *data);
+void	print_token_lst(t_token *lst);
 void	free_token_lst(t_token **lst, t_data *data);
 void	token_lst_addback(t_token **head, t_token *new);
-void	print_token_lst(t_token **lst);
+void	lexer(char *s, t_token **tokens_lst, t_data *data);
 void	manage_quotes(t_token **lst, t_token **prev, t_token **head, t_data \
 *data);
 void	manage_letters(t_token **lst, t_token **prev, t_token **head, t_data \

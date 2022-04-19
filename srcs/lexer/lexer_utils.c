@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 18:49:07 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/15 16:33:06 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/18 16:13:42 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,9 @@ int	count_letters(t_token *lst)
 
 t_token	*token_lst_last(t_token *lst)
 {
-	while (lst->next != NULL)
+	if (!lst)
+		return (NULL);
+	while (lst && lst->next != NULL)
 		lst = lst->next;
 	return (lst);
 }
