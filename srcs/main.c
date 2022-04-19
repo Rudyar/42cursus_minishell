@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:19:49 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/18 18:08:06 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/19 11:57:58 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,30 +58,6 @@ int	g_exit_status;
 // 	}
 // }
 
-// int	main(int ac, char **av, char **envp)
-// {
-// 	char	*line;
-// 	t_data	*data;
-
-// 	(void)av;
-// 	(void)ac;
-// 	data = init_data(envp);
-// 	while (1)
-// 	{
-// 		line = readline("Minishell : ");
-// 		if (*line)
-// 		{
-// 			if (parsing(line, data) == 0)
-// 			{
-// 				print_token_lst(data->tokens);
-// 				free_lst(data);
-// 			}
-// 		}
-// 	}
-// 	free_all(data);
-// 	return (0);
-// }
-
 int	main(int ac, char **av, char **envp)
 {
 	char	*line;
@@ -90,15 +66,41 @@ int	main(int ac, char **av, char **envp)
 	(void)av;
 	(void)ac;
 	data = init_data(envp);
-	line = readline("Minishell : ");
-	if (*line)
+	while (1)
 	{
-		if (parsing(line, data) == 0)
+		line = readline("Minishell : ");
+		if (*line)
 		{
-			print_token_lst(data->tokens);
-			free_lst(data);
+			add_history(line);
+			if (parsing(line, data) == 0)
+			{
+				print_token_lst(data->tokens);
+				free_lst(data);
+			}
 		}
 	}
 	free_all(data);
 	return (0);
 }
+
+// int	main(int ac, char **av, char **envp)
+// {
+// 	char	*line;
+// 	t_data	*data;
+
+// 	(void)av;
+// 	(void)ac;
+// 	data = init_data(envp);
+// 	line = readline("Minishell : ");
+// 	if (*line)
+// 	{
+		// add_history(line);
+// 		if (parsing(line, data) == 0)
+// 		{
+// 			print_token_lst(data->tokens);
+// 			free_lst(data);
+// 		}
+// 	}
+// 	free_all(data);
+// 	return (0);
+// }

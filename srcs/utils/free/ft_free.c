@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 18:57:22 by lleveque          #+#    #+#             */
-/*   Updated: 2022/04/19 11:07:38 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/19 11:50:35 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,5 @@ void	free_all(t_data *data)
 {
 	ft_free_garbage(data->garbage);
 	free(data);
+	rl_clear_history();
 }
