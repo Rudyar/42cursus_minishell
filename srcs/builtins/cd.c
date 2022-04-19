@@ -6,7 +6,7 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 13:42:57 by lleveque          #+#    #+#             */
-/*   Updated: 2022/04/19 17:08:33 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/19 17:33:21 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ void	update_env(t_env *env, t_data *data)
 	set_env(data->env, data, "PWD", ft_strdup(tmp2, data));
 	free(tmp2);
 	set_env(data->env, data, "OLDPWD", tmp);
+	free_strs(data->env_char);
+	data->env_char = dup_env(data->env, data);
 }
 
 char	*check_path(t_data *data, char *arg)
