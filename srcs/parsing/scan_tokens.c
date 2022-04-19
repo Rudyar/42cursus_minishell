@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 19:47:16 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/19 11:06:38 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/19 14:43:09 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,14 @@ unexpected token `", 2);
 	return (0);
 }
 
+t_token	*add_redir_type(t_token *lst)
+{
+	if (lst && lst->next)
+		lst->next->type = lst->type;
+	lst = lst->next;
+	return (lst);
+}
+
 void	add_type(t_token *lst)
 {
 	while (lst)
@@ -43,20 +51,35 @@ void	add_type(t_token *lst)
 		{
 			lst->type = CMD;
 			lst = lst->next;
-			while (lst && is_word(lst->type))
+			while (lst && lst->type != PIPE)
 			{
-				lst->type = ARG;
-				lst = lst->next;
+				if (is_word(lst->type))
+					lst->type = ARG;
+				else
+					lst = add_redir_type(lst);
+				if (lst)
+					lst = lst->next;
 			}
 		}
 		if (lst && is_redir_sign(lst->type))
-		{
-			lst->next->type = lst->type;
-			lst = lst->next;
-		}
+			lst = add_redir_type(lst);
 		if (lst)
 			lst = lst->next;
 	}
+}
+
+int	count_nb_cmd(t_token *lst)
+{
+	int	i;
+
+	i = 1;
+	while (lst)
+	{
+		if (lst->type == PIPE)
+			i++;
+		lst = lst->next;
+	}
+	return (i);
 }
 
 int	scan_tokens(t_data *data, t_token *lst)
@@ -67,5 +90,7 @@ int	scan_tokens(t_data *data, t_token *lst)
 		return (1);
 	data->tokens = del_whitespaces(&lst, data);
 	add_type(data->tokens);
+	data->nb_cmd = count_nb_cmd(data->tokens);
+	printf("nb cmd : %d\n", data->nb_cmd);
 	return (0);
 }

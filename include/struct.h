@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 14:17:58 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/18 14:25:44 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/19 14:24:17 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ typedef enum e_token_type
 	DGREATER = 8,
 	HERE_DOC = 9,
 	DOLLAR = '$',
-	WHITE_SPACE = 10,
-	IN_DQUOTE = 11,
-	IN_QUOTE = 12,
-	CMD = 13,
-	ARG = 14
+	WHITE_SPACE = 11,
+	IN_DQUOTE = 12,
+	IN_QUOTE = 13,
+	CMD = 14,
+	ARG = 15
 }	t_token_type;
 
 struct	s_history
