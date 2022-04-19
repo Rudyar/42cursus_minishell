@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 18:22:42 by lleveque          #+#    #+#             */
-/*   Updated: 2022/04/16 00:30:16 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/19 16:46:11 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+extern int	g_exit_status;
 
 t_env	*init_env(char **envp, t_data *data)
 {
@@ -66,5 +68,6 @@ t_data	*init_data(char **envp)
 	data->history = NULL;
 	data->nb_cmd = 0;
 	data->tokens = NULL;
+	g_exit_status = 0;
 	return (data);
 }

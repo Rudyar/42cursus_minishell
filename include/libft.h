@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:22:46 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/18 18:01:11 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/19 16:55:04 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void		ft_putstr_fd(char *s, int fd);
 void		free_strs(char **strs, t_data *data);
 void		ft_env_addback(t_env *env, t_env *new);
 char		*ft_strchr(char *s, int c);
+char		*ft_itoa(int n, t_data *data);
 char		*ft_strdup(char *s, t_data *data);
 char		*ft_strcdup(char *s, char c, t_data *data);
 void		*ft_calloc(size_t nmemb, size_t size, t_data *data);

@@ -6,19 +6,20 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 16:36:45 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/18 17:29:11 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/19 17:01:07 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-static char	*exit_dollar_status(char *s)
+extern int	g_exit_status;
+
+static char	*exit_dollar_status(int *i, t_data *data)
 {
 	char	*dst;
 
-	dst = NULL;
-	(void)s;
-	printf("Exit dollar status\n");
+	dst = ft_itoa(g_exit_status, data);
+	(*i)++;
 	return (dst);
 }
 
@@ -84,9 +85,8 @@ static char	*find_dollar_value(t_data *data, char *s, int i)
 		if (s[i] && s[i] == '$')
 		{
 			i++;
-			if (s[i] && s[i] == '?' && ((s[i + 1] && s[i + 1] == ' ')
-					|| !s[i + 1]))
-				tmp = (exit_dollar_status(s));
+			if (s[i] && s[i] == '?')
+				tmp = (exit_dollar_status(&i, data));
 			else if (!s[i] || (s[i] && (s[i] == '$' || s[i] == ' ')))
 				tmp = copy_dollar(s, &i, data);
 			else

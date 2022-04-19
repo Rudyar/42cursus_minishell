@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 19:47:16 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/19 14:43:09 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/19 14:59:36 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,5 @@ int	scan_tokens(t_data *data, t_token *lst)
 	data->tokens = del_whitespaces(&lst, data);
 	add_type(data->tokens);
 	data->nb_cmd = count_nb_cmd(data->tokens);
-	printf("nb cmd : %d\n", data->nb_cmd);
 	return (0);
 }
