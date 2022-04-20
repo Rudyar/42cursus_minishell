@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 14:58:13 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/20 15:37:21 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/20 19:44:42 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 void	start_exec(t_cmd *lst, t_data *data)
 {
 	// Connecter tous les pipes avant l'exec
+	// link_pipe(lst, data);
 	// while (data->nb_cmd != 0)
 	// {
 	// 	if (pipe(lst->pipe))
