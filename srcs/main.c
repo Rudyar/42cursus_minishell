@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:19:49 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/20 14:21:47 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/20 14:46:40 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	main(int ac, char **av, char **envp)
 			add_history(line);
 			if (parsing(line, data) == 0)
 			{
-				start_exec(data);
+				start_exec(data->cmd_lst, data);
 				print_lst(data->cmd_lst);
 				free_lst(data);
 			}

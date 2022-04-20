@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:22:46 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/20 13:53:35 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/20 15:00:01 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ int		scan_dollar(t_data *data, t_token *lst);
 int		scan_tokens(t_data *data, t_token *lst);
 int		scan_dollar(t_data *data, t_token *lst);
 int		check_next_char_dollar(char *s, int *i);
+int		create_bin_path(t_data *data, t_cmd *lst);
 void	check_builtins(t_cmd *lst);
-void	create_bin_path(t_data *data, t_cmd *lst);
 void	cmd_lst_addback(t_cmd **head, t_cmd *new, t_cmd *prev);
 char	*get_env_var_return(int *i);
 char	*ft_getenv(t_env *env, char *s);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_bin_path.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 16:23:25 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/15 09:59:34 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/20 14:59:18 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,20 +66,18 @@ static int	find_bin_path(t_data *data, t_cmd *lst)
 		}
 		i++;
 	}
+	ft_putstr_fd("minishell: \n", 2);
 	ft_putstr_fd(lst->cmd[0], 2);
 	ft_putstr_fd(": command not found\n", 2);
 	free_strs(path, data);
 	return (1);
 }
 
-void	create_bin_path(t_data *data, t_cmd *lst)
+int	create_bin_path(t_data *data, t_cmd *lst)
 {
-	while (lst)
-	{
-		if (access(lst->cmd[0], F_OK) == 0)
-			lst->bin_path = ft_strdup(lst->cmd[0], data);
-		else
-			find_bin_path(data, lst);
-		lst = lst->next;
-	}
+	if (access(lst->cmd[0], F_OK) == 0)
+		lst->bin_path = ft_strdup(lst->cmd[0], data);
+	else
+		return (find_bin_path(data, lst));
+	return (0);
 }
