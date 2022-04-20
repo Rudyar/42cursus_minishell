@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:19:49 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/19 17:39:09 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/20 14:21:47 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ int	g_exit_status;
 // 	(void)envp;
 // 	data = init_data(envp);
 // 	// pwd_cmd();
-// 	printf("===================================================================================\n");
+// 	printf("=========================================================\n");
 // 	// export_cmd(av, data);
 // 	cd_cmd(av, data);
 // 	// unset_cmd(av, data);
 // 	// echo_cmd(av);
-// 	printf("===================================================================================\n");
+// 	printf("=========================================================\n");
 // 	env_cmd(data);
 // 	// for (int i = 0; data->env_char[i]; i++)
 // 		// printf("--- %s\n", data->env_char[i]);
@@ -35,27 +35,24 @@ int	g_exit_status;
 // 	return (0);
 // }
 
-// void	print_lst(t_cmd *lst)
-// {
-// 	int	i;
+void	print_lst(t_cmd *lst)
+{
+	int	i;
 
-// 	while (lst)
-// 	{
-// 		i = 0;
-// 		printf("---------\n");
-// 		while (lst->cmd[i] != NULL)
-// 		{
-// 			if (lst->is_builtin && i == 0)
-// 				printf("Builtin : ");
-// 			printf("%s\n", lst->cmd[i]);
-// 			i++;
-// 		}
-// 		printf("---------\n");
-// 		if (lst->next == NULL)
-// 			break ;
-// 		lst = lst->next;
-// 	}
-// }
+	while (lst)
+	{
+		i = 0;
+		printf("---------\n");
+		while (lst->cmd[i] != NULL)
+			printf("%s\n", lst->cmd[i++]);
+		printf("IN : %d\n", lst->in);
+		printf("OUT : %d\n", lst->out);
+		printf("---------\n");
+		if (lst->next == NULL)
+			break ;
+		lst = lst->next;
+	}
+}
 
 int	main(int ac, char **av, char **envp)
 {
@@ -74,6 +71,7 @@ int	main(int ac, char **av, char **envp)
 			if (parsing(line, data) == 0)
 			{
 				start_exec(data);
+				print_lst(data->cmd_lst);
 				free_lst(data);
 			}
 		}

@@ -6,19 +6,19 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 14:17:58 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/19 14:24:17 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/20 14:21:23 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
 
-typedef struct s_history	t_history;
 typedef struct s_cmd		t_cmd;
-typedef struct s_data		t_data;
 typedef struct s_env		t_env;
+typedef struct s_data		t_data;
 typedef struct s_token		t_token;
 typedef struct s_garbage	t_garbage;
+typedef struct s_history	t_history;
 
 typedef enum e_token_type
 {
@@ -55,12 +55,12 @@ struct	s_garbage
 
 struct	s_cmd
 {
-	int				is_builtin;
 	int				in;
 	int				out;
 	int				pipe[2];
-	char			*bin_path;
+	int				is_builtin;
 	char			**cmd;
+	char			*bin_path;
 	pid_t			fork;
 	struct s_cmd	*next;
 	struct s_cmd	*prev;

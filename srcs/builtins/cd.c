@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 13:42:57 by lleveque          #+#    #+#             */
-/*   Updated: 2022/04/19 17:39:45 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/20 11:01:08 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	update_env(t_env *env, t_data *data)
 	set_env(data->env, data, "PWD", ft_strdup(tmp2, data));
 	free(tmp2);
 	set_env(data->env, data, "OLDPWD", tmp);
-	free_strs(data->env_char);
+	free_strs(data->env_char, data);
 	data->env_char = dup_env(data->env, data);
 }
 

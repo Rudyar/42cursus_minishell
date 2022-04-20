@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 17:41:53 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/18 17:54:00 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/20 11:32:46 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,25 +24,6 @@ char	*ft_getenv(t_env *env, char *s)
 	}
 	return (NULL);
 }
-
-// int	find_cmd_length(t_token *lst)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (lst && lst->type != PIPE)
-// 	{
-// 		if (lst && is_word(lst->type))
-// 		{
-// 			while (lst && is_word(lst->type))
-// 				lst = lst->next;
-// 			i++;
-// 		}
-// 		if (lst && lst->type != PIPE)
-// 			lst = lst->next;
-// 	}
-// 	return (i);
-// }
 
 static char	*trim_line(char *s, t_data *data)
 {
