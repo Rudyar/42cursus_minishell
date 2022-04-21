@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:02:20 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/21 14:59:02 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/21 16:57:01 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static t_token	*find_cmd_data(t_token *lst, t_cmd *new, t_data *data)
 		}
 		while (lst && lst->type == ARG)
 		{
-			new->cmd[i++] = lst->content;
+			new->cmd[i++] = ft_strdup(lst->content, data);
 			lst = lst->next;
 		}
 		if (lst && is_redir_sign(lst->type))
