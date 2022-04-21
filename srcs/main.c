@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:19:49 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/21 14:53:46 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/21 17:52:49 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	main(int ac, char **av, char **envp)
 			add_history(line);
 			if (parsing(line, data) == 0)
 			{
-				// start_exec(data->cmd_lst, data);
+				start_exec(data->cmd_lst, data);
 				free_lst(data);
 			}
 		}

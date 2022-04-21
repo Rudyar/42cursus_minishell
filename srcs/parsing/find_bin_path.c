@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_bin_path.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 16:23:25 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/20 14:59:18 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/21 17:09:33 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static int	find_bin_path(t_data *data, t_cmd *lst)
 		}
 		i++;
 	}
-	ft_putstr_fd("minishell: \n", 2);
+	ft_putstr_fd("minishell: ", 2);
 	ft_putstr_fd(lst->cmd[0], 2);
 	ft_putstr_fd(": command not found\n", 2);
 	free_strs(path, data);
