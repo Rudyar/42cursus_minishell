@@ -1,19 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec.h                                             :+:      :+:    :+:   */
+/*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/21 17:22:46 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/21 14:08:45 by arudy            ###   ########.fr       */
+/*   Created: 2022/04/21 14:03:42 by arudy             #+#    #+#             */
+/*   Updated: 2022/04/21 14:09:59 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXEC_H
-# define EXEC_H
+#include "../../include/minishell.h"
 
-void	link_pipe(t_cmd *lst, t_data *data);
-void	start_exec(t_cmd *lst, t_data *data);
-void	exec_error(char *msg, t_cmd *lst, t_data *data);
-#endif
+extern int	g_exit_status;
+
+void	exec_error(char *msg, t_cmd *lst, t_data *data)
+{
+	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd(lst->cmd[0], 2);
+	ft_putstr_fd(": ", 2);
+	ft_putstr_fd(msg, 2);
+	ft_putstr_fd("\n", 2);
+	free_all(data);
+	exit(g_exit_status);
+}

@@ -6,7 +6,7 @@
 #    By: arudy <arudy@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/21 17:19:21 by arudy             #+#    #+#              #
-#    Updated: 2022/04/19 16:55:26 by arudy            ###   ########.fr        #
+#    Updated: 2022/04/21 14:09:10 by arudy            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ SRCS_LIBFT = $(addprefix srcs/libft/, ft_putstr_fd.c ft_strlen.c \
 SRCS_BUILTINS = $(addprefix srcs/builtins/, echo.c cd.c env.c export/export.c \
 				export/check.c export/utils.c pwd.c unset.c exit.c)
 
-SRCS_EXEC = $(addprefix srcs/exec/, exec.c)
+SRCS_EXEC = $(addprefix srcs/exec/, exec.c exec_utils.c link_pipe.c)
 
 OBJS = ${SRCS:.c=.o}
 
