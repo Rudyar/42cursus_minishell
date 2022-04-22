@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 12:05:27 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/20 13:55:20 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/22 10:47:32 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,26 @@ void	cmd_lst_addback(t_cmd **head, t_cmd *new, t_cmd *prev)
 		}
 		else
 			*head = new;
+	}
+}
+
+void	print_cmd_lst(t_cmd *lst)
+{
+	int	i;
+
+	while (lst)
+	{
+		i = 0;
+		printf("---------\n");
+		while (lst->cmd[i] != NULL)
+		{
+			if (lst->is_builtin == 1)
+				printf("Builtin | ");
+			printf("%s\n", lst->cmd[i++]);
+		}
+		printf("---------\n");
+		if (lst->next == NULL)
+			break ;
+		lst = lst->next;
 	}
 }
