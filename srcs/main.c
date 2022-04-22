@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:19:49 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/22 12:53:04 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/22 13:26:25 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ int	main(int ac, char **av, char **envp)
 	(void)av;
 	(void)ac;
 	data = init_data(envp);
-	while (1)
-	{
+	// while (1)
+	// {
 		// if ((tmp = ft_getenv(data->env, "USER")))
 		// {
 		// 	ft_putstr_fd("\033[32;1m", 1);
@@ -72,10 +72,11 @@ int	main(int ac, char **av, char **envp)
 			if (parsing(line, data) == 0)
 			{
 				start_exec(data->cmd_lst, data);
+				// wait(NULL);
 				free_lst(data);
 			}
 		}
-	}
+	// }
 	free_all(data);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 14:58:13 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/22 13:02:38 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/22 13:24:44 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,20 @@ static void	exec_cmd(t_cmd *lst, t_data *data)
 	execve(lst->bin_path, lst->cmd, data->env_char);
 }
 
+// void	waitfork(t_cmd *lst)
+// {
+// 	while (lst)
+// 	{
+// 		wait(&lst->fork);
+// 		lst = lst->next;
+// 	}
+// }
+
 void	start_exec(t_cmd *lst, t_data *data)
 {
 	link_pipe(lst, data);
 	// check_builtins(lst);
+	// t_cmd *a = lst;
 	while (lst)
 	{
 		lst->fork = fork();
@@ -63,13 +73,17 @@ void	start_exec(t_cmd *lst, t_data *data)
 			exec_error("Fork error", lst, data);
 		if (lst->fork == 0)
 			exec_cmd(lst, data);
+		if (lst->in != 0)
+			close(lst->in);
+		if (lst->out != 1)
+			close(lst->out);
 		if (lst->prev)
 		{
 			close(lst->prev->pipe[0]);
 			close(lst->prev->pipe[1]);
 		}
-		// if ()
 		lst = lst->next;
 	}
+	// waitfork(a);
 	wait(NULL);
 }
