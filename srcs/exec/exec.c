@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 14:58:13 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/22 13:24:44 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/22 18:18:54 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ static void	exec_cmd(t_cmd *lst, t_data *data)
 {
 	if (create_bin_path(data, lst))
 		return ;
-
 	if (!lst->prev && lst->in != 0)
 	{
 		if (dup2(lst->in,  STDIN_FILENO) == -1)
