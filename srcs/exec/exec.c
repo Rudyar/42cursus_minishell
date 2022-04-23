@@ -6,7 +6,7 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 14:58:13 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/24 00:49:21 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/24 00:54:23 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,38 +14,38 @@
 
 static void	exec_cmd(t_cmd *lst, t_data *data)
 {
-	// if (!lst->prev && lst->in != 0)
-	// {
-	// 	if (dup2(lst->in,  STDIN_FILENO) == -1)
-	// 		exec_error("Dup2 error", lst, data);
-	// }
-	// else if (lst->prev && lst->in == 0)
-	// {
-	// 	close(lst->prev->pipe[1]);
-	// 	if (dup2(lst->prev->pipe[0], STDIN_FILENO) == -1)
-	// 		exec_error("Dup2 error", lst, data);
-	// }
-	// else if (lst->prev && lst->in != 0)
-	// {
-	// 	if (dup2(lst->in,  STDIN_FILENO) == -1)
-	// 		exec_error("Dup2 error", lst, data);
-	// }
-	// if (lst->next && lst->out == 1)
-	// {
-	// 	close(lst->pipe[0]);
-	// 	if (dup2(lst->pipe[1], STDOUT_FILENO) == -1)
-	// 		exec_error("Dup2 error", lst, data);
-	// }
-	// else if (lst->next && lst->out != 1)
-	// {
-	// 	if (dup2(lst->out, STDOUT_FILENO) == -1 )
-	// 		exec_error("Dup2 error", lst, data);
-	// }
-	// else if (!lst->next && lst->out != 1)
-	// {
-	// 	if (dup2(lst->out, STDOUT_FILENO) == -1)
-	// 		exec_error("Dup2 error", lst, data);
-	// }
+	if (!lst->prev && lst->in != 0)
+	{
+		if (dup2(lst->in,  STDIN_FILENO) == -1)
+			exec_error("Dup2 error", lst, data);
+	}
+	else if (lst->prev && lst->in == 0)
+	{
+		close(lst->prev->pipe[1]);
+		if (dup2(lst->prev->pipe[0], STDIN_FILENO) == -1)
+			exec_error("Dup2 error", lst, data);
+	}
+	else if (lst->prev && lst->in != 0)
+	{
+		if (dup2(lst->in,  STDIN_FILENO) == -1)
+			exec_error("Dup2 error", lst, data);
+	}
+	if (lst->next && lst->out == 1)
+	{
+		close(lst->pipe[0]);
+		if (dup2(lst->pipe[1], STDOUT_FILENO) == -1)
+			exec_error("Dup2 error", lst, data);
+	}
+	else if (lst->next && lst->out != 1)
+	{
+		if (dup2(lst->out, STDOUT_FILENO) == -1 )
+			exec_error("Dup2 error", lst, data);
+	}
+	else if (!lst->next && lst->out != 1)
+	{
+		if (dup2(lst->out, STDOUT_FILENO) == -1)
+			exec_error("Dup2 error", lst, data);
+	}
 	if (check_builtins(lst, data))
 		return ;
 	if (create_bin_path(data, lst))
