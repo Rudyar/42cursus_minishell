@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:19:49 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/22 21:04:06 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/24 00:41:01 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,9 +89,9 @@ char	*get_prompt(t_data *data, char **envp)
 	cwd = getcwd(NULL, 0);
 	prompt = ft_strdup("\e[1;31m", data);
 	prompt = ft_strjoin(prompt, ft_getenv(data->env, "USER"), data);
-	prompt = ft_strjoin(prompt, "\e[0m", data);
+	prompt = ft_strjoin(prompt, "@minishell\e[0m", data);
 	prompt = ft_strjoin_char(prompt, ':', data);
-	prompt = ft_strjoin(prompt, "\033[0;36m", data);
+	prompt = ft_strjoin(prompt, "\033[1;36m", data);
 	if (!ft_strncmp(cwd, ft_getenv(data->env, "HOME"), \
 		ft_strlen(ft_getenv(data->env, "HOME"))))
 	{
