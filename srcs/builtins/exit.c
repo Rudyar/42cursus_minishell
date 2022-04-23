@@ -6,7 +6,7 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 14:44:05 by lleveque          #+#    #+#             */
-/*   Updated: 2022/04/18 17:57:17 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/24 00:48:41 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,17 +99,23 @@ int	check_exit_arg(char *arg)
 	return (0);
 }
 
-int	exit_cmd(char **args)
+int	exit_cmd(char **args, t_data *data)
 {
 	if (!args[1])
 		exit(g_exit_status);
 	if (check_exit_arg(args[1]))
 	{
-		printf("minishell: exit: %s: numeric argument required\n", args[1]);
+		ft_putstr_fd("minishell: exit: ", 2);
+		ft_putstr_fd(args[1], 2);
+		ft_putstr_fd(": numeric argument required\n", 2);
+		free_all(data);
 		exit(2);
 	}
 	else if (args[2])
-		return (printf("minishell: exit: too many arguments\n"), 1);
+		return (ft_putstr_fd("minishell: exit: too many arguments\n", 2), 1);
 	else
+	{
+		free_all(data);
 		exit(ft_atoll(args[1]));
+	}
 }
