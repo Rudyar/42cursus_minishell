@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:19:49 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/24 00:41:01 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/24 12:41:32 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,72 +40,7 @@ int	exit_line(char *line, t_data *data)
 	free_all(data);
 	free(line);
 	printf("exit\n");
-	exit(g_exit_status);
-}
-
-// char	*get_prompt(t_data *data)
-// {
-// 	char	*cwd;
-// 	char	*prompt;
-
-// 	cwd = getcwd(NULL, 0);
-// 	prompt = ft_strdup("\e[1;31m", data);
-// 	prompt = ft_strjoin(prompt, ft_getenv(data->env, "USER"), data);
-// 	prompt = ft_strjoin(prompt, "\e[0m", data);
-// 	prompt = ft_strjoin_char(prompt, ':', data);
-// 	prompt = ft_strjoin(prompt, "\033[0;36m", data);
-// 	if (!ft_strncmp(cwd, ft_getenv(data->env, "HOME"), \
-// 		ft_strlen(ft_getenv(data->env, "HOME"))))
-// 	{
-// 		prompt = ft_strjoin_char(prompt, '~', data);
-// 		prompt = ft_strjoin(prompt, cwd, data);
-// 	}
-// 	else
-// 		prompt = ft_strjoin(prompt, cwd, data);
-// 	prompt = ft_strjoin(prompt, "\e[0m", data);
-// 	prompt = ft_strjoin(prompt, "$ ", data);
-// 	free(cwd);
-// 	return (prompt);
-// }
-
-char	*prompt_without_env(t_data *data)
-{
-	char	*prompt;
-	char	*cwd;
-
-	cwd = getcwd(NULL, 0);
-	prompt = ft_strdup(cwd, data);
-	free(cwd);
-	return (prompt);
-}
-
-char	*get_prompt(t_data *data, char **envp)
-{
-	char	*cwd;
-	char	*prompt;
-
-	if (!envp[0])
-		return (prompt_without_env(data));
-	cwd = getcwd(NULL, 0);
-	prompt = ft_strdup("\e[1;31m", data);
-	prompt = ft_strjoin(prompt, ft_getenv(data->env, "USER"), data);
-	prompt = ft_strjoin(prompt, "@minishell\e[0m", data);
-	prompt = ft_strjoin_char(prompt, ':', data);
-	prompt = ft_strjoin(prompt, "\033[1;36m", data);
-	if (!ft_strncmp(cwd, ft_getenv(data->env, "HOME"), \
-		ft_strlen(ft_getenv(data->env, "HOME"))))
-	{
-		prompt = ft_strjoin_char(prompt, '~', data);
-		cwd = ft_substr(cwd, ft_strlen(ft_getenv(data->env, "HOME")),\
-			ft_strlen(cwd), data);
-		prompt = ft_strjoin(prompt, cwd, data);
-	}
-	else
-		prompt = ft_strjoin(prompt, cwd, data);
-	prompt = ft_strjoin(prompt, "\e[0m", data);
-	prompt = ft_strjoin(prompt, "$ ", data);
-	free(cwd);
-	return (prompt);
+	exit(0);
 }
 
 int	loop(t_data *data, char **envp)

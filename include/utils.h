@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 10:52:06 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/19 16:53:28 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/24 12:43:01 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	*error(char *cmd, char *arg, char *msg);
 void	free_cmd_lst(t_cmd **lst, t_data *data);
 void	set_env(t_env *env, t_data *data, char *var, char *value);
 char	**dup_env(t_env *env, t_data *data);
+char	*get_prompt(t_data *data, char **envp);
 t_data	*init_data(char **envp);
 
 #endif
