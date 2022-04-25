@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 14:03:42 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/24 00:24:46 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/25 14:29:25 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int	check_builtins(t_cmd *lst, t_data *data)
 		return (unset_cmd(lst->cmd, data), 1);
 	else if (ft_strncmp(lst->cmd[0], "exit", 6) == 0)
 		return (exit_cmd(lst->cmd, data), 1);
-	printf("NOT BUILTINS\n");
 	return (0);
 }
 
