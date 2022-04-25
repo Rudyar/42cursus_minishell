@@ -6,7 +6,7 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 14:58:13 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/25 19:14:00 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/25 19:58:17 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,12 @@ extern int	g_exit_status;
 static void	exec_cmd(t_cmd *lst, t_data *data)
 {
 	if (check_builtins(lst, data))
-		exit (1);
+	{
+		g_exit_status = exec_builtins(lst, data);
+		return ;
+	}
 	if (create_bin_path(data, lst))
-		exit (1);
+		g_exit_status = create_bin_path(data, lst);
 	execve(lst->bin_path, lst->cmd, data->env_char);
 	ft_putstr_fd("Pas exec\n", 2);
 }
