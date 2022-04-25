@@ -6,18 +6,20 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 14:58:13 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/25 19:12:19 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/25 19:14:00 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
+extern int	g_exit_status;
+
 static void	exec_cmd(t_cmd *lst, t_data *data)
 {
 	if (check_builtins(lst, data))
-		return ;
+		exit (1);
 	if (create_bin_path(data, lst))
-		return ;
+		exit (1);
 	execve(lst->bin_path, lst->cmd, data->env_char);
 	ft_putstr_fd("Pas exec\n", 2);
 }
@@ -51,10 +53,9 @@ static void	wait_fork(t_cmd *lst, t_data *data)
 	while (lst)
 	{
 		waitpid(lst->fork, &status, 0);
+		g_exit_status = status;
 		lst = lst->next;
 	}
-	// Gérer le retour du waitpid qui est stocké dans status
-	// pour la mettre dans la g_exit_value
 }
 
 void	start_exec(t_cmd *lst, t_data *data)
@@ -78,28 +79,3 @@ void	start_exec(t_cmd *lst, t_data *data)
 	}
 	wait_fork(head_lst, data);
 }
-
-// void	start_exec(t_cmd *lst, t_data *data)
-// {
-// 	link_pipe(lst, data);
-// 	// check_builtins(lst);
-// 	while (lst)
-// 	{
-// 		lst->fork = fork();
-// 		if (lst->fork < 0)
-// 			exec_error("Fork error", lst, data);
-// 		if (lst->fork == 0)
-// 			exec_cmd(lst, data);
-// 		if (lst->in != 0)
-// 			close(lst->in);
-// 		if (lst->out != 1)
-// 			close(lst->out);
-// 		if (lst->prev)
-// 		{
-// 			close(lst->prev->pipe[0]);
-// 			close(lst->prev->pipe[1]);
-// 		}
-// 		lst = lst->next;
-// 	}
-// 	wait(NULL);
-// }

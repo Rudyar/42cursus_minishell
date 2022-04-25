@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:22:46 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/19 16:55:04 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/25 18:48:43 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "lexer.h"
 # include "parsing.h"
 
+int			ft_atoll(char *n);
 int			ft_isalpha(int c);
 int			ft_isdigit(int c);
 int			ft_lstsize(t_env *lst);
@@ -39,6 +40,5 @@ char		*ft_substr(char const *s, unsigned int start, size_t len, \
 t_data *data);
 t_env		*ft_env_lstnew(char *content, t_env *prev, t_data *data);
 size_t		ft_strlen(const char *str);
-long long	ft_atoll(char *n);
 
 #endif
