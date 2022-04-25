@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 14:44:05 by lleveque          #+#    #+#             */
-/*   Updated: 2022/04/24 00:48:41 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/25 19:02:12 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,10 +112,13 @@ int	exit_cmd(char **args, t_data *data)
 		exit(2);
 	}
 	else if (args[2])
-		return (ft_putstr_fd("minishell: exit: too many arguments\n", 2), 1);
+		return (ft_putstr_fd("exit\nminishell: \
+exit: too many arguments\n", 2), 1);
 	else
 	{
+		ft_putstr_fd("exit\n", 1);
+		g_exit_status = ft_atoll(args[1]);
 		free_all(data);
-		exit(ft_atoll(args[1]));
+		exit(g_exit_status);
 	}
 }

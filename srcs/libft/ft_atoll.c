@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoll.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 16:17:25 by lleveque          #+#    #+#             */
-/*   Updated: 2022/04/18 17:33:12 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/25 18:48:53 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-long long	ft_atoll(char *n)
+int	ft_atoll(char *n)
 {
 	int			i;
 	int			sign;

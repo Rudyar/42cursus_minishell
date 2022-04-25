@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:19:49 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/24 12:41:32 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/25 19:00:41 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,6 @@ int	g_exit_status;
 // 	return (0);
 // }
 
-int	exit_line(char *line, t_data *data)
-{
-	free_all(data);
-	free(line);
-	printf("exit\n");
-	exit(0);
-}
-
 int	loop(t_data *data, char **envp)
 {
 	char	*line;
@@ -56,11 +48,13 @@ int	loop(t_data *data, char **envp)
 		if (*line)
 		{
 			add_history(line);
-			if (ft_strcmp(line, "exit") == 0)
-				return (exit_line(line, data));
 			if (parsing(line, data) == 0)
 			{
-				start_exec(data->cmd_lst, data);
+				if (data->nb_cmd == 1 \
+					&& !ft_strcmp(data->cmd_lst->cmd[0], "exit"))
+					exit_cmd(data->cmd_lst->cmd, data);
+				else
+					start_exec(data->cmd_lst, data);
 				free_lst(data);
 			}
 		}
