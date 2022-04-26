@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scan_dollar_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 16:12:52 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/15 11:26:35 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/26 14:32:08 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,33 @@ char	*get_env_var_return(int *i)
 {
 	(*i)++;
 	return (NULL);
+}
+
+char	*split_whitespaces(char	*content, t_data *data)
+{
+	int		i;
+	char	*dst;
+	char	**splited;
+
+	i = 0;
+	dst = NULL;
+	splited = NULL;
+	if (content[0])
+	{
+		splited = ft_split(content, ' ', data);
+		ft_free(content, data);
+		dst = ft_strdup(splited[i], data);
+		if (splited[i + 1] != NULL)
+			dst = ft_strjoin(dst, " ", data);
+		i++;
+		while (splited[i])
+		{
+			dst = ft_strjoin(dst, splited[i], data);
+			if (splited[i + 1] != NULL)
+				dst = ft_strjoin(dst, " ", data);
+			i++;
+		}
+		return (dst);
+	}
+	return (content);
 }

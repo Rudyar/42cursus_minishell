@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 16:36:45 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/19 17:01:07 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/26 14:29:09 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,13 +104,15 @@ static char	*find_dollar_value(t_data *data, char *s, int i)
 
 int	scan_dollar(t_data *data, t_token *lst)
 {
-	int	i;
+	int		i;
 
 	while (lst)
 	{
 		i = 0;
 		if (lst->type == IN_DQUOTE || lst->type == DOLLAR)
 			lst->content = find_dollar_value(data, lst->content, i);
+		if (lst->type == DOLLAR)
+			lst->content = split_whitespaces(lst->content, data);
 		lst = lst->next;
 	}
 	return (0);

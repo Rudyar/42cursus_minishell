@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:22:46 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/24 00:12:34 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/26 14:32:44 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ char	*get_env_var_return(int *i);
 char	*ft_getenv(t_env *env, char *s);
 char	*check_line(char *s, t_data *data);
 char	*join_tmp(char *s1, char *s2, t_data *data);
+char	*split_whitespaces(char	*content, t_data *data);
 t_cmd	*cmd_lst_last(t_cmd *lst);
 t_cmd	*fill_cmd_data(t_cmd *cmd);
 t_token	*del_whitespaces(t_token **lst, t_data *data);
