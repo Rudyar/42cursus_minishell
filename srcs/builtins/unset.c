@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:37:01 by lleveque          #+#    #+#             */
-/*   Updated: 2022/04/20 15:06:09 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/26 14:01:14 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,12 +92,15 @@ t_env	*unset_env_var(t_env *env, char *arg, t_data *data)
 int	unset_cmd(char **args, t_data *data)
 {
 	int		i;
+	int		err;
 
 	i = 1;
+	err = 0;
 	while (args[i])
 	{
 		while (args[i] && check_unset_arg(args[i]))
 		{
+			err = 1;
 			error("unset", args[i], "not a valid identifier");
 			i++;
 		}
@@ -109,5 +112,5 @@ int	unset_cmd(char **args, t_data *data)
 	}
 	free_strs(data->env_char, data);
 	data->env_char = dup_env(data->env, data);
-	return (0);
+	return (err);
 }
