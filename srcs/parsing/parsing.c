@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:02:20 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/21 16:57:01 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/26 15:41:41 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ static t_token	*find_cmd_data(t_token *lst, t_cmd *new, t_data *data)
 	{
 		if (lst->type == CMD)
 		{
+			new->cmd_no_args = ft_strdup(lst->content, data);
 			new->cmd[i++] = ft_strdup(lst->content, data);
 			lst = lst->next;
 		}

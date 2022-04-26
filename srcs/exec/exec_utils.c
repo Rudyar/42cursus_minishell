@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 14:03:42 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/26 11:59:59 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/26 15:55:15 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ int	exec_builtins(t_cmd *lst, t_data *data)
 
 int	check_builtins(t_cmd *lst)
 {
+	if (!lst->cmd[0])
+		return (0);
 	if (!ft_strncmp(lst->cmd[0], "cd", 3))
 		return (1);
 	else if (!ft_strncmp(lst->cmd[0], "pwd", 4))

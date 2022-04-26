@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 14:58:13 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/26 14:46:22 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/26 16:20:29 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 extern int	g_exit_status;
 
-static int exec_cmd(t_cmd *lst, t_data *data)
+static int	exec_cmd(t_cmd *lst, t_data *data)
 {
 	if (check_builtins(lst))
 		exit(exec_builtins(lst, data));
@@ -58,19 +58,22 @@ void	start_exec(t_cmd *lst, t_data *data)
 	t_cmd	*head_lst;
 
 	head_lst = lst;
+	print_cmd_lst(lst);
 	while (lst)
 	{
 		link_pipe(lst, data);
-		// if cmd
-		lst->fork = fork();
-		if (lst->fork < 0)
-			exec_error("Fork error", lst, data);
-		if (lst->fork == 0)
-			launch_ugo(lst, data);
-		if (lst->in > 2)
-			close(lst->in);
-		if (lst->out > 2)
-			close(lst->out);
+		if (lst->cmd_no_args)
+		{
+			lst->fork = fork();
+			if (lst->fork < 0)
+				exec_error("Fork error", lst, data);
+			if (lst->fork == 0)
+				launch_ugo(lst, data);
+			if (lst->in > 2)
+				close(lst->in);
+			if (lst->out > 2)
+				close(lst->out);
+		}
 		lst = lst->next;
 	}
 	wait_fork(head_lst);

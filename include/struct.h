@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 14:17:58 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/20 14:21:23 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/26 15:40:01 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ struct	s_cmd
 	int				pipe[2];
 	int				is_builtin;
 	char			**cmd;
+	char			*cmd_no_args;
 	char			*bin_path;
 	pid_t			fork;
 	struct s_cmd	*next;

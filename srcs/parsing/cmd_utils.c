@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 12:05:27 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/22 10:47:32 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/26 16:04:04 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ t_cmd	*fill_cmd_data(t_cmd *cmd)
 	cmd->pipe[1] = 0;
 	cmd->is_builtin = 0;
 	cmd->bin_path = NULL;
+	cmd->cmd_no_args = NULL;
 	return (cmd);
 }
 
@@ -73,11 +74,10 @@ void	print_cmd_lst(t_cmd *lst)
 		i = 0;
 		printf("---------\n");
 		while (lst->cmd[i] != NULL)
-		{
-			if (lst->is_builtin == 1)
-				printf("Builtin | ");
 			printf("%s\n", lst->cmd[i++]);
-		}
+		printf("in : %d\n", lst->in);
+		printf("out : %d\n", lst->out);
+		printf("CMD : %s\n", lst->cmd_no_args);
 		printf("---------\n");
 		if (lst->next == NULL)
 			break ;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:19:49 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/26 14:47:40 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/26 15:26:14 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ int	loop(t_data *data, char **envp)
 			}
 		}
 	}
-	return (0);
+	printf("exit\n");
+	return (g_exit_status);
 }
 
 int	main(int ac, char **av, char **envp)
@@ -72,5 +73,5 @@ int	main(int ac, char **av, char **envp)
 	data = init_data(envp);
 	loop(data, envp);
 	free_all(data);
-	return (0);
+	return (g_exit_status);
 }
