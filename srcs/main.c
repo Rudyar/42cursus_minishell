@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:19:49 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/26 11:45:10 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/26 14:47:40 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	loop(t_data *data, char **envp)
 			add_history(line);
 			if (parsing(line, data) == 0)
 			{
-				if (data->nb_cmd == 1 && check_builtins(data->cmd_lst, data))
+				if (data->nb_cmd == 1 && check_builtins(data->cmd_lst))
 					g_exit_status = exec_builtins(data->cmd_lst, data);
 				else
 					start_exec(data->cmd_lst, data);
