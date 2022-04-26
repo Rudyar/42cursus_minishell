@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:19:49 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/25 20:00:16 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/26 11:45:10 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ int	loop(t_data *data, char **envp)
 	{
 		prompt = get_prompt(data, envp);
 		line = readline(prompt);
+		if (!line)
+			break ;
 		ft_free(prompt, data);
 		if (*line)
 		{

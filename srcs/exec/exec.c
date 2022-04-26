@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 14:58:13 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/25 19:58:17 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/26 11:37:11 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,8 @@ static void	launch_ugo(t_cmd *lst, t_data *data)
 	if (lst->out > 2)
 		if (dup2(lst->out, STDOUT_FILENO) == -1)
 			exec_error("Dup2 error 2", lst, data);
-	if (lst->next && lst->next->in == lst->pipe[0])
+	if (lst->next)
 		close(lst->pipe[0]);
-	if (lst->prev && lst->prev->out == lst->prev->pipe[1] \
-		&& lst->in == lst->prev->pipe[0])
-		close(lst->prev->pipe[1]);
 	exec_cmd(lst, data);
 }
 
@@ -66,9 +63,10 @@ void	start_exec(t_cmd *lst, t_data *data)
 	t_cmd	*head_lst;
 
 	head_lst = lst;
-	link_pipe(lst, data);
 	while (lst)
 	{
+		link_pipe(lst, data);
+		// if cmd
 		lst->fork = fork();
 		if (lst->fork < 0)
 			exec_error("Fork error", lst, data);
