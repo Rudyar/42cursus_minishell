@@ -6,7 +6,7 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 14:58:13 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/26 14:46:22 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/26 15:16:40 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ static int exec_cmd(t_cmd *lst, t_data *data)
 		exit(exec_builtins(lst, data));
 	if (!create_bin_path(data, lst))
 		execve(lst->bin_path, lst->cmd, data->env_char);
-	ft_putstr_fd("minishell: ", 2);
-	ft_putstr_fd(lst->cmd[0], 2);
-	ft_putstr_fd(": command not found\n", 2);
+	// ft_putstr_fd("minishell: ", 2);
+	// ft_putstr_fd(lst->cmd[0], 2);
+	// ft_putstr_fd(": command not found\n", 2);
 	exit(127);
 }
 
@@ -43,13 +43,27 @@ static void	launch_ugo(t_cmd *lst, t_data *data)
 
 static void	wait_fork(t_cmd *lst)
 {
-	int	status;
+	int		status;
 
 	while (lst)
 	{
 		waitpid(lst->fork, &status, 0);
 		g_exit_status = status % 255;
+		if (g_exit_status == 127)
+			lst->error = 1;
+		if (!lst->next)
+			break ;
 		lst = lst->next;
+	}
+	while (lst)
+	{
+		if (lst->error)
+		{
+			ft_putstr_fd("minishell: ", 2);
+			ft_putstr_fd(lst->cmd[0], 2);
+			ft_putstr_fd(": command not found\n", 2);
+		}
+		lst = lst->prev;
 	}
 }
 
