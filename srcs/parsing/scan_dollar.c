@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 16:36:45 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/26 14:29:09 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/26 14:54:20 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static char	*get_env_var(t_data *data, char *s, int *i)
 	dst = NULL;
 	if (s[*i] && !ft_isalpha(s[*i]) && s[*i] != '{'
 		&& s[*i] != '}' && s[*i] != '_')
-		return (get_env_var_return(i));
+		return (get_env_var_return_error(i, data));
 	while (check_next_char_dollar(s, i))
 	{
 		if (s[*i] != '{' && s[*i] != '}')
@@ -71,7 +71,7 @@ static char	*get_env_var(t_data *data, char *s, int *i)
 	if (env)
 		dst = ft_strdup(env, data);
 	ft_free(tmp, data);
-	return (dst);
+	return (get_env_var_return(dst, data));
 }
 
 static char	*find_dollar_value(t_data *data, char *s, int i)
