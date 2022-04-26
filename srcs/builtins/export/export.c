@@ -6,7 +6,7 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 13:42:32 by lleveque          #+#    #+#             */
-/*   Updated: 2022/04/16 00:24:29 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/26 13:36:29 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,15 @@ void	free_dup_env_char(t_data *data)
 int	export_cmd(char **args, t_data *data)
 {
 	int	i;
+	int	error;
 
 	i = 0;
+	error = 0;
 	if (!args[1] && data->env)
 		return (print_export(data), 0);
 	while (args[++i])
 	{
-		if (args[i] && !check_export_arg(args[i]))
+		if (args[i] && !check_export_arg(args[i], &error))
 		{
 			if (!check_value(args[i]))
 				continue ;
@@ -59,8 +61,6 @@ int	export_cmd(char **args, t_data *data)
 			else
 				do_not_exist(args, i, data);
 		}
-		else
-			error("export", args[i], "not a valid identifier");
 	}
-	return (free_dup_env_char(data), 0);
+	return (free_dup_env_char(data), error);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 14:58:13 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/26 11:37:11 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/26 14:46:22 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,22 @@
 
 extern int	g_exit_status;
 
-static void	exec_cmd(t_cmd *lst, t_data *data)
+static int exec_cmd(t_cmd *lst, t_data *data)
 {
-	if (check_builtins(lst, data))
-	{
-		g_exit_status = exec_builtins(lst, data);
-		return ;
-	}
-	if (create_bin_path(data, lst))
-		g_exit_status = create_bin_path(data, lst);
-	execve(lst->bin_path, lst->cmd, data->env_char);
-	ft_putstr_fd("Pas exec\n", 2);
+	if (check_builtins(lst))
+		exit(exec_builtins(lst, data));
+	if (!create_bin_path(data, lst))
+		execve(lst->bin_path, lst->cmd, data->env_char);
+	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd(lst->cmd[0], 2);
+	ft_putstr_fd(": command not found\n", 2);
+	exit(127);
 }
 
 static void	launch_ugo(t_cmd *lst, t_data *data)
 {
-	if (lst->in == -1 || lst->out == -1)
-	{
-		free_all(data);
-		exit(42);
-	}
+	if (lst->in < 0 || lst->out < 0)
+		exit(1);
 	if (lst->in > 2)
 		if (dup2(lst->in, STDIN_FILENO) == -1)
 			exec_error("Dup2 error 1", lst, data);
@@ -45,15 +41,14 @@ static void	launch_ugo(t_cmd *lst, t_data *data)
 	exec_cmd(lst, data);
 }
 
-static void	wait_fork(t_cmd *lst, t_data *data)
+static void	wait_fork(t_cmd *lst)
 {
 	int	status;
 
-	(void)data;
 	while (lst)
 	{
 		waitpid(lst->fork, &status, 0);
-		g_exit_status = status;
+		g_exit_status = status % 255;
 		lst = lst->next;
 	}
 }
@@ -78,5 +73,5 @@ void	start_exec(t_cmd *lst, t_data *data)
 			close(lst->out);
 		lst = lst->next;
 	}
-	wait_fork(head_lst, data);
+	wait_fork(head_lst);
 }

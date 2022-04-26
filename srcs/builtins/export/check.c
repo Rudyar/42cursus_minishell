@@ -6,7 +6,7 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 16:22:34 by lleveque          #+#    #+#             */
-/*   Updated: 2022/04/15 11:22:34 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/26 13:36:07 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,16 @@ int	check_value(char *arg)
 	return (0);
 }
 
-int	check_export_arg(char *arg)
+int	check_export_arg(char *arg, int *err)
 {
 	int	i;
 
 	i = 0;
 	if (!ft_isalpha(arg[0]) && arg[0] != '_')
-		return (1);
+	{
+		(*err) = 1;
+		return (error("export", arg, "not a valid identifier"), 1);
+	}
 	while (arg[i] && arg[i] != '=')
 	{
 		if (!ft_isalpha(arg[i]) && !ft_isdigit(arg[i]) && arg[i] != '='
@@ -40,7 +43,8 @@ int	check_export_arg(char *arg)
 		{
 			if (arg[i + 1] && arg[i] == '+' && arg[i + 1] == '=')
 				return (0);
-			return (1);
+			(*err) = 1;
+			return (error("export", arg, "not a valid identifier"), 1);
 		}
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 14:03:42 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/25 19:53:26 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/26 11:59:59 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	exec_builtins(t_cmd *lst, t_data *data)
 	return (0);
 }
 
-int	check_builtins(t_cmd *lst, t_data *data)
+int	check_builtins(t_cmd *lst)
 {
 	if (!ft_strncmp(lst->cmd[0], "cd", 3))
 		return (1);
@@ -44,7 +44,7 @@ int	check_builtins(t_cmd *lst, t_data *data)
 	else if (!ft_strncmp(lst->cmd[0], "env", 4))
 		return (1);
 	else if (!ft_strncmp(lst->cmd[0], "export", 7))
-		return (export_cmd(lst->cmd, data));
+		return (1);
 	else if (!ft_strncmp(lst->cmd[0], "unset", 6))
 		return (1);
 	else if (!ft_strncmp(lst->cmd[0], "exit", 6))
