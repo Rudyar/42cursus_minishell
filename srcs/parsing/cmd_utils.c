@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 12:05:27 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/26 16:23:24 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/26 16:34:12 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_cmd	*fill_cmd_data(t_cmd *cmd)
 {
 	cmd->in = 0;
 	cmd->out = 1;
-	cmd->fork = 0;
+	cmd->fork = -1;
 	cmd->cmd = NULL;
 	cmd->error = 0;
 	cmd->pipe[0] = 0;

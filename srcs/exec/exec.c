@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 14:58:13 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/26 16:23:19 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/26 16:40:47 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,11 @@ static void	wait_fork(t_cmd *lst)
 
 	while (lst)
 	{
-		waitpid(lst->fork, &status, 0);
-		g_exit_status = status % 255;
+		if (lst->fork != -1)
+		{
+			waitpid(lst->fork, &status, 0);
+			g_exit_status = status % 255;
+		}
 		if (g_exit_status == 127)
 			lst->error = 1;
 		if (!lst->next)
@@ -69,7 +72,6 @@ void	start_exec(t_cmd *lst, t_data *data)
 	t_cmd	*head_lst;
 
 	head_lst = lst;
-	print_cmd_lst(lst);
 	while (lst)
 	{
 		link_pipe(lst, data);
