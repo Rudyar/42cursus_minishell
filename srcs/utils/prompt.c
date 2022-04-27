@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 12:41:07 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/25 18:40:23 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/27 15:21:51 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,13 @@ char	*get_prompt(t_data *data, char **envp)
 	home = ft_strdup(ft_getenv(data->env, "HOME"), data);
 	if (!user || !home || !envp[0])
 		return (prompt_without_env(data));
-	prompt = ft_strdup("\e[1;32m", data);
+	prompt = ft_strdup("\001\033[1;32m\002", data);
 	prompt = ft_strjoin(prompt, user, data);
-	prompt = ft_strjoin(prompt, "@minishell\e[0m", data);
+	prompt = ft_strjoin(prompt, "@minishell\001\033[0m\002", data);
 	prompt = ft_strjoin_char(prompt, ':', data);
-	prompt = ft_strjoin(prompt, "\033[1;36m", data);
+	prompt = ft_strjoin(prompt, "\001\033[1;36m\002", data);
 	prompt = home_prompt(prompt, cwd, home, data);
-	prompt = ft_strjoin(prompt, "\e[0m", data);
+	prompt = ft_strjoin(prompt, "\001\033[0m\002", data);
 	prompt = ft_strjoin(prompt, "$ ", data);
 	return (prompt);
 }
