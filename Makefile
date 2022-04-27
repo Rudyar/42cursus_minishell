@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: arudy <arudy@student.42.fr>                +#+  +:+       +#+         #
+#    By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/21 17:19:21 by arudy             #+#    #+#              #
-#    Updated: 2022/04/24 12:43:17 by arudy            ###   ########.fr        #
+#    Updated: 2022/04/27 13:57:07 by lleveque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,6 +69,6 @@ rc: fclean all
 	${RM} ${OBJS} && clear
 
 r: rc
-	valgrind --suppressions=ignoreleak --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose ./${NAME}
+	valgrind --suppressions=ignoreleak --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes --verbose ./${NAME}
 
 .PHONY: all clean fclean re
