@@ -6,7 +6,7 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 12:41:07 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/27 15:55:01 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/27 16:05:59 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ char	*home_prompt(char *prompt, char *cwd, char *home, t_data *data)
 {
 	if (!ft_strncmp(cwd, home, ft_strlen(home)))
 	{
-		prompt = ft_strjoin_char(prompt, '~', data);
+		if (ft_getenv(data->env, "HOME"))
+			prompt = ft_strjoin_char(prompt, '~', data);
 		cwd = ft_substr(cwd, ft_strlen(home), ft_strlen(cwd), data);
 		prompt = ft_strjoin(prompt, cwd, data);
 	}
