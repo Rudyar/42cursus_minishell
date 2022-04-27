@@ -6,7 +6,7 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 12:41:07 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/27 15:21:51 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/27 15:55:01 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char	*get_prompt(t_data *data, char **envp)
 	prompt = ft_strjoin(prompt, user, data);
 	prompt = ft_strjoin(prompt, "@minishell\001\033[0m\002", data);
 	prompt = ft_strjoin_char(prompt, ':', data);
-	prompt = ft_strjoin(prompt, "\001\033[1;36m\002", data);
+	prompt = ft_strjoin(prompt, "\001\033[1;34m\002", data);
 	prompt = home_prompt(prompt, cwd, home, data);
 	prompt = ft_strjoin(prompt, "\001\033[0m\002", data);
 	prompt = ft_strjoin(prompt, "$ ", data);
