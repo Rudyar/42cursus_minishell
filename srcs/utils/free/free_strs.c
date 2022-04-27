@@ -6,11 +6,11 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 10:24:06 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/15 11:26:57 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/27 15:33:07 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../../include/minishell.h"
 
 void	free_strs(char **strs, t_data *data)
 {
