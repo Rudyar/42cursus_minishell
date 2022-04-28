@@ -3,24 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   find_bin_path.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 16:23:25 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/26 12:40:46 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/28 15:38:23 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-static char	**add_cmd_error(int n, char **path, t_data *data)
+static char	**add_cmd_error(char **path, t_data *data)
 {
-	if (n == 1)
-	{
-		ft_putstr_fd("Split problem in add_cmd\n", 2);
-		return (NULL);
-	}
-	if (n == 2)
-		ft_putstr_fd("Join problem in add_cmd\n", 2);
 	free_strs(path, data);
 	return (NULL);
 }
@@ -33,15 +26,15 @@ static char	**add_cmd(t_data *data, char *cmd)
 	i = 0;
 	path = ft_split(ft_getenv(data->env, "PATH"), ':', data);
 	if (!path)
-		return (add_cmd_error(1, path, data));
+		return (add_cmd_error(path, data));
 	while (path[i])
 	{
 		path[i] = ft_strjoin(path[i], "/", data);
 		if (!path[i])
-			return (add_cmd_error(2, path, data));
+			return (add_cmd_error(path, data));
 		path[i] = ft_strjoin(path[i], cmd, data);
 		if (!path[i])
-			return (add_cmd_error(2, path, data));
+			return (add_cmd_error(path, data));
 		i++;
 	}
 	return (path);

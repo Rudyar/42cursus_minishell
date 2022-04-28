@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 14:03:42 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/26 15:55:15 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/28 16:46:32 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,30 @@ void	exec_error(char *msg, t_cmd *lst, t_data *data)
 	ft_putstr_fd("\n", 2);
 	free_all(data);
 	exit(g_exit_status);
+}
+
+int	exit_fork(t_cmd *lst, t_data *data, int ret)
+{
+	if (lst->in > 2)
+		close(lst->in);
+	if (lst->out > 2)
+		close(lst->out);
+	free_all(data);
+	return (ret);
+}
+
+int	executable_error(t_cmd *lst, t_data *data)
+{
+	struct stat	st;
+
+	if (lstat(lst->cmd[0], &st) == -1)
+	{
+		error(lst->cmd[0], NULL, "No such file or directory");
+		return (exit_fork(lst, data, 127));
+	}
+	else if ((st.st_mode & S_IFMT) == S_IFDIR)
+		error(lst->cmd[0], NULL, "Is a directory");
+	else
+		error(lst->cmd[0], NULL, "Permission denied");
+	return (exit_fork(lst, data, 126));
 }
