@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 14:03:42 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/28 16:46:32 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/28 18:25:05 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,10 @@ int	check_builtins(t_cmd *lst)
 
 void	exec_error(char *msg, t_cmd *lst, t_data *data)
 {
-	ft_putstr_fd("minishell: ", 2);
-	ft_putstr_fd(lst->cmd[0], 2);
-	ft_putstr_fd(": ", 2);
-	ft_putstr_fd(msg, 2);
-	ft_putstr_fd("\n", 2);
+	(void)lst;
+	error(NULL, NULL, msg);
 	free_all(data);
+	g_exit_status = 255;
 	exit(g_exit_status);
 }
 

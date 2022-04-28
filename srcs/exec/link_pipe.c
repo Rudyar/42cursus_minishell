@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 17:57:01 by lleveque          #+#    #+#             */
-/*   Updated: 2022/04/26 11:43:44 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/28 18:33:22 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	link_pipe(t_cmd *lst, t_data *data)
 	if (lst->next)
 	{
 		if (pipe(lst->pipe))
-			exec_error("Pipe error", lst, data);
+			exec_error("Broken pipe", lst, data);
 		if (lst->out == 1)
 			lst->out = lst->pipe[1];
 		else

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 14:44:05 by lleveque          #+#    #+#             */
-/*   Updated: 2022/04/26 13:55:22 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/28 17:50:46 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,11 @@ int	check_exit_arg(char *arg)
 int	exit_cmd(char **args, t_data *data)
 {
 	if (!args[1])
+	{
+		ft_putstr_fd("exit\n", 1);
+		free_all(data);
 		exit(g_exit_status);
+	}
 	if (check_exit_arg(args[1]))
 	{
 		ft_putstr_fd("exit\n", 1);
