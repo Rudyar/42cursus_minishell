@@ -6,13 +6,13 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:02:20 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/26 15:41:41 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/29 16:36:22 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-static t_token	*find_cmd_fd(t_cmd *new, t_token *lst)
+static t_token	*find_cmd_fd(t_cmd *new, t_token *lst, t_data *data)
 {
 	if (lst->type == REDIR_IN || lst->type == HERE_DOC)
 	{
@@ -21,7 +21,12 @@ static t_token	*find_cmd_fd(t_cmd *new, t_token *lst)
 		if (lst->type == REDIR_IN)
 			new->in = open(lst->content, O_RDONLY);
 		else if (lst->type == HERE_DOC)
-			new->in = open(lst->content, O_RDONLY);
+		{
+			if (manage_heredoc(new, lst, data) == -1)
+				return (ft_putstr_fd("Here doc error\n", 2), lst->next);
+			// (void)data;
+			// new->in = open(lst->content, O_RDONLY);
+		}
 		if (new->in < 0)
 			return (ft_putstr_fd("minishell: ", 2), \
 				perror(lst->content), lst->next);
@@ -63,7 +68,7 @@ static t_token	*find_cmd_data(t_token *lst, t_cmd *new, t_data *data)
 		if (lst && is_redir_sign(lst->type))
 		{
 			lst = lst->next;
-			lst = find_cmd_fd(new, lst);
+			lst = find_cmd_fd(new, lst, data);
 		}
 	}
 	new->cmd[i] = NULL;

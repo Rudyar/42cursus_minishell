@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 16:36:45 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/26 14:54:20 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/29 16:50:25 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static char	*get_env_var(t_data *data, char *s, int *i)
 	return (get_env_var_return(dst, data));
 }
 
-static char	*find_dollar_value(t_data *data, char *s, int i)
+char	*find_dollar_value(t_data *data, char *s, int i)
 {
 	char	*dst;
 	char	*tmp;
