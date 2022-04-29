@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 15:14:39 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/29 17:08:14 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/29 19:20:16 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,11 @@
 
 char	*heredoc_filename(t_data *data)
 {
-	char	*file_name;
+	char	*filename;
 
-	file_name = ft_malloc(sizeof(char) * 8, data);
-	file_name[0] = '.';
-	file_name[1] = 1;
-	file_name[2] = 2;
-	file_name[3] = 3;
-	file_name[4] = 4;
-	file_name[5] = 5;
-	file_name[6] = 6;
-	file_name[7] = 0;
-	return (file_name);
+	filename = ft_strdup("/tmp/", data);
+	filename = ft_strjoin(filename, "heredoooooooc", data);
+	return (filename);
 }
 
 void	copy_in_heredoc(int fd, char *s, t_data *data)
@@ -38,23 +31,17 @@ void	copy_in_heredoc(int fd, char *s, t_data *data)
 	write(fd, dst, ft_strlen(dst));
 }
 
-int	manage_heredoc(t_cmd *cmd, t_token *lst, t_data *data)
+char	*heredoc_loop(t_token *lst, t_data *data)
 {
-	int		fd;
-	char	*file_name;
 	char	*line;
 	char	*content;
 
-	file_name = heredoc_filename(data);
 	content = NULL;
-	fd = open(file_name, O_WRONLY | O_CREAT | O_APPEND, 0777);
-	if (fd < 0)
-		return (ft_free(file_name, data), fd);
 	while (1)
 	{
 		line = readline("> ");
 		if (!line || !ft_strcmp(line, lst->content))
-			break;
+			break ;
 		if (!content)
 			content = ft_strdup(line, data);
 		else
@@ -62,11 +49,22 @@ int	manage_heredoc(t_cmd *cmd, t_token *lst, t_data *data)
 		content = ft_strjoin_char(content, '\n', data);
 		free(line);
 	}
+	return (content);
+}
+
+int	manage_heredoc(t_cmd *cmd, t_token *lst, t_data *data)
+{
+	int		fd;
+	char	*content;
+	char	*file_name;
+
 	(void)cmd;
-	if (content)
-		copy_in_heredoc(fd, content, data);
-	close(fd);
-	unlink(file_name);
+	file_name = heredoc_filename(data);
+	fd = open(file_name, O_WRONLY | O_CREAT | O_APPEND, 0777);
+	content = heredoc_loop(lst, data);
+	if (fd < 0 || !content)
+		return (ft_free(file_name, data), fd);
+	copy_in_heredoc(fd, content, data);
 	ft_free(file_name, data);
 	return (fd);
 }

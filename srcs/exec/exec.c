@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 14:58:13 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/28 18:12:56 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/29 19:19:50 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,4 +100,5 @@ void	start_exec(t_cmd *lst, t_data *data)
 		lst = lst->next;
 	}
 	wait_fork(head_lst);
+	unlink("/tmp/heredoooooooc");
 }

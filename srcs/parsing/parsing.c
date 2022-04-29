@@ -6,11 +6,52 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:02:20 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/29 16:36:22 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/29 19:16:59 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+// void	*lire(int fd)
+// {
+// 	fd = open("/tmp/heredoooooooc", O_RDONLY);
+// 	perror("heredoc");
+// 	printf("fd : %d\n", fd);
+// 	char	a[999999];
+// 	char	buffer;
+// 	char	*new_a;
+// 	int		i;
+// 	int		len;
+
+// 	i = 0;
+// 	len = 0;
+// 	a[i] = 0;
+// 	while (read(fd, &buffer, 1) > 0)
+// 	{
+// 		a[i] = buffer;
+// 		a[i + 1] = '\0';
+// 		if (a[i] == '\n')
+// 			break;
+// 		i++;
+// 	}
+// 	if (!a[0])
+// 		return (NULL);
+// 	while (a[len] != '\0')
+// 		len++;
+// 	new_a = malloc(len + 1);
+// 	if (!new_a)
+// 		return (NULL);
+// 	i = 0;
+// 	while (a[i])
+// 	{
+// 		new_a[i] = a[i];
+// 		i++;
+// 	}
+// 	new_a[i] = '\0';
+// 	printf("new a %s\n", new_a);
+// 	free(new_a);
+// 	return (NULL);
+// }
 
 static t_token	*find_cmd_fd(t_cmd *new, t_token *lst, t_data *data)
 {
@@ -22,10 +63,8 @@ static t_token	*find_cmd_fd(t_cmd *new, t_token *lst, t_data *data)
 			new->in = open(lst->content, O_RDONLY);
 		else if (lst->type == HERE_DOC)
 		{
-			if (manage_heredoc(new, lst, data) == -1)
-				return (ft_putstr_fd("Here doc error\n", 2), lst->next);
-			// (void)data;
-			// new->in = open(lst->content, O_RDONLY);
+			new->in = manage_heredoc(new, lst, data);
+			// lire(new->in);
 		}
 		if (new->in < 0)
 			return (ft_putstr_fd("minishell: ", 2), \
