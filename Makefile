@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+         #
+#    By: arudy <arudy@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/21 17:19:21 by arudy             #+#    #+#              #
-#    Updated: 2022/04/27 19:21:15 by lleveque         ###   ########.fr        #
+#    Updated: 2022/04/29 10:39:34 by arudy            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ SRCS_LIBFT = $(addprefix srcs/libft/, ft_putstr_fd.c ft_strlen.c \
 SRCS_BUILTINS = $(addprefix srcs/builtins/, echo.c cd.c env.c export/export.c \
 				export/check.c export/utils.c pwd.c unset.c exit.c)
 
-SRCS_EXEC = $(addprefix srcs/exec/, exec.c exec_utils.c link_pipe.c loop.c \
+SRCS_EXEC = $(addprefix srcs/exec/, exec.c exec_utils.c exec_return.c loop.c \
 				signals.c)
 
 OBJS = ${SRCS:.c=.o}

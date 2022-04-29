@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 19:08:27 by lleveque          #+#    #+#             */
-/*   Updated: 2022/04/28 17:23:34 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/29 10:37:05 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	loop(t_data *data, char **envp)
 		add_history(line);
 		if (parsing(line, data) == 0)
 		{
-			if (data->nb_cmd == 1 && check_builtins(data->cmd_lst))
+			if (is_only_builtin(data))
 				g_exit_status = exec_builtins(data->cmd_lst, data);
 			else
 				start_exec(data->cmd_lst, data);

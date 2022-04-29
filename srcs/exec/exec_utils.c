@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 14:03:42 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/28 18:25:05 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/29 10:38:48 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,37 +54,27 @@ int	check_builtins(t_cmd *lst)
 	return (0);
 }
 
-void	exec_error(char *msg, t_cmd *lst, t_data *data)
+int	is_only_builtin(t_data *data)
 {
-	(void)lst;
-	error(NULL, NULL, msg);
-	free_all(data);
-	g_exit_status = 255;
-	exit(g_exit_status);
+	if (data->nb_cmd == 1 && check_builtins(data->cmd_lst) \
+		&& data->cmd_lst->in == 0 && data->cmd_lst->out == 1)
+		return (1);
+	return (0);
 }
 
-int	exit_fork(t_cmd *lst, t_data *data, int ret)
+void	link_pipe(t_cmd *lst, t_data *data)
 {
-	if (lst->in > 2)
-		close(lst->in);
-	if (lst->out > 2)
-		close(lst->out);
-	free_all(data);
-	return (ret);
-}
-
-int	executable_error(t_cmd *lst, t_data *data)
-{
-	struct stat	st;
-
-	if (lstat(lst->cmd[0], &st) == -1)
+	if (lst->next)
 	{
-		error(lst->cmd[0], NULL, "No such file or directory");
-		return (exit_fork(lst, data, 127));
+		if (pipe(lst->pipe))
+			exec_error("Broken pipe", lst, data);
+		if (lst->out == 1)
+			lst->out = lst->pipe[1];
+		else
+			close(lst->pipe[1]);
+		if (lst->next->in == 0)
+			lst->next->in = lst->pipe[0];
+		else
+			close(lst->pipe[0]);
 	}
-	else if ((st.st_mode & S_IFMT) == S_IFDIR)
-		error(lst->cmd[0], NULL, "Is a directory");
-	else
-		error(lst->cmd[0], NULL, "Permission denied");
-	return (exit_fork(lst, data, 126));
 }

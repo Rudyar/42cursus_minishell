@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 12:41:07 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/27 16:05:59 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/29 10:48:20 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ char	*get_prompt(t_data *data, char **envp)
 	home = ft_strdup(ft_getenv(data->env, "HOME"), data);
 	if (!user || !home || !envp[0])
 		return (prompt_without_env(data));
-	prompt = ft_strdup("\001\033[1;32m\002", data);
+	prompt = ft_strdup("\001\033[1;31m\002", data);
 	prompt = ft_strjoin(prompt, user, data);
 	prompt = ft_strjoin(prompt, "@minishell\001\033[0m\002", data);
 	prompt = ft_strjoin_char(prompt, ':', data);
