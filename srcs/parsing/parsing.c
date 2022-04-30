@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:02:20 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/30 12:19:36 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/30 17:23:01 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static t_token	*find_cmd_fd(t_cmd *new, t_token *lst, t_data *data)
 		{
 			heredoc_name = manage_heredoc(lst, data);
 			if (!heredoc_name)
-				return (find_cmd_fd_error(lst));
+				return (lst->next);
 			new->in = open(heredoc_name, O_RDONLY);
 			unlink(heredoc_name);
 			ft_free(heredoc_name, data);

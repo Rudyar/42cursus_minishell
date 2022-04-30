@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 14:58:13 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/30 11:46:25 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/30 18:37:49 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	wait_fork(t_cmd *lst)
 	}
 	while (lst)
 	{
-		if (lst->error && ft_strncmp(lst->cmd[0], "./", 2))
+		if (lst->cmd[0] && lst->error && ft_strncmp(lst->cmd[0], "./", 2))
 			error(lst->cmd[0], NULL, "command not found");
 		lst = lst->prev;
 	}
