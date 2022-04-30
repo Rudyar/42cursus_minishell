@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 16:36:45 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/29 16:50:25 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/30 12:28:32 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ static char	*copy_dollar(char *s, int *i, t_data *data)
 	while (j++ < len)
 		dst[j] = '$';
 	dst[j] = '\0';
-	ft_free(s, data);
 	return (dst);
 }
 
