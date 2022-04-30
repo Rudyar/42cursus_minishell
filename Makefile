@@ -6,7 +6,7 @@
 #    By: arudy <arudy@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/21 17:19:21 by arudy             #+#    #+#              #
-#    Updated: 2022/04/29 19:22:29 by arudy            ###   ########.fr        #
+#    Updated: 2022/04/30 17:49:21 by arudy            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,7 @@ OBJS = ${SRCS:.c=.o}
 
 NAME = minishell
 
-CC = clang
+CC = gcc
 
 CFLAGS = -Wall -Werror -Wextra
 
