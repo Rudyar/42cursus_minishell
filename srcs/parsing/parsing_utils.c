@@ -6,11 +6,18 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 17:41:53 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/24 12:20:19 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/30 11:59:14 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+t_token	*find_cmd_fd_error(t_token *lst)
+{
+	ft_putstr_fd("minishell: ", 2);
+	perror(lst->content);
+	return (lst->next);
+}
 
 char	*ft_getenv(t_env *env, char *s)
 {

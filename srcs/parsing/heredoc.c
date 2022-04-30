@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 15:14:39 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/29 19:20:16 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/30 12:19:50 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ char	*heredoc_filename(t_data *data)
 	char	*filename;
 
 	filename = ft_strdup("/tmp/", data);
-	filename = ft_strjoin(filename, "heredoooooooc", data);
+	filename = ft_strjoin_char(filename, '.', data);
+	filename = ft_strjoin_char(filename, 8, data);
 	return (filename);
 }
 
@@ -28,10 +29,12 @@ void	copy_in_heredoc(int fd, char *s, t_data *data)
 
 	i = 0;
 	dst = find_dollar_value(data, s, i);
+	if (!dst)
+		return ;
 	write(fd, dst, ft_strlen(dst));
 }
 
-char	*heredoc_loop(t_token *lst, t_data *data)
+char	*heredoc_loop(char *eof, t_data *data)
 {
 	char	*line;
 	char	*content;
@@ -40,7 +43,7 @@ char	*heredoc_loop(t_token *lst, t_data *data)
 	while (1)
 	{
 		line = readline("> ");
-		if (!line || !ft_strcmp(line, lst->content))
+		if (!line || !ft_strcmp(line, eof))
 			break ;
 		if (!content)
 			content = ft_strdup(line, data);
@@ -52,19 +55,18 @@ char	*heredoc_loop(t_token *lst, t_data *data)
 	return (content);
 }
 
-int	manage_heredoc(t_cmd *cmd, t_token *lst, t_data *data)
+char	*manage_heredoc(t_token *lst, t_data *data)
 {
 	int		fd;
 	char	*content;
 	char	*file_name;
 
-	(void)cmd;
 	file_name = heredoc_filename(data);
-	fd = open(file_name, O_WRONLY | O_CREAT | O_APPEND, 0777);
-	content = heredoc_loop(lst, data);
+	content = heredoc_loop(lst->content, data);
+	fd = open(file_name, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (fd < 0 || !content)
-		return (ft_free(file_name, data), fd);
+		return (ft_free(file_name, data), NULL);
 	copy_in_heredoc(fd, content, data);
-	ft_free(file_name, data);
-	return (fd);
+	close(fd);
+	return (file_name);
 }

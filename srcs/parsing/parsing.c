@@ -6,70 +6,14 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:02:20 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/29 19:16:59 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/30 12:19:36 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-// void	*lire(int fd)
-// {
-// 	fd = open("/tmp/heredoooooooc", O_RDONLY);
-// 	perror("heredoc");
-// 	printf("fd : %d\n", fd);
-// 	char	a[999999];
-// 	char	buffer;
-// 	char	*new_a;
-// 	int		i;
-// 	int		len;
-
-// 	i = 0;
-// 	len = 0;
-// 	a[i] = 0;
-// 	while (read(fd, &buffer, 1) > 0)
-// 	{
-// 		a[i] = buffer;
-// 		a[i + 1] = '\0';
-// 		if (a[i] == '\n')
-// 			break;
-// 		i++;
-// 	}
-// 	if (!a[0])
-// 		return (NULL);
-// 	while (a[len] != '\0')
-// 		len++;
-// 	new_a = malloc(len + 1);
-// 	if (!new_a)
-// 		return (NULL);
-// 	i = 0;
-// 	while (a[i])
-// 	{
-// 		new_a[i] = a[i];
-// 		i++;
-// 	}
-// 	new_a[i] = '\0';
-// 	printf("new a %s\n", new_a);
-// 	free(new_a);
-// 	return (NULL);
-// }
-
-static t_token	*find_cmd_fd(t_cmd *new, t_token *lst, t_data *data)
+static t_token	*manage_out_redir(t_cmd *new, t_token *lst)
 {
-	if (lst->type == REDIR_IN || lst->type == HERE_DOC)
-	{
-		if (new->in > 2)
-			close(new->in);
-		if (lst->type == REDIR_IN)
-			new->in = open(lst->content, O_RDONLY);
-		else if (lst->type == HERE_DOC)
-		{
-			new->in = manage_heredoc(new, lst, data);
-			// lire(new->in);
-		}
-		if (new->in < 0)
-			return (ft_putstr_fd("minishell: ", 2), \
-				perror(lst->content), lst->next);
-	}
 	if (lst->type == REDIR_OUT || lst->type == DGREATER)
 	{
 		if (new->out > 2)
@@ -79,10 +23,34 @@ static t_token	*find_cmd_fd(t_cmd *new, t_token *lst, t_data *data)
 		else if (lst->type == DGREATER)
 			new->out = open(lst->content, O_CREAT | O_WRONLY | O_APPEND, 0644);
 		if (new->out < 0)
-			return (ft_putstr_fd("minishell: ", 2), \
-				perror(lst->content), lst->next);
+			return (find_cmd_fd_error(lst));
 	}
 	return (lst->next);
+}
+
+static t_token	*find_cmd_fd(t_cmd *new, t_token *lst, t_data *data)
+{
+	char	*heredoc_name;
+
+	if (lst->type == REDIR_IN || lst->type == HERE_DOC)
+	{
+		if (new->in > 2)
+			close(new->in);
+		if (lst->type == REDIR_IN)
+			new->in = open(lst->content, O_RDONLY);
+		else if (lst->type == HERE_DOC)
+		{
+			heredoc_name = manage_heredoc(lst, data);
+			if (!heredoc_name)
+				return (find_cmd_fd_error(lst));
+			new->in = open(heredoc_name, O_RDONLY);
+			unlink(heredoc_name);
+			ft_free(heredoc_name, data);
+		}
+		if (new->in < 0)
+			return (find_cmd_fd_error(lst));
+	}
+	return (manage_out_redir(new, lst));
 }
 
 static t_token	*find_cmd_data(t_token *lst, t_cmd *new, t_data *data)
