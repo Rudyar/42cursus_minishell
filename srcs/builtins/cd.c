@@ -6,7 +6,7 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 13:42:57 by lleveque          #+#    #+#             */
-/*   Updated: 2022/04/26 14:17:05 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/04/30 19:39:42 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ void	update_env(t_env *env, t_data *data)
 	tmp2 = getcwd(NULL, 0);
 	set_env(data->env, data, "PWD", ft_strdup(tmp2, data));
 	free(tmp2);
-	set_env(data->env, data, "OLDPWD", tmp);
+	if (tmp)
+		set_env(data->env, data, "OLDPWD", tmp);
 	free_strs(data->env_char, data);
 	data->env_char = dup_env(data->env, data);
 }
@@ -88,6 +89,7 @@ int	set_path(t_data *data, char *s)
 int	cd_cmd(char **args, t_data *data)
 {
 	char	*path;
+	char	*tmp;
 
 	if (args[0] && args[1] && args[2])
 	{
@@ -104,6 +106,9 @@ int	cd_cmd(char **args, t_data *data)
 	path = check_path(data, args[1]);
 	if (!path)
 		return (1);
+	tmp = getcwd(NULL, 0);
+	set_env(data->env, data, "OLDPWD", ft_strdup(tmp, data));
+	free(tmp);
 	chdir(path);
 	update_env(data->env, data);
 	return (0);
