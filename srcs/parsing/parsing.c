@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:02:20 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/30 17:23:01 by arudy            ###   ########.fr       */
+/*   Updated: 2022/04/30 20:54:16 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,5 +119,9 @@ int	parsing(char *line, t_data *data)
 		return (ft_free(line, data), 1);
 	free_token_lst(&tokens_lst, data);
 	data->cmd_lst = create_cmd_lst(data->tokens, data);
+	if (data->cmd_lst && data->cmd_lst->next)
+		set_env(data->env, data, "_", NULL);
+	else if (data->cmd_lst)
+		set_env(data->env, data, "_", ft_strdup(data->cmd_lst->cmd[0], data));
 	return (0);
 }
