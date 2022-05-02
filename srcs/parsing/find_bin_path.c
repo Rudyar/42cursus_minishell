@@ -3,14 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   find_bin_path.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 16:23:25 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/28 15:38:23 by arudy            ###   ########.fr       */
+/*   Updated: 2022/05/02 15:17:36 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+static char	**path_without_env(char *cmd, t_data *data)
+{
+	char	**path;
+
+	path = ft_malloc(sizeof(char *) * 7, data);
+	path[0] = ft_strjoin(ft_strdup("/bin/", data), cmd, data);
+	path[1] = ft_strjoin(ft_strdup("/sbin/", data), cmd, data);
+	path[2] = ft_strjoin(ft_strdup("/usr/bin/", data), cmd, data);
+	path[3] = ft_strjoin(ft_strdup("/usr/sbin/", data), cmd, data);
+	path[4] = ft_strjoin(ft_strdup("/usr/local/bin/", data), cmd, data);
+	path[5] = ft_strjoin(ft_strdup("/usr/local/sbin/", data), cmd, data);
+	path[6] = NULL;
+	return (path);
+}
 
 static char	**add_cmd_error(char **path, t_data *data)
 {
@@ -47,6 +62,8 @@ static int	find_bin_path(t_data *data, t_cmd *lst)
 
 	i = 0;
 	path = add_cmd(data, lst->cmd[0]);
+	if (!path)
+		path = path_without_env(lst->cmd[0], data);
 	if (!path)
 		return (1);
 	while (path[i])
