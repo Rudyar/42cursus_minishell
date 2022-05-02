@@ -6,7 +6,7 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 16:23:25 by arudy             #+#    #+#             */
-/*   Updated: 2022/05/02 15:17:36 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/05/02 17:09:08 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static int	find_bin_path(t_data *data, t_cmd *lst)
 
 	i = 0;
 	path = add_cmd(data, lst->cmd[0]);
-	if (!path)
+	if (!path && data->env_i)
 		path = path_without_env(lst->cmd[0], data);
 	if (!path)
 		return (1);

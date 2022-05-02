@@ -6,7 +6,7 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 15:54:28 by lleveque          #+#    #+#             */
-/*   Updated: 2022/05/02 16:12:47 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/05/02 17:05:37 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char	**dup_env(t_env *env, t_data *data)
 		i++;
 		env = env->next;
 	}
-	if (!ft_getenv(data->env, "PATH"))
+	if (!ft_getenv(data->env, "PATH") && data->env_i)
 		dest[i++] = ft_strdup("PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin: \
 					/usr/bin:/sbin:/bin", data);
 	dest[i] = NULL;

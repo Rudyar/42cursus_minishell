@@ -6,7 +6,7 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:37:01 by lleveque          #+#    #+#             */
-/*   Updated: 2022/04/26 14:01:14 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/05/02 17:14:51 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,8 @@ int	unset_cmd(char **args, t_data *data)
 			break ;
 		if (data->env)
 			data->env = unset_env_var(data->env, args[i], data);
+		if (!ft_strncmp(args[i], "PATH", 4))
+			data->env_i = 0;
 		i++;
 	}
 	free_strs(data->env_char, data);
