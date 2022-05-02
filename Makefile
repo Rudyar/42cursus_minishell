@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: arudy <arudy@student.42.fr>                +#+  +:+       +#+         #
+#    By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/21 17:19:21 by arudy             #+#    #+#              #
-#    Updated: 2022/04/30 17:49:21 by arudy            ###   ########.fr        #
+#    Updated: 2022/05/02 16:48:01 by lleveque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ SRCS_LIBFT = $(addprefix srcs/libft/, ft_putstr_fd.c ft_strlen.c \
 				ft_strdup.c ft_is_whitespace.c ft_strchr.c ft_isalpha.c \
 				ft_isdigit.c ft_calloc.c ft_bzero.c ft_nsplit.c ft_strcmp.c \
 				ft_strjoin.c ft_strjoin_char.c ft_strcdup.c ft_lstsize.c \
-				ft_atoll.c ft_itoa.c)
+				ft_atoll.c ft_itoa.c ft_atoi.c)
 
 SRCS_BUILTINS = $(addprefix srcs/builtins/, echo.c cd.c env.c export/export.c \
 				export/check.c export/utils.c pwd.c unset.c exit.c)
@@ -67,7 +67,7 @@ fclean: clean
 re: fclean all
 
 rc: fclean all
-	${RM} ${OBJS} && clear && ./${NAME}
+	${RM} ${OBJS} && clear
 
 r: fclean all
 	${RM} ${OBJS}

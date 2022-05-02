@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:22:46 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/25 18:48:43 by arudy            ###   ########.fr       */
+/*   Updated: 2022/05/02 16:40:53 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 int			ft_atoll(char *n);
 int			ft_isalpha(int c);
 int			ft_isdigit(int c);
+int			ft_atoi(char *nptr);
 int			ft_lstsize(t_env *lst);
 int			ft_is_whitespace(int c);
 int			ft_strcmp(char *s1, char *s2);
