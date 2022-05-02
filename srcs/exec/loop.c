@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 19:08:27 by lleveque          #+#    #+#             */
-/*   Updated: 2022/04/30 19:50:02 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/05/02 17:44:16 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,6 @@ int	loop(t_data *data, char **envp)
 			free_lst(data);
 		}
 	}
-	printf("\b\b  \b\bexit\n");
+	printf("\b   \b\bexit\n");
 	return (g_exit_status);
 }
