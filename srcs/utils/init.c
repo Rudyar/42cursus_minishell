@@ -6,7 +6,7 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 18:22:42 by lleveque          #+#    #+#             */
-/*   Updated: 2022/05/02 16:47:22 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/05/02 17:04:26 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ t_env	*mini_env(t_data *data)
 	t_env	*env;
 	char	*tmp;
 
+	data->env_i = 1;
 	env = ft_env_lstnew("PWD=", NULL, data);
 	tmp = getcwd(NULL, 0);
 	set_env(env, data, "PWD", ft_strdup(tmp, data));
@@ -99,6 +100,7 @@ t_data	*init_data(char **envp)
 		exit(EXIT_FAILURE);
 	}
 	data->garbage->ptr = NULL;
+	data->env_i = 0;
 	data->env = init_env(envp, data);
 	data->env_char = dup_env(data->env, data);
 	data->cmd_lst = NULL;
@@ -106,6 +108,5 @@ t_data	*init_data(char **envp)
 	data->history = NULL;
 	data->nb_cmd = 0;
 	data->tokens = NULL;
-	g_exit_status = 0;
 	return (data);
 }
