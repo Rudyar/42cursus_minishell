@@ -6,7 +6,7 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 18:22:42 by lleveque          #+#    #+#             */
-/*   Updated: 2022/05/02 17:04:26 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/05/03 01:24:56 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	update_shlvl(t_env *env, t_data *data)
 			if (!env->var[1])
 			{
 				env->var[1] = ft_strdup("1", data);
-				break;
+				break ;
 			}
 			tmp = ft_atoi(env->var[1]);
 			tmp++;

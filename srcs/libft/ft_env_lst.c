@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env_lst.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:05:20 by lleveque          #+#    #+#             */
-/*   Updated: 2022/04/19 14:12:22 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/05/02 17:38:07 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ char	**var_without_value(char *content, t_data *data)
 	var = ft_malloc(sizeof(char *) * 3, data);
 	var[0] = ft_strcdup(content, '=', data);
 	var[1] = NULL;
+	var[2] = NULL;
 	return (var);
 }
 

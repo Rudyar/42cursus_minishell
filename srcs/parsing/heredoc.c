@@ -6,41 +6,11 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 15:14:39 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/30 17:48:47 by arudy            ###   ########.fr       */
+/*   Updated: 2022/05/02 19:01:50 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
-static char	*no_line_return(int i, char *eof, char *content, t_data *data)
-{
-	char	p1;
-	char	p2;
-
-	p1 = '(';
-	p2 = ')';
-	ft_putstr_fd("minishell: ", 2);
-	ft_putstr_fd("warning: here-document at line ", 2);
-	ft_putstr_fd(ft_itoa(i, data), 2);
-	ft_putstr_fd(" delimited by end-of-file ", 2);
-	write(2, &p1, 1);
-	ft_putstr_fd("wanted `", 2);
-	ft_putstr_fd(eof, 2);
-	ft_putstr_fd("'", 2);
-	write(2, &p2, 1);
-	ft_putstr_fd("\n", 2);
-	return (content);
-}
-
-char	*heredoc_filename(t_data *data)
-{
-	char	*filename;
-
-	filename = ft_strdup("/tmp/", data);
-	filename = ft_strjoin_char(filename, '.', data);
-	filename = ft_strjoin_char(filename, 8, data);
-	return (filename);
-}
 
 void	copy_in_heredoc(int fd, char *s, t_data *data)
 {
@@ -51,23 +21,36 @@ void	copy_in_heredoc(int fd, char *s, t_data *data)
 	if (!s)
 		return ;
 	dst = find_dollar_value(data, s, i);
-	if (!dst)
-		return ;
 	write(fd, dst, ft_strlen(dst));
+}
+
+int	check_eof(char *line, char *eof, t_data *data)
+{
+	int		i;
+	char	*dst;
+
+	i = 0;
+	dst = ft_strdup(line, data);
+	dst = find_dollar_value(data, dst, i);
+	if (!ft_strcmp(dst, eof))
+	{
+		ft_free(dst, data);
+		return (1);
+	}
+	ft_free(dst, data);
+	return (0);
 }
 
 char	*heredoc_loop(char *eof, t_data *data)
 {
 	char	*line;
 	char	*content;
-	int		i;
 
 	content = NULL;
-	i = 1;
 	while (1)
 	{
 		line = readline("> ");
-		if (!line || !ft_strcmp(line, eof))
+		if (!line || !strcmp(line, eof) || check_eof(line, eof, data))
 			break ;
 		if (!content)
 			content = ft_strdup(line, data);
@@ -75,12 +58,8 @@ char	*heredoc_loop(char *eof, t_data *data)
 			content = ft_strjoin(content, line, data);
 		content = ft_strjoin_char(content, '\n', data);
 		free(line);
-		i++;
 	}
-	if (!line)
-		return (no_line_return(i, eof, content, data));
-	free(line);
-	return (content);
+	return (heredoc_return(content, line, eof, data));
 }
 
 char	*manage_heredoc(t_token *lst, t_data *data)

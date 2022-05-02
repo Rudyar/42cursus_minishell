@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:22:46 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/30 12:22:37 by arudy            ###   ########.fr       */
+/*   Updated: 2022/05/02 19:02:09 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ char	*get_env_var_return(char *dst, t_data *data);
 char	*get_env_var_return_error(int *i, t_data *data);
 char	*split_whitespaces(char	*content, t_data *data);
 char	*find_dollar_value(t_data *data, char *s, int i);
+char	*no_line_return(int i, char *eof, char *content, t_data *data);
+char	*heredoc_return(char *content, char *line, char *eof, t_data *data);
 void	print_cmd_lst(t_cmd *lst);
 void	cmd_lst_addback(t_cmd **head, t_cmd *new, t_cmd *prev);
 t_cmd	*cmd_lst_last(t_cmd *lst);

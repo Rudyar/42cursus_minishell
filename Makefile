@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+         #
+#    By: arudy <arudy@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/21 17:19:21 by arudy             #+#    #+#              #
-#    Updated: 2022/05/02 16:48:01 by lleveque         ###   ########.fr        #
+#    Updated: 2022/05/02 18:37:41 by arudy            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ SRCS_PARSING = $(addprefix srcs/parsing/, first_check.c \
 				first_check_redir.c parsing.c parsing_utils.c \
 				cmd_utils.c scan_dollar.c scan_dollar_utils.c \
 				find_bin_path.c scan_tokens_utils.c scan_tokens.c \
-				del_whitespaces.c heredoc.c)
+				del_whitespaces.c heredoc.c heredoc_utils.c)
 
 SRCS_LEXER = $(addprefix srcs/lexer/, lexer.c lexer_utils.c \
 				char_to_token.c token_manager.c)
