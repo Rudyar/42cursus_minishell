@@ -6,7 +6,7 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 15:54:28 by lleveque          #+#    #+#             */
-/*   Updated: 2022/04/19 16:47:04 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/05/02 16:12:47 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,17 @@ void	set_env(t_env *env, t_data *data, char *var, char *value)
 				env->var[1] = value;
 			else
 				env->var[1] = NULL;
+			break ;
 		}
+		if (!env->next)
+			break ;
 		env = env->next;
 	}
+	// if (!ft_strcmp("_", var) && !ft_getenv(data->env, "_"))
+		// ft_env_addback(data->env, ft_env_lstnew(ft_strjoin(var, value, data), env, data));
+	// OLDPWD TOUT CA POUR CD
+	// if (!env)
+		// ft_env_addback(data->env, ft_env_lstnew(ft_strjoin(var, value, data), env));
 }
 
 char	**dup_env(t_env *env, t_data *data)
@@ -50,6 +58,9 @@ char	**dup_env(t_env *env, t_data *data)
 		i++;
 		env = env->next;
 	}
+	if (!ft_getenv(data->env, "PATH"))
+		dest[i++] = ft_strdup("PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin: \
+					/usr/bin:/sbin:/bin", data);
 	dest[i] = NULL;
 	return (dest);
 }
