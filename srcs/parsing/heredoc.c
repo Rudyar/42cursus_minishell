@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 15:14:39 by arudy             #+#    #+#             */
-/*   Updated: 2022/05/02 19:01:50 by arudy            ###   ########.fr       */
+/*   Updated: 2022/05/03 03:29:54 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	copy_in_heredoc(int fd, char *s, t_data *data)
+void	copy_in_heredoc(int fd, char *s, t_token *lst, t_data *data)
 {
 	int		i;
 	char	*dst;
@@ -20,7 +20,10 @@ void	copy_in_heredoc(int fd, char *s, t_data *data)
 	i = 0;
 	if (!s)
 		return ;
-	dst = find_dollar_value(data, s, i);
+	if (lst->type == HERE_DOC_EXPEND)
+		dst = find_dollar_value(data, s, i);
+	else
+		dst = ft_strjoin(s, "", data);
 	write(fd, dst, ft_strlen(dst));
 }
 
@@ -50,7 +53,7 @@ char	*heredoc_loop(char *eof, t_data *data)
 	while (1)
 	{
 		line = readline("> ");
-		if (!line || !strcmp(line, eof) || check_eof(line, eof, data))
+		if (!line || !ft_strcmp(line, eof) || check_eof(line, eof, data))
 			break ;
 		if (!content)
 			content = ft_strdup(line, data);
@@ -77,7 +80,7 @@ char	*manage_heredoc(t_token *lst, t_data *data)
 		perror(lst->content);
 		return (ft_free(file_name, data), NULL);
 	}
-	copy_in_heredoc(fd, content, data);
+	copy_in_heredoc(fd, content, lst, data);
 	close(fd);
 	return (file_name);
 }

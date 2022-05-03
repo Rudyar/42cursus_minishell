@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:02:20 by arudy             #+#    #+#             */
-/*   Updated: 2022/05/02 18:19:22 by arudy            ###   ########.fr       */
+/*   Updated: 2022/05/03 03:30:34 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,14 @@ static t_token	*find_cmd_fd(t_cmd *new, t_token *lst, t_data *data)
 {
 	char	*heredoc_name;
 
-	if (lst->type == REDIR_IN || lst->type == HERE_DOC)
+	if (lst->type == REDIR_IN || lst->type == HERE_DOC \
+		|| lst->type == HERE_DOC_EXPEND)
 	{
 		if (new->in > 2)
 			close(new->in);
 		if (lst->type == REDIR_IN)
 			new->in = open(lst->content, O_RDONLY);
-		else if (lst->type == HERE_DOC)
+		else if (lst->type == HERE_DOC || lst->type == HERE_DOC_EXPEND)
 		{
 			heredoc_name = manage_heredoc(lst, data);
 			if (!heredoc_name)
