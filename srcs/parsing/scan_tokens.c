@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scan_tokens.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 19:47:16 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/19 14:59:36 by arudy            ###   ########.fr       */
+/*   Updated: 2022/05/03 03:28:53 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,16 @@ unexpected token `", 2);
 t_token	*add_redir_type(t_token *lst)
 {
 	if (lst && lst->next)
-		lst->next->type = lst->type;
+	{
+		if (lst->type == HERE_DOC && (lst->next->type == WORD \
+			|| lst->next->type == DOLLAR))
+		{
+			lst->type = HERE_DOC_EXPEND;
+			lst->next->type = HERE_DOC_EXPEND;
+		}
+		else
+			lst->next->type = lst->type;
+	}
 	lst = lst->next;
 	return (lst);
 }
