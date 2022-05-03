@@ -6,7 +6,7 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 14:17:58 by arudy             #+#    #+#             */
-/*   Updated: 2022/05/02 17:02:10 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/05/03 02:12:57 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ typedef enum e_token_type
 	IN_DQUOTE = 12,
 	IN_QUOTE = 13,
 	CMD = 14,
-	ARG = 15
+	ARG = 15,
+	HERE_DOC_EXPEND = 16
 }	t_token_type;
 
 struct	s_history
