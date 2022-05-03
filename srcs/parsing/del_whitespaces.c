@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 14:49:49 by arudy             #+#    #+#             */
-/*   Updated: 2022/05/03 11:48:19 by arudy            ###   ########.fr       */
+/*   Updated: 2022/05/03 18:08:29 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,38 @@ t_token	*token_lst_new(t_token *prev, char *s, t_data *data)
 	return (new);
 }
 
-static t_token	*create_data_token(t_token **lst, t_token *new, t_data *data)
+static t_token	*concat_dollar(t_token **lst, t_token *new, t_data *data)
 {
 	int		i;
 	char	**dollar_splited;
-	t_token	*head_new;
 
 	i = 0;
+	dollar_splited = ft_split((*lst)->content, ' ', data);
+	if (dollar_splited[0])
+	{
+		new->content = ft_strjoin(new->content, dollar_splited[0], data);
+		while (dollar_splited[++i])
+		{
+			new->next = token_lst_new(new, dollar_splited[i], data);
+			new = new->next;
+		}
+		if ((*lst)->next)
+		{
+			new->next = token_lst_new(new, NULL, data);
+			new = new->next;
+		}
+	}
+	return (new);
+}
+
+static t_token	*create_data_token(t_token **lst, t_token *new, t_data *data)
+{
+	t_token	*head_new;
+
 	head_new = new;
 	new->content = ft_strdup((*lst)->content, data);
+	if ((*lst)->type == DOLLAR)
+		new->content = split_whitespaces(new->content, data);
 	new->type = (*lst)->type;
 	new->next = NULL;
 	*lst = (*lst)->next;
@@ -40,32 +63,24 @@ static t_token	*create_data_token(t_token **lst, t_token *new, t_data *data)
 		return (new);
 	while (*lst && is_word((*lst)->type))
 	{
-		printf("c : %c\n", (*lst)->content[0]);
 		if ((*lst)->type == DOLLAR && !ft_is_whitespace((*lst)->content[0]))
 		{
-			dollar_splited = ft_split((*lst)->content, ' ', data);
-			if (dollar_splited[0])
-			{
-				new->content = ft_strjoin(new->content, dollar_splited[0], data);
-				while (dollar_splited[++i])
-				{
-					new->next = token_lst_new(new, dollar_splited[i], data);
-					new = new->next;
-				}
-				if ((*lst)->next)
-				{
-					new->next = token_lst_new(new, NULL, data);
-					new = new->next;
-				}
-			}
+			concat_dollar(lst, new, data);
 		}
 		else
+		{
+			if ((*lst)->type == DOLLAR)
+			{
+				new->content = split_whitespaces(new->content, data);
+			}
 			new->content = ft_strjoin(new->content, (*lst)->content, data);
+		}
 		*lst = (*lst)->next;
 		new->type = WORD;
 	}
 	return (head_new);
 }
+// pas sur du else d'en dessus
 
 t_token	*del_whitespaces(t_token **lst, t_data *data)
 {
