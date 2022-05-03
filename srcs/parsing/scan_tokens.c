@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scan_tokens.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 19:47:16 by arudy             #+#    #+#             */
-/*   Updated: 2022/05/03 03:28:53 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/05/03 11:42:26 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ int	scan_tokens(t_data *data, t_token *lst)
 	if (scan_dollar(data, lst))
 		return (1);
 	data->tokens = del_whitespaces(&lst, data);
+	print_token_lst(data->tokens);
 	add_type(data->tokens);
 	data->nb_cmd = count_nb_cmd(data->tokens);
 	return (0);

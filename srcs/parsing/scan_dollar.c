@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 16:36:45 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/30 12:28:32 by arudy            ###   ########.fr       */
+/*   Updated: 2022/05/03 12:17:16 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ int	scan_dollar(t_data *data, t_token *lst)
 		i = 0;
 		if (lst->type == IN_DQUOTE || lst->type == DOLLAR)
 			lst->content = find_dollar_value(data, lst->content, i);
-		if (lst->type == DOLLAR)
+		if (lst->type == DOLLAR && lst->prev && lst->prev->type != WORD)
 			lst->content = split_whitespaces(lst->content, data);
 		lst = lst->next;
 	}
