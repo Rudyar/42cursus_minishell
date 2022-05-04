@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 10:46:15 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/04 17:20:54 by arudy            ###   ########.fr       */
+/*   Updated: 2022/05/04 17:17:19 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	redir_error_msg(int n, char c)
 	{
 		if (c == '<')
 			ft_putstr_fd("minishell: syntax error near \
-unexpetecd token `newline'\n", 2);
+unexpected token `newline'\n", 2);
 		else
 			ft_putstr_fd("minishell: syntax error near \
 unexpected token `>'\n", 2);
