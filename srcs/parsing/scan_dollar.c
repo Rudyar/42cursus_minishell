@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scan_dollar.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 16:36:45 by arudy             #+#    #+#             */
-/*   Updated: 2022/05/03 17:58:33 by arudy            ###   ########.fr       */
+/*   Updated: 2022/05/04 13:14:51 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ int	scan_dollar(t_data *data, t_token *lst)
 	while (lst)
 	{
 		i = 0;
-		if (lst->type == IN_DQUOTE || lst->type == DOLLAR)
+		if ((lst->type == IN_DQUOTE || lst->type == DOLLAR) && !is_heredoc(lst))
 			lst->content = find_dollar_value(data, lst->content, i);
 		lst = lst->next;
 	}
