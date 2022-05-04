@@ -6,7 +6,7 @@
 #    By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/21 17:19:21 by arudy             #+#    #+#              #
-#    Updated: 2022/05/04 13:17:00 by lleveque         ###   ########.fr        #
+#    Updated: 2022/05/04 18:20:58 by lleveque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,8 @@ SRCS_LIBFT = $(addprefix srcs/libft/, ft_putstr_fd.c ft_strlen.c \
 				ft_atoll.c ft_itoa.c ft_atoi.c)
 
 SRCS_BUILTINS = $(addprefix srcs/builtins/, echo.c cd.c env.c export/export.c \
-				export/check.c export/utils.c pwd.c unset.c exit.c)
+				export/check.c export/utils.c pwd.c unset.c exit.c \
+				export/display.c)
 
 SRCS_EXEC = $(addprefix srcs/exec/, exec.c exec_utils.c exec_return.c loop.c \
 				signals.c)

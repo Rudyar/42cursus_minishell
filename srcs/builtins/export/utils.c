@@ -6,7 +6,7 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 19:03:17 by lleveque          #+#    #+#             */
-/*   Updated: 2022/04/16 00:24:38 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/05/04 18:16:31 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,32 +112,4 @@ char	*name_without_plus(char *s, t_data *data)
 	}
 	dest[i] = '\0';
 	return (dest);
-}
-
-void	print_export(t_data *data)
-{
-	char	**dup;
-	char	*tmp;
-	int		i;
-	int		j;
-
-	dup = dup_env(data->env, data);
-	i = -1;
-	while (dup[++i])
-	{
-		j = i;
-		while (dup[++j])
-		{
-			if (ft_strcmp(dup[i], dup[j]) > 0)
-			{
-				tmp = dup[i];
-				dup[i] = dup[j];
-				dup[j] = tmp;
-			}
-		}
-	}
-	i = -1;
-	while (dup[++i])
-		printf("declare -x %s\n", dup[i]);
-	free_strs(dup, data);
 }
