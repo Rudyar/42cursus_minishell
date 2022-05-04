@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scan_dollar.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 16:36:45 by arudy             #+#    #+#             */
-/*   Updated: 2022/05/04 13:14:51 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/05/04 13:25:02 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,5 +114,3 @@ int	scan_dollar(t_data *data, t_token *lst)
 	}
 	return (0);
 }
-		// if (lst->type == DOLLAR)
-		// 	lst->content = split_whitespaces(lst->content, data);

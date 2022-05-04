@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 18:36:05 by arudy             #+#    #+#             */
-/*   Updated: 2022/05/02 19:03:18 by arudy            ###   ########.fr       */
+/*   Updated: 2022/05/04 15:10:01 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,19 @@
 
 char	*heredoc_filename(t_data *data)
 {
-	char	*filename;
+	char		*filename;
+	struct stat	st;
 
 	filename = ft_strdup("/tmp/", data);
 	filename = ft_strjoin_char(filename, '.', data);
 	filename = ft_strjoin_char(filename, 8, data);
+	if (lstat(filename, &st) == -1)
+		return (filename);
+	else
+	{
+		unlink(filename);
+		perror(filename);
+	}
 	return (filename);
 }
 
