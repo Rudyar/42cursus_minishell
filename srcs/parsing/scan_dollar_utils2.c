@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scan_dollar_utils2.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 13:15:48 by lleveque          #+#    #+#             */
-/*   Updated: 2022/05/04 13:22:14 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/05/04 16:13:04 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,19 @@ int	is_heredoc(t_token *lst)
 				lst->prev->prev->type == HERE_DOC)
 				return (1);
 	}
+	return (0);
+}
+
+int	is_dollar_char_valid(char c, int n)
+{
+	if (n == 1)
+	{
+		if (!ft_isalpha(c) && c != '{' && c != '}' && c != '_')
+			return (1);
+	}
+	else
+		if (!ft_isdigit(c) && !ft_isalpha(c) && c != '{' && c != '}'
+			&& c != '_')
+			return (1);
 	return (0);
 }

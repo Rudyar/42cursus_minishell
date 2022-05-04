@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 10:35:41 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/15 14:01:46 by arudy            ###   ########.fr       */
+/*   Updated: 2022/05/04 17:18:21 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int	check_quotes(char *str, int *i)
 			(*i)++;
 			if (next_quote(str, DQUOTE, i))
 				return (ft_putstr_fd("minishell: syntax error \
-near unexpected token \"\n", 2), 1);
+near unexpected token `\"'\n", 2), 1);
 			else
 				return (0);
 		}
@@ -41,7 +41,7 @@ near unexpected token \"\n", 2), 1);
 			(*i)++;
 			if (next_quote(str, QUOTE, i))
 				return (ft_putstr_fd("minishell: syntax error \
-near unexpected token \'\n", 2), 1);
+near unexpected token `\''\n", 2), 1);
 			else
 				return (0);
 		}

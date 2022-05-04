@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 16:36:45 by arudy             #+#    #+#             */
-/*   Updated: 2022/05/04 13:25:02 by arudy            ###   ########.fr       */
+/*   Updated: 2022/05/04 17:57:43 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,7 @@ static char	*get_env_var(t_data *data, char *s, int *i)
 
 	tmp = NULL;
 	dst = NULL;
-	if (s[*i] && !ft_isalpha(s[*i]) && s[*i] != '{'
-		&& s[*i] != '}' && s[*i] != '_')
+	if (s[*i] && is_dollar_char_valid(s[*i], 1))
 		return (get_env_var_return_error(i, data));
 	while (check_next_char_dollar(s, i))
 	{
@@ -70,7 +69,7 @@ static char	*get_env_var(t_data *data, char *s, int *i)
 	if (env)
 		dst = ft_strdup(env, data);
 	ft_free(tmp, data);
-	return (get_env_var_return(dst, data));
+	return (dst);
 }
 
 char	*find_dollar_value(t_data *data, char *s, int i)
@@ -86,7 +85,7 @@ char	*find_dollar_value(t_data *data, char *s, int i)
 			i++;
 			if (s[i] && s[i] == '?')
 				tmp = (exit_dollar_status(&i, data));
-			else if (!s[i] || (s[i] && (s[i] == '$' || s[i] == ' ')))
+			else if (!s[i] || (s[i] && is_dollar_char_valid(s[i], 2)))
 				tmp = copy_dollar(s, &i, data);
 			else
 				tmp = get_env_var(data, s, &i);

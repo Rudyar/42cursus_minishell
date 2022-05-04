@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 14:49:49 by arudy             #+#    #+#             */
-/*   Updated: 2022/05/04 15:26:33 by arudy            ###   ########.fr       */
+/*   Updated: 2022/05/04 17:52:52 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,6 @@ static t_token	*split_dollar(t_token **lst, t_token *new, t_data *data, int n)
 			new->next = token_lst_new(new, dollar_splited[i], data);
 			new = new->next;
 		}
-		if ((*lst)->next)
-		{
-			new->next = token_lst_new(new, NULL, data);
-			new = new->next;
-		}
 	}
 	return (new);
 }
@@ -64,10 +59,10 @@ static t_token	*create_data_token(t_token **lst, t_token *new, t_data *data)
 	*lst = (*lst)->next;
 	if (!is_word(new->type))
 		return (new);
-	while (*lst && is_word((*lst)->type))
+	while (*lst && is_word((*lst)->type) && (*lst)->content)
 	{
 		if ((*lst)->type == DOLLAR && !ft_is_whitespace((*lst)->content[0]))
-			split_dollar(lst, new, data, 2);
+			new = split_dollar(lst, new, data, 2);
 		else
 		{
 			if ((*lst)->type == DOLLAR)
@@ -92,6 +87,10 @@ t_token	*del_whitespaces(t_token **lst, t_data *data)
 	head_lst = *lst;
 	while (*lst)
 	{
+		while (*lst && (!(*lst)->content || (*lst)->type == WHITE_SPACE))
+			*lst = (*lst)->next;
+		if (!(*lst))
+			break ;
 		new = ft_malloc(sizeof(t_token), data);
 		new = create_data_token(lst, new, data);
 		new->prev = prev;
