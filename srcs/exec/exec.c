@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 14:58:13 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/30 18:37:49 by arudy            ###   ########.fr       */
+/*   Updated: 2022/05/04 15:25:29 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	wait_fork(t_cmd *lst)
 
 	while (lst)
 	{
-		if (lst->fork > 0)
+		if (lst->cmd_name && lst->fork > 0)
 		{
 			waitpid(lst->fork, &status, 0);
 			g_exit_status = status % 255;
@@ -84,7 +84,7 @@ void	start_exec(t_cmd *lst, t_data *data)
 	while (lst)
 	{
 		link_pipe(lst, data);
-		if (lst->cmd_no_args)
+		if (lst->cmd_name)
 		{
 			lst->fork = fork();
 			if (lst->fork < 0)

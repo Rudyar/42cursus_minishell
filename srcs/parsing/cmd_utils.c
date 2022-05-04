@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 12:05:27 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/26 16:34:12 by arudy            ###   ########.fr       */
+/*   Updated: 2022/05/04 15:24:53 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ t_cmd	*fill_cmd_data(t_cmd *cmd)
 	cmd->pipe[1] = 0;
 	cmd->is_builtin = 0;
 	cmd->bin_path = NULL;
-	cmd->cmd_no_args = NULL;
+	cmd->cmd_name = NULL;
 	return (cmd);
 }
 
@@ -78,7 +78,7 @@ void	print_cmd_lst(t_cmd *lst)
 			printf("%s\n", lst->cmd[i++]);
 		printf("in : %d\n", lst->in);
 		printf("out : %d\n", lst->out);
-		printf("CMD : %s\n", lst->cmd_no_args);
+		printf("CMD : %s\n", lst->cmd_name);
 		printf("---------\n");
 		if (lst->next == NULL)
 			break ;

@@ -6,7 +6,7 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:02:20 by arudy             #+#    #+#             */
-/*   Updated: 2022/05/03 03:30:34 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/05/04 15:24:53 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static t_token	*find_cmd_data(t_token *lst, t_cmd *new, t_data *data)
 	{
 		if (lst->type == CMD)
 		{
-			new->cmd_no_args = ft_strdup(lst->content, data);
+			new->cmd_name = ft_strdup(lst->content, data);
 			new->cmd[i++] = ft_strdup(lst->content, data);
 			lst = lst->next;
 		}
