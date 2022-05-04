@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 14:49:49 by arudy             #+#    #+#             */
-/*   Updated: 2022/05/04 14:29:20 by arudy            ###   ########.fr       */
+/*   Updated: 2022/05/04 15:26:33 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,7 @@ static t_token	*create_data_token(t_token **lst, t_token *new, t_data *data)
 	new->content = ft_strdup((*lst)->content, data);
 	new->type = (*lst)->type;
 	if ((*lst)->type == DOLLAR)
-	{
 		new = split_dollar(lst, new, data, 1);
-	}
 	new->next = NULL;
 	*lst = (*lst)->next;
 	if (!is_word(new->type))
