@@ -6,7 +6,7 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 12:37:27 by lleveque          #+#    #+#             */
-/*   Updated: 2022/03/29 17:46:29 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/05/04 17:14:08 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ int	echo_cmd(char **args)
 	while (args[i])
 	{
 		ft_putstr_fd(args[i], 1);
-		i++;
-		if (args[i])
+		if (args[i][0] && args[i + 1][0])
 			ft_putstr_fd(" ", 1);
+		i++;
 	}
 	if (!bool)
 		ft_putstr_fd("\n", 1);
