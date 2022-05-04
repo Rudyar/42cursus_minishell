@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 16:36:45 by arudy             #+#    #+#             */
-/*   Updated: 2022/05/04 16:12:27 by arudy            ###   ########.fr       */
+/*   Updated: 2022/05/04 17:57:43 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static char	*get_env_var(t_data *data, char *s, int *i)
 	if (env)
 		dst = ft_strdup(env, data);
 	ft_free(tmp, data);
-	return (get_env_var_return(dst, data));
+	return (dst);
 }
 
 char	*find_dollar_value(t_data *data, char *s, int i)
