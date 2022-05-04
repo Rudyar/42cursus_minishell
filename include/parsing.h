@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:22:46 by arudy             #+#    #+#             */
-/*   Updated: 2022/05/04 13:16:30 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/05/04 16:11:06 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int		check_redir(char *s, int *i);
 int		find_cmd_length(t_token *lst);
 int		parsing(char *line, t_data *data);
 int		is_redir_sign(t_token_type token);
+int		is_dollar_char_valid(char c, int n);
 int		scan_dollar(t_data *data, t_token *lst);
 int		scan_tokens(t_data *data, t_token *lst);
 int		scan_dollar(t_data *data, t_token *lst);
