@@ -6,7 +6,7 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 15:14:39 by arudy             #+#    #+#             */
-/*   Updated: 2022/05/03 03:56:08 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/05/04 13:13:58 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,9 @@ void	copy_in_heredoc(int fd, char *s, t_token *lst, t_data *data)
 
 int	check_eof(char *line, char *eof, t_data *data)
 {
-	int		i;
 	char	*dst;
 
-	i = 0;
 	dst = ft_strdup(line, data);
-	dst = find_dollar_value(data, dst, i);
 	if (!ft_strcmp(dst, eof))
 	{
 		ft_free(dst, data);
