@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 12:37:27 by lleveque          #+#    #+#             */
-/*   Updated: 2022/05/04 17:21:13 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/05/04 18:25:15 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	echo_cmd(char **args)
 	while (args[i])
 	{
 		ft_putstr_fd(args[i], 1);
-		if (args[i][0] || (args[i + 1] && args[i + 1][0]))
+		if (args[i] && args[i + 1])
 			ft_putstr_fd(" ", 1);
 		i++;
 	}
