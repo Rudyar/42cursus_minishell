@@ -6,7 +6,7 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 13:42:32 by lleveque          #+#    #+#             */
-/*   Updated: 2022/04/26 13:36:29 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/05/04 18:21:17 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	export_cmd(char **args, t_data *data)
 	i = 0;
 	error = 0;
 	if (!args[1] && data->env)
-		return (print_export(data), 0);
+		return (sort_export(data), 0);
 	while (args[++i])
 	{
 		if (args[i] && !check_export_arg(args[i], &error))
