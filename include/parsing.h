@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:22:46 by arudy             #+#    #+#             */
-/*   Updated: 2022/05/02 19:02:09 by arudy            ###   ########.fr       */
+/*   Updated: 2022/05/04 13:16:30 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 int		first_check(char *s);
 int		scan_redir(t_token *lst);
+int		is_heredoc(t_token *lst);
 int		check_tokens(t_data *data);
 int		is_word(t_token_type type);
 int		check_redir(char *s, int *i);
