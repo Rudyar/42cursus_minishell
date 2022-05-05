@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_return.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 10:37:48 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/29 10:38:22 by arudy            ###   ########.fr       */
+/*   Updated: 2022/05/05 15:19:09 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,8 @@
 
 extern int	g_exit_status;
 
-void	exec_error(char *msg, t_cmd *lst, t_data *data)
+void	exec_error(char *msg, t_data *data)
 {
-	(void)lst;
 	error(NULL, NULL, msg);
 	free_all(data);
 	g_exit_status = 255;

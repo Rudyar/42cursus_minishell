@@ -6,7 +6,7 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 14:58:13 by arudy             #+#    #+#             */
-/*   Updated: 2022/05/04 15:25:29 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/05/05 15:19:45 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,10 @@ static void	launch_ugo(t_cmd *lst, t_data *data)
 		exit(exit_fork(lst, data, 1));
 	if (lst->in > 2)
 		if (dup2(lst->in, STDIN_FILENO) == -1)
-			exec_error("Bad file descriptor", lst, data);
+			exec_error("Bad file descriptor", data);
 	if (lst->out > 2)
 		if (dup2(lst->out, STDOUT_FILENO) == -1)
-			exec_error("Bad file descriptor", lst, data);
+			exec_error("Bad file descriptor", data);
 	if (lst->next)
 		close(lst->pipe[0]);
 	if (check_builtins(lst))
@@ -87,9 +87,11 @@ void	start_exec(t_cmd *lst, t_data *data)
 		if (lst->cmd_name)
 		{
 			lst->fork = fork();
+			// signal(SIGINT, SIGTERM);
+			// signal(SIGQUIT, );
 			if (lst->fork < 0)
 				exec_error("fork failed: Resource temporarily unavailable", \
-				lst, data);
+				data);
 			if (lst->fork == 0)
 				launch_ugo(lst, data);
 		}

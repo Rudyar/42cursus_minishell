@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 14:03:42 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/29 10:38:48 by arudy            ###   ########.fr       */
+/*   Updated: 2022/05/05 15:19:27 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	link_pipe(t_cmd *lst, t_data *data)
 	if (lst->next)
 	{
 		if (pipe(lst->pipe))
-			exec_error("Broken pipe", lst, data);
+			exec_error("Broken pipe", data);
 		if (lst->out == 1)
 			lst->out = lst->pipe[1];
 		else
