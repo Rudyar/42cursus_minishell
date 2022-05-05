@@ -6,7 +6,7 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 18:15:36 by lleveque          #+#    #+#             */
-/*   Updated: 2022/05/04 18:20:03 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/05/05 16:15:33 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	print_export(char **dup, t_data *data)
 {
 	int		i;
 	char	**dupdup;
+
 	i = -1;
 	while (dup[++i])
 	{
