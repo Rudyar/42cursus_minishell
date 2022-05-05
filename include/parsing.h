@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:22:46 by arudy             #+#    #+#             */
-/*   Updated: 2022/05/04 16:11:06 by arudy            ###   ########.fr       */
+/*   Updated: 2022/05/05 13:53:42 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ char	*split_whitespaces(char	*content, t_data *data);
 char	*find_dollar_value(t_data *data, char *s, int i);
 char	*no_line_return(int i, char *eof, char *content, t_data *data);
 char	*heredoc_return(char *content, char *line, char *eof, t_data *data);
+void	sig_heredoc(int sig);
 void	print_cmd_lst(t_cmd *lst);
 void	cmd_lst_addback(t_cmd **head, t_cmd *new, t_cmd *prev);
 t_cmd	*cmd_lst_last(t_cmd *lst);

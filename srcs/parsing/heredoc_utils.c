@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 18:36:05 by arudy             #+#    #+#             */
-/*   Updated: 2022/05/04 15:10:01 by arudy            ###   ########.fr       */
+/*   Updated: 2022/05/05 17:55:27 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+extern int	g_exit_status;
 
 char	*heredoc_filename(t_data *data)
 {
@@ -67,4 +69,13 @@ char	*heredoc_return(char *content, char *line, char *eof, t_data *data)
 		return (no_line_return(j, eof, content, data));
 	free(line);
 	return (content);
+}
+
+void	sig_heredoc(int sig)
+{
+	if (sig == SIGINT)
+	{
+		g_exit_status = 130;
+		// close(fd);
+	}
 }
