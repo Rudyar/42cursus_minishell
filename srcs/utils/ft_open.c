@@ -6,7 +6,7 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 15:53:11 by lleveque          #+#    #+#             */
-/*   Updated: 2022/05/05 16:43:21 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/05/05 19:57:05 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ void	close_all(t_data *data)
 	while (data->opened)
 	{
 		tmp = data->opened;
-		close(data->opened->fd);
+		if (data->opened->fd >= 0)
+			close(data->opened->fd);
 		data->opened = data->opened->next;
 		ft_free(tmp, data);
 	}

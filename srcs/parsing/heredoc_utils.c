@@ -6,7 +6,7 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 18:36:05 by arudy             #+#    #+#             */
-/*   Updated: 2022/05/05 17:55:27 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/05/05 19:54:03 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,9 @@ void	sig_heredoc(int sig)
 	if (sig == SIGINT)
 	{
 		g_exit_status = 130;
-		// close(fd);
+		write(1, "\n", 1);
+		rl_replace_line("", 0);
+		rl_on_new_line();
+		close(0);
 	}
 }
