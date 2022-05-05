@@ -6,7 +6,7 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 18:22:42 by lleveque          #+#    #+#             */
-/*   Updated: 2022/05/03 01:24:56 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/05/05 16:01:30 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,15 @@ t_env	*init_env(char **envp, t_data *data)
 	return (env);
 }
 
+void	init_null(t_data *data)
+{
+	data->opened = NULL;
+	data->cmd_lst = NULL;
+	data->current_path = NULL;
+	data->history = NULL;
+	data->tokens = NULL;
+}
+
 t_data	*init_data(char **envp)
 {
 	t_data	*data;
@@ -103,10 +112,7 @@ t_data	*init_data(char **envp)
 	data->env_i = 0;
 	data->env = init_env(envp, data);
 	data->env_char = dup_env(data->env, data);
-	data->cmd_lst = NULL;
-	data->current_path = NULL;
-	data->history = NULL;
 	data->nb_cmd = 0;
-	data->tokens = NULL;
+	init_null(data);
 	return (data);
 }

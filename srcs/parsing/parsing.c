@@ -3,25 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:02:20 by arudy             #+#    #+#             */
-/*   Updated: 2022/05/04 18:09:42 by arudy            ###   ########.fr       */
+/*   Updated: 2022/05/05 16:32:12 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-static t_token	*manage_out_redir(t_cmd *new, t_token *lst)
+static t_token	*manage_out_redir(t_cmd *new, t_token *lst, t_data *data)
 {
 	if (lst->type == REDIR_OUT || lst->type == DGREATER)
 	{
 		if (new->out > 2)
 			close(new->out);
 		if (lst->type == REDIR_OUT)
-			new->out = open(lst->content, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+			new->out = ft_open(lst->content, O_CREAT | O_WRONLY | O_TRUNC, \
+						0644, data);
 		else if (lst->type == DGREATER)
-			new->out = open(lst->content, O_CREAT | O_WRONLY | O_APPEND, 0644);
+			new->out = ft_open(lst->content, O_CREAT | O_WRONLY | O_APPEND, \
+						0644, data);
 		if (new->out < 0)
 			return (find_cmd_fd_error(lst));
 	}
@@ -38,20 +40,20 @@ static t_token	*find_cmd_fd(t_cmd *new, t_token *lst, t_data *data)
 		if (new->in > 2)
 			close(new->in);
 		if (lst->type == REDIR_IN)
-			new->in = open(lst->content, O_RDONLY);
+			new->in = ft_open(lst->content, O_RDONLY, 0, data);
 		else if (lst->type == HERE_DOC || lst->type == HERE_DOC_EXPEND)
 		{
 			heredoc_name = manage_heredoc(lst, data);
 			if (!heredoc_name)
 				return (lst->next);
-			new->in = open(heredoc_name, O_RDONLY);
+			new->in = ft_open(heredoc_name, O_RDONLY, 0, data);
 			unlink(heredoc_name);
 			ft_free(heredoc_name, data);
 		}
 		if (new->in < 0)
 			return (find_cmd_fd_error(lst));
 	}
-	return (manage_out_redir(new, lst));
+	return (manage_out_redir(new, lst, data));
 }
 
 static t_token	*find_cmd_data(t_token *lst, t_cmd *new, t_data *data)

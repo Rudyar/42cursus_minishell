@@ -3,18 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 10:52:06 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/24 12:43:01 by arudy            ###   ########.fr       */
+/*   Updated: 2022/05/05 16:15:37 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef UTILS_H
 # define UTILS_H
 
+int		ft_open(char *filename, int flags, int mod, t_data *data);
 void	free_lst(t_data *data);
 void	free_all(t_data *data);
+void	close_all(t_data *data);
 void	ft_free(void *ptr, t_data *data);
 void	free_env(t_env *lst, t_data *data);
 void	ft_free_garbage(t_garbage *garbage);

@@ -6,11 +6,13 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 15:14:39 by arudy             #+#    #+#             */
-/*   Updated: 2022/05/04 13:13:58 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/05/05 17:55:02 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+extern int	g_exit_status;
 
 void	copy_in_heredoc(int fd, char *s, t_token *lst, t_data *data)
 {
@@ -54,6 +56,12 @@ char	*heredoc_loop(char *eof, t_data *data)
 	while (1)
 	{
 		line = readline("> ");
+		if (g_exit_status == 130)
+		{
+			close_all(data);
+			free_all(data);
+			exit (g_exit_status);
+		}
 		if (!line || !ft_strcmp(line, eof) || check_eof(line, eof, data))
 			break ;
 		if (!content)
@@ -71,17 +79,34 @@ char	*manage_heredoc(t_token *lst, t_data *data)
 	int		fd;
 	char	*content;
 	char	*file_name;
+	pid_t	pid;
 
+	g_exit_status = 0;
 	file_name = heredoc_filename(data);
-	content = heredoc_loop(lst->content, data);
-	fd = open(file_name, O_CREAT | O_WRONLY | O_TRUNC, 0644);
-	if (fd < 0)
+	signal(SIGINT, sig_heredoc);
+	signal(SIGQUIT, sig_heredoc);
+	pid = fork();
+	if (pid < 0)
+		exec_error("fork failed: Resource temporarily unavailable", data);
+	if (pid == 0)
 	{
-		ft_putstr_fd("minishell: ", 2);
-		perror(lst->content);
-		return (ft_free(file_name, data), NULL);
+		// signal(SIGINT, (void (*)(int))sig_heredoc);
+		// sig_heredoc(FAKE_SIGNAL, data);
+		// signal(SIGQUIT, (void (*)(int))sig_heredoc);
+		content = heredoc_loop(lst->content, data);
+		fd = ft_open(file_name, O_CREAT | O_WRONLY | O_TRUNC, 0644, data);
+		if (fd < 0)
+		{
+			ft_putstr_fd("minishell: ", 2);
+			perror(lst->content);
+			return (ft_free(file_name, data), NULL);
+		}
+		copy_in_heredoc(fd, content, lst, data);
+		close_all(data);
+		free_all(data);
+		exit (g_exit_status);
 	}
-	copy_in_heredoc(fd, content, lst, data);
-	close(fd);
+	waitpid(pid, &g_exit_status, 0);
+	g_exit_status = g_exit_status % 255;
 	return (file_name);
 }

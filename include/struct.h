@@ -6,7 +6,7 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 14:17:58 by arudy             #+#    #+#             */
-/*   Updated: 2022/05/04 15:24:54 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/05/05 15:58:13 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ typedef struct s_cmd		t_cmd;
 typedef struct s_env		t_env;
 typedef struct s_data		t_data;
 typedef struct s_token		t_token;
+typedef struct s_opened		t_opened;
 typedef struct s_garbage	t_garbage;
 typedef struct s_history	t_history;
 
@@ -54,6 +55,13 @@ struct	s_garbage
 	struct s_garbage	*next;
 };
 
+struct	s_opened
+{
+	struct s_opened	*prev;
+	int				fd;
+	struct s_opened	*next;
+};
+
 struct	s_cmd
 {
 	int				in;
@@ -78,6 +86,7 @@ struct	s_data
 	t_env		*env;
 	t_cmd		*cmd_lst;
 	t_token		*tokens;
+	t_opened	*opened;
 	t_history	*history;
 	t_garbage	*garbage;
 };
