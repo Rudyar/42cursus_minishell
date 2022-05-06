@@ -6,7 +6,7 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 14:58:13 by arudy             #+#    #+#             */
-/*   Updated: 2022/05/06 20:30:38 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/05/06 21:12:54 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	wait_fork(t_cmd *lst)
 		if (lst->cmd[0] && lst->error && ft_strncmp(lst->cmd[0], "./", 2)
 			&& !ft_strchr(lst->cmd[0], '/'))
 			error(lst->cmd[0], NULL, "command not found");
-		else if (lst->cmd[0] && lst->error)
+		else if (lst->cmd[0] && lst->error && ft_strncmp(lst->cmd[0], "./", 2))
 			error(lst->cmd[0], NULL, "No such file or directory");
 		lst = lst->prev;
 	}
@@ -66,7 +66,7 @@ static int	exec_cmd(t_cmd *lst, t_data *data)
 {
 	if (!create_bin_path(data, lst))
 	{
-		// if (is_minishell (lst->bin_path, data))
+		// if (is_minishell(lst->bin_path, data))
 		// {
 		// 	signal(SIGINT, SIG_IGN);
 		// 	signal(SIGQUIT, SIG_IGN);
