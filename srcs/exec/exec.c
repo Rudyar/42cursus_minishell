@@ -6,7 +6,7 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 14:58:13 by arudy             #+#    #+#             */
-/*   Updated: 2022/05/05 15:19:45 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/05/06 20:30:38 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ static void	wait_fork(t_cmd *lst)
 		if (lst->cmd_name && lst->fork > 0)
 		{
 			waitpid(lst->fork, &status, 0);
-			g_exit_status = status % 255;
+			if (g_exit_status != 130 && g_exit_status != 131)
+				g_exit_status = status % 255;
 		}
 		if (g_exit_status == 127)
 			lst->error = 1;
@@ -33,16 +34,46 @@ static void	wait_fork(t_cmd *lst)
 	}
 	while (lst)
 	{
-		if (lst->cmd[0] && lst->error && ft_strncmp(lst->cmd[0], "./", 2))
+		if (lst->cmd[0] && lst->error && ft_strncmp(lst->cmd[0], "./", 2)
+			&& !ft_strchr(lst->cmd[0], '/'))
 			error(lst->cmd[0], NULL, "command not found");
+		else if (lst->cmd[0] && lst->error)
+			error(lst->cmd[0], NULL, "No such file or directory");
 		lst = lst->prev;
 	}
 }
 
+// int	is_minishell(char *path, t_data *data)
+// {
+// 	int	i;
+// 	int	j;
+// 	char *cmp;
+
+// 	i = 0;
+// 	j = ft_strlen(path) - 1;
+// 	cmp = ft_strdup("llehsinim/", data);
+// 	while (cmp[i])
+// 	{
+// 		if (cmp[i] != path[j])
+// 			return (0);
+// 		i++;
+// 		j--;
+// 	}
+// 	return (1);
+// }
+
 static int	exec_cmd(t_cmd *lst, t_data *data)
 {
 	if (!create_bin_path(data, lst))
+	{
+		// if (is_minishell (lst->bin_path, data))
+		// {
+		// 	signal(SIGINT, SIG_IGN);
+		// 	signal(SIGQUIT, SIG_IGN);
+		// }
+		// printf("path = %s\n", lst->bin_path);
 		execve(lst->bin_path, lst->cmd, data->env_char);
+	}
 	else if (!ft_strncmp(lst->cmd[0], "./", 2))
 		return (executable_error(lst, data));
 	else
@@ -80,15 +111,17 @@ void	start_exec(t_cmd *lst, t_data *data)
 {
 	t_cmd	*head_lst;
 
+	sig_reset();
 	head_lst = lst;
 	while (lst)
 	{
 		link_pipe(lst, data);
 		if (lst->cmd_name)
 		{
+			sig_reset();
 			lst->fork = fork();
-			// signal(SIGINT, SIGTERM);
-			// signal(SIGQUIT, );
+			signal(SIGINT, sig_fork);
+			signal(SIGQUIT, sig_fork);
 			if (lst->fork < 0)
 				exec_error("fork failed: Resource temporarily unavailable", \
 				data);

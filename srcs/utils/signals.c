@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/06 08:47:04 by arudy             #+#    #+#             */
-/*   Updated: 2022/05/06 10:38:10 by arudy            ###   ########.fr       */
+/*   Updated: 2022/05/06 20:25:17 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,19 @@ void	sig_reset(void)
 	signal(SIGQUIT, SIG_IGN);
 }
 
-void	sig_exec_handler(int sig)
+void	sig_fork(int sig)
 {
 	if (sig == SIGINT)
 	{
-		ft_putstr_fd("quit FORKKKKK\n", 1);
+		ft_putstr_fd("\n", 1);
 		g_exit_status = 130;
 	}
 	else if (sig == SIGQUIT)
-		ft_putstr_fd("quit FORKKKKK\n", 1);
+	{
+		ft_putstr_fd("Quit (core dumped)\n", 1);
+		g_exit_status = 131;
+	}
 }
-		// exit(130);
-		// ft_putstr_fd("\b\b  \b\b", 1);
 
 void	sig_handler(int sig)
 {
@@ -45,7 +46,6 @@ void	sig_handler(int sig)
 	}
 	else if (sig == SIGQUIT)
 		ft_putstr_fd("\b\b  \b\b", 1);
-	return ;
 }
 
 void	sig_heredoc(int sig)
