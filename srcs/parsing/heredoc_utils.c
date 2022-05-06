@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 18:36:05 by arudy             #+#    #+#             */
-/*   Updated: 2022/05/05 19:54:03 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/05/06 10:18:17 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*heredoc_filename(t_data *data)
 	return (filename);
 }
 
-char	*no_line_return(int i, char *eof, char *content, t_data *data)
+int	no_line_return(int i, char *eof, char *content, t_data *data)
 {
 	char	p1;
 	char	p2;
@@ -49,10 +49,21 @@ char	*no_line_return(int i, char *eof, char *content, t_data *data)
 	ft_putstr_fd("'", 2);
 	write(2, &p2, 1);
 	ft_putstr_fd("\n", 2);
-	return (content);
+	// return (content);
+	(void)content;
+	return (0);
 }
 
-char	*heredoc_return(char *content, char *line, char *eof, t_data *data)
+int	exit_heredoc_fork(t_data *data, int dup_stdin)
+{
+	close(0);
+	close(dup_stdin);
+	close_all(data);
+	free_all(data);
+	return(g_exit_status);
+}
+
+int	heredoc_return(char *content, char *line, char *eof, t_data *data)
 {
 	int	i;
 	int	j;
@@ -68,17 +79,6 @@ char	*heredoc_return(char *content, char *line, char *eof, t_data *data)
 	if (!line)
 		return (no_line_return(j, eof, content, data));
 	free(line);
-	return (content);
-}
-
-void	sig_heredoc(int sig)
-{
-	if (sig == SIGINT)
-	{
-		g_exit_status = 130;
-		write(1, "\n", 1);
-		rl_replace_line("", 0);
-		rl_on_new_line();
-		close(0);
-	}
+	// return (content);
+	return (0);
 }

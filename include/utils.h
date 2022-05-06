@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 10:52:06 by arudy             #+#    #+#             */
-/*   Updated: 2022/05/05 16:15:37 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/05/06 08:54:14 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 # define UTILS_H
 
 int		ft_open(char *filename, int flags, int mod, t_data *data);
+void	sig_reset(void);
+void	sig_handler(int sig);
+void	sig_heredoc(int sig);
+void	sig_handler_heredoc(void);
+void	sig_exec_handler(int sig);
 void	free_lst(t_data *data);
 void	free_all(t_data *data);
 void	close_all(t_data *data);

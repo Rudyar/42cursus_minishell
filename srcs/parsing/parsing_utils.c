@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 17:41:53 by arudy             #+#    #+#             */
-/*   Updated: 2022/04/30 11:59:14 by arudy            ###   ########.fr       */
+/*   Updated: 2022/05/06 08:59:35 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_token	*find_cmd_fd_error(t_token *lst)
 {
-	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd("minishellllllllllllllll: ", 2);
 	perror(lst->content);
 	return (lst->next);
 }

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+         #
+#    By: arudy <arudy@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/21 17:19:21 by arudy             #+#    #+#              #
-#    Updated: 2022/05/05 16:16:05 by lleveque         ###   ########.fr        #
+#    Updated: 2022/05/06 08:48:13 by arudy            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,8 @@ SRCS = ${SRCS_MAIN} ${SRCS_UTILS} ${SRCS_PARSING} ${SRCS_LEXER} ${SRCS_LIBFT} \
 SRCS_MAIN = $(addprefix srcs/, main.c)
 
 SRCS_UTILS = $(addprefix srcs/utils/, free/ft_free.c init.c error.c env.c\
-				free/free_strs.c ft_malloc.c free/utils.c prompt.c ft_open.c)
+				free/free_strs.c ft_malloc.c free/utils.c prompt.c ft_open.c \
+				signals.c)
 
 SRCS_PARSING = $(addprefix srcs/parsing/, first_check.c \
 				first_check_redir.c parsing.c parsing_utils.c \
@@ -39,8 +40,7 @@ SRCS_BUILTINS = $(addprefix srcs/builtins/, echo.c cd.c env.c export/export.c \
 				export/check.c export/utils.c pwd.c unset.c exit.c \
 				export/display.c)
 
-SRCS_EXEC = $(addprefix srcs/exec/, exec.c exec_utils.c exec_return.c loop.c \
-				signals.c)
+SRCS_EXEC = $(addprefix srcs/exec/, exec.c exec_utils.c exec_return.c loop.c)
 
 OBJS = ${SRCS:.c=.o}
 

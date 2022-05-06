@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:02:20 by arudy             #+#    #+#             */
-/*   Updated: 2022/05/05 16:32:12 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/05/06 10:09:24 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,9 @@ static t_token	*find_cmd_fd(t_cmd *new, t_token *lst, t_data *data)
 			new->in = ft_open(lst->content, O_RDONLY, 0, data);
 		else if (lst->type == HERE_DOC || lst->type == HERE_DOC_EXPEND)
 		{
-			heredoc_name = manage_heredoc(lst, data);
-			if (!heredoc_name)
+			// heredoc_name = manage_heredoc(lst, data);
+			heredoc_name = heredoc_filename(data);
+			if (manage_heredoc(lst, data))
 				return (lst->next);
 			new->in = ft_open(heredoc_name, O_RDONLY, 0, data);
 			unlink(heredoc_name);
