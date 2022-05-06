@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 18:57:22 by lleveque          #+#    #+#             */
-/*   Updated: 2022/04/25 19:01:31 by arudy            ###   ########.fr       */
+/*   Updated: 2022/05/06 17:27:53 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,27 +16,27 @@ void	remove_garbage(void *ptr, t_data *data)
 {
 	t_garbage	*tmp;
 
-	while (data->garbage->ptr != ptr)
+	while (data->garbage && data->garbage->ptr != ptr)
 		data->garbage = data->garbage->next;
 	tmp = data->garbage;
-	if (!data->garbage->prev && !data->garbage->next)
+	if (data->garbage && !data->garbage->prev && !data->garbage->next)
 		return (free(tmp));
-	if (!data->garbage->prev)
+	if (data->garbage && !data->garbage->prev)
 		data->garbage->next->prev = NULL;
-	else if (!data->garbage->next)
+	else if (data->garbage && !data->garbage->next)
 	{
 		data->garbage->prev->next = NULL;
 		data->garbage = data->garbage->prev;
 	}
-	if (data->garbage->prev && data->garbage->next)
+	if (data->garbage && data->garbage->prev && data->garbage->next)
 	{
 		data->garbage->prev->next = data->garbage->next;
 		data->garbage->next->prev = data->garbage->prev;
 	}
-	if (data->garbage->next)
+	if (data->garbage && data->garbage->next)
 		data->garbage = data->garbage->next;
 	free(tmp);
-	while (data->garbage->prev)
+	while (data->garbage && data->garbage->prev)
 		data->garbage = data->garbage->prev;
 }
 

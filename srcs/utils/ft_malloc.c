@@ -6,7 +6,7 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 15:09:12 by lleveque          #+#    #+#             */
-/*   Updated: 2022/04/18 17:55:16 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/05/06 17:27:06 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ void	*ft_malloc(size_t size, t_data *data)
 		printf("minishell: malloc error: terminal killed\n");
 		exit(1);
 	}
-	if (data->garbage->ptr)
+	if (data->garbage && data->garbage->ptr)
 		ft_garb_addback(data, ft_garb_lstnew(ptr, data));
-	else
+	else if (data->garbage)
 	{
 		data->garbage->prev = NULL;
 		data->garbage->ptr = ptr;

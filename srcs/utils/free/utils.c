@@ -6,7 +6,7 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 22:47:18 by lleveque          #+#    #+#             */
-/*   Updated: 2022/05/04 15:24:54 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/05/06 17:56:39 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,19 @@ void	ft_free_garbage(t_garbage *garbage)
 {
 	t_garbage	*tmp;
 
-	while (garbage->next)
+	while (garbage && garbage->next)
 	{
 		tmp = garbage;
-		if (garbage->ptr)
+		if (garbage && garbage->ptr)
 			free(garbage->ptr);
 		garbage = garbage->next;
 		free(tmp);
 	}
-	free(garbage->ptr);
-	free(garbage);
+	if (garbage)
+	{
+		free(garbage->ptr);
+		free(garbage);
+	}
 }
 
 void	free_env(t_env *lst, t_data *data)
