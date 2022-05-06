@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 15:14:39 by arudy             #+#    #+#             */
-/*   Updated: 2022/05/06 10:32:44 by arudy            ###   ########.fr       */
+/*   Updated: 2022/05/06 16:10:26 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,7 @@ int	check_eof(char *line, char *eof, t_data *data)
 int	heredoc_loop(char *content, char *eof, t_data *data, int dup_stdin)
 {
 	char	*line;
-	// char	*content;
 
-	// content = NULL;
 	while (1)
 	{
 		line = readline("> ");
@@ -61,7 +59,6 @@ int	heredoc_loop(char *content, char *eof, t_data *data, int dup_stdin)
 			close(dup_stdin);
 			close_all(data);
 			free_all(data);
-			printf("bonjour\n\n\n");
 			exit(g_exit_status);
 		}
 		if (!line || !ft_strcmp(line, eof) || check_eof(line, eof, data))
@@ -73,22 +70,17 @@ int	heredoc_loop(char *content, char *eof, t_data *data, int dup_stdin)
 		content = ft_strjoin_char(content, '\n', data);
 		free(line);
 	}
-	return (heredoc_return(content, line, eof, data));
+	return (heredoc_loop_return(content, line, eof, data));
 }
 
-int	manage_heredoc(t_token *lst, t_data *data)
+int	manage_heredoc(t_token *lst, char *file_name, char *content, t_data *data)
 {
 	int		fd;
-	char	*content;
-	char	*file_name;
 	pid_t	pid;
 	int		dup_stdin;
 
-	g_exit_status = 0;
 	sig_reset();
 	dup_stdin = dup(0);
-	content = NULL;
-	file_name = heredoc_filename(data);
 	pid = fork();
 	if (pid < 0)
 		exec_error("fork failed: Resource temporarily unavailable", data);
@@ -98,11 +90,7 @@ int	manage_heredoc(t_token *lst, t_data *data)
 		dup2(dup_stdin, 0);
 		fd = ft_open(file_name, O_CREAT | O_WRONLY | O_TRUNC, 0644, data);
 		if (fd < 0)
-		{
-			ft_putstr_fd("minishell: ", 2);
-			perror(lst->content);
-			return (ft_free(file_name, data), 1);
-		}
+			return (manage_heredoc_return_error(lst, data));
 		if (heredoc_loop(content, lst->content, data, dup_stdin))
 			exit(exit_heredoc_fork(data, dup_stdin));
 		copy_in_heredoc(fd, content, lst, data);
@@ -111,6 +99,5 @@ int	manage_heredoc(t_token *lst, t_data *data)
 	waitpid(pid, &g_exit_status, 0);
 	g_exit_status = g_exit_status % 255;
 	close(dup_stdin);
-	ft_free(file_name, data);
-	return (0);
+	return (g_exit_status);
 }

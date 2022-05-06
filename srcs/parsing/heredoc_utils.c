@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 18:36:05 by arudy             #+#    #+#             */
-/*   Updated: 2022/05/06 10:18:17 by arudy            ###   ########.fr       */
+/*   Updated: 2022/05/06 16:08:18 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,11 @@ char	*heredoc_filename(t_data *data)
 	if (lstat(filename, &st) == -1)
 		return (filename);
 	else
-	{
 		unlink(filename);
-		perror(filename);
-	}
 	return (filename);
 }
 
-int	no_line_return(int i, char *eof, char *content, t_data *data)
+int	no_line_return(int i, char *eof, t_data *data)
 {
 	char	p1;
 	char	p2;
@@ -49,8 +46,6 @@ int	no_line_return(int i, char *eof, char *content, t_data *data)
 	ft_putstr_fd("'", 2);
 	write(2, &p2, 1);
 	ft_putstr_fd("\n", 2);
-	// return (content);
-	(void)content;
 	return (0);
 }
 
@@ -60,10 +55,10 @@ int	exit_heredoc_fork(t_data *data, int dup_stdin)
 	close(dup_stdin);
 	close_all(data);
 	free_all(data);
-	return(g_exit_status);
+	return (g_exit_status);
 }
 
-int	heredoc_return(char *content, char *line, char *eof, t_data *data)
+int	heredoc_loop_return(char *content, char *line, char *eof, t_data *data)
 {
 	int	i;
 	int	j;
@@ -77,8 +72,15 @@ int	heredoc_return(char *content, char *line, char *eof, t_data *data)
 		i++;
 	}
 	if (!line)
-		return (no_line_return(j, eof, content, data));
+		return (no_line_return(j, eof, data));
 	free(line);
-	// return (content);
 	return (0);
+}
+
+int	manage_heredoc_return_error(t_token *lst, t_data *data)
+{
+	ft_putstr_fd("minishell: ", 2);
+	perror(lst->content);
+	free_all(data);
+	return (1);
 }

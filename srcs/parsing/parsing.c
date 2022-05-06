@@ -6,11 +6,13 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:02:20 by arudy             #+#    #+#             */
-/*   Updated: 2022/05/06 10:09:24 by arudy            ###   ########.fr       */
+/*   Updated: 2022/05/06 16:10:35 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+extern int	g_exit_status;
 
 static t_token	*manage_out_redir(t_cmd *new, t_token *lst, t_data *data)
 {
@@ -43,10 +45,10 @@ static t_token	*find_cmd_fd(t_cmd *new, t_token *lst, t_data *data)
 			new->in = ft_open(lst->content, O_RDONLY, 0, data);
 		else if (lst->type == HERE_DOC || lst->type == HERE_DOC_EXPEND)
 		{
-			// heredoc_name = manage_heredoc(lst, data);
+			g_exit_status = 0;
 			heredoc_name = heredoc_filename(data);
-			if (manage_heredoc(lst, data))
-				return (lst->next);
+			if (manage_heredoc(lst, heredoc_name, NULL, data))
+				return (NULL);
 			new->in = ft_open(heredoc_name, O_RDONLY, 0, data);
 			unlink(heredoc_name);
 			ft_free(heredoc_name, data);
@@ -57,33 +59,32 @@ static t_token	*find_cmd_fd(t_cmd *new, t_token *lst, t_data *data)
 	return (manage_out_redir(new, lst, data));
 }
 
-static t_token	*find_cmd_data(t_token *lst, t_cmd *new, t_data *data)
+static t_cmd	*find_cmd_data(t_token **lst, t_cmd *new, t_data *data, int i)
 {
-	int	i;
-
-	i = 0;
-	new->cmd = ft_malloc(sizeof(char *) * (find_cmd_length(lst) + 1), data);
-	while (lst && lst->type != PIPE)
+	new->cmd = ft_malloc(sizeof(char *) * (find_cmd_length(*lst) + 1), data);
+	while (*lst && (*lst)->type != PIPE)
 	{
-		if (lst->type == CMD)
+		if ((*lst)->type == CMD)
 		{
-			new->cmd_name = ft_strdup(lst->content, data);
-			new->cmd[i++] = ft_strdup(lst->content, data);
-			lst = lst->next;
+			new->cmd_name = ft_strdup((*lst)->content, data);
+			new->cmd[i++] = ft_strdup((*lst)->content, data);
+			*lst = (*lst)->next;
 		}
-		while (lst && lst->type == ARG)
+		while (*lst && (*lst)->type == ARG)
 		{
-			new->cmd[i++] = ft_strdup(lst->content, data);
-			lst = lst->next;
+			new->cmd[i++] = ft_strdup((*lst)->content, data);
+			*lst = (*lst)->next;
 		}
-		if (lst && is_redir_sign(lst->type))
+		if (*lst && is_redir_sign((*lst)->type))
 		{
-			lst = lst->next;
-			lst = find_cmd_fd(new, lst, data);
+			*lst = (*lst)->next;
+			*lst = find_cmd_fd(new, *lst, data);
+			if (!(*lst))
+				return (find_cmd_data_error(new, data));
 		}
 	}
 	new->cmd[i] = NULL;
-	return (lst);
+	return (new);
 }
 
 static t_cmd	*create_cmd_lst(t_token *lst, t_data *data)
@@ -99,7 +100,13 @@ static t_cmd	*create_cmd_lst(t_token *lst, t_data *data)
 	{
 		new = ft_malloc(sizeof(t_cmd), data);
 		fill_cmd_data(new);
-		lst = find_cmd_data(lst, new, data);
+		new = find_cmd_data(&lst, new, data, 0);
+		if (!new)
+		{
+			if (head)
+				free_cmd_lst(&head, data);
+			return (NULL);
+		}
 		cmd_lst_addback(&head, new, prev);
 		prev = new;
 		if (lst)

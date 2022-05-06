@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 16:12:52 by arudy             #+#    #+#             */
-/*   Updated: 2022/05/04 17:57:33 by arudy            ###   ########.fr       */
+/*   Updated: 2022/05/06 15:39:49 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,17 +46,6 @@ char	*get_env_var_return_error(int *i, t_data *data)
 	(*i)++;
 	return (dst);
 }
-
-// char	*get_env_var_return(char *dst, t_data *data)
-// {
-// 	if (!dst)
-// 	{
-// 		dst = ft_malloc(sizeof(char) * 1, data);
-// 		dst[0] = '\0';
-// 	}
-// 	(void)data;
-// 	return (dst);
-// }
 
 char	*split_whitespaces(char	*content, t_data *data)
 {

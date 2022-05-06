@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:22:46 by arudy             #+#    #+#             */
-/*   Updated: 2022/05/06 10:17:10 by arudy            ###   ########.fr       */
+/*   Updated: 2022/05/06 16:09:22 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,12 @@ int		scan_tokens(t_data *data, t_token *lst);
 int		scan_dollar(t_data *data, t_token *lst);
 int		check_next_char_dollar(char *s, int *i);
 int		create_bin_path(t_data *data, t_cmd *lst);
-int		manage_heredoc(t_token *lst, t_data *data);
+int		no_line_return(int i, char *eof, t_data *data);
 int		exit_heredoc_fork(t_data *data, int dup_stdin);
+int		manage_heredoc(t_token *lst, char *heredoc_name, \
+char *content, t_data *data);
+int		manage_heredoc_return_error(t_token *lst, t_data *data);
+int		heredoc_loop_return(char *content, char *line, char *eof, t_data *data);
 char	*ft_getenv(t_env *env, char *s);
 char	*heredoc_filename(t_data *data);
 char	*check_line(char *s, t_data *data);
@@ -38,14 +42,11 @@ char	*get_env_var_return(char *dst, t_data *data);
 char	*get_env_var_return_error(int *i, t_data *data);
 char	*split_whitespaces(char	*content, t_data *data);
 char	*find_dollar_value(t_data *data, char *s, int i);
-int		no_line_return(int i, char *eof, char *content, t_data *data);
-// char	*no_line_return(int i, char *eof, char *content, t_data *data);
-int		heredoc_return(char *content, char *line, char *eof, t_data *data);
-// char	*heredoc_return(char *content, char *line, char *eof, t_data *data);
 void	print_cmd_lst(t_cmd *lst);
 void	cmd_lst_addback(t_cmd **head, t_cmd *new, t_cmd *prev);
 t_cmd	*cmd_lst_last(t_cmd *lst);
 t_cmd	*fill_cmd_data(t_cmd *cmd);
+t_cmd	*find_cmd_data_error(t_cmd *cmd, t_data *data);
 t_token	*find_cmd_fd_error(t_token *lst);
 t_token	*del_whitespaces(t_token **lst, t_data *data);
 

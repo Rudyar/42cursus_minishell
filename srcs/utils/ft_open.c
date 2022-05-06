@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_open.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 15:53:11 by lleveque          #+#    #+#             */
-/*   Updated: 2022/05/05 19:57:05 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/05/06 16:03:16 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	opened_addback(t_opened *new, t_data *data)
 	data->opened->next = new;
 	while (data->opened->prev)
 		data->opened = data->opened->prev;
-
 }
 
 void	close_all(t_data *data)
