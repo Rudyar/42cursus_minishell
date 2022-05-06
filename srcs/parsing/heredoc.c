@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 15:14:39 by arudy             #+#    #+#             */
-/*   Updated: 2022/05/06 16:10:26 by arudy            ###   ########.fr       */
+/*   Updated: 2022/05/06 16:30:40 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	check_eof(char *line, char *eof, t_data *data)
 	return (0);
 }
 
-int	heredoc_loop(char *content, char *eof, t_data *data, int dup_stdin)
+int	heredoc_loop(char *content, char *eof, t_data *data)
 {
 	char	*line;
 
@@ -55,12 +55,7 @@ int	heredoc_loop(char *content, char *eof, t_data *data, int dup_stdin)
 	{
 		line = readline("> ");
 		if (g_exit_status == 130)
-		{
-			close(dup_stdin);
-			close_all(data);
-			free_all(data);
-			exit(g_exit_status);
-		}
+			return (1);
 		if (!line || !ft_strcmp(line, eof) || check_eof(line, eof, data))
 			break ;
 		if (!content)
@@ -91,10 +86,10 @@ int	manage_heredoc(t_token *lst, char *file_name, char *content, t_data *data)
 		fd = ft_open(file_name, O_CREAT | O_WRONLY | O_TRUNC, 0644, data);
 		if (fd < 0)
 			return (manage_heredoc_return_error(lst, data));
-		if (heredoc_loop(content, lst->content, data, dup_stdin))
-			exit(exit_heredoc_fork(data, dup_stdin));
+		if (heredoc_loop(content, lst->content, data))
+			exit_heredoc_fork(data, dup_stdin, file_name);
 		copy_in_heredoc(fd, content, lst, data);
-		exit(exit_heredoc_fork(data, dup_stdin));
+		exit_heredoc_fork(data, dup_stdin, NULL);
 	}
 	waitpid(pid, &g_exit_status, 0);
 	g_exit_status = g_exit_status % 255;

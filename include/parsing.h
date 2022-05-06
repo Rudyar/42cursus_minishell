@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:22:46 by arudy             #+#    #+#             */
-/*   Updated: 2022/05/06 16:09:22 by arudy            ###   ########.fr       */
+/*   Updated: 2022/05/06 16:29:41 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ int		scan_dollar(t_data *data, t_token *lst);
 int		check_next_char_dollar(char *s, int *i);
 int		create_bin_path(t_data *data, t_cmd *lst);
 int		no_line_return(int i, char *eof, t_data *data);
-int		exit_heredoc_fork(t_data *data, int dup_stdin);
 int		manage_heredoc(t_token *lst, char *heredoc_name, \
 char *content, t_data *data);
 int		manage_heredoc_return_error(t_token *lst, t_data *data);
+int		exit_heredoc_fork(t_data *data, int dup_stdin, char *file_name);
 int		heredoc_loop_return(char *content, char *line, char *eof, t_data *data);
 char	*ft_getenv(t_env *env, char *s);
 char	*heredoc_filename(t_data *data);

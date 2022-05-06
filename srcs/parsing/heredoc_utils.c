@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 18:36:05 by arudy             #+#    #+#             */
-/*   Updated: 2022/05/06 16:08:18 by arudy            ###   ########.fr       */
+/*   Updated: 2022/05/06 16:32:13 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,16 @@ int	no_line_return(int i, char *eof, t_data *data)
 	return (0);
 }
 
-int	exit_heredoc_fork(t_data *data, int dup_stdin)
+int	exit_heredoc_fork(t_data *data, int dup_stdin, char *file_name)
 {
-	close(0);
+	if (file_name)
+		unlink(file_name);
+	else
+		close (0);
 	close(dup_stdin);
 	close_all(data);
 	free_all(data);
-	return (g_exit_status);
+	exit (g_exit_status);
 }
 
 int	heredoc_loop_return(char *content, char *line, char *eof, t_data *data)
