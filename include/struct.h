@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 14:17:58 by arudy             #+#    #+#             */
-/*   Updated: 2022/05/05 15:58:13 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/05/09 14:36:09 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ typedef struct s_data		t_data;
 typedef struct s_token		t_token;
 typedef struct s_opened		t_opened;
 typedef struct s_garbage	t_garbage;
-typedef struct s_history	t_history;
 
 typedef enum e_token_type
 {
@@ -40,13 +39,6 @@ typedef enum e_token_type
 	ARG = 15,
 	HERE_DOC_EXPEND = 16
 }	t_token_type;
-
-struct	s_history
-{
-	struct s_history	*prev;
-	char				*cmd;
-	struct s_history	*next;
-};
 
 struct	s_garbage
 {
@@ -87,7 +79,6 @@ struct	s_data
 	t_cmd		*cmd_lst;
 	t_token		*tokens;
 	t_opened	*opened;
-	t_history	*history;
 	t_garbage	*garbage;
 };
 

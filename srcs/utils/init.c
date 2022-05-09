@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 18:22:42 by lleveque          #+#    #+#             */
-/*   Updated: 2022/05/05 16:01:30 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/05/09 14:36:21 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ void	init_null(t_data *data)
 	data->opened = NULL;
 	data->cmd_lst = NULL;
 	data->current_path = NULL;
-	data->history = NULL;
 	data->tokens = NULL;
 }
 
