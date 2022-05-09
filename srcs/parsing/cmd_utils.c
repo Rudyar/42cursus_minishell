@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 12:05:27 by arudy             #+#    #+#             */
-/*   Updated: 2022/05/04 15:24:53 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/05/09 16:57:30 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,13 @@ void	print_cmd_lst(t_cmd *lst)
 
 	while (lst)
 	{
-		i = 0;
+		i = 1;
 		printf("---------\n");
-		while (lst->cmd[i] != NULL)
-			printf("%s\n", lst->cmd[i++]);
-		printf("in : %d\n", lst->in);
-		printf("out : %d\n", lst->out);
 		printf("CMD : %s\n", lst->cmd_name);
+		while (lst->cmd[i] != NULL)
+			printf("%s ", lst->cmd[i++]);
+		printf("\nin : %d\n", lst->in);
+		printf("out : %d\n", lst->out);
 		printf("---------\n");
 		if (lst->next == NULL)
 			break ;
