@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:02:20 by arudy             #+#    #+#             */
-/*   Updated: 2022/05/09 10:52:05 by arudy            ###   ########.fr       */
+/*   Updated: 2022/05/09 15:45:23 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,14 @@ static t_token	*manage_out_redir(t_cmd *new, t_token *lst, t_data *data)
 		if (new->out < 0)
 			return (find_cmd_fd_error(lst));
 	}
-	return (lst->next);
+	return (lst);
 }
 
 static t_token	*find_cmd_fd(t_cmd *new, t_token *lst, t_data *data)
 {
 	char	*heredoc_name;
 
+	lst = lst->next;
 	if (lst->type == REDIR_IN || lst->type == HERE_DOC \
 		|| lst->type == HERE_DOC_EXPEND)
 	{
@@ -77,11 +78,12 @@ static t_cmd	*find_cmd_data(t_token **lst, t_cmd *new, t_data *data, int i)
 		}
 		if (*lst && is_redir_sign((*lst)->type))
 		{
-			*lst = (*lst)->next;
 			*lst = find_cmd_fd(new, *lst, data);
 			if (!(*lst))
 				return (find_cmd_data_error(new, data));
 		}
+		if (*lst)
+			*lst = (*lst)->next;
 	}
 	new->cmd[i] = NULL;
 	return (new);
