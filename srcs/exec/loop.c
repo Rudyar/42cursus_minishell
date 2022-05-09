@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 19:08:27 by lleveque          #+#    #+#             */
-/*   Updated: 2022/05/02 17:44:16 by arudy            ###   ########.fr       */
+/*   Updated: 2022/05/09 12:01:42 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	loop(t_data *data, char **envp)
 	while (1)
 	{
 		signal(SIGINT, sig_handler);
-		signal(SIGQUIT, sig_handler);
+		signal(SIGQUIT, SIG_IGN);
 		prompt = get_prompt(data, envp);
 		line = readline(prompt);
 		if (!line)

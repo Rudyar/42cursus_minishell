@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/06 08:47:04 by arudy             #+#    #+#             */
-/*   Updated: 2022/05/06 20:25:17 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/05/09 12:07:14 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,14 @@ void	sig_reset(void)
 
 void	sig_fork(int sig)
 {
+	printf("SIGNALS\n");
 	if (sig == SIGINT)
 	{
 		ft_putstr_fd("\n", 1);
 		g_exit_status = 130;
 	}
 	else if (sig == SIGQUIT)
-	{
-		ft_putstr_fd("Quit (core dumped)\n", 1);
 		g_exit_status = 131;
-	}
 }
 
 void	sig_handler(int sig)

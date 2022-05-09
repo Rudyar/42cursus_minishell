@@ -3,16 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 14:58:13 by arudy             #+#    #+#             */
-/*   Updated: 2022/05/06 21:12:54 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/05/09 12:04:54 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
 extern int	g_exit_status;
+
+static void	wait_lst_error(t_cmd *lst)
+{
+	while (lst)
+	{
+		if (lst->cmd[0] && lst->error && ft_strncmp(lst->cmd[0], "./", 2)
+			&& !ft_strchr(lst->cmd[0], '/'))
+			error(lst->cmd[0], NULL, "command not found");
+		else if (lst->cmd[0] && lst->error && ft_strncmp(lst->cmd[0], "./", 2))
+			error(lst->cmd[0], NULL, "No such file or directory");
+		lst = lst->prev;
+	}
+}
 
 static void	wait_fork(t_cmd *lst)
 {
@@ -28,52 +41,20 @@ static void	wait_fork(t_cmd *lst)
 		}
 		if (g_exit_status == 127)
 			lst->error = 1;
+		if (g_exit_status == 131)
+			ft_putstr_fd("Quit (core dumped)\n", 1);
 		if (!lst->next)
 			break ;
 		lst = lst->next;
 	}
-	while (lst)
-	{
-		if (lst->cmd[0] && lst->error && ft_strncmp(lst->cmd[0], "./", 2)
-			&& !ft_strchr(lst->cmd[0], '/'))
-			error(lst->cmd[0], NULL, "command not found");
-		else if (lst->cmd[0] && lst->error && ft_strncmp(lst->cmd[0], "./", 2))
-			error(lst->cmd[0], NULL, "No such file or directory");
-		lst = lst->prev;
-	}
+	wait_lst_error(lst);
+	sig_reset();
 }
-
-// int	is_minishell(char *path, t_data *data)
-// {
-// 	int	i;
-// 	int	j;
-// 	char *cmp;
-
-// 	i = 0;
-// 	j = ft_strlen(path) - 1;
-// 	cmp = ft_strdup("llehsinim/", data);
-// 	while (cmp[i])
-// 	{
-// 		if (cmp[i] != path[j])
-// 			return (0);
-// 		i++;
-// 		j--;
-// 	}
-// 	return (1);
-// }
 
 static int	exec_cmd(t_cmd *lst, t_data *data)
 {
 	if (!create_bin_path(data, lst))
-	{
-		// if (is_minishell(lst->bin_path, data))
-		// {
-		// 	signal(SIGINT, SIG_IGN);
-		// 	signal(SIGQUIT, SIG_IGN);
-		// }
-		// printf("path = %s\n", lst->bin_path);
 		execve(lst->bin_path, lst->cmd, data->env_char);
-	}
 	else if (!ft_strncmp(lst->cmd[0], "./", 2))
 		return (executable_error(lst, data));
 	else
@@ -91,6 +72,8 @@ static int	exec_cmd(t_cmd *lst, t_data *data)
 
 static void	launch_ugo(t_cmd *lst, t_data *data)
 {
+	signal(SIGINT, sig_fork);
+	signal(SIGQUIT, sig_fork);
 	if (lst->in < 0 || lst->out < 0)
 		exit(exit_fork(lst, data, 1));
 	if (lst->in > 2)
@@ -111,17 +94,14 @@ void	start_exec(t_cmd *lst, t_data *data)
 {
 	t_cmd	*head_lst;
 
-	sig_reset();
 	head_lst = lst;
+	sig_reset();
 	while (lst)
 	{
 		link_pipe(lst, data);
 		if (lst->cmd_name)
 		{
-			sig_reset();
 			lst->fork = fork();
-			signal(SIGINT, sig_fork);
-			signal(SIGQUIT, sig_fork);
 			if (lst->fork < 0)
 				exec_error("fork failed: Resource temporarily unavailable", \
 				data);
