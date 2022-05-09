@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 18:36:05 by arudy             #+#    #+#             */
-/*   Updated: 2022/05/06 16:32:13 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/05/09 18:49:23 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ int	heredoc_loop_return(char *content, char *line, char *eof, t_data *data)
 	free(line);
 	return (0);
 }
+// Prendre l'adresse en param et tout rechecker !!
 
 int	manage_heredoc_return_error(t_token *lst, t_data *data)
 {

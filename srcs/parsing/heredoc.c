@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 15:14:39 by arudy             #+#    #+#             */
-/*   Updated: 2022/05/06 16:30:40 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/05/09 18:48:50 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	check_eof(char *line, char *eof, t_data *data)
 	return (0);
 }
 
-int	heredoc_loop(char *content, char *eof, t_data *data)
+int	heredoc_loop(char **content, char *eof, t_data *data)
 {
 	char	*line;
 
@@ -59,13 +59,13 @@ int	heredoc_loop(char *content, char *eof, t_data *data)
 		if (!line || !ft_strcmp(line, eof) || check_eof(line, eof, data))
 			break ;
 		if (!content)
-			content = ft_strdup(line, data);
+			*content = ft_strdup(line, data);
 		else
-			content = ft_strjoin(content, line, data);
-		content = ft_strjoin_char(content, '\n', data);
+			*content = ft_strjoin(*content, line, data);
+		*content = ft_strjoin_char(*content, '\n', data);
 		free(line);
 	}
-	return (heredoc_loop_return(content, line, eof, data));
+	return (heredoc_loop_return(*content, line, eof, data));
 }
 
 int	manage_heredoc(t_token *lst, char *file_name, char *content, t_data *data)
@@ -86,7 +86,7 @@ int	manage_heredoc(t_token *lst, char *file_name, char *content, t_data *data)
 		fd = ft_open(file_name, O_CREAT | O_WRONLY | O_TRUNC, 0644, data);
 		if (fd < 0)
 			return (manage_heredoc_return_error(lst, data));
-		if (heredoc_loop(content, lst->content, data))
+		if (heredoc_loop(&content, lst->content, data))
 			exit_heredoc_fork(data, dup_stdin, file_name);
 		copy_in_heredoc(fd, content, lst, data);
 		exit_heredoc_fork(data, dup_stdin, NULL);
