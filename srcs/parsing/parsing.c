@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:02:20 by arudy             #+#    #+#             */
-/*   Updated: 2022/05/09 15:45:23 by arudy            ###   ########.fr       */
+/*   Updated: 2022/05/09 16:18:56 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ static t_cmd	*find_cmd_data(t_token **lst, t_cmd *new, t_data *data, int i)
 		{
 			new->cmd_name = ft_strdup((*lst)->content, data);
 			new->cmd[i++] = ft_strdup((*lst)->content, data);
-			*lst = (*lst)->next;
 		}
 		while (*lst && (*lst)->type == ARG)
 		{
