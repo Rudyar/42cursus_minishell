@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 14:58:13 by arudy             #+#    #+#             */
-/*   Updated: 2022/05/09 12:04:54 by arudy            ###   ########.fr       */
+/*   Updated: 2022/05/09 14:20:34 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,13 @@ static void	wait_fork(t_cmd *lst)
 	while (lst)
 	{
 		if (lst->cmd_name && lst->fork > 0)
-		{
 			waitpid(lst->fork, &status, 0);
-			if (g_exit_status != 130 && g_exit_status != 131)
-				g_exit_status = status % 255;
-		}
+		if (WIFEXITED(status))
+			g_exit_status = WEXITSTATUS(status);
+		else if (WIFSIGNALED(status))
+			print_sig_error_exec(status);
 		if (g_exit_status == 127)
 			lst->error = 1;
-		if (g_exit_status == 131)
-			ft_putstr_fd("Quit (core dumped)\n", 1);
 		if (!lst->next)
 			break ;
 		lst = lst->next;

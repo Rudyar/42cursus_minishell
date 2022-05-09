@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 14:03:42 by arudy             #+#    #+#             */
-/*   Updated: 2022/05/05 15:19:27 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/05/09 14:18:46 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,18 @@ void	link_pipe(t_cmd *lst, t_data *data)
 			lst->next->in = lst->pipe[0];
 		else
 			close(lst->pipe[0]);
+	}
+}
+
+void	print_sig_error_exec(int status)
+{
+	g_exit_status = WTERMSIG(status) + 128;
+	if (g_exit_status == 131)
+		ft_putstr_fd("Quit (core dumped)\n", 1);
+	if (g_exit_status == 130)
+	{
+		write(1, "\n", 1);
+		rl_replace_line("", 0);
+		rl_on_new_line();
 	}
 }

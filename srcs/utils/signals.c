@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/06 08:47:04 by arudy             #+#    #+#             */
-/*   Updated: 2022/05/09 12:07:14 by arudy            ###   ########.fr       */
+/*   Updated: 2022/05/09 14:17:32 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	sig_reset(void)
 
 void	sig_fork(int sig)
 {
-	printf("SIGNALS\n");
 	if (sig == SIGINT)
 	{
 		ft_putstr_fd("\n", 1);
@@ -42,8 +41,6 @@ void	sig_handler(int sig)
 		rl_replace_line("", 0);
 		rl_redisplay();
 	}
-	else if (sig == SIGQUIT)
-		ft_putstr_fd("\b\b  \b\b", 1);
 }
 
 void	sig_heredoc(int sig)
@@ -56,12 +53,10 @@ void	sig_heredoc(int sig)
 		rl_replace_line("", 0);
 		rl_on_new_line();
 	}
-	else if (sig == SIGQUIT)
-		ft_putstr_fd("\b\b  \b\b", 1);
 }
 
 void	sig_handler_heredoc(void)
 {
 	signal(SIGINT, sig_heredoc);
-	signal(SIGQUIT, sig_heredoc);
+	signal(SIGQUIT, SIG_IGN);
 }
