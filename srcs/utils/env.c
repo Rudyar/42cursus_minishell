@@ -6,7 +6,7 @@
 /*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 15:54:28 by lleveque          #+#    #+#             */
-/*   Updated: 2022/05/02 17:05:37 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/05/10 10:05:27 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,6 @@ void	set_env(t_env *env, t_data *data, char *var, char *value)
 			break ;
 		env = env->next;
 	}
-	// if (!ft_strcmp("_", var) && !ft_getenv(data->env, "_"))
-		// ft_env_addback(data->env, ft_env_lstnew(ft_strjoin(var, value, data), env, data));
-	// OLDPWD TOUT CA POUR CD
-	// if (!env)
-		// ft_env_addback(data->env, ft_env_lstnew(ft_strjoin(var, value, data), env));
 }
 
 char	**dup_env(t_env *env, t_data *data)
