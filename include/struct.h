@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 14:17:58 by arudy             #+#    #+#             */
-/*   Updated: 2022/05/09 14:36:09 by arudy            ###   ########.fr       */
+/*   Updated: 2022/05/10 14:00:44 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ typedef struct s_data		t_data;
 typedef struct s_token		t_token;
 typedef struct s_opened		t_opened;
 typedef struct s_garbage	t_garbage;
+typedef struct s_fd_error	t_fd_error;
 
 typedef enum e_token_type
 {
@@ -47,6 +48,14 @@ struct	s_garbage
 	struct s_garbage	*next;
 };
 
+struct	s_fd_error
+{
+	struct s_fd_error	*prev;
+	char				*content;
+	int					errno_nb;
+	struct s_fd_error	*next;
+};
+
 struct	s_opened
 {
 	struct s_opened	*prev;
@@ -73,13 +82,13 @@ struct	s_data
 {
 	int			nb_cmd;
 	int			env_i;
-	char		*current_path;
 	char		**env_char;
 	t_env		*env;
 	t_cmd		*cmd_lst;
 	t_token		*tokens;
 	t_opened	*opened;
 	t_garbage	*garbage;
+	t_fd_error	*fd_error;
 };
 
 struct	s_env

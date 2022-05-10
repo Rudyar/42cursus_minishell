@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 18:22:42 by lleveque          #+#    #+#             */
-/*   Updated: 2022/05/09 14:36:21 by arudy            ###   ########.fr       */
+/*   Updated: 2022/05/10 11:36:34 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,9 @@ t_env	*init_env(char **envp, t_data *data)
 void	init_null(t_data *data)
 {
 	data->opened = NULL;
-	data->cmd_lst = NULL;
-	data->current_path = NULL;
 	data->tokens = NULL;
+	data->cmd_lst = NULL;
+	data->fd_error = NULL;
 }
 
 t_data	*init_data(char **envp)

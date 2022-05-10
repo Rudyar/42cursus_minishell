@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:02:20 by arudy             #+#    #+#             */
-/*   Updated: 2022/05/09 17:02:04 by arudy            ###   ########.fr       */
+/*   Updated: 2022/05/10 14:04:02 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static t_token	*manage_out_redir(t_cmd *new, t_token *lst, t_data *data)
 			new->out = ft_open(lst->content, O_CREAT | O_WRONLY | O_APPEND, \
 						0644, data);
 		if (new->out < 0)
-			return (find_cmd_fd_error(lst));
+			return (new_fd_error(lst, data));
 	}
 	return (lst);
 }
@@ -37,8 +37,8 @@ static t_token	*find_cmd_fd(t_cmd *new, t_token *lst, t_data *data)
 	char	*heredoc_name;
 
 	lst = lst->next;
-	if (lst->type == REDIR_IN || lst->type == HERE_DOC \
-		|| lst->type == HERE_DOC_EXPEND)
+	if ((lst->type == REDIR_IN || lst->type == HERE_DOC \
+		|| lst->type == HERE_DOC_EXPEND))
 	{
 		if (new->in > 2)
 			close(new->in);
@@ -55,7 +55,7 @@ static t_token	*find_cmd_fd(t_cmd *new, t_token *lst, t_data *data)
 			ft_free(heredoc_name, data);
 		}
 		if (new->in < 0)
-			return (find_cmd_fd_error(lst));
+			return (new_fd_error(lst, data));
 	}
 	return (manage_out_redir(new, lst, data));
 }
@@ -74,7 +74,8 @@ static t_cmd	*find_cmd_data(t_token **lst, t_cmd *new, t_data *data, int i)
 			new->cmd[i++] = ft_strdup((*lst)->content, data);
 		if (*lst && is_redir_sign((*lst)->type))
 		{
-			*lst = find_cmd_fd(new, *lst, data);
+			if (new->in != -1 && new->out != -1)
+				*lst = find_cmd_fd(new, *lst, data);
 			if (!(*lst))
 				return (find_cmd_data_error(new, data));
 		}
@@ -128,6 +129,7 @@ int	parsing(char *line, t_data *data)
 		return (ft_free(line, data), 1);
 	free_token_lst(&tokens_lst, data);
 	data->cmd_lst = create_cmd_lst(data->tokens, data);
+	print_fd_error(data);
 	if (!data->cmd_lst)
 		return (1);
 	else if (data->nb_cmd != 1)
