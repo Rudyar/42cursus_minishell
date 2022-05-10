@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_return.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 10:37:48 by arudy             #+#    #+#             */
-/*   Updated: 2022/05/05 15:19:09 by lleveque         ###   ########.fr       */
+/*   Updated: 2022/05/10 10:32:53 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int	exit_fork(t_cmd *lst, t_data *data, int ret)
 		close(lst->in);
 	if (lst->out > 2)
 		close(lst->out);
+	if (lst->next)
+		close(lst->pipe[0]);
 	free_all(data);
 	return (ret);
 }

@@ -6,7 +6,7 @@
 #    By: arudy <arudy@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/21 17:19:21 by arudy             #+#    #+#              #
-#    Updated: 2022/05/06 08:48:13 by arudy            ###   ########.fr        #
+#    Updated: 2022/05/10 10:38:32 by arudy            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,9 +70,5 @@ re: fclean all
 
 rc: fclean all
 	${RM} ${OBJS} && clear
-
-r: fclean all
-	${RM} ${OBJS}
-	valgrind --suppressions=ignoreleak --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes --verbose ./${NAME}
 
 .PHONY: all clean fclean re
