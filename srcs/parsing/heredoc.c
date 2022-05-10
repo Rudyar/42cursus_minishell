@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 15:14:39 by arudy             #+#    #+#             */
-/*   Updated: 2022/05/09 18:48:50 by arudy            ###   ########.fr       */
+/*   Updated: 2022/05/10 09:28:10 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	heredoc_loop(char **content, char *eof, t_data *data)
 			return (1);
 		if (!line || !ft_strcmp(line, eof) || check_eof(line, eof, data))
 			break ;
-		if (!content)
+		if (!*content)
 			*content = ft_strdup(line, data);
 		else
 			*content = ft_strjoin(*content, line, data);
