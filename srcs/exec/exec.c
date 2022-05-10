@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lleveque <lleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 14:58:13 by arudy             #+#    #+#             */
-/*   Updated: 2022/05/09 16:22:54 by arudy            ###   ########.fr       */
+/*   Updated: 2022/05/10 09:47:34 by lleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,14 @@ static int	exec_cmd(t_cmd *lst, t_data *data)
 		return (exit_fork(lst, data, 127));
 	if (!ft_strncmp(lst->cmd[0], "./", 2))
 		return (executable_error(lst, data));
-	if (errno == EACCES)
+	if (errno == EACCES && ft_strchr(lst->cmd[0], '/'))
 	{
-		ft_putstr_fd("minishell: ", 2);
+		error(lst->cmd[0], NULL, "Is a directory");
+		return (exit_fork(lst, data, 126));
+	}
+	else if (errno == EACCES)
+	{
+		ft_putstr_fd("minisheeeeeell: ", 2);
 		perror(lst->cmd[0]);
 		return (exit_fork(lst, data, 126));
 	}
