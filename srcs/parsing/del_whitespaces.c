@@ -6,7 +6,7 @@
 /*   By: arudy <arudy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 14:49:49 by arudy             #+#    #+#             */
-/*   Updated: 2022/05/04 17:52:52 by arudy            ###   ########.fr       */
+/*   Updated: 2022/05/10 16:36:24 by arudy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,10 @@ static t_token	*split_dollar(t_token **lst, t_token *new, t_data *data, int n)
 	{
 		if (n == 1)
 			new->content = ft_strdup(dollar_splited[0], data);
-		else
+		else if (n == 2)
 			new->content = ft_strjoin(new->content, dollar_splited[0], data);
+		else
+			i = -1;
 		while (dollar_splited[++i])
 		{
 			new->next = token_lst_new(new, dollar_splited[i], data);
@@ -63,12 +65,10 @@ static t_token	*create_data_token(t_token **lst, t_token *new, t_data *data)
 	{
 		if ((*lst)->type == DOLLAR && !ft_is_whitespace((*lst)->content[0]))
 			new = split_dollar(lst, new, data, 2);
+		else if ((*lst)->type == DOLLAR)
+			new = split_dollar(lst, new, data, 3);
 		else
-		{
-			if ((*lst)->type == DOLLAR)
-				new->content = split_whitespaces(new->content, data);
 			new->content = ft_strjoin(new->content, (*lst)->content, data);
-		}
 		*lst = (*lst)->next;
 		new->type = WORD;
 	}
