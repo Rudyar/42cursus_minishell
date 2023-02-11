@@ -1,6 +1,6 @@
 # minishell for 42cursus.
 
-This project is about creating a simple shell, our own little bash. The goal is to learn about processes and files descriptors. We had to work as duo 
+This project is about creating a simple shell, our own little bash. The goal is to learn about processes and files descriptors. We had to work as a duo 
 with @Rudyar to realise this project.
 
 Minishell almost works the same as bash. It does not behaves exactly like bash does in some cases.
