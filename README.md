@@ -22,8 +22,12 @@ And finally, we had to recode the following builtins : <br>
 - env <br>
 - exit <br>
 
+---
+
 ### Our grade :mortar_board:
 [![lleveque's 42 minishell Score](https://badge42.vercel.app/api/v2/clc6bxaur00060fmon220zhly/project/2553765)](https://github.com/JaeSeoKim/badge42)
+
+---
 
 ### Usage :desktop_computer:
 
