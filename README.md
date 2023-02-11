@@ -35,3 +35,17 @@ First:
 Then:
     
     make
+    
+<p align="center">
+    <img src="https://github.com/lleveque42/minishell/blob/master/readme/make-minishell.gif">
+</p>
+
+And finally:
+
+    ./minishell
+    
+You can now use it like a real bash.
+
+<p align="center">
+    <img src="https://github.com/lleveque42/minishell/blob/master/readme/run-minishell.gif">
+</p>
